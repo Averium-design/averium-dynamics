@@ -153,6 +153,114 @@ function App() {
           </div>
         </div>
       </section>
+      <section className="py-20 md:py-32 bg-white">
+  <div className="container mx-auto px-6">
+    <div className="text-center mb-16">
+      <p className="text-sm font-mono uppercase tracking-widest text-foreground-muted mb-4">
+        WHY IT MATTERS
+      </p>
+      <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
+        Early Detection Changes Everything
+      </h2>
+    </div>
+
+    <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      
+      <div className="flex gap-4">
+        <div className="w-12 h-12 bg-secondary rounded flex items-center justify-center">
+          <Clock className="w-6 h-6 text-primary" />
+        </div>
+        <div>
+          <h3 className="font-semibold text-lg">Early Detection Saves Everything</h3>
+          <p className="text-foreground-muted">
+            Fires detected in the first 30 seconds can be contained before they spread.
+          </p>
+        </div>
+      </div>
+
+      <div className="flex gap-4">
+        <div className="w-12 h-12 bg-secondary rounded flex items-center justify-center">
+          <Trees className="w-6 h-6 text-primary" />
+        </div>
+        <div>
+          <h3 className="font-semibold text-lg">Environmental Protection</h3>
+          <p className="text-foreground-muted">
+            Protecting forests means protecting biodiversity and carbon sinks.
+          </p>
+        </div>
+      </div>
+
+      <div className="flex gap-4">
+        <div className="w-12 h-12 bg-secondary rounded flex items-center justify-center">
+          <Users className="w-6 h-6 text-primary" />
+        </div>
+        <div>
+          <h3 className="font-semibold text-lg">Community Safety</h3>
+          <p className="text-foreground-muted">
+            Faster response means fewer evacuations and saved lives.
+          </p>
+        </div>
+      </div>
+
+      <div className="flex gap-4">
+        <div className="w-12 h-12 bg-secondary rounded flex items-center justify-center">
+          <ShieldCheck className="w-6 h-6 text-primary" />
+        </div>
+        <div>
+          <h3 className="font-semibold text-lg">Economic Impact</h3>
+          <p className="text-foreground-muted">
+            Prevention costs a fraction of suppression.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section className="py-20 md:py-32 bg-slate-50">
+  <div className="container mx-auto px-6">
+    <div className="text-center mb-16">
+      <p className="text-sm font-mono uppercase tracking-widest text-foreground-muted mb-4">
+        CURRENT STAGE
+      </p>
+      <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
+        Building the Future of Fire Prevention
+      </h2>
+    </div>
+
+    <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+
+      <div className="border border-border p-8 bg-white rounded-sm">
+        <h3 className="font-semibold text-lg mb-2">Active R&D</h3>
+        <p className="text-foreground-muted">
+          Early-stage research and development with active prototyping.
+        </p>
+      </div>
+
+      <div className="border border-border p-8 bg-white rounded-sm">
+        <h3 className="font-semibold text-lg mb-2">Patent Filing</h3>
+        <p className="text-foreground-muted">
+          Core technology patent filing in progress.
+        </p>
+      </div>
+
+      <div className="border border-border p-8 bg-white rounded-sm">
+        <h3 className="font-semibold text-lg mb-2">Pilot Preparation</h3>
+        <p className="text-foreground-muted">
+          Preparing for pilot deployments with fire agencies.
+        </p>
+      </div>
+
+      <div className="border border-border p-8 bg-white rounded-sm">
+        <h3 className="font-semibold text-lg mb-2">Engineering Foundation</h3>
+        <p className="text-foreground-muted">
+          Built on deep engineering research and operational field insights.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
 
       <section id="team" className="py-20 md:py-32 bg-white">
         <div className="container mx-auto px-6">

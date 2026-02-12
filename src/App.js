@@ -160,11 +160,11 @@ function App() {
             <p className="text-sm font-mono uppercase tracking-widest text-foreground-muted mb-4">LEADERSHIP</p>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="max-w-3xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="max-w-4xl mx-auto">
             <div className="flex flex-col md:flex-row items-start gap-8 bg-slate-50 p-8 rounded-sm border border-border/50">
-              <div className="relative w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
+              <div className="relative w-40 h-40 md:w-56 md:h-56 flex-shrink-0">
                 <img src="/leo_image.jpg"
- alt="Leo Safia" className="w-full h-full rounded-full object-cover grayscale" />
+ alt="Leo Safia" className="w-full h-full rounded-full object-cover" />
               </div>
               <div className="flex-1">
                 <h3 className="text-2xl md:text-3xl font-bold mb-2 text-foreground font-heading">Leo Safia</h3>

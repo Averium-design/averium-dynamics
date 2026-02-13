@@ -306,22 +306,53 @@ function App() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">Name *</label>
-                  <input type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Your name" className="w-full px-4 py-3 rounded-sm bg-emerald-800 border border-emerald-700 text-white placeholder-emerald-300 focus:outline-none focus:border-white transition-colors" />
+                  <input
+  type="text"
+  name="name"
+  required
+  value={formData.name}
+  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+  placeholder="Your name"
+  className="w-full px-4 py-3 rounded-sm bg-emerald-800 border border-emerald-700 text-white placeholder-emerald-300 focus:outline-none focus:border-white transition-colors"
+/>
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium mb-2">Email *</label>
-                  <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="your@email.com" className="w-full px-4 py-3 rounded-sm bg-emerald-800 border border-emerald-700 text-white placeholder-emerald-300 focus:outline-none focus:border-white transition-colors" />
+                  <input
+  type="email"
+  name="email"
+  required
+  value={formData.email}
+  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+  placeholder="your@email.com"
+  className="w-full px-4 py-3 rounded-sm bg-emerald-800 border border-emerald-700 text-white placeholder-emerald-300 focus:outline-none focus:border-white transition-colors"
+/>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-2">Organization</label>
-                  <input type="text" value={formData.organization} onChange={(e) => setFormData({ ...formData, organization: e.target.value })} placeholder="Company or agency name" className="w-full px-4 py-3 rounded-sm bg-emerald-800 border border-emerald-700 text-white placeholder-emerald-300 focus:outline-none focus:border-white transition-colors" />
+                  <input
+  type="text"
+  name="organization"
+  value={formData.organization}
+  onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+  placeholder="Company or agency name"
+  className="w-full px-4 py-3 rounded-sm bg-emerald-800 border border-emerald-700 text-white placeholder-emerald-300 focus:outline-none focus:border-white transition-colors"
+/>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-2">Message *</label>
-                  <textarea rows="4" required value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="Tell us about your interest..." className="w-full px-4 py-3 rounded-sm bg-emerald-800 border border-emerald-700 text-white placeholder-emerald-300 focus:outline-none focus:border-white transition-colors resize-none"></textarea>
+                  <textarea
+  rows="4"
+  name="message"
+  required
+  value={formData.message}
+  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+  placeholder="Tell us about your interest..."
+  className="w-full px-4 py-3 rounded-sm bg-emerald-800 border border-emerald-700 text-white placeholder-emerald-300 focus:outline-none focus:border-white transition-colors resize-none"
+></textarea>
                 </div>
 
                 <button type="submit" disabled={formStatus === 'loading'} className="w-full bg-white text-primary px-6 py-3 rounded-full font-semibold hover:bg-emerald-50 transition-all duration-300 flex items-center justify-center gap-2 group">

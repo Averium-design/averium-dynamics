@@ -21,15 +21,36 @@ function App() {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormStatus('loading');
-    setTimeout(() => {
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setFormStatus('loading');
+
+  try {
+    const fd = new FormData();
+    fd.append('name', formData.name);
+    fd.append('email', formData.email);
+    fd.append('organization', formData.organization);
+    fd.append('message', formData.message);
+
+    const res = await fetch('https://formspree.io/f/xnjbpreq', {
+      method: 'POST',
+      body: fd,
+      headers: { Accept: 'application/json' },
+    });
+
+    if (res.ok) {
       setFormStatus('success');
       setFormData({ name: '', email: '', organization: '', message: '' });
       setTimeout(() => setFormStatus('idle'), 3000);
-    }, 1500);
-  };
+    } else {
+      setFormStatus('error');
+      setTimeout(() => setFormStatus('idle'), 4000);
+    }
+  } catch (err) {
+    setFormStatus('error');
+    setTimeout(() => setFormStatus('idle'), 4000);
+  }
+};
 
   return (
     <div className="min-h-screen bg-white font-body">

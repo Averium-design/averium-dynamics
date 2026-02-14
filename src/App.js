@@ -155,7 +155,8 @@ function HomePage() {
       </motion.header>
 {/* HERO */}
 <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
-  {/* Background image (animated) */}
+
+  {/* Background Image */}
   <motion.div
     aria-hidden
     className="absolute inset-0"
@@ -170,11 +171,8 @@ function HomePage() {
     />
   </motion.div>
 
-  {/* Overlay to keep text readable */}
-  <div className="absolute inset-0 bg-white/20 md:bg-white/10" />
-
-  {/* Optional depth gradient */}
-  <div className="absolute inset-0 bg-gradient-to-r from-white/35 via-white/10 to-transparent" />
+  {/* Smart Reading Overlay (LEFT SIDE ONLY) */}
+  <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/30 md:from-white/95 md:via-white/80 md:to-transparent" />
 
   <div className="container mx-auto px-6 relative z-10">
     <motion.div
@@ -188,6 +186,7 @@ function HomePage() {
         transition={{ duration: 0.7, ease: easeOut }}
         className="text-sm font-mono uppercase tracking-widest text-black/70 mb-6"
       >
+
         CLIMATE INFRASTRUCTURE
       </motion.p>
 

@@ -202,7 +202,7 @@ function HomePage() {
       <motion.p
         variants={fadeUp}
         transition={{ duration: 0.7, ease: easeOut }}
-        className="text-lg md:text-xl leading-relaxed text-black/75 mb-10 max-w-2xl"
+        className="text-lg md:text-xl leading-relaxed text-black/95 mb-10 max-w-2xl"
       >
         Averium Dynamics develops the Green Dome, an AI-driven drone system that detects wildfires in their earliest seconds and supports rapid response.
       </motion.p>

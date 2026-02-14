@@ -171,10 +171,10 @@ function HomePage() {
   </motion.div>
 
   {/* Overlay to keep text readable */}
-  <div className="absolute inset-0 bg-white/75 md:bg-white/60" />
+  <div className="absolute inset-0 bg-white/30 md:bg-white/20" />
 
   {/* Optional depth gradient */}
-  <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/55 to-white/15" />
+  <div className="absolute inset-0 bg-gradient-to-r from-white/55 via-white/20 to-transparent" />
 
   <div className="container mx-auto px-6 relative z-10">
     <motion.div

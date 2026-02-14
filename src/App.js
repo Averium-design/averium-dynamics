@@ -153,79 +153,87 @@ function HomePage() {
           </nav>
         </div>
       </motion.header>
+{/* HERO */}
+<section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+  {/* Background image (animated) */}
+  <motion.div
+    aria-hidden
+    className="absolute inset-0"
+    initial={{ scale: 1.08, opacity: 0 }}
+    animate={{ scale: 1, opacity: 1 }}
+    transition={{ duration: 1.2, ease: easeOut }}
+  >
+    <img
+      src="/hero.jpg"
+      alt=""
+      className="w-full h-full object-cover"
+    />
+  </motion.div>
 
-      {/* HERO */}
-      <section className="relative min-h-screen flex items-center bg-gradient-to-b from-white to-slate-50 overflow-hidden pt-20">
-        {/* subtle parallax-ish bg */}
-        <motion.div
-          aria-hidden
-          className="absolute inset-0 opacity-5 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1768280511074-3b3effe7a139?crop=entropy&cs=srgb&fm=jpg&q=85')`,
-          }}
-          initial={{ scale: 1.06 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.2, ease: easeOut }}
-        />
+  {/* Overlay to keep text readable */}
+  <div className="absolute inset-0 bg-white/75 md:bg-white/60" />
 
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            animate="visible"
-            className="max-w-4xl"
-          >
-            <motion.p
-              variants={fadeUp}
-              transition={{ duration: 0.7, ease: easeOut }}
-              className="text-sm font-mono uppercase tracking-widest text-foreground-muted mb-6"
-            >
-              CLIMATE INFRASTRUCTURE
-            </motion.p>
+  {/* Optional depth gradient */}
+  <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/55 to-white/15" />
 
-            <motion.h1
-              variants={fadeUp}
-              transition={{ duration: 0.7, ease: easeOut }}
-              className="text-5xl md:text-7xl font-bold tracking-tighter leading-none text-foreground mb-8 font-heading"
-            >
-              Eliminating Wildfires<br />Through Autonomous<br />Infrastructure
-            </motion.h1>
+  <div className="container mx-auto px-6 relative z-10">
+    <motion.div
+      variants={stagger}
+      initial="hidden"
+      animate="visible"
+      className="max-w-4xl"
+    >
+      <motion.p
+        variants={fadeUp}
+        transition={{ duration: 0.7, ease: easeOut }}
+        className="text-sm font-mono uppercase tracking-widest text-foreground-muted mb-6"
+      >
+        CLIMATE INFRASTRUCTURE
+      </motion.p>
 
-            <motion.p
-              variants={fadeUp}
-              transition={{ duration: 0.7, ease: easeOut }}
-              className="text-lg md:text-xl leading-relaxed text-foreground-muted mb-10 max-w-2xl"
-            >
-              Averium Dynamics develops the Green Dome, an AI-driven drone system that detects wildfires in their earliest seconds and supports rapid response.
-            </motion.p>
+      <motion.h1
+        variants={fadeUp}
+        transition={{ duration: 0.7, ease: easeOut }}
+        className="text-5xl md:text-7xl font-bold tracking-tighter leading-none text-foreground mb-8 font-heading"
+      >
+        Eliminating Wildfires<br />Through Autonomous<br />Infrastructure
+      </motion.h1>
 
-            <motion.div
-              variants={fadeUp}
-              transition={{ duration: 0.7, ease: easeOut }}
-              className="flex gap-4 flex-wrap"
-            >
-              <motion.button
-                onClick={() => scrollToSection('solution')}
-                className="bg-primary text-white px-8 py-4 rounded-full hover:bg-primary/90 transition-all duration-300 flex items-center gap-2 group font-medium"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Explore Our Mission
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
+      <motion.p
+        variants={fadeUp}
+        transition={{ duration: 0.7, ease: easeOut }}
+        className="text-lg md:text-xl leading-relaxed text-foreground-muted mb-10 max-w-2xl"
+      >
+        Averium Dynamics develops the Green Dome, an AI-driven drone system that detects wildfires in their earliest seconds and supports rapid response.
+      </motion.p>
 
-              <motion.button
-                onClick={() => scrollToSection('solution')}
-                className="border-2 border-border text-foreground px-8 py-4 rounded-full hover:border-primary hover:text-primary transition-all duration-300 font-medium"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                View Technology
-              </motion.button>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      <motion.div
+        variants={fadeUp}
+        transition={{ duration: 0.7, ease: easeOut }}
+        className="flex gap-4 flex-wrap"
+      >
+        <motion.button
+          onClick={() => scrollToSection('solution')}
+          className="bg-primary text-white px-8 py-4 rounded-full hover:bg-primary/90 transition-all duration-300 flex items-center gap-2 group font-medium"
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          Explore Our Mission
+          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+        </motion.button>
+
+        <motion.button
+          onClick={() => scrollToSection('solution')}
+          className="border-2 border-border text-foreground px-8 py-4 rounded-full hover:border-primary hover:text-primary transition-all duration-300 font-medium"
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          View Technology
+        </motion.button>
+      </motion.div>
+    </motion.div>
+  </div>
+</section>
 
       {/* MISSION */}
       <motion.section

@@ -1,4 +1,4 @@
-// src/App.js  ✅ FULL REPLACEMENT (paste everything)
+// src/App.js 
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
@@ -107,14 +107,14 @@ function HomePage() {
             transition={{ delay: 0.15, duration: 0.6, ease: easeOut }}
             className="flex items-center gap-2"
           >
-            <motion.div
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.2 }}
-              className="w-8 h-8 bg-primary rounded flex items-center justify-center"
-            >
-              <Target className="w-5 h-5 text-white" />
-            </motion.div>
+            <motion.img
+  src="/logo.png"
+  alt="Averium Dynamics"
+  className="w-9 h-9 object-contain"
+  whileHover={{ scale: 1.06 }}
+  whileTap={{ scale: 0.98 }}
+  transition={{ duration: 0.2 }}
+/>
             <span className="text-xl font-heading font-bold text-foreground">Averium Dynamics</span>
           </motion.div>
 
@@ -678,14 +678,14 @@ function HomePage() {
             className="flex flex-col md:flex-row justify-between items-center gap-4"
           >
             <div className="flex items-center gap-2">
-              <motion.div
-                whileHover={{ scale: 1.06 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.2 }}
-                className="w-8 h-8 bg-primary rounded flex items-center justify-center"
-              >
-                <Target className="w-5 h-5 text-white" />
-              </motion.div>
+              <motion.img
+  src="/logo.png"
+  alt="Averium Dynamics"
+  className="w-8 h-8 object-contain"
+  whileHover={{ scale: 1.06 }}
+  whileTap={{ scale: 0.98 }}
+  transition={{ duration: 0.2 }}
+/>
               <span className="font-heading font-semibold text-white">Averium Dynamics</span>
             </div>
 

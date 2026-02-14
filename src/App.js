@@ -110,7 +110,8 @@ function HomePage() {
             <motion.img
   src="/logo.png"
   alt="Averium Dynamics"
-  className="w-9 h-9 object-contain"
+  className="w-9 h-9 object-contain translate-y-[1px]"
+  style={{ display: 'block' }}
   whileHover={{ scale: 1.06 }}
   whileTap={{ scale: 0.98 }}
   transition={{ duration: 0.2 }}
@@ -681,7 +682,8 @@ function HomePage() {
               <motion.img
   src="/logo.png"
   alt="Averium Dynamics"
-  className="w-8 h-8 object-contain"
+  className="w-9 h-9 object-contain translate-y-[1px]"
+  style={{ display: 'block' }}
   whileHover={{ scale: 1.06 }}
   whileTap={{ scale: 0.98 }}
   transition={{ duration: 0.2 }}

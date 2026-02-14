@@ -5,8 +5,11 @@ import {
   Clock, Target, Wind, Trees, Signal,
   Users, Mail, Globe
 } from 'lucide-react';
+import { Routes, Route, Link } from 'react-router-dom';
+import Imprint from './Imprint';
+import Privacy from './Privacy';
 
-function App() {
+function HomePage() {
   const [scrolled, setScrolled] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', organization: '', message: '' });
   const [formStatus, setFormStatus] = useState('idle');
@@ -386,134 +389,6 @@ function App() {
         </div>
       </section>
       {/* LEGAL */}
-<section id="imprint" className="py-16 md:py-24 bg-white border-t border-border/50">
-  <div className="container mx-auto px-6">
-    <div className="max-w-4xl mx-auto">
-      <p className="text-sm font-mono uppercase tracking-widest text-foreground-muted mb-4">LEGAL</p>
-      <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-6 font-heading">
-        Imprint
-      </h2>
-
-      <div className="bg-slate-50 border border-border/50 p-6 md:p-8 rounded-sm space-y-6">
-        <div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">Company</h3>
-          <p className="text-foreground-muted leading-relaxed">
-            <strong>Averium Dynamics UG (haftungsbeschränkt) i.G.</strong><br />
-            (in formation / pending registration)
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">Address</h3>
-          <p className="text-foreground-muted leading-relaxed">
-            Kastanienallee 51<br />
-            12627 Berlin<br />
-            Germany
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">Represented by</h3>
-          <p className="text-foreground-muted leading-relaxed">
-            Leo Safia (Managing Director / Geschäftsführer)
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">Contact</h3>
-          <p className="text-foreground-muted leading-relaxed">
-            Email: <a className="text-primary hover:underline" href="mailto:info@averiumdynamics.com">info@averiumdynamics.com</a>
-          </p>
-        </div>
-
-        <div className="text-sm text-foreground-muted">
-          Note: The company is currently in formation (“i.G.”). Official commercial register details (HRB / register court) will be added after registration.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="privacy" className="py-16 md:py-24 bg-white border-t border-border/50">
-  <div className="container mx-auto px-6">
-    <div className="max-w-4xl mx-auto">
-      <p className="text-sm font-mono uppercase tracking-widest text-foreground-muted mb-4">LEGAL</p>
-      <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-6 font-heading">
-        Privacy Policy
-      </h2>
-
-      <div className="bg-slate-50 border border-border/50 p-6 md:p-8 rounded-sm space-y-6 text-foreground-muted leading-relaxed">
-        <div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">1. Controller</h3>
-          <p>
-            Averium Dynamics UG (haftungsbeschränkt) i.G.<br />
-            Kastanienallee 51, 12627 Berlin, Germany<br />
-            Email: <a className="text-primary hover:underline" href="mailto:info@averiumdynamics.com">info@averiumdynamics.com</a>
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">2. Data we process</h3>
-          <p>
-            When you contact us via the contact form or email, we process the information you provide (e.g., name, email address, organization, message)
-            in order to respond to your inquiry.
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">3. Purpose & legal basis</h3>
-          <p>
-            We process your data to communicate with you and handle your request (Art. 6(1)(b) GDPR — steps prior to entering into a contract,
-            and/or Art. 6(1)(f) GDPR — legitimate interest in responding to inquiries).
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">4. Hosting</h3>
-          <p>
-            This website may be hosted on infrastructure provided by Vercel. Server logs (e.g., IP address, request metadata) may be processed
-            for security and operational purposes.
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">5. Cookies & analytics</h3>
-          <p>
-            We do not intentionally use tracking cookies or analytics tools on this website at this time.
-            If we add analytics in the future, we will update this policy accordingly.
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">6. Data retention</h3>
-          <p>
-            We keep your inquiry data only as long as necessary to respond and for any follow-up communication,
-            unless longer retention is required by law.
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">7. Your rights</h3>
-          <p>
-            You have the right to access, rectify, erase, restrict processing, object to processing, and data portability (where applicable),
-            as well as the right to lodge a complaint with a supervisory authority.
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">8. Security</h3>
-          <p>
-            We apply appropriate technical and organizational measures to protect your data. However, no method of transmission over the internet is 100% secure.
-          </p>
-        </div>
-
-        <div className="text-sm text-foreground-muted">
-          Last updated: {new Date().toISOString().slice(0, 10)}
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
       <footer className="bg-black text-gray-400 py-8">
   <div className="container mx-auto px-6">
@@ -527,19 +402,21 @@ function App() {
 
       {/* NEW: footer legal links */}
       <div className="flex items-center gap-4 text-sm">
-        <button
-          onClick={() => scrollToSection('imprint')}
-          className="hover:text-white transition-colors"
-        >
-          Imprint
-        </button>
-        <span className="text-gray-600">•</span>
-        <button
-          onClick={() => scrollToSection('privacy')}
-          className="hover:text-white transition-colors"
-        >
-          Privacy Policy
-        </button>
+        <Link
+  to="/imprint"
+  className="hover:text-white transition-colors"
+>
+  Imprint
+</Link>
+
+<span className="text-gray-600">•</span>
+
+<Link
+  to="/privacy"
+  className="hover:text-white transition-colors"
+>
+  Privacy Policy
+</Link>
       </div>
 
       <div className="text-sm">© {new Date().getFullYear()} Averium Dynamics</div>
@@ -550,4 +427,12 @@ function App() {
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/imprint" element={<Imprint />} />
+      <Route path="/privacy" element={<Privacy />} />
+    </Routes>
+  );
+}

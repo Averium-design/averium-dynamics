@@ -174,7 +174,7 @@ function HomePage() {
   <div className="absolute inset-0 bg-white/20 md:bg-white/10" />
 
   {/* Optional depth gradient */}
-  <div className="absolute inset-0 bg-gradient-to-r from-white/55 via-white/20 to-transparent" />
+  <div className="absolute inset-0 bg-gradient-to-r from-white/35 via-white/10 to-transparent" />
 
   <div className="container mx-auto px-6 relative z-10">
     <motion.div

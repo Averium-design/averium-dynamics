@@ -115,7 +115,7 @@ function HomePage() {
             >
               <Target className="w-5 h-5 text-white" />
             </motion.div>
-            <span className="text-xl font-heading font-bold text-foreground">Averium</span>
+            <span className="text-xl font-heading font-bold text-foreground">Averium Dynamics</span>
           </motion.div>
 
           <nav className="hidden md:flex items-center gap-8">
@@ -172,8 +172,13 @@ function HomePage() {
   </motion.div>
 
   {/* Smart Reading Overlay (LEFT SIDE ONLY) */}
-  <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/30 md:from-white/95 md:via-white/80 md:to-transparent" />
-
+  <div className="absolute inset-0 bg-gradient-to-r 
+  from-white/75 
+  via-white/45 
+  to-white/10 
+  md:from-white/85 
+  md:via-white/50 
+  md:to-transparent" />
   <div className="container mx-auto px-6 relative z-10">
     <motion.div
       variants={stagger}

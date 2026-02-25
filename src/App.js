@@ -359,7 +359,7 @@ function HomePage() {
             className="text-center mb-16"
           >
             <p className="text-sm font-mono uppercase tracking-widest text-foreground-muted mb-4">OUR SOLUTION</p>
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-6 font-heading">The Green Dome System</h2>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-6 font-heading">The Green Dome</h2>
             <p className="text-lg leading-relaxed text-foreground-muted max-w-3xl mx-auto">
               Modular, scalable infrastructure designed for integration with fire agencies and environmental authorities.
             </p>

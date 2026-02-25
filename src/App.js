@@ -373,7 +373,7 @@ function HomePage() {
             viewport={{ once: true, amount: 0.18 }}
           >
             {[
-              { icon: Radar, title: 'Autonomous Drone Stations', desc: 'Modular, self-contained drone stations deployed across high-risk zones. Always ready, always watching.', image: 'https://images.unsplash.com/photo-1488149048941-581936ced6d6?crop=entropy&cs=srgb&fm=jpg&q=85' },
+              { icon: Radar, title: 'Autonomous Drone Systems', desc: 'Autonomous detection drones, suppression drones, and integrated battery-swap and refill stations. A fully operational aerial infrastructure. Always ready, always watching.', image: 'https://images.unsplash.com/photo-1488149048941-581936ced6d6?crop=entropy&cs=srgb&fm=jpg&q=85' },
               { icon: Signal, title: 'Multi-Sensor AI Detection', desc: 'Advanced AI processes thermal, optical, and environmental data to detect fires within seconds of ignition.', image: 'https://images.unsplash.com/photo-1770699197239-81b5da579f2b?crop=entropy&cs=srgb&fm=jpg&q=85' },
               { icon: Zap, title: 'Rapid Response Support', desc: 'Instant alerts to fire agencies with precise coordinates, enabling faster deployment and targeted suppression.', image: 'https://images.unsplash.com/photo-1768280511074-3b3effe7a139?crop=entropy&cs=srgb&fm=jpg&q=85' },
             ].map((item, index) => (

@@ -1,11 +1,11 @@
-// src/App.js 
+// src/App.js
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   Flame, Radar, Zap, ShieldCheck, ArrowRight,
   Clock, Target, Wind, Trees, Signal,
-  Users, Mail, Globe
+  Users, Mail, Globe, FileCheck, Award, Activity, Building2
 } from 'lucide-react';
 import { Routes, Route, Link } from 'react-router-dom';
 import Imprint from './Imprint';
@@ -108,14 +108,14 @@ function HomePage() {
             className="flex items-center gap-2"
           >
             <motion.img
-  src="/logo.png"
-  alt="Averium Dynamics"
-  className="w-11 h-11 object-contain"
-  style={{ display: 'block' }}
-  whileHover={{ scale: 1.06 }}
-  whileTap={{ scale: 0.98 }}
-  transition={{ duration: 0.2 }}
-/>
+              src="/logo.png"
+              alt="Averium Dynamics"
+              className="w-11 h-11 object-contain"
+              style={{ display: 'block' }}
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+            />
             <span className="text-xl font-heading font-bold text-foreground">Averium Dynamics</span>
           </motion.div>
 
@@ -154,91 +154,92 @@ function HomePage() {
           </nav>
         </div>
       </motion.header>
-{/* HERO */}
-<section className="relative min-h-screen flex items-center overflow-hidden pt-20">
 
-  {/* Background Image */}
-  <motion.div
-    aria-hidden
-    className="absolute inset-0"
-    initial={{ scale: 1.08, opacity: 0 }}
-    animate={{ scale: 1, opacity: 1 }}
-    transition={{ duration: 1.2, ease: easeOut }}
-  >
-    <img
-      src="/hero.jpg"
-      alt=""
-      className="w-full h-full object-cover"
-    />
-  </motion.div>
+      {/* HERO */}
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
 
-  {/* Smart Reading Overlay (LEFT SIDE ONLY) */}
-  <div className="absolute inset-0 bg-gradient-to-r 
-  from-white/75 
-  via-white/45 
-  to-white/10 
-  md:from-white/85 
-  md:via-white/50 
-  md:to-transparent" />
-  <div className="container mx-auto px-6 relative z-10">
-    <motion.div
-      variants={stagger}
-      initial="hidden"
-      animate="visible"
-      className="max-w-4xl"
-    >
-      <motion.p
-        variants={fadeUp}
-        transition={{ duration: 0.7, ease: easeOut }}
-        className="text-sm font-mono uppercase tracking-widest text-black/70 mb-6"
-      >
-
-        CLIMATE INFRASTRUCTURE
-      </motion.p>
-
-      <motion.h1
-        variants={fadeUp}
-        transition={{ duration: 0.7, ease: easeOut }}
-        className="text-5xl md:text-7xl font-bold tracking-tighter leading-none text-foreground mb-8 font-heading"
-      >
-        Eliminating Wildfires<br />Through Autonomous<br />Infrastructure
-      </motion.h1>
-
-      <motion.p
-        variants={fadeUp}
-        transition={{ duration: 0.7, ease: easeOut }}
-        className="text-lg md:text-xl leading-relaxed text-black/95 mb-10 max-w-2xl"
-      >
-        Averium Dynamics develops the Green Dome, an AI-driven drone system that detects wildfires in their earliest seconds and supports rapid response.
-      </motion.p>
-
-      <motion.div
-        variants={fadeUp}
-        transition={{ duration: 0.7, ease: easeOut }}
-        className="flex gap-4 flex-wrap"
-      >
-        <motion.button
-          onClick={() => scrollToSection('solution')}
-          className="bg-primary text-white px-8 py-4 rounded-full hover:bg-primary/90 transition-all duration-300 flex items-center gap-2 group font-medium"
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.98 }}
+        {/* Background Image */}
+        <motion.div
+          aria-hidden
+          className="absolute inset-0"
+          initial={{ scale: 1.08, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.2, ease: easeOut }}
         >
-          Explore Our Mission
-          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-        </motion.button>
+          <img
+            src="/hero.jpg"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
 
-        <motion.button
-          onClick={() => scrollToSection('solution')}
-          className="border-2 border-border text-foreground px-8 py-4 rounded-full hover:border-primary hover:text-primary transition-all duration-300 font-medium"
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          View Technology
-        </motion.button>
-      </motion.div>
-    </motion.div>
-  </div>
-</section>
+        {/* Smart Reading Overlay (LEFT SIDE ONLY) */}
+        <div className="absolute inset-0 bg-gradient-to-r
+          from-white/75
+          via-white/45
+          to-white/10
+          md:from-white/85
+          md:via-white/50
+          md:to-transparent" />
+
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            animate="visible"
+            className="max-w-4xl"
+          >
+            <motion.p
+              variants={fadeUp}
+              transition={{ duration: 0.7, ease: easeOut }}
+              className="text-sm font-mono uppercase tracking-widest text-black/70 mb-6"
+            >
+              CLIMATE INFRASTRUCTURE
+            </motion.p>
+
+            <motion.h1
+              variants={fadeUp}
+              transition={{ duration: 0.7, ease: easeOut }}
+              className="text-5xl md:text-7xl font-bold tracking-tighter leading-none text-foreground mb-8 font-heading"
+            >
+              Eliminating Wildfires<br />Through Autonomous<br />Infrastructure
+            </motion.h1>
+
+            <motion.p
+              variants={fadeUp}
+              transition={{ duration: 0.7, ease: easeOut }}
+              className="text-lg md:text-xl leading-relaxed text-black/95 mb-10 max-w-2xl"
+            >
+              Averium Dynamics builds <strong>BioSphereX</strong> &mdash; a closed-loop platform that predicts, suppresses, and contains wildfires before they spread. Our prediction layer is live in production today.
+            </motion.p>
+
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.7, ease: easeOut }}
+              className="flex gap-4 flex-wrap"
+            >
+              <motion.button
+                onClick={() => scrollToSection('solution')}
+                className="bg-primary text-white px-8 py-4 rounded-full hover:bg-primary/90 transition-all duration-300 flex items-center gap-2 group font-medium"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Explore Our Mission
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </motion.button>
+
+              <motion.button
+                onClick={() => scrollToSection('solution')}
+                className="border-2 border-border text-foreground px-8 py-4 rounded-full hover:border-primary hover:text-primary transition-all duration-300 font-medium"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                View Technology
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* MISSION */}
       <motion.section
@@ -316,7 +317,7 @@ function HomePage() {
               The Global Wildfire Crisis
             </h2>
             <p className="text-lg leading-relaxed text-gray-300 max-w-3xl">
-              Rising temperatures are creating longer fire seasons. Traditional detection methods are too slow. By the time fires are spotted, they've often grown beyond control.
+              Rising temperatures are creating longer fire seasons. Traditional detection methods are too slow. By the time fires are spotted, they have often grown beyond control.
             </p>
           </motion.div>
 
@@ -347,7 +348,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* SOLUTION */}
+      {/* SOLUTION — BioSphereX three-layer system */}
       <section id="solution" className="py-20 md:py-32 bg-slate-50">
         <div className="container mx-auto px-6">
           <motion.div
@@ -359,9 +360,11 @@ function HomePage() {
             className="text-center mb-16"
           >
             <p className="text-sm font-mono uppercase tracking-widest text-foreground-muted mb-4">OUR SOLUTION</p>
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-6 font-heading">The Green Dome</h2>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-6 font-heading">
+              BioSphereX
+            </h2>
             <p className="text-lg leading-relaxed text-foreground-muted max-w-3xl mx-auto">
-              Modular, scalable infrastructure designed for integration with fire agencies and environmental authorities.
+              A closed-loop wildfire protection system. Three integrated layers &mdash; <strong>predict</strong>, <strong>suppress</strong>, <strong>contain</strong> &mdash; designed for direct integration with fire agencies and environmental authorities.
             </p>
           </motion.div>
 
@@ -373,9 +376,27 @@ function HomePage() {
             viewport={{ once: true, amount: 0.18 }}
           >
             {[
-              { icon: Radar, title: 'Autonomous Drone Systems', desc: 'Autonomous detection drones, suppression drones, and integrated battery-swap and refill stations. A fully operational aerial infrastructure. Always ready, always watching.', image: 'https://images.unsplash.com/photo-1488149048941-581936ced6d6?crop=entropy&cs=srgb&fm=jpg&q=85' },
-              { icon: Signal, title: 'Multi-Sensor AI Detection', desc: 'Advanced AI processes thermal, optical, and environmental data to detect fires within seconds of ignition.', image: 'https://images.unsplash.com/photo-1770699197239-81b5da579f2b?crop=entropy&cs=srgb&fm=jpg&q=85' },
-              { icon: Zap, title: 'Rapid Response Support', desc: 'Instant alerts to fire agencies with precise coordinates, enabling faster deployment and targeted suppression.', image: 'https://images.unsplash.com/photo-1768280511074-3b3effe7a139?crop=entropy&cs=srgb&fm=jpg&q=85' },
+              {
+                eyebrow: 'LAYER 1 — PREDICT',
+                icon: Signal,
+                title: 'PYROGNOSIS',
+                desc: 'AI prediction platform fusing satellite, weather, and environmental data into a real-time ignition risk surface. Refreshes every five minutes at sub-hectare resolution. Live in production today.',
+                image: 'https://images.unsplash.com/photo-1770699197239-81b5da579f2b?crop=entropy&cs=srgb&fm=jpg&q=85',
+              },
+              {
+                eyebrow: 'LAYER 2 — SUPPRESS',
+                icon: ShieldCheck,
+                title: 'Green Dome',
+                desc: 'Two-drone autonomous architecture: a detection drone with multi-sensor AI confirms ignition; a suppression drone deploys retardant before fire spreads. Patent filed at the German Patent Office.',
+                image: 'https://images.unsplash.com/photo-1488149048941-581936ced6d6?crop=entropy&cs=srgb&fm=jpg&q=85',
+              },
+              {
+                eyebrow: 'LAYER 3 — CONTAIN',
+                icon: Flame,
+                title: 'HELIOS',
+                desc: 'Autonomous backfire drone swarm for megafire response. Satellite-guided controlled-burn system designed to halt fires that have already escaped initial suppression. In development.',
+                image: 'https://images.unsplash.com/photo-1768280511074-3b3effe7a139?crop=entropy&cs=srgb&fm=jpg&q=85',
+              },
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -393,6 +414,7 @@ function HomePage() {
                     transition={{ duration: 0.5, ease: easeOut }}
                   />
                 </div>
+                <p className="text-xs font-mono uppercase tracking-widest text-primary mb-3">{item.eyebrow}</p>
                 <div className="w-14 h-14 bg-secondary rounded-full flex items-center justify-center mb-6">
                   <item.icon className="w-7 h-7 text-primary" />
                 </div>
@@ -454,7 +476,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* CURRENT STAGE */}
+      {/* CURRENT STAGE — real, dated, verifiable milestones */}
       <section className="py-20 md:py-32 bg-slate-50">
         <div className="container mx-auto px-6">
           <motion.div
@@ -479,10 +501,26 @@ function HomePage() {
             viewport={{ once: true, amount: 0.2 }}
           >
             {[
-              { title: 'Active R&D', desc: 'Early-stage research and development with active prototyping.' },
-              { title: 'Patent Filing', desc: 'Core technology patent filing in progress.' },
-              { title: 'Pilot Preparation', desc: 'Preparing for pilot deployments with fire agencies.' },
-              { title: 'Engineering Foundation', desc: 'Built on deep engineering research and operational field insights.' },
+              {
+                icon: Building2,
+                title: 'Registered Company',
+                desc: 'Averium Dynamics UG (haftungsbeschränkt) — registered at Amtsgericht Charlottenburg, HRB 285037 B.',
+              },
+              {
+                icon: FileCheck,
+                title: 'Patent Filed at DPMA',
+                desc: 'Core system patent filed at the German Patent and Trade Mark Office covering Green Dome architecture, with priority secured.',
+              },
+              {
+                icon: Award,
+                title: 'EIC-Validated Deep Tech',
+                desc: 'Independently evaluated by the European Innovation Council and recognised as a high-impact deep-tech breakthrough.',
+              },
+              {
+                icon: Activity,
+                title: 'PYROGNOSIS Live in Production',
+                desc: 'Our prediction layer is deployed and operating, monitoring multiple regions across Europe and the Mediterranean.',
+              },
             ].map((item, idx) => (
               <motion.div
                 key={idx}
@@ -491,6 +529,9 @@ function HomePage() {
                 whileHover={{ y: -6 }}
                 className="border border-border p-8 bg-white rounded-sm"
               >
+                <div className="w-12 h-12 bg-secondary rounded flex items-center justify-center mb-4">
+                  <item.icon className="w-6 h-6 text-primary" />
+                </div>
                 <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
                 <p className="text-foreground-muted">{item.desc}</p>
               </motion.div>
@@ -499,7 +540,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* TEAM */}
+      {/* TEAM — Leo + Jack as co-founders */}
       <section id="team" className="py-20 md:py-32 bg-white">
         <div className="container mx-auto px-6">
           <motion.div
@@ -511,22 +552,26 @@ function HomePage() {
             className="text-center mb-16"
           >
             <p className="text-sm font-mono uppercase tracking-widest text-foreground-muted mb-4">LEADERSHIP</p>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground font-heading">
+              Engineers Building Autonomous Wildfire Infrastructure
+            </h2>
           </motion.div>
 
           <motion.div
-            variants={fadeUp}
+            className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto"
+            variants={stagger}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.7, ease: easeOut }}
-            className="max-w-4xl mx-auto"
+            viewport={{ once: true, amount: 0.2 }}
           >
+            {/* Leo */}
             <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.6, ease: easeOut }}
               whileHover={{ y: -6 }}
-              transition={{ duration: 0.25 }}
-              className="flex flex-col md:flex-row items-start gap-8 bg-slate-50 p-8 rounded-sm border border-border/50"
+              className="flex flex-col items-start gap-6 bg-slate-50 p-8 rounded-sm border border-border/50"
             >
-              <div className="relative w-40 h-40 md:w-56 md:h-56 flex-shrink-0">
+              <div className="relative w-32 h-32 md:w-40 md:h-40 flex-shrink-0">
                 <motion.img
                   src="/leo_image.jpg"
                   alt="Leo Safia"
@@ -537,9 +582,9 @@ function HomePage() {
               </div>
               <div className="flex-1">
                 <h3 className="text-2xl md:text-3xl font-bold mb-2 text-foreground font-heading">Leo Safia</h3>
-                <p className="text-primary font-medium mb-4">Founder & Systems Architect</p>
+                <p className="text-primary font-medium mb-4">Co-Founder &amp; Head of Systems</p>
                 <p className="text-foreground-muted leading-relaxed mb-4">
-                  With a background in mechatronics engineering and autonomous systems, Leo leads Averium&apos;s technical vision. His expertise spans system architecture, robotics, and climate-infrastructure innovation.
+                  Mechatronics engineer and inventor of record on the company&apos;s first patent. Leo leads hardware engineering, autonomous drone systems, and IP strategy.
                 </p>
                 <motion.div
                   className="flex flex-wrap gap-2"
@@ -548,7 +593,51 @@ function HomePage() {
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.25 }}
                 >
-                  {['MECHATRONICS', 'AUTONOMOUS SYSTEMS', 'CLIMATE TECH'].map((tag, index) => (
+                  {['MECHATRONICS', 'AUTONOMOUS SYSTEMS', 'IP STRATEGY'].map((tag, index) => (
+                    <motion.span
+                      key={index}
+                      variants={fadeUp}
+                      transition={{ duration: 0.4, ease: easeOut }}
+                      whileHover={{ y: -2 }}
+                      className="bg-secondary text-primary px-3 py-1 rounded-full text-sm font-medium font-mono"
+                    >
+                      {tag}
+                    </motion.span>
+                  ))}
+                </motion.div>
+              </div>
+            </motion.div>
+
+            {/* Jack */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.6, ease: easeOut }}
+              whileHover={{ y: -6 }}
+              className="flex flex-col items-start gap-6 bg-slate-50 p-8 rounded-sm border border-border/50"
+            >
+              <div className="relative w-32 h-32 md:w-40 md:h-40 flex-shrink-0">
+                <motion.img
+                  src="/Jack.jpg"
+                  alt="Jack Safia"
+                  className="w-full h-full rounded-full object-cover"
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ duration: 0.35, ease: easeOut }}
+                />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-2xl md:text-3xl font-bold mb-2 text-foreground font-heading">Jack Safia</h3>
+                <p className="text-primary font-medium mb-4">Co-Founder &amp; Head of AI</p>
+                <p className="text-foreground-muted leading-relaxed mb-4">
+                  Mechatronics engineer and software architect. Jack leads Averium&apos;s AI and software systems and built the PYROGNOSIS prediction platform from the ground up.
+                </p>
+                <motion.div
+                  className="flex flex-wrap gap-2"
+                  variants={stagger}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.25 }}
+                >
+                  {['MACHINE LEARNING', 'COMPUTER VISION', 'CLOUD INFRASTRUCTURE'].map((tag, index) => (
                     <motion.span
                       key={index}
                       variants={fadeUp}
@@ -580,7 +669,7 @@ function HomePage() {
               <p className="text-sm font-mono uppercase tracking-widest text-emerald-200 mb-4">GET IN TOUCH</p>
               <h2 className="text-4xl md:text-5xl font-bold mb-6 font-heading">Let&apos;s Build the Future Together</h2>
               <p className="text-emerald-100 text-lg mb-8 leading-relaxed">
-                For partnerships, pilots, or collaboration opportunities, we&apos;d love to hear from you.
+                For partnerships, pilots, or collaboration opportunities, we would love to hear from you.
               </p>
               <motion.div whileHover={{ x: 6 }} transition={{ duration: 0.2 }} className="flex items-center gap-3 text-emerald-100">
                 <Mail className="w-5 h-5" />
@@ -668,7 +757,7 @@ function HomePage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-black text-gray-400 py-8">
+      <footer className="bg-black text-gray-400 py-10">
         <div className="container mx-auto px-6">
           <motion.div
             variants={fadeUp}
@@ -676,38 +765,44 @@ function HomePage() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, ease: easeOut }}
-            className="flex flex-col md:flex-row justify-between items-center gap-4"
+            className="flex flex-col gap-6"
           >
-            <div className="flex items-center gap-2">
-              <motion.img
-  src="/logo.png"
-  alt="Averium Dynamics"
-  className="w-11 h-11 object-contain"
-  style={{ display: 'block' }}
-  whileHover={{ scale: 1.06 }}
-  whileTap={{ scale: 0.98 }}
-  transition={{ duration: 0.2 }}
-/>
-              <span className="font-heading font-semibold text-white">Averium Dynamics</span>
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <div className="flex items-center gap-2">
+                <motion.img
+                  src="/logo.png"
+                  alt="Averium Dynamics"
+                  className="w-11 h-11 object-contain"
+                  style={{ display: 'block' }}
+                  whileHover={{ scale: 1.06 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
+                />
+                <span className="font-heading font-semibold text-white">Averium Dynamics</span>
+              </div>
+
+              <div className="flex items-center gap-4 text-sm">
+                <motion.div whileHover={{ y: -1 }} transition={{ duration: 0.2 }}>
+                  <Link to="/imprint" className="hover:text-white transition-colors">
+                    Imprint
+                  </Link>
+                </motion.div>
+
+                <span className="text-gray-600">•</span>
+
+                <motion.div whileHover={{ y: -1 }} transition={{ duration: 0.2 }}>
+                  <Link to="/privacy" className="hover:text-white transition-colors">
+                    Privacy Policy
+                  </Link>
+                </motion.div>
+              </div>
+
+              <div className="text-sm">© {new Date().getFullYear()} Averium Dynamics UG</div>
             </div>
 
-            <div className="flex items-center gap-4 text-sm">
-              <motion.div whileHover={{ y: -1 }} transition={{ duration: 0.2 }}>
-                <Link to="/imprint" className="hover:text-white transition-colors">
-                  Imprint
-                </Link>
-              </motion.div>
-
-              <span className="text-gray-600">•</span>
-
-              <motion.div whileHover={{ y: -1 }} transition={{ duration: 0.2 }}>
-                <Link to="/privacy" className="hover:text-white transition-colors">
-                  Privacy Policy
-                </Link>
-              </motion.div>
+            <div className="text-xs text-gray-500 text-center md:text-left border-t border-gray-800 pt-4">
+              Averium Dynamics UG (haftungsbeschränkt) · HRB 285037 B Amtsgericht Charlottenburg · Berlin, Germany
             </div>
-
-            <div className="text-sm">© {new Date().getFullYear()} Averium Dynamics</div>
           </motion.div>
         </div>
       </footer>

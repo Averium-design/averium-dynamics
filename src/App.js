@@ -259,13 +259,13 @@ function HomePage() {
             transition={{ duration: 0.7, ease: easeOut }}
             className="max-w-4xl mx-auto text-center mb-16"
           >
-            <p className="text-sm font-mono uppercase tracking-widest text-foreground-muted mb-4">OUR MISSION</p>
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-6 font-heading">
-              Building Scalable Autonomous Systems to Prevent Wildfires
-            </h2>
-            <p className="text-lg leading-relaxed text-foreground-muted">
-              Our mission is to build scalable autonomous systems that prevent wildfires before they become disasters. We combine robotics, AI, and environmental engineering to protect forests, communities, and ecosystems.
-            </p>
+            <p className="text-sm font-mono uppercase tracking-widest text-foreground-muted mb-6">AUTONOMOUS WILDFIRE PROTECTION</p>
+<h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-none text-foreground mb-8 font-heading">
+  Predict. Suppress.<br />Contain.
+</h1>
+<p className="text-lg md:text-xl leading-relaxed text-foreground-muted mb-10 max-w-2xl">
+  Averium Dynamics builds BioSphereX — an autonomous closed-loop wildfire protection system combining AI prediction, drone suppression, and swarm-based containment.
+</p>
           </motion.div>
 
           <motion.div

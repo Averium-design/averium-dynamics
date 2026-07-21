@@ -210,7 +210,7 @@ function HomePage() {
               transition={{ duration: 0.7, ease: easeOut }}
               className="text-lg md:text-xl leading-relaxed text-black/95 mb-10 max-w-2xl"
             >
-              Averium Dynamics builds <strong>BioSphereX</strong> &mdash; a closed-loop platform that predicts, suppresses, and contains wildfires before they spread. Our prediction layer is live in production today.
+              Averium Dynamics builds <strong>BioSphereX</strong> &mdash; a closed-loop platform that predicts, suppresses, and contains wildfires before they spread. Our prediction layer has been tested on Spain and is ready for pilot deployment.
             </motion.p>
 
             <motion.div
@@ -380,7 +380,7 @@ function HomePage() {
                 eyebrow: 'LAYER 1 — PREDICT',
                 icon: Signal,
                 title: 'PYROGNOSIS',
-                desc: 'AI prediction platform fusing satellite, weather, and environmental data into a real-time ignition risk surface. Refreshes every five minutes at sub-hectare resolution. Live in production today.',
+                desc: 'AI prediction platform fusing satellite, weather, and environmental data into a real-time ignition risk surface. Refreshes every five minutes at sub-hectare resolution. Tested on Spain and ready for pilot deployment.',
                 image: 'https://images.unsplash.com/photo-1770699197239-81b5da579f2b?crop=entropy&cs=srgb&fm=jpg&q=85',
               },
               {
@@ -504,22 +504,22 @@ function HomePage() {
               {
                 icon: Building2,
                 title: 'Registered Company',
-                desc: 'Averium Dynamics UG (haftungsbeschränkt) — registered at Amtsgericht Charlottenburg, HRB 285037 B.',
+                desc: 'Averium Dynamics UG — a German company registered at Amtsgericht Charlottenburg, Berlin.',
               },
               {
                 icon: FileCheck,
-                title: 'Patent Filed at DPMA',
-                desc: 'Core system patent filed at the German Patent and Trade Mark Office covering Green Dome architecture, with priority secured.',
+                title: 'Patent Application Filed at DPMA',
+                desc: 'Patent application for the Green Dome architecture filed at the German Patent and Trade Mark Office (DPMA), with an established priority date.',
               },
               {
                 icon: Award,
-                title: 'EIC-Validated Deep Tech',
-                desc: 'Independently evaluated by the European Innovation Council and recognised as a high-impact deep-tech breakthrough.',
+                title: 'SIBB Deep-Tech Scholar',
+                desc: 'Selected for the SIBB Digital-Transition incubator (ESF+ funded), Berlin.',
               },
               {
                 icon: Activity,
-                title: 'PYROGNOSIS Live in Production',
-                desc: 'Our prediction layer is deployed and operating, monitoring multiple regions across Europe and the Mediterranean.',
+                title: 'PYROGNOSIS — Ready for Pilots',
+                desc: 'Our wildfire-prediction platform has been tested by temporal holdout on Spain — the standard method in the field — where it outperforms the conventional fire-danger index. Ready for pilot deployment with fire and civil-protection partners.',
               },
             ].map((item, idx) => (
               <motion.div

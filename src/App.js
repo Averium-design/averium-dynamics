@@ -835,6 +835,11 @@ function HomePage() {
                   alt="Kofinanziert von der Europäischen Union"
                   className="h-11 md:h-16 w-auto object-contain"
                 />
+                <img
+                  src="/nvidia-inception-logo.png"
+                  alt="NVIDIA Inception Program member"
+                  className="h-12 md:h-16 w-auto object-contain"
+                />
               </div>
             </div>
 

@@ -387,7 +387,7 @@ function HomePage() {
                 eyebrow: 'LAYER 2 — SUPPRESS',
                 icon: ShieldCheck,
                 title: 'Green Dome',
-                desc: 'Two-drone autonomous architecture: a detection drone with multi-sensor AI confirms ignition; a suppression drone deploys retardant before fire spreads. Patent filed at the German Patent Office.',
+                desc: 'Two-drone autonomous architecture: a detection drone with multi-sensor AI confirms ignition; a suppression drone deploys retardant before fire spreads. Patent pending at the German Patent and Trade Mark Office (DPMA), with an established priority date.',
                 image: 'https://images.unsplash.com/photo-1488149048941-581936ced6d6?crop=entropy&cs=srgb&fm=jpg&q=85',
               },
               {

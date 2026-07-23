@@ -508,7 +508,7 @@ function HomePage() {
               },
               {
                 icon: FileCheck,
-                title: 'Patent Application Filed at DPMA',
+                title: 'Patent Pending',
                 desc: 'Patent application for the Green Dome architecture filed at the German Patent and Trade Mark Office (DPMA), with an established priority date.',
               },
               {

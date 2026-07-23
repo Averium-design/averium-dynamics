@@ -515,6 +515,8 @@ function HomePage() {
                 icon: Award,
                 title: 'SIBB Deep-Tech Scholar',
                 desc: 'Selected for the SIBB Digital-Transition incubator (ESF+ funded), Berlin.',
+                logo: '/sibb-logo.png',
+                logoAlt: 'SIBB — Digital Association of Berlin-Brandenburg',
               },
               {
                 icon: Activity,
@@ -534,6 +536,13 @@ function HomePage() {
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
                 <p className="text-foreground-muted">{item.desc}</p>
+                {item.logo && (
+                  <img
+                    src={item.logo}
+                    alt={item.logoAlt}
+                    className="h-8 w-auto object-contain mt-5"
+                  />
+                )}
               </motion.div>
             ))}
           </motion.div>
@@ -772,21 +781,21 @@ function HomePage() {
               <p className="text-xs font-mono uppercase tracking-widest text-gray-500 mb-5 text-center md:text-left">
                 Supported by
               </p>
-              <div className="bg-white rounded-lg px-6 py-6 flex flex-wrap items-center justify-center md:justify-between gap-x-10 gap-y-6">
+              <div className="bg-white rounded-lg px-8 py-8 md:px-12 md:py-10 flex flex-wrap items-center justify-center md:justify-between gap-x-14 gap-y-8">
                 <img
                   src="/sibb-logo.png"
                   alt="SIBB — Digital Association of Berlin-Brandenburg"
-                  className="h-12 md:h-16 w-auto object-contain"
+                  className="h-16 md:h-24 w-auto object-contain"
                 />
                 <img
                   src="/berlin-logo.png"
                   alt="Land Berlin"
-                  className="h-8 md:h-11 w-auto object-contain"
+                  className="h-11 md:h-16 w-auto object-contain"
                 />
                 <img
                   src="/eu-cofinanced.png"
                   alt="Kofinanziert von der Europäischen Union"
-                  className="h-8 md:h-11 w-auto object-contain"
+                  className="h-11 md:h-16 w-auto object-contain"
                 />
               </div>
             </div>

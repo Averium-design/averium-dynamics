@@ -1,7 +1,7 @@
 // src/App.js
 
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useReducedMotion, useInView, animate } from 'framer-motion';
 import {
   Flame, Radar, Zap, ShieldCheck, ArrowRight,
   Clock, Target, Wind, Trees, Signal,
@@ -42,6 +42,39 @@ const floatInRight = {
   hidden: { opacity: 0, x: 26 },
   visible: { opacity: 1, x: 0 },
 };
+
+/** -----------------------------
+ *  CountUp — animates an integer from 0 to `value` when scrolled into
+ *  view (once). Honors reduced-motion: jumps straight to the final value.
+ *  ----------------------------- */
+function CountUp({ value, prefix = '', suffix = '', duration = 1.4 }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.5 });
+  const reduce = useReducedMotion();
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    if (reduce) {
+      setDisplay(value);
+      return;
+    }
+    const controls = animate(0, value, {
+      duration,
+      ease: easeOut,
+      onUpdate: (v) => setDisplay(Math.round(v)),
+    });
+    return () => controls.stop();
+  }, [inView, reduce, value, duration]);
+
+  return (
+    <span ref={ref}>
+      {prefix}
+      {display}
+      {suffix}
+    </span>
+  );
+}
 
 function HomePage() {
   const [scrolled, setScrolled] = useState(false);
@@ -329,9 +362,9 @@ function HomePage() {
             viewport={{ once: true, amount: 0.2 }}
           >
             {[
-              { value: '70K+', label: 'Wildfires per year in the US alone' },
-              { value: '10M', label: 'Acres burned annually' },
-              { value: '$50B+', label: 'Economic damage per year' },
+              { value: 70, suffix: 'K+', label: 'Wildfires per year in the US alone' },
+              { value: 10, suffix: 'M', label: 'Acres burned annually' },
+              { value: 50, prefix: '$', suffix: 'B+', label: 'Economic damage per year' },
             ].map((stat, index) => (
               <motion.div
                 key={index}
@@ -340,7 +373,9 @@ function HomePage() {
                 whileHover={{ y: -6 }}
                 className="border border-primary/30 bg-slate-900/50 p-8 rounded-sm backdrop-blur-sm"
               >
-                <div className="text-5xl font-bold mb-2 font-heading">{stat.value}</div>
+                <div className="text-5xl font-bold mb-2 font-heading">
+                  <CountUp value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
+                </div>
                 <div className="text-accent mb-2 font-medium">{stat.label}</div>
               </motion.div>
             ))}

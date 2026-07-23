@@ -838,7 +838,7 @@ function HomePage() {
                 <img
                   src="/nvidia-inception-logo.png"
                   alt="NVIDIA Inception Program member"
-                  className="h-12 md:h-16 w-auto object-contain"
+                  className="h-14 md:h-20 w-auto object-contain"
                 />
               </div>
             </div>

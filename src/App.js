@@ -767,6 +767,30 @@ function HomePage() {
             transition={{ duration: 0.6, ease: easeOut }}
             className="flex flex-col gap-6"
           >
+            {/* FUNDING / PARTNER STRIP — ESF+ co-financing acknowledgement */}
+            <div className="border-b border-gray-800 pb-8">
+              <p className="text-xs font-mono uppercase tracking-widest text-gray-500 mb-5 text-center md:text-left">
+                Supported by
+              </p>
+              <div className="bg-white rounded-lg px-6 py-6 flex flex-wrap items-center justify-center md:justify-between gap-x-10 gap-y-6">
+                <img
+                  src="/sibb-logo.png"
+                  alt="SIBB — Digital Association of Berlin-Brandenburg"
+                  className="h-12 md:h-16 w-auto object-contain"
+                />
+                <img
+                  src="/berlin-senate-logo.png"
+                  alt="Senatsverwaltung für Wirtschaft, Energie und Betriebe"
+                  className="h-8 md:h-11 w-auto object-contain"
+                />
+                <img
+                  src="/eu-cofinanced.png"
+                  alt="Kofinanziert von der Europäischen Union"
+                  className="h-8 md:h-11 w-auto object-contain"
+                />
+              </div>
+            </div>
+
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div className="flex items-center gap-2">
                 <motion.img

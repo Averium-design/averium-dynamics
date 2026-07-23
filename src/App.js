@@ -779,8 +779,8 @@ function HomePage() {
                   className="h-12 md:h-16 w-auto object-contain"
                 />
                 <img
-                  src="/berlin-senate-logo.png"
-                  alt="Senatsverwaltung für Wirtschaft, Energie und Betriebe"
+                  src="/berlin-logo.png"
+                  alt="Land Berlin"
                   className="h-8 md:h-11 w-auto object-contain"
                 />
                 <img

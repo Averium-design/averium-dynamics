@@ -531,18 +531,21 @@ function HomePage() {
                 whileHover={{ y: -6 }}
                 className="border border-border p-8 bg-white rounded-sm"
               >
-                <div className="w-12 h-12 bg-secondary rounded flex items-center justify-center mb-4">
-                  <item.icon className="w-6 h-6 text-primary" />
-                </div>
+                {item.logo ? (
+                  <div className="h-12 flex items-center mb-4">
+                    <img
+                      src={item.logo}
+                      alt={item.logoAlt}
+                      className="h-12 w-auto object-contain"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-12 h-12 bg-secondary rounded flex items-center justify-center mb-4">
+                    <item.icon className="w-6 h-6 text-primary" />
+                  </div>
+                )}
                 <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
                 <p className="text-foreground-muted">{item.desc}</p>
-                {item.logo && (
-                  <img
-                    src={item.logo}
-                    alt={item.logoAlt}
-                    className="h-8 w-auto object-contain mt-5"
-                  />
-                )}
               </motion.div>
             ))}
           </motion.div>

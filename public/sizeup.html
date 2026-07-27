@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#0a0d12"/>
+<meta name="mobile-web-app-capable" content="yes"/>
 <!-- Reachable by direct link only: sent to crews we have briefed, not a public page. -->
 <meta name="robots" content="noindex, nofollow, noarchive"/>
 <title>Pyrognosis — Fire Size-Up</title>
@@ -14,8 +16,11 @@
     --fire:#ff4d2e; --warn:#f5a524; --ok:#37b26b; --accent:#3fa9ff;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;height:100%;font-family:"Segoe UI",system-ui,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
-  #app{display:flex;flex-direction:column;height:100%}
+  html,body{margin:0;height:100%;font-family:"Segoe UI",system-ui,Roboto,sans-serif;background:var(--bg);color:var(--ink);
+    -webkit-text-size-adjust:100%}
+  /* dvh follows the mobile browser chrome as it hides/shows; 100% is the fallback. */
+  #app{display:flex;flex-direction:column;height:100%;height:100dvh}
+  button,input,textarea{touch-action:manipulation}  /* kills the 300ms tap delay */
   header{background:#0a0d12;border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
   header .brand{font-weight:800;letter-spacing:.3px}
   header .brand b{color:var(--fire)}
@@ -23,6 +28,13 @@
   .coords{margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
   .coords input{background:#0a0d12;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 10px;width:230px;font-size:13px}
   .coords button{background:var(--fire);border:none;color:#fff;border-radius:8px;padding:8px 12px;font-weight:700;cursor:pointer}
+  .coords button.loc{background:#1b2530;border:1px solid var(--line);color:var(--ink);display:flex;align-items:center;gap:7px}
+  .coords button.loc:hover{border-color:var(--accent)}
+  .coords button.loc .pin{color:var(--accent);font-size:15px;line-height:1}
+  .coords button.loc.busy{opacity:.7}
+  .coords button.loc.busy .pin{animation:ping 1s linear infinite}
+  @keyframes ping{50%{opacity:.25}}
+  @media (prefers-reduced-motion:reduce){.coords button.loc.busy .pin{animation:none}}
   main{flex:1;display:flex;min-height:0}
   #map{flex:1;min-height:0}
   aside{width:390px;max-width:46vw;background:var(--panel);border-left:1px solid var(--line);overflow:auto;padding:16px}
@@ -71,9 +83,37 @@
   .err{color:#ff8a6b;font-size:13px;margin-bottom:10px}
   @media (max-width:820px){
     main{flex-direction:column}
-    aside{width:100%;max-width:none;border-left:none;border-top:1px solid var(--line)}
-    #map{height:46vh;flex:none}
-    .coords input{width:150px}
+    aside{width:100%;max-width:none;border-left:none;border-top:1px solid var(--line);
+      padding:14px 14px calc(20px + env(safe-area-inset-bottom))}
+    #map{height:44vh;flex:none}
+
+    /* Header stacks: title on its own line, controls on the next, locate button first
+       and widest because on scene "where am I" beats typing coordinates. */
+    header{padding:9px 12px calc(9px) ;gap:8px;
+      padding-left:calc(12px + env(safe-area-inset-left));
+      padding-right:calc(12px + env(safe-area-inset-right))}
+    header .brand{font-size:15px;width:100%}
+    header .tag{display:none}
+    .coords{margin-left:0;width:100%;gap:7px}
+    .coords button.loc{flex:1 1 auto;justify-content:center;font-size:14.5px}
+    .coords input{flex:1 1 120px;width:auto;min-width:0;font-size:16px}  /* 16px stops iOS zooming on focus */
+    .coords button{padding:0 14px}
+
+    /* Touch targets: 44px minimum, per Apple's guidance. Gloved hands, moving vehicle. */
+    .coords button,.coords input{min-height:44px}
+    .fb-btns button,.send{min-height:46px;font-size:15px}
+    textarea,.txt{font-size:16px}
+    .txt{min-height:46px}
+
+    .wish label{padding:11px 0;gap:12px;font-size:14.5px}
+    .wish input[type=checkbox]{width:21px;height:21px;margin-top:1px;accent-color:var(--fire)}
+    .stations li{padding:9px 0;font-size:14.5px}
+    .read{font-size:16px}
+    .metric .v{font-size:21px}
+  }
+  @media (max-width:380px){
+    .grid{grid-template-columns:1fr}
+    .coords button.loc{flex:1 1 100%}
   }
 </style>
 </head>
@@ -83,7 +123,8 @@
     <span class="brand"><b>PYROGNOSIS</b> · Fire Size-Up</span>
     <span class="tag">tap the map to place the fire</span>
     <div class="coords">
-      <input id="coordInput" placeholder="or paste coordinates  e.g. 37.92, -2.94" />
+      <button id="locBtn" class="loc" type="button"><span class="pin">◎</span><span id="locTxt">My location</span></button>
+      <input id="coordInput" placeholder="or paste coordinates  e.g. 37.92, -2.94" inputmode="decimal" />
       <button id="goBtn">Go</button>
     </div>
   </header>
@@ -431,6 +472,58 @@
   }
   $('goBtn').addEventListener('click',goToTyped);
   $('coordInput').addEventListener('keydown',e=>{if(e.key==='Enter')goToTyped();});
+
+  // ---- "my location" -------------------------------------------------------
+  // A crew opening this on scene wants "where I am", not a coordinate to type.
+  let accCircle=null;
+  function clearAccuracy(){ if(accCircle){ map.removeLayer(accCircle); accCircle=null; } }
+  marker.on('dragstart',clearAccuracy);
+  map.on('click',clearAccuracy);
+
+  function locBusy(on){
+    const b=$('locBtn');
+    b.disabled=on; b.classList.toggle('busy',on);
+    $('locTxt').textContent = on ? 'Locating…' : 'My location';
+  }
+
+  $('locBtn').addEventListener('click',()=>{
+    if(!navigator.geolocation){
+      $('err').style.display='block';
+      $('err').textContent='This device cannot share its location. Tap the map instead.';
+      return;
+    }
+    locBusy(true);
+    navigator.geolocation.getCurrentPosition(
+      p=>{
+        locBusy(false);
+        const la=p.coords.latitude, lo=p.coords.longitude, acc=p.coords.accuracy;
+        clearAccuracy();
+        marker.setLatLng([la,lo]);
+        map.setView([la,lo], acc<200?15:13);
+        // Show the GPS uncertainty rather than implying the pin is exact.
+        if(acc && acc>40){
+          accCircle=L.circle([la,lo],{radius:acc,color:'#3fa9ff',weight:1,
+            fillColor:'#3fa9ff',fillOpacity:.08,interactive:false}).addTo(map);
+        }
+        // update() clears the error banner as it starts, so the warning has to be set
+        // AFTER it or it gets wiped straight away.
+        update();
+        if(acc && acc>500){
+          $('err').style.display='block';
+          $('err').textContent='Rough fix only (about '+Math.round(acc)+' m out). Drag the pin to where the fire actually is.';
+        }
+      },
+      e=>{
+        locBusy(false);
+        $('err').style.display='block';
+        $('err').textContent =
+          e.code===1 ? 'Location access was blocked. Allow it in your browser settings, or just tap the map.' :
+          e.code===2 ? 'No fix here — the phone cannot see enough satellites. Tap the map instead.' :
+                       'Locating took too long. Try again, or tap the map.';
+      },
+      {enableHighAccuracy:true,timeout:15000,maximumAge:30000}
+    );
+  });
 
   // ---- feedback ------------------------------------------------------------
   let verdict='';

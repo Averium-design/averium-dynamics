@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- Reachable by direct link only: this is an advisory field tool sent to briefed crews,
+     not a public page. Kept out of search results so it is not found and acted on by
+     anyone who has not been briefed on what it does and does not tell them. -->
+<meta name="robots" content="noindex, nofollow, noarchive"/>
+<title>Pyrognosis — Fire Size-Up (prototype)</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root{
+    --bg:#0c0f14; --panel:#141a22; --line:#26303c; --ink:#eef2f6; --muted:#93a1b0;
+    --fire:#ff4d2e; --warn:#f5a524; --ok:#37b26b; --accent:#3fa9ff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;font-family:"Segoe UI",system-ui,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+  #app{display:flex;flex-direction:column;height:100%}
+  header{background:#0a0d12;border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  header .brand{font-weight:800;letter-spacing:.3px}
+  header .brand b{color:var(--fire)}
+  header .tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:2px 8px;border-radius:999px}
+  .coords{margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+  .coords input{background:#0a0d12;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 10px;width:230px;font-size:13px}
+  .coords button{background:var(--fire);border:none;color:#fff;border-radius:8px;padding:8px 12px;font-weight:700;cursor:pointer}
+  main{flex:1;display:flex;min-height:0}
+  #map{flex:1;min-height:0}
+  aside{width:380px;max-width:44vw;background:var(--panel);border-left:1px solid var(--line);overflow:auto;padding:16px}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 10px}
+  .read{background:#10161d;border:1px solid var(--line);border-left:4px solid var(--fire);border-radius:10px;padding:14px;font-size:15.5px;line-height:1.5;margin-bottom:14px}
+  .read.loading{border-left-color:var(--muted);color:var(--muted)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+  .metric{background:#10161d;border:1px solid var(--line);border-radius:10px;padding:11px 12px}
+  .metric .k{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+  .metric .v{font-size:22px;font-weight:800;margin-top:3px}
+  .metric .s{font-size:12px;color:var(--muted);margin-top:2px}
+  .chip{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;margin-top:4px}
+  .chip.gentle{background:#123326;color:#5fe0a0}
+  .chip.moderate{background:#2f2a12;color:#f5cf6a}
+  .chip.steep{background:#3a1f12;color:#ff9d6b}
+  .chip.vsteep{background:#3a1216;color:#ff6b6b}
+  .windrose{display:flex;align-items:center;gap:10px}
+  .age{margin-top:6px;font-size:11px;line-height:1.35}
+  .age.stale{color:var(--warn);font-weight:700}
+  .arrow{width:38px;height:38px;flex:none;transition:transform .3s ease}
+  .checklist{background:#10161d;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:14px}
+  .checklist label{display:flex;gap:9px;align-items:flex-start;font-size:14px;padding:5px 0;cursor:pointer}
+  .checklist input{margin-top:3px}
+  .note{font-size:11.5px;color:var(--muted);line-height:1.6;border-top:1px solid var(--line);padding-top:10px}
+  .feedback{margin-top:14px;background:#10161d;border:1px dashed var(--line);border-radius:10px;padding:12px 14px}
+  .feedback .fb-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .feedback button{flex:1;min-width:120px;background:#1b2530;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:9px;font-size:13px;font-weight:600;cursor:pointer}
+  .feedback button:hover{border-color:var(--accent)}
+  .feedback button.picked{background:var(--accent);border-color:var(--accent);color:#04121f}
+  .err{color:#ff8a6b;font-size:13px;margin-bottom:10px}
+  @media (max-width:820px){
+    main{flex-direction:column}
+    aside{width:100%;max-width:none;border-left:none;border-top:1px solid var(--line)}
+    #map{height:46vh;flex:none}
+    .coords input{width:150px}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <span class="brand"><b>PYROGNOSIS</b> · Fire Size-Up</span>
+    <span class="tag">prototype · drop a pin anywhere</span>
+    <div class="coords">
+      <input id="coordInput" placeholder="paste lat, lon  e.g. 37.92, -2.94" />
+      <button id="goBtn">Go</button>
+    </div>
+  </header>
+  <main>
+    <div id="map"></div>
+    <aside>
+      <h2>What you're driving into</h2>
+      <div id="err" class="err" style="display:none"></div>
+      <div id="read" class="read loading">Drop the fire pin on the map (or paste coordinates) to read the terrain.</div>
+
+      <div class="grid">
+        <div class="metric"><div class="k">Slope</div><div class="v" id="mSlope">—</div><div><span class="chip" id="mSteep">—</span></div></div>
+        <div class="metric"><div class="k">Fire will run</div><div class="v" id="mUp">—</div><div class="s">uphill, toward…</div></div>
+        <div class="metric"><div class="k">Aspect (faces)</div><div class="v" id="mAspect">—</div><div class="s" id="mAspectSun">—</div></div>
+        <div class="metric"><div class="k">Elevation</div><div class="v" id="mElev">—</div><div class="s">at the pin</div></div>
+        <div class="metric">
+          <div class="k">Wind</div>
+          <div class="windrose"><svg class="arrow" id="windArrow" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="5"/><polyline points="6,11 12,5 18,11"/></svg><div><div class="v" id="mWind" style="font-size:18px">—</div><div class="s" id="mWindDir">—</div></div></div>
+          <div class="s age" id="mWindAge"></div>
+        </div>
+        <div class="metric"><div class="k">Air</div><div class="v" id="mTemp" style="font-size:18px">—</div><div class="s" id="mRH">—</div></div>
+      </div>
+
+      <div class="checklist">
+        <div class="k" style="font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:4px">Size-up prompts (crew confirms on the ground)</div>
+        <label><input type="checkbox"> <span>Steep ground <b>above</b> us? (fire climbs toward you)</span></label>
+        <label><input type="checkbox"> <span>Drainage / chute / saddle nearby? (fire accelerates)</span></label>
+        <label><input type="checkbox"> <span>Escape route + safety zone identified? (LCES)</span></label>
+        <label><input type="checkbox"> <span>Access for engines + nearest water located?</span></label>
+      </div>
+
+      <div class="feedback">
+        <div class="k" style="font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase">Feedback (the whole point)</div>
+        <div style="font-size:13.5px;margin-top:6px">Would this have helped before you arrived?</div>
+        <div class="fb-btns">
+          <button data-fb="yes">Yes, useful</button>
+          <button data-fb="partly">Partly</button>
+          <button data-fb="no">No</button>
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-top:8px">…then ask them: <i>what one thing would you want here that isn't?</i></div>
+      </div>
+
+      <div class="note" id="note">
+        Terrain from the Copernicus GLO-90 DEM (~90&nbsp;m) via Open-Meteo, sampled on a 200&nbsp;m grid so
+        neighbouring samples land in distinct DEM cells; wind/air from Open-Meteo current forecast.
+        <b>Advisory only</b> — a prototype for interviews, not for operational decisions; verify on the ground.
+        The production version would run on Pyrognosis' own higher-resolution DEM/slope, wind, fuel and
+        fire-station / water / access layers.
+      </div>
+    </aside>
+  </main>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const START=[37.92,-2.94]; // Sierra de Cazorla, Spain (validated region)
+
+  // Spacing of the 3x3 terrain probe, in metres. Copernicus GLO-90 has ~92.6 m latitude
+  // spacing, so a 90 m step makes neighbouring rows resolve to the SAME DEM cell — the
+  // N-S gradient then comes off a degenerate stencil and aspect skews ~30 deg. 200 m keeps
+  // every sample in a distinct cell while staying a landscape-scale read.
+  const DEM_STEP_M=200;
+
+  // Wind thresholds (km/h): below LIGHT wind is not a driver; at or above DRIVEN expect a
+  // genuinely wind-driven run. Without these the read called a 4 km/h breeze a "fast, driven
+  // uphill run".
+  const LIGHT_KMH=8, DRIVEN_KMH=15;
+
+  const map=L.map('map',{zoomControl:true}).setView(START,13);
+  const topo=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+    {maxZoom:17,attribution:'© OpenTopoMap (CC-BY-SA)'}).addTo(map);
+  const sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    {maxZoom:19,attribution:'Esri World Imagery'});
+  L.control.layers({'Topographic':topo,'Satellite':sat},null,{position:'topright'}).addTo(map);
+
+  const fireIcon=L.divIcon({className:'',html:'<div style="font-size:26px;line-height:26px;filter:drop-shadow(0 1px 2px #000)">🔥</div>',iconSize:[26,26],iconAnchor:[13,24]});
+  const marker=L.marker(START,{draggable:true,icon:fireIcon}).addTo(map);
+
+  const $=id=>document.getElementById(id);
+  const COMPASS=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+  const compass=d=>COMPASS[Math.round(((d%360)+360)%360/22.5)%16];
+  const rad=x=>x*Math.PI/180, deg=x=>x*180/Math.PI;
+  const angDiff=(a,b)=>{let d=Math.abs(a-b)%360;return d>180?360-d:d;};
+
+  // Build a 3x3 grid (a..i, NW->SE, north = higher lat) spaced ~step metres
+  function grid(lat,lon,step){
+    const dLat=step/111320, dLon=step/(111320*Math.cos(rad(lat)));
+    const rows=[lat+dLat,lat,lat-dLat], cols=[lon-dLon,lon,lon+dLon];
+    const pts=[];
+    for(const la of rows) for(const lo of cols) pts.push([la,lo]);
+    return {pts,step};
+  }
+
+  // Horn/ESRI slope + aspect from 9 elevations (a..i)
+  function terrain(z,cell){
+    const [a,b,c,d,e,f,g,h,i]=z;
+    const dzdx=((c+2*f+i)-(a+2*d+g))/(8*cell);
+    const dzdy=((g+2*h+i)-(a+2*b+c))/(8*cell);
+    const slope=deg(Math.atan(Math.hypot(dzdx,dzdy)));
+    let asp=deg(Math.atan2(dzdy,-dzdx));
+    let aspect; if(asp<0)aspect=90-asp; else if(asp>90)aspect=360-asp+90; else aspect=90-asp;
+    return {slope, aspect:((aspect%360)+360)%360, elev:e};
+  }
+
+  const steepClass=s=> s<10?['gentle','gentle']: s<20?['moderate','moderate']: s<30?['steep','steep']:['very steep','vsteep'];
+
+  // Insolation from the aspect ANGLE, not a hand-listed set of compass points. The old list
+  // ('S','SSW','SW','SSE','WSW') omitted SE and W while including SSE and WSW, so a SE-facing
+  // slope was labelled "shaded". Peak heating sits on the equator-facing side biased ~20° west,
+  // because afternoon sun coincides with the daily temperature maximum — SW aspects dry hardest.
+  function insolation(aspectDeg,lat){
+    const hottest = lat>=0 ? 200 : 340;          // SSW in the north, NNW in the south
+    const off = angDiff(aspectDeg,hottest);
+    if(off<=75)  return {txt:'sun-exposed · driest fuel', sunny:true};
+    if(off<=135) return {txt:'partial sun', sunny:false};
+    return {txt:'shaded aspect · fuel holds moisture', sunny:false};
+  }
+
+  let seq=0;
+  async function update(){
+    const my=++seq;
+    const {lat,lng}=marker.getLatLng();
+    $('coordInput').value=lat.toFixed(5)+', '+lng.toFixed(5);
+    $('err').style.display='none';
+    $('read').className='read loading';
+    $('read').textContent='Reading terrain…';
+
+    const g=grid(lat,lng,DEM_STEP_M);
+    const lats=g.pts.map(p=>p[0].toFixed(6)).join(',');
+    const lons=g.pts.map(p=>p[1].toFixed(6)).join(',');
+    const elevUrl=`https://api.open-meteo.com/v1/elevation?latitude=${lats}&longitude=${lons}`;
+    const wxUrl=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m&wind_speed_unit=kmh`;
+
+    try{
+      const [eR,wR]=await Promise.all([fetch(elevUrl),fetch(wxUrl)]);
+      if(my!==seq) return;
+      const eJ=await eR.json(), wJ=await wR.json();
+      if(my!==seq) return;
+      if(!eJ.elevation || eJ.elevation.length<9) throw new Error('no elevation');
+
+      const t=terrain(eJ.elevation, g.step);
+      const cur=wJ.current||{};
+      const windFrom=cur.wind_direction_10m??null, windSpd=cur.wind_speed_10m??null;
+      const temp=cur.temperature_2m, rh=cur.relative_humidity_2m;
+
+      const [steepTxt,steepCls]=steepClass(t.slope);
+      const upslope=(t.aspect+180)%360;         // fire runs uphill = opposite of downhill-facing aspect
+      const windToward=windFrom!=null?(windFrom+180)%360:null;
+
+      // metrics
+      $('mSlope').textContent=t.slope.toFixed(0)+'°';
+      const chip=$('mSteep'); chip.textContent=steepTxt; chip.className='chip '+steepCls;
+      $('mUp').textContent=compass(upslope);
+      $('mAspect').textContent=compass(t.aspect);
+      const sun=insolation(t.aspect,lat), sunny=sun.sunny;
+      $('mAspectSun').textContent=sun.txt;
+      $('mElev').textContent=Math.round(t.elev)+' m';
+      $('mTemp').textContent=(temp!=null?temp.toFixed(0)+'°C':'—');
+      $('mRH').textContent=(rh!=null?rh+'% RH'+(rh<25?' · very dry':''):'');
+      if(windSpd!=null){
+        $('mWind').textContent=windSpd.toFixed(0)+' km/h';
+        $('mWindDir').textContent='from '+compass(windFrom)+' → pushing '+compass(windToward);
+        $('windArrow').style.transform='rotate('+windToward+'deg)'; // arrow points where wind blows TO
+        // Age-stamp the wind. This is a MODEL FORECAST, not an observation, and it is the only
+        // fast-moving input on the card — a crew must never read an hour-old value as "now".
+        // Open-Meteo defaults to timezone=GMT, so current.time is UTC and needs the explicit Z.
+        const obs=cur.time?new Date(cur.time+'Z'):null;
+        const ageMin=obs?Math.max(0,Math.round((Date.now()-obs.getTime())/60000)):null;
+        const el=$('mWindAge');
+        if(ageMin==null){
+          el.className='s age'; el.textContent='forecast model · observation time unknown';
+        }else{
+          const hhmm=obs.toISOString().slice(11,16);
+          el.className='s age'+(ageMin>60?' stale':'');
+          el.textContent='forecast model, not observed · '+hhmm+'Z, '+
+            (ageMin<1?'just now':ageMin+' min old')+(ageMin>60?' — CONFIRM ON THE GROUND':'');
+        }
+      }
+
+      // the READ
+      let read='';
+      const align = windToward!=null ? angDiff(windToward,upslope) : 999;
+      const haveWind = windToward!=null && windSpd!=null;
+      const light  = haveWind && windSpd<LIGHT_KMH;
+      const driven = haveWind && windSpd>=DRIVEN_KMH;
+      const spd = haveWind ? windSpd.toFixed(0) : '';
+      if(t.slope<10){
+        read=`Gentle ground (${t.slope.toFixed(0)}°). Terrain won't drive the run much — `;
+        if(!haveWind){
+          read+='and there is no wind reading for this point.';
+        }else if(light){
+          read+=`and wind is light (${spd} km/h), so <b>fuel and ignition pattern will govern</b> rather than terrain or wind.`;
+        }else{
+          read+=`<b>wind is the main factor</b>, currently pushing toward the ${compass(windToward)} at ${spd} km/h.`;
+        }
+      }else{
+        read=`Fire sits on ${steepTxt} ground (${t.slope.toFixed(0)}°) facing ${compass(t.aspect)}. Expect it to <b>climb toward the ${compass(upslope)}</b>`;
+        if(!haveWind){
+          read+='.';
+        }else if(light){
+          read+=` — wind is light (${spd} km/h), so <b>slope, not wind, sets the direction</b>.`;
+        }else if(align<45 && driven){
+          read+=` — and wind (${spd} km/h toward the ${compass(windToward)}) is <b>aligned with the slope</b>, so anticipate a fast, driven uphill run. Do not get above it.`;
+        }else if(align<45){
+          read+=` — wind (${spd} km/h toward the ${compass(windToward)}) is aligned with the slope and reinforces the uphill run, but is only moderate.`;
+        }else if(driven){
+          read+=`. Wind is cross-slope and strong (${spd} km/h toward the ${compass(windToward)}) — watch for flank runs and shifts.`;
+        }else{
+          read+=`. Wind is cross-slope (${spd} km/h toward the ${compass(windToward)}) — watch the flanks.`;
+        }
+      }
+      if(sunny) read+=' Sun-exposed aspect — fuels drier here.';
+      if(rh!=null && rh<25) read+=' Low humidity ('+rh+'%) — expect active fire behaviour.';
+      $('read').className='read';
+      $('read').innerHTML=read;
+
+    }catch(err){
+      if(my!==seq) return;
+      $('read').className='read loading';
+      $('read').textContent='Could not read this location.';
+      $('err').style.display='block';
+      $('err').textContent='Data fetch failed (offline, or the open DEM/weather API is rate-limited). Move the pin and retry.';
+    }
+  }
+
+  marker.on('dragend',update);
+  map.on('click',e=>{marker.setLatLng(e.latlng);update();});
+  // Trim first: a leading space used to yield an empty token, and Number('')===0 survived the
+  // old isNaN filter — so " 37.92, -2.94" silently jumped to lat 0. Ranges are checked too.
+  function goToTyped(){
+    const nums=$('coordInput').value.trim().split(/[\s,]+/).filter(s=>s.length).map(Number);
+    const la=nums[0], lo=nums[1];
+    if(nums.length<2 || !isFinite(la) || !isFinite(lo) || Math.abs(la)>90 || Math.abs(lo)>180){
+      $('err').style.display='block';
+      $('err').textContent='Enter coordinates as "lat, lon" — latitude −90…90, longitude −180…180.';
+      return;
+    }
+    $('err').style.display='none';
+    marker.setLatLng([la,lo]); map.setView([la,lo],14); update();
+  }
+  $('goBtn').addEventListener('click',goToTyped);
+  $('coordInput').addEventListener('keydown',e=>{if(e.key==='Enter')goToTyped();});
+  document.querySelectorAll('.feedback button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.feedback button').forEach(x=>x.classList.remove('picked'));
+    b.classList.add('picked');
+  }));
+
+  update();
+})();
+</script>
+</body>
+</html>

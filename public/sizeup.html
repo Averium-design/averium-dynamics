@@ -24,6 +24,7 @@
 <meta property="og:image:height" content="630"/>
 <meta property="og:image:alt" content="The Fire Size-Up tool showing a hillside near Cazorla with slope, wind and fire direction."/>
 <meta property="og:locale" content="en_GB"/>
+<meta property="og:locale:alternate" content="de_DE"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Fire Size-Up — see the ground before you arrive"/>
 <meta name="twitter:description" content="Drop a pin on a fire and read the hillside: how steep, which way it will run, the wind, and your nearest fire stations."/>
@@ -47,6 +48,11 @@
   header .brand{font-weight:800;letter-spacing:.3px}
   header .brand b{color:var(--fire)}
   header .tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:2px 8px;border-radius:999px}
+  .lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;flex:none}
+  .lang button{background:transparent;border:none;color:var(--muted);font:700 12px/1 inherit;
+    padding:6px 11px;cursor:pointer;letter-spacing:.05em}
+  .lang button.on{background:var(--accent);color:#04121f}
+  .lang button:not(.on):hover{color:var(--ink)}
   .coords{margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
   .coords input{background:#0a0d12;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 10px;width:230px;font-size:13px}
   .coords button{background:var(--fire);border:none;color:#fff;border-radius:8px;padding:8px 12px;font-weight:700;cursor:pointer}
@@ -86,7 +92,6 @@
   .stations .dir{color:var(--muted);font-size:12px}
   .wish label{display:flex;gap:9px;align-items:flex-start;font-size:14px;padding:6px 0;cursor:pointer;line-height:1.4}
   .wish input{margin-top:3px;flex:none}
-  .wish .done{color:var(--ok);font-size:11px;font-weight:700;letter-spacing:.06em}
   .fb-btns{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
   .fb-btns button{flex:1;min-width:84px;background:#1b2530;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:9px;font-size:13px;font-weight:600;cursor:pointer}
   .fb-btns button:hover{border-color:var(--accent)}
@@ -112,13 +117,14 @@
       padding:14px 14px calc(20px + env(safe-area-inset-bottom))}
     #map{height:44vh;flex:none}
 
-    /* Header stacks: title on its own line, controls on the next, locate button first
-       and widest because on scene "where am I" beats typing coordinates. */
-    header{padding:9px 12px calc(9px) ;gap:8px;
+    /* Header stacks: title and language on one line, controls on the next, locate button
+       first and widest because on scene "where am I" beats typing coordinates. */
+    header{padding:9px 12px;gap:8px;
       padding-left:calc(12px + env(safe-area-inset-left));
       padding-right:calc(12px + env(safe-area-inset-right))}
-    header .brand{font-size:15px;width:100%}
+    header .brand{font-size:15px}
     header .tag{display:none}
+    .lang{margin-left:auto}
     .coords{margin-left:0;width:100%;gap:7px}
     .coords button.loc{flex:1 1 auto;justify-content:center;font-size:14.5px}
     .coords input{flex:1 1 120px;width:auto;min-width:0;font-size:16px}  /* 16px stops iOS zooming on focus */
@@ -129,6 +135,7 @@
     .fb-btns button,.send{min-height:46px;font-size:15px}
     textarea,.txt{font-size:16px}
     .txt{min-height:46px}
+    .lang button{padding:9px 13px;font-size:13px}
 
     .wish label{padding:11px 0;gap:12px;font-size:14.5px}
     .wish input[type=checkbox]{width:21px;height:21px;margin-top:1px;accent-color:var(--fire)}
@@ -145,73 +152,76 @@
 <body>
 <div id="app">
   <header>
-    <span class="brand"><b>PYROGNOSIS</b> · Fire Size-Up</span>
-    <span class="tag">tap the map to place the fire</span>
+    <span class="brand"><b>PYROGNOSIS</b> · <span data-i18n="brandSuffix">Fire Size-Up</span></span>
+    <div class="lang" id="lang">
+      <button type="button" data-lang="en" class="on">EN</button><button type="button" data-lang="de">DE</button>
+    </div>
+    <span class="tag" data-i18n="tag">tap the map to place the fire</span>
     <div class="coords">
-      <button id="locBtn" class="loc" type="button"><span class="pin">◎</span><span id="locTxt">My location</span></button>
-      <input id="coordInput" placeholder="or paste coordinates  e.g. 37.92, -2.94" inputmode="decimal" />
-      <button id="goBtn">Go</button>
+      <button id="locBtn" class="loc" type="button"><span class="pin">◎</span><span id="locTxt" data-i18n="myLocation">My location</span></button>
+      <input id="coordInput" data-i18n-ph="coordPh" placeholder="or paste coordinates  e.g. 37.92, -2.94" inputmode="decimal" />
+      <button id="goBtn" data-i18n="go">Go</button>
     </div>
   </header>
   <main>
     <div id="map"></div>
     <aside>
-      <h2>What you're driving into</h2>
+      <h2 data-i18n="panelTitle">What you're driving into</h2>
       <div id="err" class="err" style="display:none"></div>
       <div id="read" class="read loading">Tap the map where the fire is, and we'll read the ground for you.</div>
 
       <div class="grid">
-        <div class="metric"><div class="k">How steep</div><div class="v" id="mSlope">—</div><div><span class="chip" id="mSteep">—</span></div></div>
-        <div class="metric"><div class="k">Fire will run</div><div class="v" id="mUp">—</div><div class="s">uphill, toward…</div></div>
-        <div class="metric"><div class="k">Slope faces</div><div class="v" id="mAspect">—</div><div class="s" id="mAspectSun">—</div></div>
-        <div class="metric"><div class="k">Height above sea</div><div class="v" id="mElev">—</div><div class="s">where the fire is</div></div>
+        <div class="metric"><div class="k" data-i18n="mSteepK">How steep</div><div class="v" id="mSlope">—</div><div><span class="chip" id="mSteep">—</span></div></div>
+        <div class="metric"><div class="k" data-i18n="mRunK">Fire will run</div><div class="v" id="mUp">—</div><div class="s" data-i18n="mRunS">uphill, toward…</div></div>
+        <div class="metric"><div class="k" data-i18n="mFacesK">Slope faces</div><div class="v" id="mAspect">—</div><div class="s" id="mAspectSun">—</div></div>
+        <div class="metric"><div class="k" data-i18n="mElevK">Height above sea</div><div class="v" id="mElev">—</div><div class="s" data-i18n="mElevS">where the fire is</div></div>
         <div class="metric">
-          <div class="k">Wind</div>
+          <div class="k" data-i18n="mWindK">Wind</div>
           <div class="windrose"><svg class="arrow" id="windArrow" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="5"/><polyline points="6,11 12,5 18,11"/></svg><div><div class="v" id="mWind" style="font-size:18px">—</div><div class="s" id="mWindDir">—</div></div></div>
         </div>
-        <div class="metric"><div class="k">Air</div><div class="v" id="mTemp" style="font-size:18px">—</div><div class="s" id="mRH">—</div></div>
+        <div class="metric"><div class="k" data-i18n="mAirK">Air</div><div class="v" id="mTemp" style="font-size:18px">—</div><div class="s" id="mRH">—</div></div>
       </div>
 
       <div class="card">
-        <div class="hd">Nearest help</div>
-        <div class="sub">Closest fire stations to this spot, straight-line distance.</div>
-        <ul class="stations" id="stations"><li><span class="nm" style="color:var(--muted)">Looking for stations…</span></li></ul>
+        <div class="hd" data-i18n="stationsHd">Nearest help</div>
+        <div class="sub" data-i18n="stationsSub">Closest fire stations to this spot, straight-line distance.</div>
+        <ul class="stations" id="stations"><li><span class="nm" style="color:var(--muted)">…</span></li></ul>
       </div>
 
       <div class="card wish">
-        <div class="hd">What would help you most?</div>
-        <div class="sub">Tick anything you'd want this to show you. That's what we build next.</div>
-        <label><input type="checkbox" value="Steep ground above the fire marked automatically"> <span>Show me the steep ground <b>above</b> the fire, so I know where it will climb</span></label>
-        <label><input type="checkbox" value="Gullies, chutes and saddles marked"> <span>Mark the gullies and narrow valleys where fire speeds up</span></label>
-        <label><input type="checkbox" value="Escape routes and safe areas"> <span>Suggest escape routes and safe places to fall back to</span></label>
-        <label><input type="checkbox" value="Road access for engines"> <span>Which roads and tracks an engine can actually get down</span></label>
-        <label><input type="checkbox" value="Nearest water for refilling"> <span>Nearest water to refill from</span></label>
-        <label><input type="checkbox" value="What is burning - vegetation and fuel type"> <span>What's growing there — trees, scrub, grass</span></label>
-        <label><input type="checkbox" value="Predicted spread over the next hours"> <span>Where the fire is likely to be in one to three hours</span></label>
-        <label><input type="checkbox" value="3D view of the terrain"> <span>A 3D view of the hillside</span></label>
-        <label><input type="checkbox" value="Works with no phone signal"> <span>Works when there's no phone signal</span></label>
+        <div class="hd" data-i18n="wishHd">What would help you most?</div>
+        <div class="sub" data-i18n="wishSub">Tick anything you'd want this to show you. That's what we build next.</div>
+        <label><input type="checkbox" value="Steep ground above the fire marked automatically"> <span data-i18n="wish1">Show me the steep ground <b>above</b> the fire, so I know where it will climb</span></label>
+        <label><input type="checkbox" value="Gullies, chutes and saddles marked"> <span data-i18n="wish2">Mark the gullies and narrow valleys where fire speeds up</span></label>
+        <label><input type="checkbox" value="Escape routes and safe areas"> <span data-i18n="wish3">Suggest escape routes and safe places to fall back to</span></label>
+        <label><input type="checkbox" value="Road access for engines"> <span data-i18n="wish4">Which roads and tracks an engine can actually get down</span></label>
+        <label><input type="checkbox" value="Nearest water for refilling"> <span data-i18n="wish5">Nearest water to refill from</span></label>
+        <label><input type="checkbox" value="What is burning - vegetation and fuel type"> <span data-i18n="wish6">What's growing there — trees, scrub, grass</span></label>
+        <label><input type="checkbox" value="Predicted spread over the next hours"> <span data-i18n="wish7">Where the fire is likely to be in one to three hours</span></label>
+        <label><input type="checkbox" value="3D view of the terrain"> <span data-i18n="wish8">A 3D view of the hillside</span></label>
+        <label><input type="checkbox" value="Works with no phone signal"> <span data-i18n="wish9">Works when there's no phone signal</span></label>
       </div>
 
       <div class="card">
-        <div class="hd">Tell us what you think</div>
-        <div class="sub">Goes straight to the team. Anonymous unless you tell us who you are.</div>
+        <div class="hd" data-i18n="fbHd">Tell us what you think</div>
+        <div class="sub" data-i18n="fbSub">Goes straight to the team. Anonymous unless you tell us who you are.</div>
 
-        <span class="fld">Would this have helped you before you arrived?</span>
+        <span class="fld" data-i18n="fbQ">Would this have helped you before you arrived?</span>
         <div class="fb-btns" id="fbBtns">
-          <button type="button" data-fb="Yes, useful">Yes, useful</button>
-          <button type="button" data-fb="Partly">Partly</button>
-          <button type="button" data-fb="No">No</button>
+          <button type="button" data-fb="Yes, useful" data-i18n="fbYes">Yes, useful</button>
+          <button type="button" data-fb="Partly" data-i18n="fbPartly">Partly</button>
+          <button type="button" data-fb="No" data-i18n="fbNo">No</button>
         </div>
 
-        <label class="fld" for="fbMissing">What's the one thing you'd want here that isn't?</label>
-        <textarea id="fbMissing" placeholder="Anything at all — what you looked for and couldn't find."></textarea>
+        <label class="fld" for="fbMissing" data-i18n="fbMissingL">What's the one thing you'd want here that isn't?</label>
+        <textarea id="fbMissing" data-i18n-ph="fbMissingPh" placeholder="Anything at all — what you looked for and couldn't find."></textarea>
 
-        <label class="fld" for="fbRole">Your role or brigade <span style="color:var(--muted)">(optional)</span></label>
-        <input class="txt" id="fbRole" placeholder="e.g. crew boss, Bomberos Cazorla" />
+        <label class="fld" for="fbRole"><span data-i18n="fbRoleL">Your role or brigade</span> <span style="color:var(--muted)" data-i18n="fbOptional">(optional)</span></label>
+        <input class="txt" id="fbRole" data-i18n-ph="fbRolePh" placeholder="e.g. crew boss, Bomberos Cazorla" />
 
         <div class="hp"><label>Leave this empty<input id="fbHp" tabindex="-1" autocomplete="off"/></label></div>
 
-        <button class="send" id="fbSend">Send feedback</button>
+        <button class="send" id="fbSend" data-i18n="fbSend">Send feedback</button>
         <div class="sent" id="fbSent"></div>
       </div>
 
@@ -220,14 +230,14 @@
              check we are a real company without leaving the page. The Impressum is the
              strongest signal available in Germany: it is a legal filing with a named address. -->
         <div class="who">
-          Built by <a href="https://www.averiumdynamics.com/" target="_blank" rel="noopener">Averium&nbsp;Dynamics</a>,
-          a wildfire-prevention company in Berlin.
-          <a href="https://www.averiumdynamics.com/imprint" target="_blank" rel="noopener">Company details</a> ·
-          <a href="https://www.averiumdynamics.com/privacy" target="_blank" rel="noopener">Privacy</a> ·
+          <span data-i18n="whoBuilt">Built by</span>
+          <a href="https://www.averiumdynamics.com/" target="_blank" rel="noopener">Averium&nbsp;Dynamics</a><span data-i18n="whoDesc">, a wildfire-prevention company in Berlin.</span>
+          <a href="https://www.averiumdynamics.com/imprint" target="_blank" rel="noopener" data-i18n="whoImprint">Company details</a> ·
+          <a href="https://www.averiumdynamics.com/privacy" target="_blank" rel="noopener" data-i18n="whoPrivacy">Privacy</a> ·
           <a href="mailto:info@averiumdynamics.com">info@averiumdynamics.com</a>
         </div>
-        Ground shape from the Copernicus 90&nbsp;m elevation model; weather from Open-Meteo; stations from OpenStreetMap.
-        <b>Always confirm what you see on the ground</b> — this is a guide to what's ahead of you, not a substitute for your own eyes.
+        <span data-i18n="sources">Ground shape from the Copernicus 90 m elevation model; weather from Open-Meteo; stations from OpenStreetMap.</span>
+        <b data-i18n="confirmB">Always confirm what you see on the ground</b><span data-i18n="confirmRest"> — this is a guide to what's ahead of you, not a substitute for your own eyes.</span>
       </div>
     </aside>
   </main>
@@ -251,23 +261,164 @@
 
   const STATION_RADIUS_M=40000, STATION_SHOW=3;
 
-  // Overpass is frequently overloaded (it took four attempts to answer while this was built),
-  // so the two tenant regions are baked in as a fallback. A live query still runs first, which
-  // is what makes the tool work for a pin dropped anywhere else.
-  const BAKED_STATIONS=[
-    {lat:37.9169026,lon:-3.1095985,name:'Bomberos Consorcio Sierra de Cazorla'},
-    {lat:37.9214646,lon:-2.9297490,name:'CEDEFO Vadillo Castril'},
-    {lat:38.0160645,lon:-3.3765450,name:'Parque de Bomberos de Úbeda'},
-    {lat:37.8179248,lon:-2.5247546,name:'Fire station (unnamed)'},
-    {lat:35.5156707,lon:35.7852700,name:'Fire station (unnamed)'}
-  ];
+  // ---- language ------------------------------------------------------------
+  // German uses O for Ost, not E for East. Getting this wrong would make every direction
+  // on the card subtly foreign to a German crew.
+  const ROSE={
+    en:['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'],
+    de:['N','NNO','NO','ONO','O','OSO','SO','SSO','S','SSW','SW','WSW','W','WNW','NW','NNW']
+  };
+  const STEEP={
+    en:{gentle:'gentle',moderate:'moderate',steep:'steep',vsteep:'very steep'},
+    de:{gentle:'sanft',moderate:'mäßig steil',steep:'steil',vsteep:'sehr steil'}
+  };
+  // German needs the dative adjective ending for "an ... Hang".
+  const STEEP_INLINE={
+    en:{gentle:'gentle',moderate:'moderate',steep:'steep',vsteep:'very steep'},
+    de:{gentle:'sanftem',moderate:'mäßig steilem',steep:'steilem',vsteep:'sehr steilem'}
+  };
+  const SUN={
+    en:{hot:'sun on it — drier',mid:'some sun',cool:'shaded — damper'},
+    de:{hot:'sonnig – trockener',mid:'teils sonnig',cool:'schattig – feuchter'}
+  };
+
+  const STR={
+    en:{
+      brandSuffix:'Fire Size-Up',
+      tag:'tap the map to place the fire',
+      coordPh:'or paste coordinates  e.g. 37.92, -2.94',
+      myLocation:'My location', locating:'Locating…', go:'Go',
+      panelTitle:"What you're driving into",
+      readIdle:"Tap the map where the fire is, and we'll read the ground for you.",
+      readLoading:'Reading the ground…',
+      readFail:'Could not read this spot.',
+      mSteepK:'How steep', mRunK:'Fire will run', mRunS:'uphill, toward…',
+      mFacesK:'Slope faces', mElevK:'Height above sea', mElevS:'where the fire is',
+      mWindK:'Wind', mAirK:'Air',
+      windFrom:(f,to)=>`from the ${f}, blowing ${to}`,
+      humidity:v=>`${v}% humidity`, veryDry:' · very dry',
+      stationsHd:'Nearest help',
+      stationsSub:'Closest fire stations to this spot, straight-line distance.',
+      stationsLooking:'Looking for stations…',
+      stationsNone:`No fire station found within ${STATION_RADIUS_M/1000} km.`,
+      stationsOwn:'From our own records — there may be more nearby.',
+      stationsDir:d=>`to the ${d}`,
+      stationUnnamed:'Fire station (unnamed)',
+      wishHd:'What would help you most?',
+      wishSub:"Tick anything you'd want this to show you. That's what we build next.",
+      wish1:'Show me the steep ground <b>above</b> the fire, so I know where it will climb',
+      wish2:'Mark the gullies and narrow valleys where fire speeds up',
+      wish3:'Suggest escape routes and safe places to fall back to',
+      wish4:'Which roads and tracks an engine can actually get down',
+      wish5:'Nearest water to refill from',
+      wish6:"What's growing there — trees, scrub, grass",
+      wish7:'Where the fire is likely to be in one to three hours',
+      wish8:'A 3D view of the hillside',
+      wish9:"Works when there's no phone signal",
+      fbHd:'Tell us what you think',
+      fbSub:'Goes straight to the team. Anonymous unless you tell us who you are.',
+      fbQ:'Would this have helped you before you arrived?',
+      fbYes:'Yes, useful', fbPartly:'Partly', fbNo:'No',
+      fbMissingL:"What's the one thing you'd want here that isn't?",
+      fbMissingPh:"Anything at all — what you looked for and couldn't find.",
+      fbRoleL:'Your role or brigade', fbOptional:'(optional)',
+      fbRolePh:'e.g. crew boss, Bomberos Cazorla',
+      fbSend:'Send feedback', fbSending:'Sending…', fbSentBtn:'Sent',
+      fbThanks:"Thank you — that's with the team. It genuinely shapes what we build next.",
+      fbEmpty:'Pick an answer, tick something, or write a line first.',
+      fbFail:"That didn't send — check your connection and try again.",
+      errCoord:'Type the position as "latitude, longitude" — for example 37.92, -2.94',
+      errFetch:'Could not load the data — check your connection and try moving the pin.',
+      errNoGeo:'This device cannot share its location. Tap the map instead.',
+      errGeoDenied:'Location access was blocked. Allow it in your browser settings, or just tap the map.',
+      errGeoUnavail:'No fix here — the phone cannot see enough satellites. Tap the map instead.',
+      errGeoTimeout:'Locating took too long. Try again, or tap the map.',
+      errGeoRough:m=>`Rough fix only (about ${m} m out). Drag the pin to where the fire actually is.`,
+      whoBuilt:'Built by', whoDesc:', a wildfire-prevention company in Berlin.',
+      whoImprint:'Company details', whoPrivacy:'Privacy',
+      sources:'Ground shape from the Copernicus 90 m elevation model; weather from Open-Meteo; stations from OpenStreetMap.',
+      confirmB:'Always confirm what you see on the ground',
+      confirmRest:' — this is a guide to what\'s ahead of you, not a substitute for your own eyes.'
+    },
+    de:{
+      brandSuffix:'Lagebeurteilung',
+      tag:'auf die Karte tippen, um das Feuer zu setzen',
+      coordPh:'oder Koordinaten einfügen, z. B. 37.92, -2.94',
+      myLocation:'Mein Standort', locating:'Suche Standort…', go:'Los',
+      panelTitle:'Was Sie erwartet',
+      readIdle:'Tippen Sie auf die Karte, wo das Feuer ist – wir lesen das Gelände für Sie aus.',
+      readLoading:'Gelände wird ausgelesen…',
+      readFail:'Diese Stelle konnte nicht ausgelesen werden.',
+      mSteepK:'Steilheit', mRunK:'Feuer läuft nach', mRunS:'bergauf, Richtung…',
+      mFacesK:'Hang zeigt nach', mElevK:'Höhe über NN', mElevS:'am Feuer',
+      mWindK:'Wind', mAirK:'Luft',
+      windFrom:(f,to)=>`aus ${f}, weht nach ${to}`,
+      humidity:v=>`${v} % Luftfeuchte`, veryDry:' · sehr trocken',
+      stationsHd:'Nächste Hilfe',
+      stationsSub:'Nächstgelegene Feuerwachen, Luftlinie.',
+      stationsLooking:'Suche Feuerwachen…',
+      stationsNone:`Keine Feuerwache im Umkreis von ${STATION_RADIUS_M/1000} km gefunden.`,
+      stationsOwn:'Aus unseren eigenen Daten – es kann weitere in der Nähe geben.',
+      stationsDir:d=>`Richtung ${d}`,
+      stationUnnamed:'Feuerwache (ohne Namen)',
+      wishHd:'Was würde Ihnen am meisten helfen?',
+      wishSub:'Kreuzen Sie an, was hier zu sehen sein sollte. Genau das bauen wir als Nächstes.',
+      wish1:'Zeig mir das steile Gelände <b>oberhalb</b> des Feuers, damit ich weiß, wohin es steigt',
+      wish2:'Rinnen und enge Täler markieren, in denen das Feuer schneller wird',
+      wish3:'Fluchtwege und sichere Rückzugsräume vorschlagen',
+      wish4:'Welche Straßen und Wege ein Fahrzeug wirklich befahren kann',
+      wish5:'Nächste Wasserentnahmestelle zum Auffüllen',
+      wish6:'Was dort wächst – Wald, Gebüsch, Gras',
+      wish7:'Wo das Feuer in ein bis drei Stunden voraussichtlich steht',
+      wish8:'Eine 3D-Ansicht des Hangs',
+      wish9:'Funktioniert auch ohne Handyempfang',
+      fbHd:'Sagen Sie uns Ihre Meinung',
+      fbSub:'Geht direkt an das Team. Anonym, sofern Sie uns nicht sagen, wer Sie sind.',
+      fbQ:'Hätte Ihnen das vor dem Eintreffen geholfen?',
+      fbYes:'Ja, nützlich', fbPartly:'Teilweise', fbNo:'Nein',
+      fbMissingL:'Was fehlt Ihnen hier am meisten?',
+      fbMissingPh:'Alles ist willkommen – wonach Sie gesucht und was Sie nicht gefunden haben.',
+      fbRoleL:'Ihre Funktion oder Wache', fbOptional:'(freiwillig)',
+      fbRolePh:'z. B. Gruppenführer, FF Musterstadt',
+      fbSend:'Rückmeldung senden', fbSending:'Wird gesendet…', fbSentBtn:'Gesendet',
+      fbThanks:'Vielen Dank – das ist beim Team angekommen und fließt direkt in die Entwicklung ein.',
+      fbEmpty:'Bitte zuerst eine Antwort wählen, etwas ankreuzen oder eine Zeile schreiben.',
+      fbFail:'Das konnte nicht gesendet werden – bitte Verbindung prüfen und erneut versuchen.',
+      errCoord:'Position als „Breite, Länge“ eingeben – zum Beispiel 37.92, -2.94',
+      errFetch:'Daten konnten nicht geladen werden – bitte Verbindung prüfen und die Markierung verschieben.',
+      errNoGeo:'Dieses Gerät kann seinen Standort nicht teilen. Bitte auf die Karte tippen.',
+      errGeoDenied:'Standortzugriff ist blockiert. Bitte im Browser erlauben oder einfach auf die Karte tippen.',
+      errGeoUnavail:'Kein Empfang hier – das Gerät sieht zu wenige Satelliten. Bitte auf die Karte tippen.',
+      errGeoTimeout:'Standortsuche hat zu lange gedauert. Bitte erneut versuchen oder auf die Karte tippen.',
+      errGeoRough:m=>`Nur grobe Ortung (etwa ${m} m Abweichung). Ziehen Sie die Markierung dorthin, wo das Feuer wirklich ist.`,
+      whoBuilt:'Entwickelt von', whoDesc:', einem Unternehmen für Waldbrandprävention in Berlin.',
+      whoImprint:'Impressum', whoPrivacy:'Datenschutz',
+      sources:'Geländeform aus dem Copernicus-Höhenmodell (90 m); Wetter von Open-Meteo; Feuerwachen aus OpenStreetMap.',
+      confirmB:'Prüfen Sie die Lage immer vor Ort',
+      confirmRest:' – dies ist ein Anhaltspunkt für das, was vor Ihnen liegt, und ersetzt nicht den eigenen Blick.'
+    }
+  };
+
+  let LANG = (function(){
+    try{ const s=localStorage.getItem('sizeup-lang'); if(s==='en'||s==='de') return s; }catch(e){}
+    return (navigator.language||'').toLowerCase().startsWith('de') ? 'de' : 'en';
+  })();
+
+  const t=k=>{ const v=STR[LANG][k]; return v!==undefined?v:STR.en[k]; };
 
   const map=L.map('map',{zoomControl:true}).setView(START,13);
   const topo=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
     {maxZoom:17,attribution:'© OpenTopoMap (CC-BY-SA)'}).addTo(map);
   const sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
     {maxZoom:19,attribution:'Esri World Imagery'});
-  L.control.layers({'Topographic':topo,'Satellite':sat},null,{position:'topright'}).addTo(map);
+  const LAYER_NAMES={en:{topo:'Topographic',sat:'Satellite'},de:{topo:'Topografisch',sat:'Satellit'}};
+  let layerCtl=null;
+  function buildLayerControl(){
+    if(layerCtl) layerCtl.remove();
+    const n=LAYER_NAMES[LANG];
+    const o={}; o[n.topo]=topo; o[n.sat]=sat;
+    layerCtl=L.control.layers(o,null,{position:'topright'}).addTo(map);
+  }
 
   const fireIcon=L.divIcon({className:'',html:'<div style="font-size:26px;line-height:26px;filter:drop-shadow(0 1px 2px #000)">🔥</div>',iconSize:[26,26],iconAnchor:[13,24]});
   const marker=L.marker(START,{draggable:true,icon:fireIcon}).addTo(map);
@@ -275,10 +426,11 @@
   const stationIcon=L.divIcon({className:'',html:'<div style="font-size:19px;line-height:19px;filter:drop-shadow(0 1px 2px #000)">🚒</div>',iconSize:[19,19],iconAnchor:[10,10]});
 
   const $=id=>document.getElementById(id);
-  const COMPASS=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
-  const compass=d=>COMPASS[Math.round(((d%360)+360)%360/22.5)%16];
+  const compass=d=>ROSE[LANG][Math.round(((d%360)+360)%360/22.5)%16];
   const rad=x=>x*Math.PI/180, deg=x=>x*180/Math.PI;
   const angDiff=(a,b)=>{let d=Math.abs(a-b)%360;return d>180?360-d:d;};
+  const locale=()=>LANG==='de'?'de-DE':'en-GB';
+  const num=(v,dp)=>v.toLocaleString(locale(),{minimumFractionDigits:dp,maximumFractionDigits:dp});
 
   function haversine(a,b,c,d){
     const R=6371000, dLat=rad(c-a), dLon=rad(d-b);
@@ -311,7 +463,8 @@
     return {slope, aspect:((aspect%360)+360)%360, elev:e};
   }
 
-  const steepClass=s=> s<10?['gentle','gentle']: s<20?['moderate','moderate']: s<30?['steep','steep']:['very steep','vsteep'];
+  const steepKey=s=> s<10?'gentle': s<20?'moderate': s<30?'steep':'vsteep';
+  const chipClass={gentle:'gentle',moderate:'moderate',steep:'steep',vsteep:'vsteep'};
 
   // Insolation from the aspect ANGLE, not a hand-listed set of compass points. The old list
   // ('S','SSW','SW','SSE','WSW') omitted SE and W while including SSE and WSW, so a SE-facing
@@ -320,32 +473,91 @@
   function insolation(aspectDeg,lat){
     const hottest = lat>=0 ? 200 : 340;          // SSW in the north, NNW in the south
     const off = angDiff(aspectDeg,hottest);
-    if(off<=75)  return {txt:'sun on it — drier', sunny:true};
-    if(off<=135) return {txt:'some sun', sunny:false};
-    return {txt:'shaded — damper', sunny:false};
+    if(off<=75)  return {key:'hot',  sunny:true};
+    if(off<=135) return {key:'mid',  sunny:false};
+    return {key:'cool', sunny:false};
+  }
+
+  // ---- the read ------------------------------------------------------------
+  // Written per language rather than templated, because German word order and the dative
+  // after "an ... Hang" do not survive a word-for-word substitution.
+  function buildRead(d){
+    const {slope,aspectTxt,upslopeTxt,steepK,haveWind,light,driven,align,spd,windTowardTxt,sunny,rh}=d;
+    let r='';
+    if(LANG==='de'){
+      const sd=num(slope,0);
+      if(slope<10){
+        r=`Das Gelände ist hier ziemlich flach (${sd}°), der Hang treibt das Feuer also kaum. `;
+        if(!haveWind) r+='Für diesen Punkt liegt kein Windwert vor.';
+        else if(light) r+=`Der Wind ist ebenfalls schwach (${spd} km/h) – <b>entscheidend ist, was hier wächst</b>, nicht Hang oder Wind.`;
+        else r+=`<b>Der Wind ist der entscheidende Faktor</b>: Er weht mit ${spd} km/h Richtung ${windTowardTxt}.`;
+      }else{
+        r=`Das Feuer liegt an ${STEEP_INLINE.de[steepK]} Hang (${sd}°) mit Ausrichtung nach ${aspectTxt}. Feuer läuft bergauf, rechnen Sie also damit, dass es <b>Richtung ${upslopeTxt} zieht</b>`;
+        if(!haveWind) r+='.';
+        else if(light) r+=` – der Wind ist schwach (${spd} km/h), also <b>bestimmt der Hang die Richtung</b>, nicht der Wind.`;
+        else if(align<45 && driven) r+=` – und der Wind (${spd} km/h Richtung ${windTowardTxt}) drückt <b>in dieselbe Richtung wie der Hang</b>. Rechnen Sie mit einem schnellen Lauf bergauf. <b>Halten Sie sich nicht oberhalb auf.</b>`;
+        else if(align<45) r+=` – und der Wind (${spd} km/h Richtung ${windTowardTxt}) drückt in dieselbe Richtung wie der Hang und verstärkt den Lauf bergauf.`;
+        else if(driven) r+=`. Der Wind ist stark (${spd} km/h) und weht quer zum Hang Richtung ${windTowardTxt} – achten Sie auf die Flanken und auf Drehungen.`;
+        else r+=`. Der Wind (${spd} km/h) weht quer zum Hang Richtung ${windTowardTxt} – achten Sie auf die Flanken.`;
+      }
+      if(sunny) r+=' Die Sonne steht auf diesem Hang, die Vegetation ist hier trockener als auf der Schattenseite.';
+      if(rh!=null && rh<25) r+=` Die Luft ist sehr trocken (${rh} % Luftfeuchte) – rechnen Sie mit aktivem Feuerverhalten.`;
+      return r;
+    }
+    const sd=num(slope,0);
+    if(slope<10){
+      r=`The ground here is fairly flat (${sd}°), so the hill won't push the fire much — `;
+      if(!haveWind) r+='and we have no wind reading for this spot.';
+      else if(light) r+=`and the wind is light (${spd} km/h). <b>What's growing there will matter more</b> than the ground or the wind.`;
+      else r+=`<b>the wind is what to watch</b>. It's blowing toward the ${windTowardTxt} at ${spd} km/h.`;
+    }else{
+      r=`The fire is on ${STEEP_INLINE.en[steepK]} ground (${sd}°), facing ${aspectTxt}. Fire climbs, so expect it to <b>run uphill toward the ${upslopeTxt}</b>`;
+      if(!haveWind) r+='.';
+      else if(light) r+=` — the wind is light (${spd} km/h), so <b>the hill decides where it goes</b>, not the wind.`;
+      else if(align<45 && driven) r+=` — and the wind (${spd} km/h, blowing ${windTowardTxt}) is pushing <b>the same way as the hill</b>. Expect it to move fast uphill. <b>Do not get above it.</b>`;
+      else if(align<45) r+=` — and the wind (${spd} km/h, blowing ${windTowardTxt}) is pushing the same way as the hill, which adds to the uphill run.`;
+      else if(driven) r+=`. The wind is strong (${spd} km/h) and blowing across the slope toward the ${windTowardTxt} — watch the sides, and expect it to shift.`;
+      else r+=`. The wind (${spd} km/h) is blowing across the slope toward the ${windTowardTxt} — watch the sides.`;
+    }
+    if(sunny) r+=" The sun is on this slope, so what's growing here is drier than the shaded side.";
+    if(rh!=null && rh<25) r+=` The air is very dry (${rh}% humidity) — expect it to burn actively.`;
+    return r;
   }
 
   // ---- fire stations -------------------------------------------------------
-  function renderStations(list,lat,lon,note){
+  // Overpass is frequently overloaded (it took four attempts to answer while this was built),
+  // so the two tenant regions are baked in as a fallback. A live query still runs first, which
+  // is what makes the tool work for a pin dropped anywhere else.
+  const BAKED_STATIONS=[
+    {lat:37.9169026,lon:-3.1095985,name:'Bomberos Consorcio Sierra de Cazorla'},
+    {lat:37.9214646,lon:-2.9297490,name:'CEDEFO Vadillo Castril'},
+    {lat:38.0160645,lon:-3.3765450,name:'Parque de Bomberos de Úbeda'},
+    {lat:37.8179248,lon:-2.5247546,name:null},
+    {lat:35.5156707,lon:35.7852700,name:null}
+  ];
+
+  let lastStations=null, lastStationNote='';
+  function renderStations(list,note){
+    lastStations=list; lastStationNote=note;
     stationLayer.clearLayers();
     const ul=$('stations');
     if(!list.length){
-      ul.innerHTML='<li><span class="nm" style="color:var(--muted)">No fire station found within '+
-        (STATION_RADIUS_M/1000)+' km.</span></li>';
+      ul.innerHTML='<li><span class="nm" style="color:var(--muted)">'+t('stationsNone')+'</span></li>';
       return;
     }
     ul.innerHTML='';
     list.slice(0,STATION_SHOW).forEach(s=>{
       const km=s.dist/1000;
+      const name=s.name||t('stationUnnamed');
       const li=document.createElement('li');
-      li.innerHTML='<span class="dist">'+(km<10?km.toFixed(1):Math.round(km))+' km</span>'+
-        '<span class="nm">'+s.name+'<br><span class="dir">to the '+compass(s.brg)+'</span></span>';
+      li.innerHTML='<span class="dist">'+(km<10?num(km,1):num(Math.round(km),0))+' km</span>'+
+        '<span class="nm">'+name+'<br><span class="dir">'+t('stationsDir')(compass(s.brg))+'</span></span>';
       ul.appendChild(li);
-      L.marker([s.lat,s.lon],{icon:stationIcon}).addTo(stationLayer).bindPopup(s.name);
+      L.marker([s.lat,s.lon],{icon:stationIcon}).addTo(stationLayer).bindPopup(name);
     });
     if(note){
       const li=document.createElement('li');
-      li.innerHTML='<span class="nm dir">'+note+'</span>';
+      li.innerHTML='<span class="nm dir">'+t(note)+'</span>';
       ul.appendChild(li);
     }
   }
@@ -361,7 +573,7 @@
   }
 
   async function loadStations(lat,lon,token){
-    $('stations').innerHTML='<li><span class="nm" style="color:var(--muted)">Looking for stations…</span></li>';
+    $('stations').innerHTML='<li><span class="nm" style="color:var(--muted)">'+t('stationsLooking')+'</span></li>';
     const q='[out:json][timeout:15];('+
       'node["amenity"="fire_station"](around:'+STATION_RADIUS_M+','+lat+','+lon+');'+
       'way["amenity"="fire_station"](around:'+STATION_RADIUS_M+','+lat+','+lon+');'+
@@ -376,28 +588,41 @@
       const j=await r.json();
       if(token!==seq) return;
       const raw=(j.elements||[]).map(e=>{
-        const c=e.center||e, t=e.tags||{};
-        return {lat:c.lat, lon:c.lon, name:t.name||'Fire station (unnamed)'};
+        const c=e.center||e, tg=e.tags||{};
+        return {lat:c.lat, lon:c.lon, name:tg.name||null};
       }).filter(s=>s.lat!=null);
-      renderStations(rank(raw,lat,lon),lat,lon,'');
+      renderStations(rank(raw,lat,lon),'');
     }catch(err){
       if(token!==seq) return;
-      // Overpass down or slow — fall back to the baked tenant-region list.
-      renderStations(rank(BAKED_STATIONS,lat,lon),lat,lon,
-        'From our own records — there may be more nearby.');
+      renderStations(rank(BAKED_STATIONS,lat,lon),'stationsOwn');
     }
   }
 
+  // Errors are stored by key, not as rendered text, so switching language re-translates
+  // whatever is currently on screen instead of leaving a stale English sentence.
+  function showErr(key,arg){
+    const el=$('err');
+    el.dataset.k=key;
+    if(arg==null) delete el.dataset.a; else el.dataset.a=String(arg);
+    const v=t(key);
+    el.textContent = typeof v==='function' ? v(arg) : v;
+    el.style.display='block';
+  }
+  function hideErr(){
+    const el=$('err');
+    el.style.display='none'; delete el.dataset.k; delete el.dataset.a;
+  }
+
   // ---- main read -----------------------------------------------------------
-  let seq=0;
-  let lastCtx={};
+  let seq=0, lastCtx={}, lastRead=null, readState='idle';  // idle | loading | ok | fail
   async function update(){
     const my=++seq;
     const {lat,lng}=marker.getLatLng();
     $('coordInput').value=lat.toFixed(5)+', '+lng.toFixed(5);
-    $('err').style.display='none';
+    hideErr();
+    readState='loading';
     $('read').className='read loading';
-    $('read').textContent='Reading the ground…';
+    $('read').textContent=t('readLoading');
 
     loadStations(lat,lng,my);
 
@@ -414,80 +639,107 @@
       if(my!==seq) return;
       if(!eJ.elevation || eJ.elevation.length<9) throw new Error('no elevation');
 
-      const t=terrain(eJ.elevation, g.step);
+      const tr=terrain(eJ.elevation, g.step);
       const cur=wJ.current||{};
       const windFrom=cur.wind_direction_10m??null, windSpd=cur.wind_speed_10m??null;
       const temp=cur.temperature_2m, rh=cur.relative_humidity_2m;
 
-      const [steepTxt,steepCls]=steepClass(t.slope);
-      const upslope=(t.aspect+180)%360;         // fire runs uphill = opposite of downhill-facing aspect
+      const steepK=steepKey(tr.slope);
+      const upslope=(tr.aspect+180)%360;   // fire runs uphill = opposite of downhill-facing aspect
       const windToward=windFrom!=null?(windFrom+180)%360:null;
+      const sun=insolation(tr.aspect,lat);
 
-      // metrics
-      $('mSlope').textContent=t.slope.toFixed(0)+'°';
-      const chip=$('mSteep'); chip.textContent=steepTxt; chip.className='chip '+steepCls;
-      $('mUp').textContent=compass(upslope);
-      $('mAspect').textContent=compass(t.aspect);
-      const sun=insolation(t.aspect,lat), sunny=sun.sunny;
-      $('mAspectSun').textContent=sun.txt;
-      $('mElev').textContent=Math.round(t.elev)+' m';
-      $('mTemp').textContent=(temp!=null?temp.toFixed(0)+'°C':'—');
-      $('mRH').textContent=(rh!=null?rh+'% humidity'+(rh<25?' · very dry':''):'');
-      if(windSpd!=null){
-        $('mWind').textContent=windSpd.toFixed(0)+' km/h';
-        $('mWindDir').textContent='from the '+compass(windFrom)+', blowing '+compass(windToward);
-        $('windArrow').style.transform='rotate('+windToward+'deg)'; // arrow points where wind blows TO
-      }
+      lastRead={tr,windFrom,windSpd,windToward,temp,rh,steepK,upslope,sun,lat};
+      readState='ok';
+      paint();
 
-      // the READ
-      let read='';
-      const align = windToward!=null ? angDiff(windToward,upslope) : 999;
-      const haveWind = windToward!=null && windSpd!=null;
-      const light  = haveWind && windSpd<LIGHT_KMH;
-      const driven = haveWind && windSpd>=DRIVEN_KMH;
-      const spd = haveWind ? windSpd.toFixed(0) : '';
-      if(t.slope<10){
-        read=`The ground here is fairly flat (${t.slope.toFixed(0)}°), so the hill won't push the fire much — `;
-        if(!haveWind){
-          read+='and we have no wind reading for this spot.';
-        }else if(light){
-          read+=`and the wind is light (${spd} km/h). <b>What's growing there will matter more</b> than the ground or the wind.`;
-        }else{
-          read+=`<b>the wind is what to watch</b>. It's blowing toward the ${compass(windToward)} at ${spd} km/h.`;
-        }
-      }else{
-        read=`The fire is on ${steepTxt} ground (${t.slope.toFixed(0)}°), facing ${compass(t.aspect)}. Fire climbs, so expect it to <b>run uphill toward the ${compass(upslope)}</b>`;
-        if(!haveWind){
-          read+='.';
-        }else if(light){
-          read+=` — the wind is light (${spd} km/h), so <b>the hill decides where it goes</b>, not the wind.`;
-        }else if(align<45 && driven){
-          read+=` — and the wind (${spd} km/h, blowing ${compass(windToward)}) is pushing <b>the same way as the hill</b>. Expect it to move fast uphill. <b>Do not get above it.</b>`;
-        }else if(align<45){
-          read+=` — and the wind (${spd} km/h, blowing ${compass(windToward)}) is pushing the same way as the hill, which adds to the uphill run.`;
-        }else if(driven){
-          read+=`. The wind is strong (${spd} km/h) and blowing across the slope toward the ${compass(windToward)} — watch the sides, and expect it to shift.`;
-        }else{
-          read+=`. The wind (${spd} km/h) is blowing across the slope toward the ${compass(windToward)} — watch the sides.`;
-        }
-      }
-      if(sunny) read+=' The sun is on this slope, so what\'s growing here is drier than the shaded side.';
-      if(rh!=null && rh<25) read+=' The air is very dry ('+rh+'% humidity) — expect it to burn actively.';
-      $('read').className='read';
-      $('read').innerHTML=read;
-
-      lastCtx={lat:lat.toFixed(5), lon:lng.toFixed(5), slope:t.slope.toFixed(0)+'°',
-        aspect:compass(t.aspect), upslope:compass(upslope),
-        wind:haveWind?(spd+' km/h toward '+compass(windToward)):'unknown'};
+      lastCtx={lat:lat.toFixed(5), lon:lng.toFixed(5), slope:Math.round(tr.slope)+'°',
+        aspect:ROSE.en[Math.round(tr.aspect/22.5)%16], upslope:ROSE.en[Math.round(upslope/22.5)%16],
+        wind:(windSpd!=null&&windToward!=null)?(Math.round(windSpd)+' km/h toward '+ROSE.en[Math.round(windToward/22.5)%16]):'unknown'};
 
     }catch(err){
       if(my!==seq) return;
+      lastRead=null; readState='fail';
       $('read').className='read loading';
-      $('read').textContent='Could not read this spot.';
-      $('err').style.display='block';
-      $('err').textContent='Could not load the data — check your connection and try moving the pin.';
+      $('read').textContent=t('readFail');
+      showErr('errFetch');
     }
   }
+
+  // Re-renders everything derived from the last fetch, so switching language does not
+  // require another round-trip to the APIs.
+  function paint(){
+    if(!lastRead) return;
+    const d=lastRead, tr=d.tr;
+    const haveWind = d.windToward!=null && d.windSpd!=null;
+    const light  = haveWind && d.windSpd<LIGHT_KMH;
+    const driven = haveWind && d.windSpd>=DRIVEN_KMH;
+    const spd    = haveWind ? num(d.windSpd,0) : '';
+    const align  = haveWind ? angDiff(d.windToward,d.upslope) : 999;
+
+    $('mSlope').textContent=num(tr.slope,0)+'°';
+    const chip=$('mSteep'); chip.textContent=STEEP[LANG][d.steepK]; chip.className='chip '+chipClass[d.steepK];
+    $('mUp').textContent=compass(d.upslope);
+    $('mAspect').textContent=compass(tr.aspect);
+    $('mAspectSun').textContent=SUN[LANG][d.sun.key];
+    $('mElev').textContent=Math.round(tr.elev)+' m';
+    $('mTemp').textContent=(d.temp!=null?num(d.temp,0)+(LANG==='de'?' °C':'°C'):'—');
+    $('mRH').textContent=(d.rh!=null?t('humidity')(d.rh)+(d.rh<25?t('veryDry'):''):'');
+    if(haveWind){
+      $('mWind').textContent=spd+' km/h';
+      $('mWindDir').textContent=t('windFrom')(compass(d.windFrom),compass(d.windToward));
+      $('windArrow').style.transform='rotate('+d.windToward+'deg)'; // arrow points where wind blows TO
+    }
+    $('read').className='read';
+    $('read').innerHTML=buildRead({
+      slope:tr.slope, aspectTxt:compass(tr.aspect), upslopeTxt:compass(d.upslope),
+      steepK:d.steepK, haveWind, light, driven, align, spd,
+      windTowardTxt:haveWind?compass(d.windToward):'', sunny:d.sun.sunny, rh:d.rh
+    });
+  }
+
+  // ---- applying a language -------------------------------------------------
+  function applyLang(){
+    document.documentElement.lang=LANG;
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const v=t(el.dataset.i18n);
+      if(typeof v==='string') el.innerHTML=v;
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+      const v=t(el.dataset.i18nPh);
+      if(typeof v==='string') el.placeholder=v;
+    });
+    [...$('lang').children].forEach(b=>b.classList.toggle('on',b.dataset.lang===LANG));
+    $('locTxt').textContent = $('locBtn').classList.contains('busy') ? t('locating') : t('myLocation');
+    buildLayerControl();
+
+    // Restore whatever the read panel was showing, in the new language.
+    if(readState==='ok' && lastRead){ paint(); }
+    else{
+      $('read').className='read loading';
+      $('read').textContent = readState==='loading' ? t('readLoading')
+                            : readState==='fail'    ? t('readFail')
+                            :                         t('readIdle');
+    }
+
+    if(lastStations) renderStations(lastStations,lastStationNote);
+
+    const el=$('err');
+    if(el.style.display==='block' && el.dataset.k){
+      showErr(el.dataset.k, el.dataset.a!==undefined?Number(el.dataset.a):null);
+    }
+
+    const sendBtn=$('fbSend');
+    if(sendBtn.dataset.state==='sent'){ sendBtn.textContent=t('fbSentBtn'); $('fbSent').textContent=t('fbThanks'); }
+    else if(!sendBtn.disabled){ sendBtn.textContent=t('fbSend'); }
+  }
+
+  $('lang').addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b) return;
+    LANG=b.dataset.lang;
+    try{ localStorage.setItem('sizeup-lang',LANG); }catch(err){}
+    applyLang();
+  });
 
   marker.on('dragend',update);
   map.on('click',e=>{marker.setLatLng(e.latlng);update();});
@@ -498,11 +750,10 @@
     const nums=$('coordInput').value.trim().split(/[\s,]+/).filter(s=>s.length).map(Number);
     const la=nums[0], lo=nums[1];
     if(nums.length<2 || !isFinite(la) || !isFinite(lo) || Math.abs(la)>90 || Math.abs(lo)>180){
-      $('err').style.display='block';
-      $('err').textContent='Type the position as "latitude, longitude" — for example 37.92, -2.94';
+      showErr('errCoord');
       return;
     }
-    $('err').style.display='none';
+    hideErr();
     marker.setLatLng([la,lo]); map.setView([la,lo],14); update();
   }
   $('goBtn').addEventListener('click',goToTyped);
@@ -518,13 +769,12 @@
   function locBusy(on){
     const b=$('locBtn');
     b.disabled=on; b.classList.toggle('busy',on);
-    $('locTxt').textContent = on ? 'Locating…' : 'My location';
+    $('locTxt').textContent = on ? t('locating') : t('myLocation');
   }
 
   $('locBtn').addEventListener('click',()=>{
     if(!navigator.geolocation){
-      $('err').style.display='block';
-      $('err').textContent='This device cannot share its location. Tap the map instead.';
+      showErr('errNoGeo');
       return;
     }
     locBusy(true);
@@ -543,18 +793,11 @@
         // update() clears the error banner as it starts, so the warning has to be set
         // AFTER it or it gets wiped straight away.
         update();
-        if(acc && acc>500){
-          $('err').style.display='block';
-          $('err').textContent='Rough fix only (about '+Math.round(acc)+' m out). Drag the pin to where the fire actually is.';
-        }
+        if(acc && acc>500) showErr('errGeoRough',Math.round(acc));
       },
       e=>{
         locBusy(false);
-        $('err').style.display='block';
-        $('err').textContent =
-          e.code===1 ? 'Location access was blocked. Allow it in your browser settings, or just tap the map.' :
-          e.code===2 ? 'No fix here — the phone cannot see enough satellites. Tap the map instead.' :
-                       'Locating took too long. Try again, or tap the map.';
+        showErr(e.code===1 ? 'errGeoDenied' : e.code===2 ? 'errGeoUnavail' : 'errGeoTimeout');
       },
       {enableHighAccuracy:true,timeout:15000,maximumAge:30000}
     );
@@ -572,34 +815,30 @@
     const wanted=[...document.querySelectorAll('.wish input:checked')].map(i=>i.value);
     const missing=$('fbMissing').value.trim();
     const role=$('fbRole').value.trim();
-    const out=$('fbSent');
+    const out=$('fbSent'), btn=$('fbSend');
     if(!verdict && !missing && !wanted.length){
-      out.className='sent bad';
-      out.textContent='Pick an answer, tick something, or write a line first.';
+      out.className='sent bad'; out.textContent=t('fbEmpty');
       return;
     }
-    $('fbSend').disabled=true; $('fbSend').textContent='Sending…';
+    btn.disabled=true; btn.textContent=t('fbSending');
     out.className='sent'; out.textContent='';
     try{
       const r=await fetch('/api/feedback',{
         method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({verdict,missing,role,wanted,website:$('fbHp').value,context:lastCtx})
+        body:JSON.stringify({verdict,missing,role,wanted,lang:LANG,website:$('fbHp').value,context:lastCtx})
       });
       const j=await r.json().catch(()=>({}));
       if(r.ok && j.ok){
-        out.className='sent ok';
-        out.textContent='Thank you — that\'s with the team. It genuinely shapes what we build next.';
-        $('fbSend').textContent='Sent';
-      }else{
-        throw new Error('rejected');
-      }
+        out.className='sent ok'; out.textContent=t('fbThanks');
+        btn.textContent=t('fbSentBtn'); btn.dataset.state='sent';
+      }else{ throw new Error('rejected'); }
     }catch(err){
-      $('fbSend').disabled=false; $('fbSend').textContent='Send feedback';
-      out.className='sent bad';
-      out.textContent='That didn\'t send — check your connection and try again.';
+      btn.disabled=false; btn.textContent=t('fbSend');
+      out.className='sent bad'; out.textContent=t('fbFail');
     }
   });
 
+  applyLang();
   update();
 })();
 </script>

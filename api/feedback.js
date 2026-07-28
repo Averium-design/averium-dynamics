@@ -42,9 +42,13 @@ module.exports = async (req, res) => {
     return res.status(400).json({ ok: false, error: 'empty feedback' });
   }
 
+  const langCode = clean(body.lang, 8).toLowerCase();
+  const langName = { en: 'English', de: 'German' }[langCode] || langCode || '(unknown)';
+
   const lines = [
     `Useful?      ${verdict || '(not answered)'}`,
     `Role/brigade ${role || '(not given)'}`,
+    `Read it in   ${langName}`,
     '',
     'Wants us to add:',
     ...(wanted.length ? wanted.map(w => `  - ${w}`) : ['  (nothing ticked)']),
@@ -74,7 +78,7 @@ module.exports = async (req, res) => {
       body: JSON.stringify({
         from: process.env.FEEDBACK_FROM || 'Pyrognosis Size-Up <onboarding@resend.dev>',
         to: [to],
-        subject: `Size-Up feedback: ${verdict || 'no verdict'}${role ? ' — ' + role : ''}`,
+        subject: `Size-Up feedback${langCode ? ' [' + langCode.toUpperCase() + ']' : ''}: ${verdict || 'no verdict'}${role ? ' — ' + role : ''}`,
         text,
         html: `<pre style="font:14px/1.5 ui-monospace,Menlo,Consolas,monospace">${esc(text)}</pre>`,
       }),

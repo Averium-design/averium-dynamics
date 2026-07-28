@@ -173,8 +173,8 @@
       <div class="grid">
         <div class="metric"><div class="k" data-i18n="mSteepK">How steep</div><div class="v" id="mSlope">—</div><div><span class="chip" id="mSteep">—</span></div></div>
         <div class="metric"><div class="k" data-i18n="mRunK">Fire will run</div><div class="v" id="mUp">—</div><div class="s" data-i18n="mRunS">uphill, toward…</div></div>
-        <div class="metric"><div class="k" data-i18n="mFacesK">Slope faces</div><div class="v" id="mAspect">—</div><div class="s" id="mAspectSun">—</div></div>
-        <div class="metric"><div class="k" data-i18n="mElevK">Height above sea</div><div class="v" id="mElev">—</div><div class="s" data-i18n="mElevS">where the fire is</div></div>
+        <div class="metric"><div class="k" data-i18n="mFacesK">Which way it faces</div><div class="v" id="mAspect">—</div><div class="s" id="mAspectSun">—</div></div>
+        <div class="metric"><div class="k" data-i18n="mElevK">How high up</div><div class="v" id="mElev">—</div><div class="s" data-i18n="mElevS">where the fire is</div></div>
         <div class="metric">
           <div class="k" data-i18n="mWindK">Wind</div>
           <div class="windrose"><svg class="arrow" id="windArrow" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="5"/><polyline points="6,11 12,5 18,11"/></svg><div><div class="v" id="mWind" style="font-size:18px">—</div><div class="s" id="mWindDir">—</div></div></div>
@@ -184,7 +184,7 @@
 
       <div class="card">
         <div class="hd" data-i18n="stationsHd">Nearest help</div>
-        <div class="sub" data-i18n="stationsSub">Closest fire stations to this spot, straight-line distance.</div>
+        <div class="sub" data-i18n="stationsSub">Closest fire stations. Distance is direct, not by road.</div>
         <ul class="stations" id="stations"><li><span class="nm" style="color:var(--muted)">…</span></li></ul>
       </div>
 
@@ -236,7 +236,7 @@
           <a href="https://www.averiumdynamics.com/privacy" target="_blank" rel="noopener" data-i18n="whoPrivacy">Privacy</a> ·
           <a href="mailto:info@averiumdynamics.com">info@averiumdynamics.com</a>
         </div>
-        <span data-i18n="sources">Ground shape from the Copernicus 90 m elevation model; weather from Open-Meteo; stations from OpenStreetMap.</span>
+        <span data-i18n="sources">Ground height measured from satellites; weather and wind from Open-Meteo; fire stations from OpenStreetMap.</span>
         <b data-i18n="confirmB">Always confirm what you see on the ground</b><span data-i18n="confirmRest"> — this is a guide to what's ahead of you, not a substitute for your own eyes.</span>
       </div>
     </aside>

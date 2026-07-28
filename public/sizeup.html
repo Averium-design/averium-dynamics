@@ -293,12 +293,12 @@
       readLoading:'Reading the ground…',
       readFail:'Could not read this spot.',
       mSteepK:'How steep', mRunK:'Fire will run', mRunS:'uphill, toward…',
-      mFacesK:'Slope faces', mElevK:'Height above sea', mElevS:'where the fire is',
+      mFacesK:'Which way it faces', mElevK:'How high up', mElevS:'where the fire is',
       mWindK:'Wind', mAirK:'Air',
       windFrom:(f,to)=>`from the ${f}, blowing ${to}`,
       humidity:v=>`${v}% humidity`, veryDry:' · very dry',
       stationsHd:'Nearest help',
-      stationsSub:'Closest fire stations to this spot, straight-line distance.',
+      stationsSub:'Closest fire stations. Distance is direct, not by road.',
       stationsLooking:'Looking for stations…',
       stationsNone:`No fire station found within ${STATION_RADIUS_M/1000} km.`,
       stationsOwn:'From our own records — there may be more nearby.',
@@ -336,7 +336,7 @@
       errGeoRough:m=>`Rough fix only (about ${m} m out). Drag the pin to where the fire actually is.`,
       whoBuilt:'Built by', whoDesc:', a wildfire-prevention company in Berlin.',
       whoImprint:'Company details', whoPrivacy:'Privacy',
-      sources:'Ground shape from the Copernicus 90 m elevation model; weather from Open-Meteo; stations from OpenStreetMap.',
+      sources:'Ground height measured from satellites; weather and wind from Open-Meteo; fire stations from OpenStreetMap.',
       confirmB:'Always confirm what you see on the ground',
       confirmRest:' — this is a guide to what\'s ahead of you, not a substitute for your own eyes.'
     },
@@ -350,12 +350,12 @@
       readLoading:'Gelände wird ausgelesen…',
       readFail:'Diese Stelle konnte nicht ausgelesen werden.',
       mSteepK:'Steilheit', mRunK:'Feuer läuft nach', mRunS:'bergauf, Richtung…',
-      mFacesK:'Hang zeigt nach', mElevK:'Höhe über NN', mElevS:'am Feuer',
+      mFacesK:'Hang zeigt nach', mElevK:'Höhe über dem Meer', mElevS:'am Feuer',
       mWindK:'Wind', mAirK:'Luft',
       windFrom:(f,to)=>`aus ${f}, weht nach ${to}`,
       humidity:v=>`${v} % Luftfeuchte`, veryDry:' · sehr trocken',
       stationsHd:'Nächste Hilfe',
-      stationsSub:'Nächstgelegene Feuerwachen, Luftlinie.',
+      stationsSub:'Nächstgelegene Feuerwachen. Entfernung in Luftlinie, nicht über die Straße.',
       stationsLooking:'Suche Feuerwachen…',
       stationsNone:`Keine Feuerwache im Umkreis von ${STATION_RADIUS_M/1000} km gefunden.`,
       stationsOwn:'Aus unseren eigenen Daten – es kann weitere in der Nähe geben.',
@@ -393,7 +393,7 @@
       errGeoRough:m=>`Nur grobe Ortung (etwa ${m} m Abweichung). Ziehen Sie die Markierung dorthin, wo das Feuer wirklich ist.`,
       whoBuilt:'Entwickelt von', whoDesc:', einem Unternehmen für Waldbrandprävention in Berlin.',
       whoImprint:'Impressum', whoPrivacy:'Datenschutz',
-      sources:'Geländeform aus dem Copernicus-Höhenmodell (90 m); Wetter von Open-Meteo; Feuerwachen aus OpenStreetMap.',
+      sources:'Geländehöhen per Satellit gemessen; Wetter und Wind von Open-Meteo; Feuerwachen aus OpenStreetMap.',
       confirmB:'Prüfen Sie die Lage immer vor Ort',
       confirmRest:' – dies ist ein Anhaltspunkt für das, was vor Ihnen liegt, und ersetzt nicht den eigenen Blick.'
     }
@@ -492,7 +492,7 @@
         else if(light) r+=`Der Wind ist ebenfalls schwach (${spd} km/h) – <b>entscheidend ist, was hier wächst</b>, nicht Hang oder Wind.`;
         else r+=`<b>Der Wind ist der entscheidende Faktor</b>: Er weht mit ${spd} km/h Richtung ${windTowardTxt}.`;
       }else{
-        r=`Das Feuer liegt an ${STEEP_INLINE.de[steepK]} Hang (${sd}°) mit Ausrichtung nach ${aspectTxt}. Feuer läuft bergauf, rechnen Sie also damit, dass es <b>Richtung ${upslopeTxt} zieht</b>`;
+        r=`Das Feuer liegt an ${STEEP_INLINE.de[steepK]} Hang (${sd}°), der nach ${aspectTxt} zeigt. Feuer läuft bergauf, rechnen Sie also damit, dass es <b>Richtung ${upslopeTxt} zieht</b>`;
         if(!haveWind) r+='.';
         else if(light) r+=` – der Wind ist schwach (${spd} km/h), also <b>bestimmt der Hang die Richtung</b>, nicht der Wind.`;
         else if(align<45 && driven) r+=` – und der Wind (${spd} km/h Richtung ${windTowardTxt}) drückt <b>in dieselbe Richtung wie der Hang</b>. Rechnen Sie mit einem schnellen Lauf bergauf. <b>Halten Sie sich nicht oberhalb auf.</b>`;

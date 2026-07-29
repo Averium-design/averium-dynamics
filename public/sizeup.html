@@ -416,9 +416,12 @@
     }
   };
 
+  // English is the default for everyone. We no longer infer German from the browser
+  // locale — a German-configured phone in Spain would have got a German page. Only an
+  // explicit tap on DE switches it, and that choice is then remembered.
   let LANG = (function(){
     try{ const s=localStorage.getItem('sizeup-lang'); if(s==='en'||s==='de') return s; }catch(e){}
-    return (navigator.language||'').toLowerCase().startsWith('de') ? 'de' : 'en';
+    return 'en';
   })();
 
   const t=k=>{ const v=STR[LANG][k]; return v!==undefined?v:STR.en[k]; };

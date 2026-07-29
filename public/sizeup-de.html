@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
@@ -7,29 +7,29 @@
 <meta name="mobile-web-app-capable" content="yes"/>
 <!-- Reachable by direct link only: sent to crews we have briefed, not a public page. -->
 <meta name="robots" content="noindex, nofollow, noarchive"/>
-<title>Pyrognosis — Fire Size-Up</title>
+<title>Pyrognosis — Lagebeurteilung</title>
 
 <!-- Link preview. Without these the URL pastes into email, WhatsApp and LinkedIn as a
      bare string, which is what a phishing link looks like. With them it unfurls as a
      titled, branded card showing the actual tool, so the recipient can judge it before
      deciding to click. For cold outreach this matters more than anything on the page. -->
-<meta name="description" content="See the ground before you arrive: how steep it is, which way the fire will run, the wind, and your nearest fire stations. From Averium Dynamics."/>
+<meta name="description" content="Das Gelände kennen, bevor Sie eintreffen: Steilheit, Laufrichtung des Feuers, Wind und die nächstgelegenen Feuerwachen. Von Averium Dynamics."/>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Averium Dynamics"/>
-<meta property="og:title" content="Fire Size-Up — see the ground before you arrive"/>
-<meta property="og:description" content="Drop a pin on a fire and read the hillside: how steep, which way it will run, the wind, and your nearest fire stations. Built by Averium Dynamics, Berlin."/>
-<meta property="og:url" content="https://www.averiumdynamics.com/sizeup"/>
-<meta property="og:image" content="https://www.averiumdynamics.com/sizeup-preview.jpg"/>
+<meta property="og:title" content="Lagebeurteilung — das Gelände kennen, bevor Sie eintreffen"/>
+<meta property="og:description" content="Markieren Sie ein Feuer auf der Karte und lesen Sie den Hang: Steilheit, Laufrichtung, Wind und die nächstgelegenen Feuerwachen. Entwickelt von Averium Dynamics, Berlin."/>
+<meta property="og:url" content="https://www.averiumdynamics.com/sizeup-de"/>
+<meta property="og:image" content="https://www.averiumdynamics.com/sizeup-preview-de.jpg"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
-<meta property="og:image:alt" content="The Fire Size-Up tool showing a hillside near Cazorla with slope, wind and fire direction."/>
-<meta property="og:locale" content="en_GB"/>
-<meta property="og:locale:alternate" content="de_DE"/>
+<meta property="og:image:alt" content="Die Lagebeurteilung zeigt einen Hang bei Cazorla mit Steilheit, Wind und Laufrichtung des Feuers."/>
+<meta property="og:locale" content="de_DE"/>
+<meta property="og:locale:alternate" content="en_GB"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Fire Size-Up — see the ground before you arrive"/>
-<meta name="twitter:description" content="Drop a pin on a fire and read the hillside: how steep, which way it will run, the wind, and your nearest fire stations. Built by Averium Dynamics, Berlin."/>
-<meta name="twitter:image" content="https://www.averiumdynamics.com/sizeup-preview.jpg"/>
-<link rel="canonical" href="https://www.averiumdynamics.com/sizeup"/>
+<meta name="twitter:title" content="Lagebeurteilung — das Gelände kennen, bevor Sie eintreffen"/>
+<meta name="twitter:description" content="Markieren Sie ein Feuer auf der Karte und lesen Sie den Hang: Steilheit, Laufrichtung, Wind und die nächstgelegenen Feuerwachen. Entwickelt von Averium Dynamics, Berlin."/>
+<meta name="twitter:image" content="https://www.averiumdynamics.com/sizeup-preview-de.jpg"/>
+<link rel="canonical" href="https://www.averiumdynamics.com/sizeup-de"/>
 <link rel="alternate" hreflang="en" href="https://www.averiumdynamics.com/sizeup"/>
 <link rel="alternate" hreflang="de" href="https://www.averiumdynamics.com/sizeup-de"/>
 <link rel="icon" type="image/png" href="/favicon.png"/>
@@ -156,7 +156,7 @@
   <header>
     <span class="brand"><b>PYROGNOSIS</b> · <span data-i18n="brandSuffix">Fire Size-Up</span></span>
     <div class="lang" id="lang">
-      <a href="/sizeup" data-lang="en" class="on">EN</a><a href="/sizeup-de" data-lang="de">DE</a>
+      <a href="/sizeup" data-lang="en">EN</a><a href="/sizeup-de" data-lang="de" class="on">DE</a>
     </div>
     <span class="tag" data-i18n="tag">tap the map to place the fire</span>
     <div class="coords">
@@ -421,7 +421,7 @@
   // Fixed at build time — one page per language, so the URL itself says which version this
   // is and a forwarded link carries its language with it. Never inferred from the browser:
   // a German-configured phone belonging to a Spanish crew would have got a German page.
-  let LANG = 'en'; // BUILD:LANG
+  let LANG = 'de'; // BUILD:LANG
 
   const t=k=>{ const v=STR[LANG][k]; return v!==undefined?v:STR.en[k]; };
 

@@ -313,7 +313,7 @@
       tag:'tap the map to place the fire',
       coordPh:'or paste coordinates  e.g. 37.92, -2.94',
       myLocation:'My location', locating:'Locating…', go:'Go',
-      ctaText:'Tap any spot on the map — try a place you know well.',
+      ctaText:'Tap a spot on the map — try somewhere in Spain you know well.',
       panelTitle:"What you're driving into",
       readIdle:"Tap the map where the fire is, and we'll read the ground for you.",
       readLoading:'Reading the ground…',
@@ -330,6 +330,7 @@
       stationsSub:'Closest fire stations. Distance is direct, not by road.',
       stationsLooking:'Looking for stations…',
       stationsNone:`No fire station found within ${STATION_RADIUS_M/1000} km.`,
+      stationsUnavailable:'Could not reach the station list just now — move the pin to try again.',
       stationsOwn:'From our own records — there may be more nearby.',
       stationsDir:d=>`to the ${d}`,
       stationUnnamed:'Fire station (unnamed)',
@@ -374,7 +375,7 @@
       tag:'auf die Karte tippen, um das Feuer zu setzen',
       coordPh:'oder Koordinaten einfügen, z. B. 37.92, -2.94',
       myLocation:'Mein Standort', locating:'Suche Standort…', go:'Los',
-      ctaText:'Tippen Sie auf eine beliebige Stelle der Karte — am besten eine Gegend, die Sie gut kennen.',
+      ctaText:'Tippen Sie auf eine Stelle der Karte — am besten eine Gegend in Deutschland, die Sie gut kennen.',
       panelTitle:'Was Sie erwartet',
       readIdle:'Tippen Sie auf die Karte, wo das Feuer ist – wir lesen das Gelände für Sie aus.',
       readLoading:'Gelände wird ausgelesen…',
@@ -391,6 +392,7 @@
       stationsSub:'Nächstgelegene Feuerwachen. Entfernung in Luftlinie, nicht über die Straße.',
       stationsLooking:'Suche Feuerwachen…',
       stationsNone:`Keine Feuerwache im Umkreis von ${STATION_RADIUS_M/1000} km gefunden.`,
+      stationsUnavailable:'Die Wachenliste ist gerade nicht erreichbar — Markierung verschieben, um es erneut zu versuchen.',
       stationsOwn:'Aus unseren eigenen Daten – es kann weitere in der Nähe geben.',
       stationsDir:d=>`Richtung ${d}`,
       stationUnnamed:'Feuerwache (ohne Namen)',
@@ -564,20 +566,42 @@
   // so the two tenant regions are baked in as a fallback. A live query still runs first, which
   // is what makes the tool work for a pin dropped anywhere else.
   const BAKED_STATIONS=[
+    // Spain — Sierra de Cazorla, the validated region and the default pin.
     {lat:37.9169026,lon:-3.1095985,name:'Bomberos Consorcio Sierra de Cazorla'},
     {lat:37.9214646,lon:-2.9297490,name:'CEDEFO Vadillo Castril'},
     {lat:38.0160645,lon:-3.3765450,name:'Parque de Bomberos de Úbeda'},
     {lat:37.8179248,lon:-2.5247546,name:null},
-    {lat:35.5156707,lon:35.7852700,name:null}
+    // Syria — OSM coverage here is genuinely thin; this is the only one within 40 km.
+    {lat:35.5156707,lon:35.7852700,name:null},
+    // Germany — Berlin and Brandenburg, the country's wildfire heartland and the likeliest
+    // place a German crew tests this. Without these, a German pin fell back to nothing.
+    {lat:52.1428807,lon:13.3658177,name:'Freiwillige Feuerwehr Sperenberg'},
+    {lat:52.4874539,lon:13.3206881,name:'Berufsfeuerwache Wilmersdorf'},
+    {lat:52.5118289,lon:13.4445489,name:'Berufsfeuerwache Friedrichshain'},
+    {lat:52.3689395,lon:13.7020795,name:'Freiwillige Feuerwehr Wernsdorf'},
+    {lat:52.0746342,lon:12.9497634,name:null},
+    {lat:52.1604751,lon:12.9245563,name:null},
+    {lat:52.3043218,lon:13.6301861,name:'Feuerwehr Königs Wusterhausen'},
+    {lat:52.5472525,lon:13.0575695,name:'Freiwillige Feuerwehr Dallgow-Döberitz'},
+    {lat:52.3733085,lon:13.2605811,name:'Freiwillige Feuerwehr Ruhlsdorf'},
+    {lat:52.3184244,lon:13.4430827,name:'Feuerwehr Dahlewitz'},
+    {lat:52.5265525,lon:13.3891997,name:'Freiwillige Feuerwehr Mitte'},
+    {lat:52.6111032,lon:13.4830902,name:'Freiwillige Feuerwehr Karow'},
+    {lat:52.0555718,lon:13.2301378,name:'Freiwillige Feuerwehr Jänickendorf'},
+    {lat:52.3588236,lon:13.5912062,name:'Freiwillige Feuerwehr Schulzendorf'}
   ];
 
-  let lastStations=null, lastStationNote='';
-  function renderStations(list,note){
-    lastStations=list; lastStationNote=note;
+  let lastStations=null, lastStationNote='', lastStationFailed=false;
+  function renderStations(list,note,failed){
+    lastStations=list; lastStationNote=note; lastStationFailed=!!failed;
     stationLayer.clearLayers();
     const ul=$('stations');
     if(!list.length){
-      ul.innerHTML='<li><span class="nm" style="color:var(--muted)">'+t('stationsNone')+'</span></li>';
+      // "We looked and there are none" and "we could not look" are different facts. Showing
+      // the first when the second is true tells a crew there is no help nearby, which is a
+      // claim we have not earned.
+      const msg = failed ? t('stationsUnavailable') : t('stationsNone');
+      ul.innerHTML='<li><span class="nm" style="color:var(--muted)">'+msg+'</span></li>';
       return;
     }
     ul.innerHTML='';
@@ -626,10 +650,11 @@
         const c=e.center||e, tg=e.tags||{};
         return {lat:c.lat, lon:c.lon, name:tg.name||null};
       }).filter(s=>s.lat!=null);
-      renderStations(rank(raw,lat,lon),'');
+      renderStations(rank(raw,lat,lon),'',false);
     }catch(err){
       if(token!==seq) return;
-      renderStations(rank(BAKED_STATIONS,lat,lon),'stationsOwn');
+      const fallback=rank(BAKED_STATIONS,lat,lon);
+      renderStations(fallback, fallback.length?'stationsOwn':'', true);
     }
   }
 
@@ -761,7 +786,7 @@
                             :                         t('readIdle');
     }
 
-    if(lastStations) renderStations(lastStations,lastStationNote);
+    if(lastStations) renderStations(lastStations,lastStationNote,lastStationFailed);
 
     const el=$('err');
     if(el.style.display==='block' && el.dataset.k){

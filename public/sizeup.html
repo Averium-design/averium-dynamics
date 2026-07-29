@@ -69,6 +69,13 @@
   #map{flex:1;min-height:0}
   aside{width:390px;max-width:46vw;background:var(--panel);border-left:1px solid var(--line);overflow:auto;padding:16px}
   h2{font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 10px}
+  .cta{display:flex;gap:10px;align-items:center;background:rgba(63,169,255,.10);
+    border:1px solid rgba(63,169,255,.45);border-radius:10px;padding:11px 13px;margin-bottom:14px;
+    font-size:14.5px;line-height:1.4;color:#dbeaf7}
+  .cta-hand{font-size:19px;line-height:1;flex:none;animation:tapnudge 1.9s ease-in-out infinite}
+  @keyframes tapnudge{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
+  @media (prefers-reduced-motion:reduce){.cta-hand{animation:none}}
+  .cta.gone{display:none}
   .read{background:#10161d;border:1px solid var(--line);border-left:4px solid var(--fire);border-radius:10px;padding:14px;font-size:15.5px;line-height:1.5;margin-bottom:14px}
   .read.loading{border-left-color:var(--muted);color:var(--muted)}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
@@ -168,6 +175,13 @@
   <main>
     <div id="map"></div>
     <aside>
+      <!-- The page loads with a pin already down and a filled-in card, so without this it
+           reads as a display rather than something to touch. Disappears the moment they
+           move the pin, so it never nags anyone who has already worked it out. -->
+      <div class="cta" id="cta">
+        <span class="cta-hand">👆</span>
+        <span data-i18n="ctaText">Tap any spot on the map — try a place you know well.</span>
+      </div>
       <h2 data-i18n="panelTitle">What you're driving into</h2>
       <div id="err" class="err" style="display:none"></div>
       <div id="read" class="read loading">Tap the map where the fire is, and we'll read the ground for you.</div>
@@ -301,6 +315,7 @@
       tag:'tap the map to place the fire',
       coordPh:'or paste coordinates  e.g. 37.92, -2.94',
       myLocation:'My location', locating:'Locating…', go:'Go',
+      ctaText:'Tap any spot on the map — try a place you know well.',
       panelTitle:"What you're driving into",
       readIdle:"Tap the map where the fire is, and we'll read the ground for you.",
       readLoading:'Reading the ground…',
@@ -361,6 +376,7 @@
       tag:'auf die Karte tippen, um das Feuer zu setzen',
       coordPh:'oder Koordinaten einfügen, z. B. 37.92, -2.94',
       myLocation:'Mein Standort', locating:'Suche Standort…', go:'Los',
+      ctaText:'Tippen Sie auf eine beliebige Stelle der Karte — am besten eine Gegend, die Sie gut kennen.',
       panelTitle:'Was Sie erwartet',
       readIdle:'Tippen Sie auf die Karte, wo das Feuer ist – wir lesen das Gelände für Sie aus.',
       readLoading:'Gelände wird ausgelesen…',
@@ -764,8 +780,13 @@
   // The EN/DE control is now two links to the two pages, so there is no in-page switching
   // to wire up. applyLang() still runs once on load to render the built-in language.
 
-  marker.on('dragend',update);
-  map.on('click',e=>{marker.setLatLng(e.latlng);update();});
+  // Retire the prompt on the first pin move by ANY route — tapping the map, dragging the
+  // pin, typing coordinates or using "my location". Anything less and it keeps nagging
+  // someone who has already done the thing it is asking for.
+  function ctaDone(){ const c=$('cta'); if(c) c.classList.add('gone'); }
+
+  marker.on('dragend',()=>{ctaDone();update();});
+  map.on('click',e=>{ctaDone();marker.setLatLng(e.latlng);update();});
 
   // Trim first: a leading space used to yield an empty token, and Number('')===0 survived the
   // old isNaN filter — so " 37.92, -2.94" silently jumped to lat 0. Ranges are checked too.
@@ -777,6 +798,7 @@
       return;
     }
     hideErr();
+    ctaDone();
     marker.setLatLng([la,lo]); map.setView([la,lo],14); update();
   }
   $('goBtn').addEventListener('click',goToTyped);
@@ -804,6 +826,7 @@
     navigator.geolocation.getCurrentPosition(
       p=>{
         locBusy(false);
+        ctaDone();
         const la=p.coords.latitude, lo=p.coords.longitude, acc=p.coords.accuracy;
         clearAccuracy();
         marker.setLatLng([la,lo]);

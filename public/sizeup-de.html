@@ -161,15 +161,15 @@
 <body>
 <div id="app">
   <header>
-    <span class="brand"><b>PYROGNOSIS</b> · <span data-i18n="brandSuffix">Fire Size-Up</span></span>
+    <span class="brand"><b>PYROGNOSIS</b> · <span data-i18n="brandSuffix">Lagebeurteilung</span></span>
     <div class="lang" id="lang">
       <a href="/sizeup" data-lang="en">EN</a><a href="/sizeup-de" data-lang="de" class="on">DE</a>
     </div>
-    <span class="tag" data-i18n="tag">tap the map to place the fire</span>
+    <span class="tag" data-i18n="tag">auf die Karte tippen, um das Feuer zu setzen</span>
     <div class="coords">
-      <button id="locBtn" class="loc" type="button"><span class="pin">◎</span><span id="locTxt" data-i18n="myLocation">My location</span></button>
-      <input id="coordInput" data-i18n-ph="coordPh" placeholder="or paste coordinates  e.g. 37.92, -2.94" inputmode="decimal" />
-      <button id="goBtn" data-i18n="go">Go</button>
+      <button id="locBtn" class="loc" type="button"><span class="pin">◎</span><span id="locTxt" data-i18n="myLocation">Mein Standort</span></button>
+      <input id="coordInput" data-i18n-ph="coordPh" placeholder="oder Koordinaten einfügen, z. B. 37.92, -2.94" inputmode="decimal" />
+      <button id="goBtn" data-i18n="go">Los</button>
     </div>
   </header>
   <main>
@@ -180,64 +180,64 @@
            move the pin, so it never nags anyone who has already worked it out. -->
       <div class="cta" id="cta">
         <span class="cta-hand">👆</span>
-        <span data-i18n="ctaText">Tap any spot on the map — try a place you know well.</span>
+        <span data-i18n="ctaText">Wählen Sie auf der Karte eine beliebige Stelle in Spanien.</span>
       </div>
-      <h2 data-i18n="panelTitle">What you're driving into</h2>
+      <h2 data-i18n="panelTitle">Was Sie erwartet</h2>
       <div id="err" class="err" style="display:none"></div>
       <div id="read" class="read loading">Tap the map where the fire is, and we'll read the ground for you.</div>
 
       <div class="grid">
-        <div class="metric"><div class="k" data-i18n="mSteepK">How steep</div><div class="v" id="mSlope">—</div><div><span class="chip" id="mSteep">—</span></div></div>
-        <div class="metric"><div class="k" data-i18n="mRunK">Fire will run</div><div class="v" id="mUp">—</div><div class="s" id="mUpSub" data-i18n="mRunS">uphill, toward…</div></div>
-        <div class="metric"><div class="k" data-i18n="mFacesK">Which way it faces</div><div class="v" id="mAspect">—</div><div class="s" id="mAspectFull">—</div><div class="s" id="mAspectSun">—</div></div>
-        <div class="metric"><div class="k" data-i18n="mElevK">How high up</div><div class="v" id="mElev">—</div><div class="s" data-i18n="mElevS">where the fire is</div></div>
+        <div class="metric"><div class="k" data-i18n="mSteepK">Steilheit</div><div class="v" id="mSlope">—</div><div><span class="chip" id="mSteep">—</span></div></div>
+        <div class="metric"><div class="k" data-i18n="mRunK">Feuer läuft nach</div><div class="v" id="mUp">—</div><div class="s" id="mUpSub" data-i18n="mRunS">bergauf, Richtung…</div></div>
+        <div class="metric"><div class="k" data-i18n="mFacesK">Hang zeigt nach</div><div class="v" id="mAspect">—</div><div class="s" id="mAspectFull">—</div><div class="s" id="mAspectSun">—</div></div>
+        <div class="metric"><div class="k" data-i18n="mElevK">Höhe über dem Meer</div><div class="v" id="mElev">—</div><div class="s" data-i18n="mElevS">am Feuer</div></div>
         <div class="metric">
           <div class="k" data-i18n="mWindK">Wind</div>
           <div class="windrose"><svg class="arrow" id="windArrow" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="5"/><polyline points="6,11 12,5 18,11"/></svg><div><div class="v" id="mWind" style="font-size:18px">—</div><div class="s" id="mWindDir">—</div></div></div>
         </div>
-        <div class="metric"><div class="k" data-i18n="mAirK">Air</div><div class="v" id="mTemp" style="font-size:18px">—</div><div class="s" id="mRH">—</div></div>
+        <div class="metric"><div class="k" data-i18n="mAirK">Luft</div><div class="v" id="mTemp" style="font-size:18px">—</div><div class="s" id="mRH">—</div></div>
       </div>
 
       <div class="card">
-        <div class="hd" data-i18n="stationsHd">Nearest help</div>
-        <div class="sub" data-i18n="stationsSub">Closest fire stations. Distance is direct, not by road.</div>
+        <div class="hd" data-i18n="stationsHd">Nächste Hilfe</div>
+        <div class="sub" data-i18n="stationsSub">Nächstgelegene Feuerwachen. Entfernung in Luftlinie, nicht über die Straße.</div>
         <ul class="stations" id="stations"><li><span class="nm" style="color:var(--muted)">…</span></li></ul>
       </div>
 
       <div class="card wish">
-        <div class="hd" data-i18n="wishHd">What would help you most?</div>
-        <div class="sub" data-i18n="wishSub">Tick anything you'd want this to show you. That's what we build next.</div>
-        <label><input type="checkbox" value="Steep ground above the fire marked automatically"> <span data-i18n="wish1">Show me the steep ground <b>above</b> the fire, so I know where it will climb</span></label>
-        <label><input type="checkbox" value="Gullies, chutes and saddles marked"> <span data-i18n="wish2">Mark the gullies and narrow valleys where fire speeds up</span></label>
-        <label><input type="checkbox" value="Escape routes and safe areas"> <span data-i18n="wish3">Suggest escape routes and safe places to fall back to</span></label>
-        <label><input type="checkbox" value="Road access for engines"> <span data-i18n="wish4">Which roads and tracks an engine can actually get down</span></label>
-        <label><input type="checkbox" value="Nearest water for refilling"> <span data-i18n="wish5">Nearest water to refill from</span></label>
-        <label><input type="checkbox" value="What is burning - vegetation and fuel type"> <span data-i18n="wish6">What's growing there — trees, scrub, grass</span></label>
-        <label><input type="checkbox" value="Predicted spread over the next hours"> <span data-i18n="wish7">Where the fire is likely to be in one to three hours</span></label>
-        <label><input type="checkbox" value="3D view of the terrain"> <span data-i18n="wish8">A 3D view of the hillside</span></label>
-        <label><input type="checkbox" value="Works with no phone signal"> <span data-i18n="wish9">Works when there's no phone signal</span></label>
+        <div class="hd" data-i18n="wishHd">Was würde Ihnen am meisten helfen?</div>
+        <div class="sub" data-i18n="wishSub">Kreuzen Sie an, was hier zu sehen sein sollte. Genau das bauen wir als Nächstes.</div>
+        <label><input type="checkbox" value="Steep ground above the fire marked automatically"> <span data-i18n="wish1">Zeig mir das steile Gelände <b>oberhalb</b> des Feuers, damit ich weiß, wohin es steigt</span></label>
+        <label><input type="checkbox" value="Gullies, chutes and saddles marked"> <span data-i18n="wish2">Rinnen und enge Täler markieren, in denen das Feuer schneller wird</span></label>
+        <label><input type="checkbox" value="Escape routes and safe areas"> <span data-i18n="wish3">Fluchtwege und sichere Rückzugsräume vorschlagen</span></label>
+        <label><input type="checkbox" value="Road access for engines"> <span data-i18n="wish4">Welche Straßen und Wege ein Fahrzeug wirklich befahren kann</span></label>
+        <label><input type="checkbox" value="Nearest water for refilling"> <span data-i18n="wish5">Nächste Wasserentnahmestelle zum Auffüllen</span></label>
+        <label><input type="checkbox" value="What is burning - vegetation and fuel type"> <span data-i18n="wish6">Was dort wächst – Wald, Gebüsch, Gras</span></label>
+        <label><input type="checkbox" value="Predicted spread over the next hours"> <span data-i18n="wish7">Wo das Feuer in ein bis drei Stunden voraussichtlich steht</span></label>
+        <label><input type="checkbox" value="3D view of the terrain"> <span data-i18n="wish8">Eine 3D-Ansicht des Hangs</span></label>
+        <label><input type="checkbox" value="Works with no phone signal"> <span data-i18n="wish9">Funktioniert auch ohne Handyempfang</span></label>
       </div>
 
       <div class="card">
-        <div class="hd" data-i18n="fbHd">Tell us what you think</div>
-        <div class="sub" data-i18n="fbSub">Goes straight to the team. Anonymous unless you tell us who you are.</div>
+        <div class="hd" data-i18n="fbHd">Sagen Sie uns Ihre Meinung</div>
+        <div class="sub" data-i18n="fbSub">Geht direkt an das Team. Anonym, sofern Sie uns nicht sagen, wer Sie sind.</div>
 
-        <span class="fld" data-i18n="fbQ">Would this have helped you before you arrived?</span>
+        <span class="fld" data-i18n="fbQ">Hätte Ihnen das vor dem Eintreffen geholfen?</span>
         <div class="fb-btns" id="fbBtns">
-          <button type="button" data-fb="Yes, useful" data-i18n="fbYes">Yes, useful</button>
-          <button type="button" data-fb="Partly" data-i18n="fbPartly">Partly</button>
-          <button type="button" data-fb="No" data-i18n="fbNo">No</button>
+          <button type="button" data-fb="Yes, useful" data-i18n="fbYes">Ja, nützlich</button>
+          <button type="button" data-fb="Partly" data-i18n="fbPartly">Teilweise</button>
+          <button type="button" data-fb="No" data-i18n="fbNo">Nein</button>
         </div>
 
-        <label class="fld" for="fbMissing" data-i18n="fbMissingL">What's the one thing you'd want here that isn't?</label>
-        <textarea id="fbMissing" data-i18n-ph="fbMissingPh" placeholder="Anything at all — what you looked for and couldn't find."></textarea>
+        <label class="fld" for="fbMissing" data-i18n="fbMissingL">Was fehlt Ihnen hier am meisten?</label>
+        <textarea id="fbMissing" data-i18n-ph="fbMissingPh" placeholder="Alles ist willkommen – wonach Sie gesucht und was Sie nicht gefunden haben."></textarea>
 
-        <label class="fld" for="fbRole"><span data-i18n="fbRoleL">Your role or brigade</span> <span style="color:var(--muted)" data-i18n="fbOptional">(optional)</span></label>
-        <input class="txt" id="fbRole" data-i18n-ph="fbRolePh" placeholder="e.g. crew boss, Bomberos Cazorla" />
+        <label class="fld" for="fbRole"><span data-i18n="fbRoleL">Ihre Funktion oder Wache</span> <span style="color:var(--muted)" data-i18n="fbOptional">(freiwillig)</span></label>
+        <input class="txt" id="fbRole" data-i18n-ph="fbRolePh" placeholder="z. B. Gruppenführer, FF Musterstadt" />
 
         <div class="hp"><label>Leave this empty<input id="fbHp" tabindex="-1" autocomplete="off"/></label></div>
 
-        <button class="send" id="fbSend" data-i18n="fbSend">Send feedback</button>
+        <button class="send" id="fbSend" data-i18n="fbSend">Rückmeldung senden</button>
         <div class="sent" id="fbSent"></div>
       </div>
 
@@ -246,14 +246,14 @@
              check we are a real company without leaving the page. The Impressum is the
              strongest signal available in Germany: it is a legal filing with a named address. -->
         <div class="who">
-          <span data-i18n="whoBuilt">Built by</span>
-          <a href="https://www.averiumdynamics.com/" target="_blank" rel="noopener">Averium&nbsp;Dynamics</a><span data-i18n="whoDesc">, a wildfire-prevention company in Berlin.</span>
-          <a href="https://www.averiumdynamics.com/imprint" target="_blank" rel="noopener" data-i18n="whoImprint">Company details</a> ·
-          <a href="https://www.averiumdynamics.com/privacy" target="_blank" rel="noopener" data-i18n="whoPrivacy">Privacy</a> ·
+          <span data-i18n="whoBuilt">Entwickelt von</span>
+          <a href="https://www.averiumdynamics.com/" target="_blank" rel="noopener">Averium&nbsp;Dynamics</a><span data-i18n="whoDesc">, einem Unternehmen für Waldbrandprävention in Berlin.</span>
+          <a href="https://www.averiumdynamics.com/imprint" target="_blank" rel="noopener" data-i18n="whoImprint">Impressum</a> ·
+          <a href="https://www.averiumdynamics.com/privacy" target="_blank" rel="noopener" data-i18n="whoPrivacy">Datenschutz</a> ·
           <a href="mailto:info@averiumdynamics.com">info@averiumdynamics.com</a>
         </div>
-        <span data-i18n="sources">Ground height measured from satellites; weather and wind from Open-Meteo; fire stations from OpenStreetMap.</span>
-        <b data-i18n="confirmB">Always confirm what you see on the ground</b><span data-i18n="confirmRest"> — this is a guide to what's ahead of you, not a substitute for your own eyes.</span>
+        <span data-i18n="sources">Geländehöhen per Satellit gemessen; Wetter und Wind von Open-Meteo; Feuerwachen aus OpenStreetMap.</span>
+        <b data-i18n="confirmB">Prüfen Sie die Lage immer vor Ort</b><span data-i18n="confirmRest"> – dies ist ein Anhaltspunkt für das, was vor Ihnen liegt, und ersetzt nicht den eigenen Blick.</span>
       </div>
     </aside>
   </main>

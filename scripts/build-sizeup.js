@@ -66,6 +66,49 @@ function setMeta(html, attr, key, value, label) {
   return html.replace(re, `$1${esc(value)}$2`);
 }
 
+// Pull the STR table straight out of the source so the generator uses the same strings the
+// page does, with no second copy to fall out of step.
+function readStrings(html) {
+  const start = html.indexOf('const STR={');
+  if (start < 0) throw new Error('build-sizeup: const STR={ not found');
+  let i = html.indexOf('{', start), depth = 0, end = -1;
+  for (let j = i; j < html.length; j++) {
+    if (html[j] === '{') depth++;
+    else if (html[j] === '}') { depth--; if (depth === 0) { end = j + 1; break; } }
+  }
+  if (end < 0) throw new Error('build-sizeup: could not find the end of the STR object');
+  const radius = Number((html.match(/STATION_RADIUS_M\s*=\s*(\d+)/) || [])[1]);
+  if (!radius) throw new Error('build-sizeup: STATION_RADIUS_M not found');
+  return new Function('STATION_RADIUS_M', `return (${html.slice(i, end)});`)(radius);
+}
+
+// Bake the correct language into every data-i18n element. Without this the hardcoded
+// English ships inside both pages and flashes before the script runs — which already
+// happened twice: once with the jargon cleanup, once with this very prompt.
+function bakeStrings(html, strings, lang) {
+  let baked = 0, missing = [];
+  const keys = [...html.matchAll(/\sdata-i18n="([A-Za-z0-9_]+)"/g)].map(m => m[1]);
+  for (const key of new Set(keys)) {
+    const value = strings[lang][key] !== undefined ? strings[lang][key] : strings.en[key];
+    if (typeof value !== 'string') { missing.push(key); continue; }
+    const re = new RegExp(`(<([a-z0-9]+)[^>]*\\sdata-i18n="${key}"[^>]*>)([\\s\\S]*?)(</\\2>)`);
+    if (!re.test(html)) { missing.push(key); continue; }
+    html = html.replace(re, (_m, open, _tag, _old, close) => `${open}${value}${close}`);
+    baked++;
+  }
+  // Placeholders too.
+  for (const m of [...html.matchAll(/\sdata-i18n-ph="([A-Za-z0-9_]+)"/g)]) {
+    const key = m[1];
+    const value = strings[lang][key] !== undefined ? strings[lang][key] : strings.en[key];
+    if (typeof value !== 'string') { missing.push(key + ' (placeholder)'); continue; }
+    const re = new RegExp(`(\\sdata-i18n-ph="${key}"[^>]*?placeholder=")[^"]*(")`);
+    if (re.test(html)) { html = html.replace(re, `$1${esc(value)}$2`); baked++; }
+    else missing.push(key + ' (placeholder)');
+  }
+  if (missing.length) throw new Error(`build-sizeup: could not bake ${lang}: ${missing.join(', ')}`);
+  return { html, baked };
+}
+
 function build(lang) {
   const p = PAGES[lang];
   let html = fs.readFileSync(SRC, 'utf8');
@@ -107,13 +150,18 @@ function build(lang) {
     .replace(/<a href="\/sizeup" data-lang="en"[^>]*>/, `<a href="/sizeup" data-lang="en"${lang === 'en' ? ' class="on"' : ''}>`)
     .replace(/<a href="\/sizeup-de" data-lang="de"[^>]*>/, `<a href="/sizeup-de" data-lang="de"${lang === 'de' ? ' class="on"' : ''}>`);
 
+  // 7. Bake every visible string for this language into the markup itself.
+  const strings = readStrings(html);
+  const res = bakeStrings(html, strings, lang);
+  html = res.html;
+
   const dest = path.join(ROOT, 'public', p.out);
   fs.writeFileSync(dest, html, 'utf8');
-  return { dest, bytes: Buffer.byteLength(html), lang };
+  return { dest, bytes: Buffer.byteLength(html), lang, baked: res.baked };
 }
 
 const results = Object.keys(PAGES).map(build);
 for (const r of results) {
-  console.log(`${r.lang.toUpperCase()}  ->  public/${path.basename(r.dest)}  ${r.bytes} bytes`);
+  console.log(`${r.lang.toUpperCase()}  ->  public/${path.basename(r.dest)}  ${r.bytes} bytes  (${r.baked} strings baked in)`);
 }
 console.log('\nSource of truth: scripts/sizeup.src.html — never edit public/sizeup*.html by hand.');

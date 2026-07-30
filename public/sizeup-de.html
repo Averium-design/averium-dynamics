@@ -252,6 +252,7 @@
           <a href="https://www.averiumdynamics.com/privacy" target="_blank" rel="noopener" data-i18n="whoPrivacy">Datenschutz</a> ·
           <a href="mailto:info@averiumdynamics.com">info@averiumdynamics.com</a>
         </div>
+        <span data-i18n="spreadNote">Die Laufrichtung ergibt sich aus Hang und Wind zusammen. Vegetation und Feuchte spielen ebenfalls hinein und fehlen hier noch — als Blickrichtung zu verstehen, nicht als Vorhersage.</span>
         <span data-i18n="sources">Geländehöhen per Satellit gemessen; Wetter und Wind von Open-Meteo; Feuerwachen aus OpenStreetMap.</span>
         <b data-i18n="confirmB">Prüfen Sie die Lage immer vor Ort</b><span data-i18n="confirmRest"> – dies ist ein Anhaltspunkt für das, was vor Ihnen liegt, und ersetzt nicht den eigenen Blick.</span>
       </div>
@@ -322,6 +323,8 @@
       readFail:'Could not read this spot.',
       mSteepK:'How steep', mRunK:'Fire will run', mRunS:'uphill, toward…',
       mRunFull:d=>`uphill, to the ${d}`,
+      driverHill:'mostly the hill', driverWind:'mostly the wind', driverBoth:'hill and wind together',
+      spreadNote:'Where it will run is the hill and the wind combined. Fuel and moisture also matter, and are not in this yet — treat it as which way to look, not a forecast.',
       windFromFull:f=>`coming from the ${f}`, windToFull:to=>`blowing to the ${to}`,
       stationsDirFull:d=>`to the ${d}`,
       mFacesK:'Which way it faces', mElevK:'How high up', mElevS:'where the fire is',
@@ -384,6 +387,8 @@
       readFail:'Diese Stelle konnte nicht ausgelesen werden.',
       mSteepK:'Steilheit', mRunK:'Feuer läuft nach', mRunS:'bergauf, Richtung…',
       mRunFull:d=>`bergauf, Richtung ${d}`,
+      driverHill:'vor allem der Hang', driverWind:'vor allem der Wind', driverBoth:'Hang und Wind zusammen',
+      spreadNote:'Die Laufrichtung ergibt sich aus Hang und Wind zusammen. Vegetation und Feuchte spielen ebenfalls hinein und fehlen hier noch — als Blickrichtung zu verstehen, nicht als Vorhersage.',
       windFromFull:f=>`kommt aus ${f}`, windToFull:to=>`weht nach ${to}`,
       stationsDirFull:d=>`Richtung ${d}`,
       mFacesK:'Hang zeigt nach', mElevK:'Höhe über dem Meer', mElevS:'am Feuer',
@@ -521,7 +526,8 @@
   // Written per language rather than templated, because German word order and the dative
   // after "an ... Hang" do not survive a word-for-word substitution.
   function buildRead(d){
-    const {slope,aspectTxt,upslopeTxt,steepK,haveWind,light,driven,align,spd,windTowardTxt,sunny,rh}=d;
+    const {slope,aspectTxt,upslopeTxt,steepK,haveWind,light,driven,align,spd,windTowardTxt,sunny,rh,
+           spreadTxt,driver}=d;
     let r='';
     if(LANG==='de'){
       const sd=num(slope,0);
@@ -530,14 +536,19 @@
         if(!haveWind) r+='Für diesen Punkt liegt kein Windwert vor.';
         else if(light) r+=`Der Wind ist ebenfalls schwach (${spd} km/h) – <b>entscheidend ist, was hier wächst</b>, nicht Hang oder Wind.`;
         else r+=`<b>Der Wind ist der entscheidende Faktor</b>: Er weht mit ${spd} km/h Richtung ${windTowardTxt}.`;
+      }else if(!haveWind){
+        r=`Das Feuer liegt an ${STEEP_INLINE.de[steepK]} Hang (${sd}°), der nach ${aspectTxt} zeigt. Feuer läuft bergauf, rechnen Sie also damit, dass es <b>Richtung ${upslopeTxt} zieht</b>. Für diesen Punkt liegt kein Windwert vor.`;
       }else{
-        r=`Das Feuer liegt an ${STEEP_INLINE.de[steepK]} Hang (${sd}°), der nach ${aspectTxt} zeigt. Feuer läuft bergauf, rechnen Sie also damit, dass es <b>Richtung ${upslopeTxt} zieht</b>`;
-        if(!haveWind) r+='.';
-        else if(light) r+=` – der Wind ist schwach (${spd} km/h), also <b>bestimmt der Hang die Richtung</b>, nicht der Wind.`;
-        else if(align<45 && driven) r+=` – und der Wind (${spd} km/h Richtung ${windTowardTxt}) drückt <b>in dieselbe Richtung wie der Hang</b>. Rechnen Sie mit einem schnellen Lauf bergauf. <b>Halten Sie sich nicht oberhalb auf.</b>`;
-        else if(align<45) r+=` – und der Wind (${spd} km/h Richtung ${windTowardTxt}) drückt in dieselbe Richtung wie der Hang und verstärkt den Lauf bergauf.`;
-        else if(driven) r+=`. Der Wind ist stark (${spd} km/h) und weht quer zum Hang Richtung ${windTowardTxt} – achten Sie auf die Flanken und auf Drehungen.`;
-        else r+=`. Der Wind (${spd} km/h) weht quer zum Hang Richtung ${windTowardTxt} – achten Sie auf die Flanken.`;
+        r=`Das Feuer liegt an ${STEEP_INLINE.de[steepK]} Hang (${sd}°), der nach ${aspectTxt} zeigt. `;
+        r+=`Rechnen Sie damit, dass es sich <b>Richtung ${spreadTxt} ausbreitet</b>. `;
+        // Spell out both pushes: seeing two different directions on the card without this
+        // reads as a contradiction rather than as the two forces it actually is.
+        r+=`Der Hang schiebt es bergauf Richtung ${upslopeTxt}, der Wind (${spd} km/h) schiebt es Richtung ${windTowardTxt}.`;
+        if(driver==='hill') r+=' Zurzeit ist <b>der Hang der stärkere von beiden</b>.';
+        else if(driver==='wind') r+=' Zurzeit ist <b>der Wind der stärkere von beiden</b>.';
+        else r+=' Beide wirken gerade etwa gleich stark.';
+        if(align<45 && driven) r+=' Beide zeigen in dieselbe Richtung – rechnen Sie mit einem schnellen Lauf bergauf. <b>Halten Sie sich nicht oberhalb auf.</b>';
+        else if(align>=45) r+=' Weil sie auseinanderlaufen, achten Sie auf die Flanken.';
       }
       if(sunny) r+=' Die Sonne steht auf diesem Hang, die Vegetation ist hier trockener als auf der Schattenseite.';
       if(rh!=null && rh<25) r+=` Die Luft ist sehr trocken (${rh} % Luftfeuchte) – rechnen Sie mit aktivem Feuerverhalten.`;
@@ -549,18 +560,55 @@
       if(!haveWind) r+='and we have no wind reading for this spot.';
       else if(light) r+=`and the wind is light (${spd} km/h). <b>What's growing there will matter more</b> than the ground or the wind.`;
       else r+=`<b>the wind is what to watch</b>. It's blowing toward the ${windTowardTxt} at ${spd} km/h.`;
+    }else if(!haveWind){
+      r=`The fire is on ${STEEP_INLINE.en[steepK]} ground (${sd}°), facing ${aspectTxt}. Fire climbs, so expect it to <b>run uphill toward the ${upslopeTxt}</b>. We have no wind reading for this spot.`;
     }else{
-      r=`The fire is on ${STEEP_INLINE.en[steepK]} ground (${sd}°), facing ${aspectTxt}. Fire climbs, so expect it to <b>run uphill toward the ${upslopeTxt}</b>`;
-      if(!haveWind) r+='.';
-      else if(light) r+=` — the wind is light (${spd} km/h), so <b>the hill decides where it goes</b>, not the wind.`;
-      else if(align<45 && driven) r+=` — and the wind (${spd} km/h, blowing ${windTowardTxt}) is pushing <b>the same way as the hill</b>. Expect it to move fast uphill. <b>Do not get above it.</b>`;
-      else if(align<45) r+=` — and the wind (${spd} km/h, blowing ${windTowardTxt}) is pushing the same way as the hill, which adds to the uphill run.`;
-      else if(driven) r+=`. The wind is strong (${spd} km/h) and blowing across the slope toward the ${windTowardTxt} — watch the sides, and expect it to shift.`;
-      else r+=`. The wind (${spd} km/h) is blowing across the slope toward the ${windTowardTxt} — watch the sides.`;
+      r=`The fire is on ${STEEP_INLINE.en[steepK]} ground (${sd}°), facing ${aspectTxt}. `;
+      r+=`Expect it to <b>spread toward the ${spreadTxt}</b>. `;
+      // Spell out both pushes: seeing two different directions on the card without this
+      // reads as a contradiction rather than as the two forces it actually is.
+      r+=`The hill pushes it uphill to the ${upslopeTxt}; the wind (${spd} km/h) pushes it ${windTowardTxt}.`;
+      if(driver==='hill') r+=' Right now <b>the hill is the stronger of the two</b>.';
+      else if(driver==='wind') r+=' Right now <b>the wind is the stronger of the two</b>.';
+      else r+=' The two are pushing about equally hard.';
+      if(align<45 && driven) r+=' Both point the same way — expect a fast uphill run. <b>Do not get above it.</b>';
+      else if(align>=45) r+=' Because they pull apart, watch the flanks.';
     }
     if(sunny) r+=" The sun is on this slope, so what's growing here is drier than the shaded side.";
     if(rh!=null && rh<25) r+=` The air is very dry (${rh}% humidity) — expect it to burn actively.`;
     return r;
+  }
+
+  // ---- where it will actually spread --------------------------------------
+  // The slope and the wind both push the fire, and they rarely point the same way. Adding
+  // them as vectors gives the direction of fastest spread:
+  //
+  //   slope push = tan(slope)^2              the standard Rothermel form — the slope effect
+  //                                          grows with the square of the tangent
+  //   wind push  = WIND_REF * (U/10)^1.5     Rothermel uses a power law near 1.5
+  //
+  // WIND_REF is set so 10 km/h of wind carries the same push as a 20° slope.
+  //
+  // That anchor is a CALIBRATION CHOICE, not a measurement. Real spread also depends on
+  // fuel type, fuel moisture and fire size, none of which this page has. So this says which
+  // way to look, not how fast it will get there — and both component directions stay on the
+  // card so nothing is hidden behind the combined figure.
+  const WIND_REF = Math.pow(Math.tan(rad(20)),2);
+
+  function spread(slopeDeg,upslopeDeg,windKmh,windTowardDeg){
+    // tan blows up near vertical; 60° is well past anything fire runs on.
+    const s = Math.pow(Math.tan(rad(Math.min(Math.max(slopeDeg,0),60))),2);
+    const w = (windKmh!=null && windTowardDeg!=null && windKmh>0)
+      ? WIND_REF*Math.pow(windKmh/10,1.5) : 0;
+    const total = s+w;
+    if(total<=0) return null;
+    const x = s*Math.sin(rad(upslopeDeg)) + w*Math.sin(rad(windTowardDeg));
+    const y = s*Math.cos(rad(upslopeDeg)) + w*Math.cos(rad(windTowardDeg));
+    if(Math.abs(x)<1e-12 && Math.abs(y)<1e-12) return null;  // exactly opposing pushes
+    return {
+      bearing:(deg(Math.atan2(x,y))+360)%360,
+      driver: s>=3*w ? 'hill' : w>=3*s ? 'wind' : 'both'
+    };
   }
 
   // ---- fire stations -------------------------------------------------------
@@ -712,8 +760,6 @@
       const sun=insolation(tr.aspect,lat);
 
       lastRead={tr,windFrom,windSpd,windToward,temp,rh,steepK,upslope,sun,lat};
-      readState='ok';
-      paint();
 
       lastCtx={lat:lat.toFixed(5), lon:lng.toFixed(5), slope:Math.round(tr.slope)+'°',
         aspect:ROSE.en[Math.round(tr.aspect/22.5)%16], upslope:ROSE.en[Math.round(upslope/22.5)%16],
@@ -725,6 +771,21 @@
       $('read').className='read loading';
       $('read').textContent=t('readFail');
       showErr('errFetch');
+      return;
+    }
+
+    // Rendering is deliberately OUTSIDE the fetch try/catch. A bug in paint() is our fault,
+    // not the network's, and swallowing it into the same handler told the reader to check
+    // their connection while the real cause was an undefined variable in here.
+    if(my!==seq) return;
+    try{
+      readState='ok';
+      paint();
+    }catch(err){
+      console.error('[sizeup] render failed — this is a bug, not a connection problem:', err);
+      readState='fail';
+      $('read').className='read loading';
+      $('read').textContent=t('readFail');
     }
   }
 
@@ -741,8 +802,14 @@
 
     $('mSlope').textContent=num(tr.slope,0)+'°';
     const chip=$('mSteep'); chip.textContent=STEEP[LANG][d.steepK]; chip.className='chip '+chipClass[d.steepK];
-    $('mUp').textContent=compass(d.upslope);
-    $('mUpSub').textContent=t('mRunFull')(full(d.upslope));
+    // The headline direction is now slope AND wind together, which is what "fire will run"
+    // actually means. Falls back to pure upslope when there is no wind reading.
+    const sp = spread(tr.slope, d.upslope, haveWind?d.windSpd:null, haveWind?d.windToward:null);
+    const runBearing = sp ? sp.bearing : d.upslope;
+    $('mUp').textContent=compass(runBearing);
+    $('mUpSub').textContent = sp
+      ? full(runBearing)+' — '+t('driver'+sp.driver.charAt(0).toUpperCase()+sp.driver.slice(1))
+      : t('mRunFull')(full(runBearing));
     $('mAspect').textContent=compass(tr.aspect);
     $('mAspectFull').textContent=full(tr.aspect);
     $('mAspectSun').textContent=SUN[LANG][d.sun.key];
@@ -760,7 +827,8 @@
     $('read').innerHTML=buildRead({
       slope:tr.slope, aspectTxt:full(tr.aspect), upslopeTxt:full(d.upslope),
       steepK:d.steepK, haveWind, light, driven, align, spd,
-      windTowardTxt:haveWind?full(d.windToward):'', sunny:d.sun.sunny, rh:d.rh
+      windTowardTxt:haveWind?full(d.windToward):'', sunny:d.sun.sunny, rh:d.rh,
+      spreadTxt:full(runBearing), driver:sp?sp.driver:null
     });
   }
 

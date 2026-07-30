@@ -69,12 +69,14 @@
   #map{flex:1;min-height:0}
   aside{width:390px;max-width:46vw;background:var(--panel);border-left:1px solid var(--line);overflow:auto;padding:16px}
   h2{font-size:13px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 10px}
-  .cta{display:flex;gap:10px;align-items:center;background:rgba(63,169,255,.10);
-    border:1px solid rgba(63,169,255,.45);border-radius:10px;padding:11px 13px;margin-bottom:14px;
-    font-size:14.5px;line-height:1.4;color:#dbeaf7}
-  .cta-hand{font-size:19px;line-height:1;flex:none;animation:tapnudge 1.9s ease-in-out infinite}
-  @keyframes tapnudge{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
-  @media (prefers-reduced-motion:reduce){.cta-hand{animation:none}}
+  /* A four-line scenario, not a one-line hint: the icon aligns to the first line rather
+     than floating in the middle of the block. */
+  .cta{display:flex;gap:11px;align-items:flex-start;background:rgba(63,169,255,.10);
+    border:1px solid rgba(63,169,255,.45);border-radius:10px;padding:12px 14px;margin-bottom:14px;
+    font-size:14.5px;line-height:1.5;color:#dbeaf7}
+  .cta-hand{font-size:20px;line-height:1.35;flex:none}
+  .cta-text b{color:#fff}
+  .cta-text br{content:"";display:block;margin-top:5px}
   .cta.gone{display:none}
   .read{background:#10161d;border:1px solid var(--line);border-left:4px solid var(--fire);border-radius:10px;padding:14px;font-size:15.5px;line-height:1.5;margin-bottom:14px}
   .read.loading{border-left-color:var(--muted);color:var(--muted)}
@@ -179,8 +181,8 @@
            reads as a display rather than something to touch. Disappears the moment they
            move the pin, so it never nags anyone who has already worked it out. -->
       <div class="cta" id="cta">
-        <span class="cta-hand">👆</span>
-        <span data-i18n="ctaText">Wählen Sie auf der Karte eine beliebige Stelle in Spanien.</span>
+        <span class="cta-hand">🚒</span>
+        <span class="cta-text" data-i18n="ctaText"><b>Sie werden gerade zu einem Waldbrand alarmiert.</b><br>Tippen Sie auf der Karte auf die Einsatzstelle — für diesen Test eine beliebige Stelle in Spanien.<br>Was darunter erscheint, erwartet Sie beim Eintreffen.<br>Sagen Sie uns anschließend unten, ob Ihnen das geholfen hätte.</span>
       </div>
       <h2 data-i18n="panelTitle">Was Sie erwartet</h2>
       <div id="err" class="err" style="display:none"></div>
@@ -316,7 +318,13 @@
       tag:'tap the map to place the fire',
       coordPh:'or paste coordinates  e.g. 37.92, -2.94',
       myLocation:'My location', locating:'Locating…', go:'Go',
-      ctaText:'Choose any location in Spain on the map.',
+      // Framed as a situation rather than an instruction: we are asking a professional to
+      // judge whether this would have helped them, and that only works if they are picturing
+      // a real call-out rather than poking at a demo.
+      ctaText:'<b>You have just been called to a wildfire.</b>'
+        +'<br>Tap the spot on the map where it is — any location in Spain for this test.'
+        +'<br>What appears below is what is waiting for you when you arrive.'
+        +'<br>Then tell us at the bottom whether that would have helped.',
       panelTitle:"What you're driving into",
       readIdle:"Tap the map where the fire is, and we'll read the ground for you.",
       readLoading:'Reading the ground…',
@@ -380,7 +388,10 @@
       tag:'auf die Karte tippen, um das Feuer zu setzen',
       coordPh:'oder Koordinaten einfügen, z. B. 37.92, -2.94',
       myLocation:'Mein Standort', locating:'Suche Standort…', go:'Los',
-      ctaText:'Wählen Sie auf der Karte eine beliebige Stelle in Spanien.',
+      ctaText:'<b>Sie werden gerade zu einem Waldbrand alarmiert.</b>'
+        +'<br>Tippen Sie auf der Karte auf die Einsatzstelle — für diesen Test eine beliebige Stelle in Spanien.'
+        +'<br>Was darunter erscheint, erwartet Sie beim Eintreffen.'
+        +'<br>Sagen Sie uns anschließend unten, ob Ihnen das geholfen hätte.',
       panelTitle:'Was Sie erwartet',
       readIdle:'Tippen Sie auf die Karte, wo das Feuer ist – wir lesen das Gelände für Sie aus.',
       readLoading:'Gelände wird ausgelesen…',

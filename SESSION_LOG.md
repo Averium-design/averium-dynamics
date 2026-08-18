@@ -22,5 +22,11 @@ Read this file at the START of every session. Append at the END.
   the diff.
 - Never assert a file path, line number, count or test result that has
   not been verified in the current session.
+- If an instruction and the server disagree, the server wins. Verify repo
+  facts against prodserver, not against what anyone remembers, and say so
+  when the two differ.
+- Open-Meteo fail-closed is DEPLOYED (tip of fix/ors-base-from-env,
+  6edfe57). It was on the open-blocker list until 2026-08-18 and should
+  not be re-raised.
 
 ## Sessions

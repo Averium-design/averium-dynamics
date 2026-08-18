@@ -5,31 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="theme-color" content="#1B4D3E"/>
 
-<title>Helicopter, air tanker, fire engine, drone: what each is for</title>
-<meta name="description" content="Twenty hectares to four hundred at the Müritz fire. What each firefighting asset is actually for, judged on five things we state up front, and the gap none of them covered."/>
+<title>Helicopter, air tanker, fire engine, drone: what each one is for</title>
+<meta name="description" content="A fire in Muritz National Park went from twenty hectares to four hundred. What each firefighting tool is actually good at, judged on five things we state up front, and the gap none of them covered."/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone"/>
 
 <!-- This link gets forwarded to fire services and districts by email and
      WhatsApp. Without these tags it pastes as a bare string, which is what a
      phishing link looks like.
-     og-card.jpg is a 1200x630 centre crop of the night fire-front photograph,
-     made here as a stopgap. If a purpose-designed card arrives, overwrite
+     og-card.jpg is a 1200x630 centre crop of the night fire photograph, made
+     as a stopgap. If a purpose-designed card arrives, overwrite
      /blog/img/og-card.jpg at the same dimensions and nothing else changes. -->
 <meta property="og:type" content="article"/>
 <meta property="og:site_name" content="Averium Dynamics"/>
-<meta property="og:title" content="Helicopter, air tanker, fire engine, drone — what each is actually for"/>
-<meta property="og:description" content="The Müritz fire went from just over 20 hectares to nearly 400, and nobody did anything obviously wrong. What each asset is for, and the gap none of them covered."/>
+<meta property="og:title" content="Helicopter, air tanker, fire engine, drone: what each one is for"/>
+<meta property="og:description" content="A fire in Muritz National Park went from twenty hectares to four hundred. What each tool is actually good at, and the gap none of them covered."/>
 <meta property="og:url" content="https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone"/>
 <meta property="og:locale" content="en_GB"/>
 <meta property="article:published_time" content="2026-08-18"/>
 <meta property="og:image" content="https://www.averiumdynamics.com/blog/img/og-card.jpg"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
-<meta property="og:image:alt" content="A fire front burning along a forested ridge at dusk, reflected in the water below."/>
+<meta property="og:image:alt" content="A fire burning along a forested ridge at dusk, reflected in the water below."/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="Helicopter, air tanker, fire engine, drone — what each is actually for"/>
-<meta name="twitter:description" content="The Müritz fire went from just over 20 hectares to nearly 400, and nobody did anything obviously wrong. What each asset is for, and the gap none of them covered."/>
+<meta name="twitter:title" content="Helicopter, air tanker, fire engine, drone: what each one is for"/>
+<meta name="twitter:description" content="A fire in Muritz National Park went from twenty hectares to four hundred. What each tool is actually good at, and the gap none of them covered."/>
 <meta name="twitter:image" content="https://www.averiumdynamics.com/blog/img/og-card.jpg"/>
 
 <link rel="icon" type="image/png" href="/favicon.png"/>
@@ -38,9 +38,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-  /* Tokens taken from tailwind.config.js - same design language as the rest
-     of the site, just without the Tailwind build, because Tailwind only
-     scans ./src and never reaches public/. */
+  /* Tokens taken from tailwind.config.js, so this matches the rest of the
+     site. Tailwind only scans ./src and never reaches public/. */
   :root{
     --primary:#1B4D3E; --accent:#FF4D00;
     --fg:#1A1A1A; --muted:#6B7280;
@@ -56,7 +55,7 @@
   }
   h1,h2,h3{font-family:'Space Grotesk','Inter',sans-serif;line-height:1.15}
 
-  .wrap{max-width:56rem;margin:0 auto;padding:0 1.5rem}   /* = container + max-w-4xl */
+  .wrap{max-width:56rem;margin:0 auto;padding:0 1.5rem}
 
   .site-head{border-bottom:1px solid var(--border);background:#fff}
   .site-head .wrap{display:flex;align-items:center;gap:.6rem;height:4.5rem}
@@ -90,8 +89,8 @@
   ul{margin:0 0 1.25rem 1.25rem}
   li{margin-bottom:.4rem}
 
-  /* Photographs are stock, not our own and not of the fire the piece discusses.
-     The caption carries that, so the reader is never left to assume. */
+  /* Photographs are stock, not ours, and not of the fire this piece is about.
+     The caption says so, so nobody has to assume. */
   figure{margin:2.25rem 0}
   figure img{width:100%;height:auto;display:block;border:1px solid var(--border)}
   figcaption{font-size:.8125rem;color:var(--muted);margin-top:.6rem;line-height:1.55}
@@ -111,7 +110,24 @@
   .sources ol{margin-left:1.25rem}
   .sources li{margin-bottom:.5rem;word-break:break-word}
 
-  footer{background:#000;color:#9CA3AF;padding:2.5rem 0;margin-top:4rem;font-size:.875rem}
+  /* Funding logos, same pairing and roughly the same proportions as the
+     homepage strip. */
+  .supporters{border-top:1px solid var(--border);margin-top:3rem;padding-top:2rem}
+  .supporters p{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;
+    color:var(--muted);margin-bottom:1.25rem;
+  }
+  .supporters .logos{display:flex;flex-wrap:wrap;align-items:center;gap:2.5rem}
+  .supporters img{width:auto;object-fit:contain;display:block}
+  .supporters .sibb{height:3.5rem}
+  .supporters .eu{height:2.5rem}
+  @media(min-width:768px){
+    .supporters .sibb{height:4.5rem}
+    .supporters .eu{height:3rem}
+  }
+
+  footer{background:#000;color:#9CA3AF;padding:2.5rem 0;margin-top:3rem;font-size:.875rem}
   footer a{color:#9CA3AF;text-decoration:none}
   footer a:hover{color:#fff}
   footer .row{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
@@ -141,15 +157,15 @@
   <div class="wrap">
 
     <p class="eyebrow">Field note</p>
-    <h1>Helicopter, air tanker, fire engine, drone&nbsp;— what each is actually for</h1>
-    <p class="dek">They are not alternatives. They turn up at different points in the same
-      fire, which makes "which one is better" the wrong question to be arguing about.</p>
+    <h1>Helicopter, air tanker, fire engine, drone: what each one is for</h1>
+    <p class="dek">They are not alternatives. They turn up at different points in the same fire
+      and do different jobs.</p>
     <p class="byline">18 August 2026 · Averium Dynamics UG, Berlin</p>
 
     <figure>
       <img src="/blog/img/smouldering-ground.jpg" width="1400" height="888"
-           alt="Smoke rising from smouldering ground across a cleared conifer forest, stumps and
-                brash in the foreground."
+           alt="Smoke rising from burnt ground in a cleared conifer forest, with stumps and
+                branches in the foreground."
            decoding="async"/>
       <figcaption>Ground that has already burned.
         <span class="note">Stock photograph. Not the Müritz fire, and not our own image.</span>
@@ -158,179 +174,159 @@
 
     <h2>Twenty hectares to four hundred</h2>
 
-    <p>On 13 July a fire started in the Müritz National Park, on ground the army used to train
-      on. When it was first sized up it was a bit over 20 hectares. By the end it had covered
-      close to 400&nbsp;— about one per cent of the whole park.<sup>[2][4]</sup></p>
+    <p>On 13 July a fire started in Müritz National Park, on old army training ground. It was
+      just over 20 hectares when crews first sized it up. By the end it had burned close to 400,
+      about one per cent of the park.<sup>[2][4]</sup></p>
 
-    <p>As far as we can tell nobody did anything wrong. Hundreds of people worked it. The
-      Bundeswehr put two CH-53s over it and dropped something like 1.58&nbsp;million litres
-      across three days.<sup>[3]</sup> It went from 20 to 400 anyway.</p>
+    <p>As far as we can tell nobody did anything wrong. Hundreds of people worked on it. The
+      German air force flew two heavy helicopters over it and dropped around 1.58 million litres
+      in three days.<sup>[3]</sup> It still went from 20 to 400.</p>
 
-    <p>We keep coming back to that pair of numbers. It says more than any argument about
-      equipment does, because the fire was small once, and the stretch where it was still small
-      is where the outcome actually got decided. Most of what happened after that was limiting
-      the damage.</p>
+    <p>That pair of numbers is the whole argument. The fire was small once. What happens while
+      it is still small decides how it ends. Everything after that is clearing up.</p>
 
-    <p>Which is worth keeping in mind when these four things get compared, because they usually
-      get compared on the wrong axis&nbsp;— how much water each one carries. They are not
-      substitutes for each other. They turn up at different points and do different jobs. Tell
-      a Wehr that drones beat fire engines and they will stop listening, and they will be right
-      to.</p>
+    <p>People usually compare firefighting kit by how much water it carries. That is the wrong
+      question. These four things are not alternatives. They arrive at different times and do
+      different jobs. Tell a fire crew that drones beat fire engines and they will stop
+      listening to you, and they should.</p>
 
-    <h2>What we are judging them on</h2>
+    <h2>How we are comparing them</h2>
 
-    <p>Five things. Better to write them down than leave them implied:</p>
+    <p>Five things:</p>
 
     <ul>
-      <li>how long before something actually lands on the fire</li>
-      <li>what one deployment costs</li>
-      <li>where it can get to, physically and legally</li>
-      <li>how many people have to be inside the hazard area</li>
+      <li>how long until something lands on the fire</li>
+      <li>what one call-out costs</li>
+      <li>where it can reach, physically and legally</li>
+      <li>how many people have to go into danger</li>
       <li>how much it carries</li>
     </ul>
 
-    <p>On the second one: we could not find per-flight-hour costs for German firefighting
-      helicopters or air tankers that we would be willing to put our name to. So there are no
-      euro figures anywhere in this piece. Where cost matters we say so in words and say who
-      told us. Making a number up would have been easy and would have undone everything else.</p>
+    <p>On cost: we could not find flight-hour prices for German firefighting helicopters or
+      planes that we trust enough to print. So there are no euro figures in this piece. Where
+      cost matters we say so in words, and we say who told us.</p>
 
     <p>Nothing wins on all five.</p>
 
-    <h2>Tanklöschfahrzeug</h2>
+    <h2>Fire engine</h2>
 
-    <p>Where there is a road, nothing else is close. A TLF brings real volume, it can be
-      resupplied, it cools rather than just knocking flame down, and the crew can see what they
-      are dealing with and change the attack while they are doing it. No aircraft does that.
-      And whatever else happens, the hot spots, the damping down and the securing of the ground
-      afterwards all belong to the people standing on it.</p>
+    <p>Where there is a road, nothing beats it. It carries a lot of water, it can refill, it
+      cools the ground properly, and the crew can see the fire and change what they are doing.
+      No aircraft can do that. And the slow work afterwards, the hot spots and the damping down,
+      happens on foot anyway.</p>
 
-    <p>The limitation is not the vehicle. It is getting the vehicle to the fire.</p>
+    <p>The problem is not the truck. It is getting the truck to the fire.</p>
 
     <blockquote>
-      The biggest delay is not the alarm. It happens finding the route through the terrain.
-      Crews end up searching for the fire themselves&nbsp;— and hours pass before they get
-      there.
-      <cite>Paraphrased: a fire officer (Brandamtmann) with the Berlin fire service, 40 years
-        in, talking to us</cite>
+      The biggest delay is not the alarm. It is finding the route through the terrain. Crews end
+      up searching for the fire themselves, and hours go by before they reach it.
+      <cite>A fire officer with the Berlin fire service, forty years in. Our paraphrase.</cite>
     </blockquote>
 
-    <p>We have now heard some version of that from enough people that we have stopped treating
-      it as an anecdote. The alarm is quick. The run out to the last piece of tarmac is quick.
-      Then it turns into navigation, in a forest, often at night, sometimes with a reporting
-      party who was not sure where they were either. Forest rescue points (Rettungspunkte) help
-      with the handover, but a rescue point is a place to meet, not the seat of the fire.</p>
+    <p>We have heard that from enough people now to stop calling it an anecdote. The alarm is
+      fast. The drive to the last paved road is fast. Then it turns into navigation, in a
+      forest, often in the dark, sometimes from a caller who was not sure where they were
+      either. Forest meeting points help with the handover, but a meeting point is not the
+      fire.</p>
 
-    <h2>Löschhubschrauber</h2>
+    <h2>Helicopter</h2>
 
     <figure>
       <img src="/blog/img/fire-front-night.jpg" width="1600" height="1067"
-           alt="A fire front burning along a forested ridge at dusk, its light reflected in the
-                water in the foreground."
+           alt="A fire burning along a forested ridge at dusk, its light reflected in the water
+                in the foreground."
            loading="lazy" decoding="async"/>
       <figcaption>Once it looks like this, the first hour is long gone.
         <span class="note">Stock photograph. Not the Müritz fire, and not our own image.</span>
       </figcaption>
     </figure>
 
-    <p>Once a fire is properly going, the work moves into the air. A helicopter covers ground in
-      minutes that would cost a vehicle hours, and it arrives with a load nothing on wheels
-      could have brought up in that time. Müritz is the demonstration: 316 sorties, roughly
-      1.58&nbsp;million litres, over three days.<sup>[3]</sup> The park administration went out
-      of its way afterwards to credit the helicopter crews with a decisive contribution to
-      getting the fire contained.<sup>[4]</sup></p>
+    <p>Once a fire is big, the work moves into the air. A helicopter crosses in minutes what
+      would take a truck hours, and it arrives with a load nothing on wheels could bring in that
+      time. Müritz shows it: 316 flights, around 1.58 million litres, over three
+      days.<sup>[3]</sup> The park authority later credited the helicopter crews with turning
+      the fire around.<sup>[4]</sup></p>
 
     <blockquote>
       A drop from altitude misses most of the fire. And every flight costs so much that
-      helicopters only get requested in an emergency.
-      <cite>Paraphrased: the founder of an aerial firefighting company in Athens, talking to
-        us</cite>
+      helicopters only get called in an emergency.
+      <cite>The founder of an aerial firefighting company in Athens. Our paraphrase.</cite>
     </blockquote>
 
-    <p>That is physics rather than criticism. Water dropped from height spreads out on the way
-      down and some of it is gone before it lands. It is why the helicopter is the tool for a
-      fire that is already big, and why nobody would call one out for something that is still
-      twenty metres across&nbsp;— by the time the case for the cost has been made, the fire has
-      made it for you.</p>
+    <p>That is physics, not a complaint. Water dropped from height spreads on the way down and
+      some of it never lands. So a helicopter is for a fire that is already big. Nobody calls
+      one out for something twenty metres across.</p>
 
-    <h2>Löschflugzeug</h2>
+    <h2>Air tanker</h2>
 
-    <p>Air tankers carry more per run than anything else here and cover serious area. Around the
-      Mediterranean they are the backbone of the air response. In a German district, in the
-      first hour, they are close to irrelevant: requesting, repositioning and loading all take
-      time, and the nearest suitable base is rarely nearby. This is a day-two asset. That is
-      the whole entry, and the length of it is the point.</p>
+    <p>Planes carry more per run than anything else here, and around the Mediterranean they are
+      the backbone of the air response. In a German district, in the first hour, they barely
+      matter. Requesting one, moving it and loading it all take time, and the nearest suitable
+      base is rarely close. This is a day-two tool.</p>
 
-    <h2>Drohne</h2>
+    <h2>Drone</h2>
 
     <p>We build these, so here is what ours cannot do.</p>
 
-    <p>The payload is small. Against a developed front a drone is useless&nbsp;— send one at a
-      crown fire running across 300 hectares and you have wasted the sortie and everyone's time.
-      Dry powder knocks flame down without cooling the fuel underneath it, which means
-      re-ignition is a live problem rather than a theoretical one, and it means somebody still
-      has to come and check the ground afterwards.</p>
+    <p>The load is small. Against a big fire front a drone is useless. Send one at a fire running
+      through the treetops across 300 hectares and you have wasted everyone's time. Dry powder
+      puts the flame out without cooling the fuel underneath, so it can catch again, and
+      somebody still has to walk the ground afterwards.</p>
 
-    <p>Müritz is a good illustration of why that matters, incidentally. Weeks after the fire was
-      contained, drone monitoring over the burn was still picking up individual heat sources at
-      up to 160&nbsp;°C.<sup>[4]</sup> Fires that look finished are not finished.</p>
+    <p>Müritz shows that too. Weeks after the fire was under control, drone flights over the burn
+      were still finding hot spots at up to 160 degrees.<sup>[4]</sup> Fires that look finished
+      are not finished.</p>
 
-    <p>What does hold up: a drone gets to ground with no road to it, quickly, without anyone
-      having to find the way in first. Nobody is in the hazard area. A deployment costs orders
-      of magnitude less than putting a crewed aircraft in the air, which changes what you are
-      willing to send it at. And it scales by flying again rather than by carrying more, which
-      is a different shape of problem to solve.</p>
+    <p>What is true: a drone reaches ground with no road to it, fast, and nobody has to find the
+      way in first. Nobody is in danger. One flight costs a small fraction of putting a crewed
+      aircraft up, which changes what you are willing to send it at. And you scale it by flying
+      again, not by carrying more.</p>
 
-    <p>So the useful role is narrow and specific: a small fire, in the first minutes, somewhere
-      nothing else reaches in that window.</p>
+    <p>So the job is narrow. A small fire, in the first few minutes, somewhere nothing else can
+      reach in that time.</p>
 
     <h2>The gap</h2>
 
-    <p>Back to Müritz, because the interesting part is not the size of it.</p>
+    <p>Back to Müritz, because the size of it is not the interesting part.</p>
 
-    <p>The ground was a former military training area and it is heavily contaminated with
-      unexploded ordnance. On 15 July the Nordkurier reported the district's position plainly:
-      because a heavily munitions-contaminated former training area was involved, the fire
-      service could not get directly at the fire and had to keep a safety distance of
-      1,000&nbsp;metres. That day 118 hectares were burning.<sup>[1]</sup></p>
+    <p>The ground there is old army training ground and it is full of unexploded shells. On
+      15 July the local paper reported the district's position: because of that, crews could not
+      go near the fire and had to stay 1,000 metres back. That day 118 hectares were
+      burning.<sup>[1]</sup></p>
 
-    <p>A thousand metres. On foot, that is not a tactic, it is a spectator position.</p>
+    <p>A thousand metres. On foot that is not a tactic. That is watching.</p>
 
-    <p>What could still work over the top of it was the district's own drone unit. Different
-      rules apply to an aircraft passing overhead than to people who have to walk in. Operators
-      from the district land registry office (Katasteramt) were flying from the
-      Käflingsbergturm, a tower south-east of the village of Speck, from six in the morning
-      until close to midnight, day after day, holding an overview and measuring the burnt
-      area.<sup>[2]</sup></p>
+    <p>What could still work over the top was the district's own drone team. Different rules
+      apply to an aircraft passing overhead than to people walking in. They flew from a tower
+      southeast of the village of Speck, from six in the morning until close to midnight, day
+      after day, keeping an eye on the fire and measuring how far it had spread.<sup>[2]</sup></p>
 
-    <p>They could see everything and do nothing about any of it.</p>
+    <p>They could see all of it and do nothing about any of it.</p>
 
-    <p>Two things follow from that, and the first one cuts against us.</p>
+    <p>Two things follow, and the first one goes against us.</p>
 
-    <p>The helicopters were not shut out. They flew, they were effective, and the record says
-      so&nbsp;— 316 sorties and 1.58 million litres.<sup>[3]</sup> Anybody telling you that only
-      a drone could get near Müritz is selling something. The 1,000 metres applied to the crews
-      on the ground.</p>
+    <p>The helicopters were not shut out. They flew and they worked: 316 flights, 1.58 million
+      litres.<sup>[3]</sup> Anyone telling you that only a drone could get near Müritz is selling
+      something. The 1,000 metres applied to the crews on the ground.</p>
 
-    <p>But that is exactly what makes the gap visible. For weeks there was ground no person was
-      allowed to walk onto. There was an uncrewed aircraft over it more or less continuously,
-      and its entire contribution was watching. Everything that actually reached the fire came
-      from altitude, in sorties with hours between them, at whatever accuracy a drop from that
-      height gives you. When the fire was declared under control, the munitions clearance
-      service estimated it would be about two weeks before crews could set foot on the burn at
-      all.<sup>[4]</sup></p>
+    <p>But that is what makes the gap easy to see. For weeks there was ground nobody was allowed
+      to walk on. There was an unmanned aircraft above it almost all the time, and all it could
+      do was watch. Everything that actually hit the fire came from high up, in flights with
+      hours between them. When the fire was declared under control, the bomb disposal service
+      said it would be about two weeks before anyone could set foot on the burnt
+      area.<sup>[4]</sup></p>
 
-    <p>The drone was not the better tool there. It was the only thing that could be over the
-      fire early and stay over it, and it had nothing to offer once it arrived.</p>
+    <p>The drone was not the better tool. It was the only thing that could be there early and
+      stay there, and it had nothing to offer once it arrived.</p>
 
-    <h2>So</h2>
+    <h2>What this means</h2>
 
-    <p>A drone does not replace a helicopter, and it does not replace a Tanklöschfahrzeug.
-      Anyone who has watched either of them work already knows that.</p>
+    <p>A drone does not replace a helicopter. It does not replace a fire engine. Anyone who has
+      watched either of them work knows that.</p>
 
-    <p>What it can do is cover a gap that nothing covers at the moment: the first few minutes,
-      somewhere nobody reaches in the first few minutes, either because there is no road or
-      because nobody is permitted. After that it is the same job it has always been, done by the
-      same people.</p>
+    <p>It covers a gap that nothing covers now. The first few minutes, somewhere nobody can reach
+      in the first few minutes, because there is no road or because nobody is allowed. After
+      that it is the same job it has always been, done by the same people.</p>
 
     <div class="cta">
       <h3>If you want to look at your own ground</h3>
@@ -346,33 +342,42 @@
     <div class="sources">
       <h3>Sources</h3>
       <ol>
-        <li>Nordkurier, 15 July 2026, 13:50: „Großbrand im Nationalpark weitet sich aus" —
-          1,000-metre safety distance for the fire service; 118 hectares.
+        <li>Nordkurier, 15 July 2026, 13:50. The 1,000 metre safety distance for the fire
+          service, and 118 hectares burning.
           <a href="https://www.nordkurier.de/regional/mecklenburg-vorpommern/grossbrand-im-nationalpark-weitet-sich-aus-duestere-prognose-fuer-die-anwohner-und-feuerwehr-4719357">nordkurier.de</a></li>
-        <li>Nordkurier, 4 August 2026: „Drohnenpilot bei Großbrand im Dauereinsatz" — just over
-          20 hectares at the start, almost 400 at the end; the district's drone unit, the
-          Katasteramt, flying from the Käflingsbergturm.
+        <li>Nordkurier, 4 August 2026. Just over 20 hectares at the start and almost 400 at the
+          end, and the district drone team flying from the tower near Speck.
           <a href="https://www.nordkurier.de/regional/mueritz/drohnenpilot-bei-grossbrand-im-dauereinsatz-bundeswehr-entschuldigt-sich-fuer-verhalten-eines-soldaten-4753714">nordkurier.de</a></li>
-        <li>Bundeswehr, Operatives Führungskommando: two CH-53, 16–18 July 2026, 316 sorties,
-          roughly 1,580,000 litres.
+        <li>German armed forces, joint operations command. Two CH-53 helicopters, 16 to 18 July
+          2026, 316 flights, around 1,580,000 litres.
           <a href="https://www.bundeswehr.de/de/organisation/operatives-fuehrungskommando-der-bundeswehr/bundewehr-mueritz-waldbrand-unterstuetzung-6123090">bundeswehr.de</a></li>
-        <li>Müritz-Nationalpark, press release: around 400 hectares of the park's 32,200
-          hectares; burn still closed for munitions contamination; drone monitoring showing heat
-          sources up to 160 °C; clearance service estimate of roughly two weeks before crews
-          could re-enter.
+        <li>Müritz National Park, press release. Around 400 hectares of the park's 32,200; the
+          burnt area still closed because of unexploded shells; drone monitoring finding hot
+          spots up to 160 degrees; roughly two weeks before crews could go back in.
           <a href="https://www.mueritz-nationalpark.de/presse/detail/waldbrand-im-mueritz-nationalpark-unter-kontrolle-nachsorge-und-sicherung-geht-weiter">mueritz-nationalpark.de</a></li>
       </ol>
       <p style="margin-top:1rem">The two quotes are from conversations we had ourselves and are
         paraphrased from memory. They are not publicly checkable, and we would rather say that
-        than dress them up as something they are not.</p>
+        than pretend otherwise.</p>
       <p>Both photographs are from Pixabay, used under the
         <a href="https://pixabay.com/service/license-summary/">Pixabay Content Licence</a>:
-        <a href="https://pixabay.com/photos/wildfire-bushfire-fire-forest-4755030/">„Wildfire
-        Bushfire Fire"</a> by sippakorn and
-        <a href="https://pixabay.com/photos/the-forest-fell-fire-smoke-tree-2370996/">„The
-        Forest Fell"</a> by ojkumena. That licence does not require attribution. We are giving
-        it anyway, because a piece that sources everything else should source these too. Neither
-        shows the Müritz fire, neither was taken by us, and neither shows our equipment.</p>
+        <a href="https://pixabay.com/photos/wildfire-bushfire-fire-forest-4755030/">Wildfire
+        Bushfire Fire</a> by sippakorn and
+        <a href="https://pixabay.com/photos/the-forest-fell-fire-smoke-tree-2370996/">The Forest
+        Fell</a> by ojkumena. That licence does not ask for credit. We are giving it anyway.
+        Neither photograph shows the Müritz fire, neither was taken by us, and neither shows our
+        equipment.</p>
+    </div>
+
+    <div class="supporters">
+      <p>Supported by</p>
+      <div class="logos">
+        <img class="sibb" src="/sibb-logo.png" width="500" height="346"
+             alt="SIBB, the digital industry association of Berlin and Brandenburg"
+             loading="lazy"/>
+        <img class="eu" src="/eu-cofinanced.png" width="600" height="126"
+             alt="Co-funded by the European Union" loading="lazy"/>
+      </div>
     </div>
 
   </div>

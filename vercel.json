@@ -2,6 +2,10 @@
   "rewrites": [
     { "source": "/sizeup", "destination": "/sizeup.html" },
     { "source": "/sizeup-de", "destination": "/sizeup-de.html" },
+    {
+      "source": "/blog/helicopter-air-tanker-fire-engine-drone",
+      "destination": "/blog/helicopter-air-tanker-fire-engine-drone.html"
+    },
     { "source": "/(.*)", "destination": "/" }
   ]
 }

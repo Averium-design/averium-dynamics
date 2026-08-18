@@ -13,10 +13,9 @@
 <!-- This link gets forwarded to fire services and districts by email and
      WhatsApp. Without these tags it pastes as a bare string, which is what a
      phishing link looks like.
-     og:image is deliberately absent until the 1200x630 card exists — a
-     summary_large_image card with a missing or wrongly-cropped image unfurls
-     worse than a plain summary card. Add og:image, twitter:image and switch
-     twitter:card back to summary_large_image when the artwork lands. -->
+     og-card.jpg is a 1200x630 centre crop of the night fire-front photograph,
+     made here as a stopgap. If a purpose-designed card arrives, overwrite
+     /blog/img/og-card.jpg at the same dimensions and nothing else changes. -->
 <meta property="og:type" content="article"/>
 <meta property="og:site_name" content="Averium Dynamics"/>
 <meta property="og:title" content="Helicopter, air tanker, fire engine, drone — what each is actually for"/>
@@ -24,9 +23,14 @@
 <meta property="og:url" content="https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone"/>
 <meta property="og:locale" content="en_GB"/>
 <meta property="article:published_time" content="2026-08-18"/>
-<meta name="twitter:card" content="summary"/>
+<meta property="og:image" content="https://www.averiumdynamics.com/blog/img/og-card.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="A fire front burning along a forested ridge at dusk, reflected in the water below."/>
+<meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Helicopter, air tanker, fire engine, drone — what each is actually for"/>
 <meta name="twitter:description" content="They are not substitutes. They are complements at different stages of a fire. An honest comparison against five stated criteria."/>
+<meta name="twitter:image" content="https://www.averiumdynamics.com/blog/img/og-card.jpg"/>
 
 <link rel="icon" type="image/png" href="/favicon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -97,6 +101,13 @@
   }
   blockquote cite{display:block;margin-top:.5rem;font-size:.875rem;color:var(--muted);font-style:normal}
 
+  /* Photographs are stock, not our own and not of the fire the piece discusses.
+     The caption carries that, so the reader is never left to assume. */
+  figure{margin:2.25rem 0}
+  figure img{width:100%;height:auto;display:block;border:1px solid var(--border)}
+  figcaption{font-size:.8125rem;color:var(--muted);margin-top:.6rem;line-height:1.55}
+  figcaption .note{display:block;margin-top:.15rem}
+
   ul{margin:0 0 1.25rem 1.25rem}
   li{margin-bottom:.5rem}
 
@@ -165,6 +176,16 @@
     <p class="dek">Four assets that get set against each other. They are not substitutes.
       They arrive at different stages of the same fire.</p>
     <p class="byline">18 August 2026 · Averium Dynamics UG, Berlin</p>
+
+    <figure>
+      <img src="/blog/img/smouldering-ground.jpg" width="1400" height="888"
+           alt="Smoke rising from smouldering ground across a cleared conifer forest, stumps and
+                brash in the foreground."
+           decoding="async"/>
+      <figcaption>Ground that has already burned. Everything at this stage is damage limitation.
+        <span class="note">Stock photograph. Not the Müritz fire, and not our own image.</span>
+      </figcaption>
+    </figure>
 
     <h2>The first hour decides it</h2>
 
@@ -235,6 +256,17 @@
     <div class="asset">
       <h2>Firefighting helicopter <span style="font-weight:400;color:var(--muted)">(Löschhubschrauber)</span></h2>
       <p class="role">Decisive on a developed fire. Large volume, fast over distance.</p>
+
+      <figure>
+        <img src="/blog/img/fire-front-night.jpg" width="1600" height="1067"
+             alt="A fire front burning along a forested ridge at dusk, its light reflected in the
+                  water in the foreground."
+             loading="lazy" decoding="async"/>
+        <figcaption>A developed front. At this point the first hour is long gone, and the
+          question is no longer how fast something arrives but how much it carries.
+          <span class="note">Stock photograph. Not the Müritz fire, and not our own image.</span>
+        </figcaption>
+      </figure>
 
       <p>Once a fire is large, everything moves into the air. A helicopter crosses distance and
         terrain in minutes that would cost a vehicle hours, and it delivers a volume no ground
@@ -393,6 +425,8 @@
       </ol>
       <p style="margin-top:1rem">The two quotations come from conversations we held ourselves
         and are paraphrased. They are not publicly citable, and are marked as such.</p>
+      <p>Both photographs are stock images. Neither shows the Müritz fire, neither was taken
+        by us, and neither depicts our equipment.</p>
     </div>
 
   </div>

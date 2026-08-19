@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="theme-color" content="#1B4D3E"/>
+
+<title>Löschhubschrauber, Löschflugzeug, Tanklöschfahrzeug, Drohne: wofür jedes Mittel da ist</title>
+<meta name="description" content="Ein Feuer im Müritz-Nationalpark brannte wochenlang auf Boden, den niemand betreten durfte. Was jedes Einsatzmittel kann, was es nicht kann, und welche Lücke keines von ihnen gedeckt hat."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.averiumdynamics.com/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne"/>
+<link rel="alternate" hreflang="de" href="https://www.averiumdynamics.com/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne"/>
+<link rel="alternate" hreflang="en" href="https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone"/>
+<link rel="alternate" hreflang="x-default" href="https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone"/>
+
+<!-- Dieser Link wird per E-Mail und WhatsApp an Feuerwehren und Landkreise
+     weitergeleitet. Ohne diese Tags erscheint er als nackte Zeichenkette, und
+     so sieht ein Phishing-Link aus.
+     og-card.jpg ist ein 1200x630-Ausschnitt des Nachtbildes, als Behelf
+     angelegt, und wird mit der englischen Fassung geteilt. Kommt eine
+     gestaltete Karte, wird /blog/img/og-card.jpg in derselben Größe
+     überschrieben, sonst ändert sich nichts. -->
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="Averium Dynamics"/>
+<meta property="og:title" content="Löschhubschrauber, Löschflugzeug, Tanklöschfahrzeug, Drohne: wofür jedes Mittel da ist"/>
+<meta property="og:description" content="Ein Feuer an der Müritz brannte wochenlang auf Boden, den niemand betreten durfte. Was jedes Mittel kann, und welche Lücke keines gedeckt hat."/>
+<meta property="og:url" content="https://www.averiumdynamics.com/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne"/>
+<meta property="og:locale" content="de_DE"/>
+<meta property="og:locale:alternate" content="en_GB"/>
+<meta property="article:published_time" content="2026-08-19"/>
+<meta property="og:image" content="https://www.averiumdynamics.com/blog/img/og-card.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Ein Feuer brennt in der Dämmerung entlang eines bewaldeten Höhenzugs, gespiegelt im Wasser davor."/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Löschhubschrauber, Löschflugzeug, Tanklöschfahrzeug, Drohne: wofür jedes Mittel da ist"/>
+<meta name="twitter:description" content="Ein Feuer an der Müritz brannte wochenlang auf Boden, den niemand betreten durfte. Was jedes Mittel kann, und welche Lücke keines gedeckt hat."/>
+<meta name="twitter:image" content="https://www.averiumdynamics.com/blog/img/og-card.jpg"/>
+
+<link rel="icon" type="image/png" href="/favicon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* Tokens taken from tailwind.config.js, so this matches the rest of the
+     site. Tailwind only scans ./src and never reaches public/. */
+  :root{
+    --primary:#1B4D3E; --accent:#FF4D00;
+    --fg:#1A1A1A; --muted:#6B7280;
+    --border:#E5E7EB; --bg:#FFFFFF; --bg-alt:#F8F9FA;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    line-height:1.75;
+  }
+  h1,h2,h3{font-family:'Space Grotesk','Inter',sans-serif;line-height:1.15}
+
+  .wrap{max-width:56rem;margin:0 auto;padding:0 1.5rem}
+
+  .site-head{border-bottom:1px solid var(--border);background:#fff}
+  .site-head .wrap{display:flex;align-items:center;gap:.6rem;height:4.5rem}
+  .site-head img{width:2.75rem;height:2.75rem;object-fit:contain;display:block}
+  .site-head span{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem}
+  .site-head a{text-decoration:none;color:var(--fg);display:flex;align-items:center;gap:.6rem}
+
+  article{padding:5rem 0 4rem}
+  h1{font-size:2.25rem;font-weight:700;letter-spacing:-.02em;margin-bottom:1.25rem}
+  @media(min-width:768px){h1{font-size:3rem}}
+  .byline{font-size:.875rem;color:var(--muted);padding-bottom:2rem;border-bottom:1px solid var(--border)}
+
+  h2{font-size:1.5rem;font-weight:700;margin:3rem 0 1rem}
+  @media(min-width:768px){h2{font-size:1.75rem}}
+  p{margin-bottom:1.25rem}
+  strong{font-weight:600}
+  a{color:var(--primary)}
+
+  blockquote{
+    border-left:3px solid var(--accent);
+    padding-left:1.25rem;margin:1.75rem 0;font-size:1.0625rem;
+  }
+  blockquote cite{display:block;margin-top:.5rem;font-size:.875rem;color:var(--muted);font-style:normal}
+
+  ul{margin:0 0 1.25rem 1.25rem}
+  li{margin-bottom:.4rem}
+
+  figure{margin:2.25rem 0}
+  figure img{width:100%;height:auto;display:block;border:1px solid var(--border)}
+  figcaption{font-size:.8125rem;color:var(--muted);margin-top:.6rem;line-height:1.55}
+
+  .cta{
+    border:1px solid var(--border);border-top:3px solid var(--primary);
+    padding:1.75rem;margin:3.5rem 0 2rem;
+  }
+  .cta h3{font-size:1.125rem;font-weight:600;margin:0 0 .75rem}
+  .cta p:last-child{margin-bottom:0}
+  .cta a{font-weight:600}
+
+  .sources{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:.875rem;color:var(--muted)}
+  .sources h3{font-size:.8125rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 .75rem}
+  .sources ul{margin-left:1.25rem}
+  .sources li{margin-bottom:.5rem;word-break:break-word}
+
+  /* Funding logos, same pairing and roughly the same proportions as the
+     homepage strip. */
+  .supporters{border-top:1px solid var(--border);margin-top:3rem;padding-top:2rem}
+  .supporters p{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;
+    color:var(--muted);margin-bottom:1.25rem;
+  }
+  .supporters .logos{display:flex;flex-wrap:wrap;align-items:center;gap:2.5rem}
+  .supporters img{width:auto;object-fit:contain;display:block}
+  .supporters .sibb{height:3.5rem}
+  .supporters .eu{height:2.5rem}
+  @media(min-width:768px){
+    .supporters .sibb{height:4.5rem}
+    .supporters .eu{height:3rem}
+  }
+
+  footer{background:#000;color:#9CA3AF;padding:2.5rem 0;margin-top:3rem;font-size:.875rem}
+  footer a{color:#9CA3AF;text-decoration:none}
+  footer a:hover{color:#fff}
+  footer .row{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
+  footer .legal{margin-top:1.25rem;padding-top:1rem;border-top:1px solid #1F2937;font-size:.75rem;color:#6B7280}
+
+  /* This gets printed before briefings. */
+  @media print{
+    .site-head,footer,.cta{display:none}
+    body{font-size:11pt}
+    figure{break-inside:avoid}
+    a{color:#000;text-decoration:underline}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a href="/">
+      <img src="/logo.png" alt=""/>
+      <span>Averium Dynamics</span>
+    </a>
+  </div>
+</header>
+
+<article>
+  <div class="wrap">
+
+    <h1>Löschhubschrauber, Löschflugzeug, Tanklöschfahrzeug, Drohne: wofür jedes Mittel da ist</h1>
+    <p class="byline">19. August 2026 · Averium Dynamics UG, Berlin</p>
+
+    <figure>
+      <img src="/blog/img/smouldering-ground.jpg" width="1300" height="824"
+           alt="Rauch steigt von verbranntem Boden in einem gerodeten Waldstück auf, davor
+                Baumstümpfe."
+           decoding="async"/>
+      <figcaption>Boden, der schon gebrannt hat.</figcaption>
+    </figure>
+
+    <h2>Das Feuer, an das niemand heran durfte</h2>
+
+    <p>Am 13. Juli brach im Müritz-Nationalpark ein Feuer aus, auf einem ehemaligen
+      Truppenübungsplatz. Bei der ersten Erkundung waren es gut 20 Hektar. Das ist ein Feuer,
+      um das sich noch eine Linie ziehen lässt.</p>
+
+    <p>Herangehen durfte niemand. Im Boden liegt bis heute Munition aus den Jahren, in denen
+      die Armee das Gelände genutzt hat, deshalb musste die Feuerwehr tausend Meter Abstand
+      halten. Am 15. Juli gab der Nordkurier die Lage des Landkreises unmissverständlich
+      wieder: Die Einsatzkräfte kamen an das Feuer nicht heran. An diesem Tag brannten
+      118 Hektar.</p>
+
+    <p>Eines funktionierte weiter, und zwar darüber. Ein Team des Katasteramtes des Landkreises
+      flog wochenlang Drohnen vom Käflingsbergturm südöstlich von Speck, von sechs Uhr morgens
+      bis kurz vor Mitternacht. Für den Flug über diesem Boden gelten andere Regeln als für das
+      Betreten. Sie verfolgten das Feuer und maßen, wie weit es gelaufen war.</p>
+
+    <p>Einen einzigen Liter Wasser konnten sie nicht darauf bringen.</p>
+
+    <figure>
+      <img src="/blog/img/fire-front-night.jpg" width="1600" height="1067"
+           alt="Ein Feuer brennt in der Dämmerung entlang eines bewaldeten Höhenzugs, sein Licht
+                spiegelt sich im Wasser davor."
+           loading="lazy" decoding="async"/>
+      <figcaption>Zu diesem Zeitpunkt sind die Entscheidungen, auf die es ankam, Stunden
+        her.</figcaption>
+    </figure>
+
+    <p>Am Ende waren knapp 400 Hektar verbrannt, etwa ein Prozent des Nationalparks. Hunderte
+      Menschen waren im Einsatz. Die Bundeswehr schickte zwei schwere Hubschrauber und brachte
+      in drei Tagen rund 1,58 Millionen Liter aus. Niemand hat einen offensichtlichen Fehler
+      gemacht, und trotzdem wurden aus 20 Hektar 400.</p>
+
+    <p>Löschtechnik wird meistens danach verglichen, wie viel Wasser sie mitführt. Die
+      nützlichere Frage ist, was ein Feuer erreicht, solange es noch klein ist. Die Müritz ist
+      ein Fall, in dem das fast nichts konnte.</p>
+
+    <h2>Fünf Maßstäbe für den Vergleich</h2>
+
+    <p>Jeder Vergleich, der etwas taugt, nennt seine Maßstäbe. Wie lange es dauert, bis etwas
+      am Feuer ankommt. Was ein Einsatz kostet. Wohin ein Mittel kommt, und wohin es kommen
+      darf. Wie viele Menschen dafür in der Gefahrenzone stehen müssen. Wie viel es trägt.</p>
+
+    <p>Ein Wort zu den Kosten. Belastbare öffentliche Zahlen zu den Flugstundenkosten deutscher
+      Löschluftfahrzeuge sind kaum zu finden, deshalb nennt dieser Text keine, statt zu
+      schätzen. Keines der vier Mittel gewinnt in allen fünf Punkten, und genau deshalb lohnt
+      der Vergleich überhaupt.</p>
+
+    <h2>Das Tanklöschfahrzeug</h2>
+
+    <figure>
+      <img src="/blog/img/fire-engine.jpg" width="1250" height="938"
+           alt="Ein Löschfahrzeug und ein Rettungswagen fahren über eine Landstraße."
+           loading="lazy" decoding="async"/>
+      <figcaption>Kaum zu schlagen, bis zu der Stelle, an der der Weg endet.</figcaption>
+    </figure>
+
+    <p>Wo eine Straße hinführt, kommt nichts anderes heran. Ein Tanklöschfahrzeug bringt echte
+      Menge, es lässt sich nachfüllen, und es kühlt den Boden, statt die Flamme nur
+      niederzuschlagen. Die Besatzung sieht, was vor ihr liegt, und ändert den Plan während der
+      Arbeit. Das kann kein Luftfahrzeug. Die Glutnester und das Wässern danach passieren
+      ohnehin zu Fuß.</p>
+
+    <p>Die Grenze ist nicht das Fahrzeug. Es sind die letzten Kilometer.</p>
+
+    <p>Ein Berliner Feuerwehrmann mit vierzig Dienstjahren hat es so beschrieben, und dieselbe
+      Klage kommt oft genug vor, dass sie kein Einzelfall ist:</p>
+
+    <blockquote>
+      Die größte Verzögerung sei nicht die Alarmierung, sondern der Weg durch den Wald. Am Ende
+      suchten die Kräfte das Feuer selbst, und bis sie da seien, vergingen Stunden.
+      <cite>Sinngemäß aus einem Interview.</cite>
+    </blockquote>
+
+    <p>Die Alarmierung geht schnell. Die Fahrt bis zur letzten befestigten Straße geht schnell.
+      Danach wird daraus Navigation, im Wald, meistens nachts. Rettungspunkte helfen den
+      Kräften, sich untereinander zu finden. Zum Feuer führen sie niemanden.</p>
+
+    <h2>Der Löschhubschrauber</h2>
+
+    <figure>
+      <img src="/blog/img/helicopter.jpg" width="1250" height="833"
+           alt="Ein rot-weißer Rettungshubschrauber schwebt tief über einer Wiese, dahinter Wald
+                und Felsen."
+           loading="lazy" decoding="async"/>
+      <figcaption>Minuten für Gelände, für das ein Fahrzeug Stunden braucht.</figcaption>
+    </figure>
+
+    <p>Sobald ein Feuer groß ist, ist das das Mittel, das den Ausgang verändert. Ein
+      Hubschrauber legt in Minuten zurück, wofür ein Fahrzeug Stunden bräuchte, und er kommt
+      mit mehr an, als auf Rädern in dieser Zeit herangeschafft werden könnte. Über der Müritz
+      flogen die beiden Maschinen der Bundeswehr in drei Tagen 316 Einsätze, und der
+      Nationalpark rechnete es später diesen Besatzungen an, dass das Feuer gedreht wurde.</p>
+
+    <p>Der Gründer eines Unternehmens für Brandbekämpfung aus der Luft in Athen, der seit
+      Jahren mit dieser Arbeit zu tun hat, ist deutlich, was den Preis dafür angeht:</p>
+
+    <blockquote>
+      Aus großer Höhe abgeworfenes Wasser verfehlt den größten Teil des Feuers. Und jeder Flug
+      kostet so viel, dass Hubschrauber nur im Notfall gerufen werden.
+      <cite>Sinngemäß aus einem Interview, aus dem Englischen übersetzt.</cite>
+    </blockquote>
+
+    <p>Wasser, das aus Höhe fällt, verteilt sich, und ein Teil davon ist weg, bevor es
+      ankommt. So funktioniert das Verfahren, und deshalb gehört der Hubschrauber zu dem Teil
+      des Feuers, das schon davon ist. Für ein Feuer von zwanzig Metern ruft ihn niemand. Wenn
+      die Kosten leicht zu rechtfertigen sind, ist die billige Fassung des Problems vorbei.</p>
+
+    <h2>Das Löschflugzeug</h2>
+
+    <figure>
+      <img src="/blog/img/air-tanker.jpg" width="1400" height="788"
+           alt="Ein gelb-rotes Löschflugzeug von unten, das eine große Wasserlast abwirft."
+           loading="lazy" decoding="async"/>
+      <figcaption>Die größte Zuladung von allen.</figcaption>
+    </figure>
+
+    <p>Löschflugzeuge tragen pro Anflug mehr als alles andere hier. Rund um das Mittelmeer sind
+      sie das Rückgrat der Bekämpfung aus der Luft. In einem deutschen Landkreis, in der ersten
+      Stunde, fallen sie kaum ins Gewicht. Das Flugzeug muss angefordert, verlegt, beladen und
+      geflogen werden, und der nächste Stützpunkt liegt selten in der Nähe. Das ist ein Mittel
+      für den zweiten Tag, und am zweiten Tag ist die Sache schon verloren.</p>
+
+    <h2>Die Drohne</h2>
+
+    <figure>
+      <img src="/blog/img/drone-in-flight.jpg" width="1250" height="798"
+           alt="Eine große Drohne mit Tank und Sprüharmen fliegt tief über ein überflutetes
+                Feld."
+           loading="lazy" decoding="async"/>
+      <figcaption>Eine Sprühdrohne über Ackerland. Gleicher Gedanke, andere Aufgabe.</figcaption>
+    </figure>
+
+    <p>Fangen wir damit an, was eine Drohne nicht kann, denn die Grenzen bestimmen die Aufgabe.
+      Der Tank ist klein. Gegen ein entwickeltes Feuer ist sie nutzlos. Trockenes Pulver
+      erstickt die Flamme, ohne den Brennstoff darunter zu kühlen, das Feuer kann also
+      zurückkommen, und jemand muss diesen Boden später trotzdem begehen.</p>
+
+    <p>Auch das zeigt die Müritz. Wochen nachdem das Feuer als unter Kontrolle gemeldet war,
+      fanden Drohnen über der Brandfläche noch Glutnester mit bis zu 160 Grad. Ein Feuer, das
+      fertig aussieht, ist es sehr oft nicht.</p>
+
+    <p>Die andere Hälfte hält stand. Eine Drohne erreicht Gelände ohne Zufahrt, und zwar
+      schnell, und niemand muss vorher den Weg dorthin suchen. Niemand steht dabei in der
+      Gefahrenzone. Ein Flug kostet einen Bruchteil eines Fluges mit Piloten an Bord, und sie
+      skaliert, indem sie noch einmal fliegt, nicht indem sie mehr trägt.</p>
+
+    <p>Bleibt eine schmale Aufgabe: ein kleines Feuer, in den ersten Minuten, an einer Stelle,
+      die in dieser Zeit sonst nichts erreicht.</p>
+
+    <h2>Die Lücke</h2>
+
+    <p>Womit wir wieder bei der Müritz wären, wo die Größe des Feuers nie der interessante Teil
+      war.</p>
+
+    <figure>
+      <img src="/blog/img/crew-at-the-edge.jpg" width="1400" height="933"
+           alt="Zwei Feuerwehrleute stehen vor einer hohen Flammenwand in niedrigem Buschwerk."
+           loading="lazy" decoding="async"/>
+      <figcaption>Normalerweise passiert die Arbeit auf diese Entfernung. An der Müritz kam
+        niemand näher als einen Kilometer heran.</figcaption>
+    </figure>
+
+    <p>Eine Sache gehört klar gesagt, weil sie gegen die bequeme Fassung dieses Arguments
+      spricht. Die Hubschrauber blieben nicht am Boden. Sie flogen, sie arbeiteten, und die
+      Zahlen belegen es: 316 Flüge und 1,58 Millionen Liter. Der Abstand von tausend Metern
+      galt den Kräften am Boden, nicht den Luftfahrzeugen darüber.</p>
+
+    <p>Genau das macht die Lücke sichtbar. Wochenlang gab es Boden, den kein Mensch betreten
+      konnte. Ein unbemanntes Luftfahrzeug stand fast durchgehend darüber, und beitragen konnte
+      es nur Erkundung. Alles, was das Feuer erreichte, kam aus der Höhe, in Abständen von
+      Stunden. Als das Feuer schließlich unter Kontrolle war, rechnete der
+      Munitionsbergungsdienst mit weiteren zwei Wochen, bevor jemand die Fläche betreten
+      konnte.</p>
+
+    <p>Die Drohne war nicht das bessere Mittel. Sie war das Einzige, das früh da sein und
+      bleiben konnte, und sie kam an, ohne etwas abgeben zu können.</p>
+
+    <h2>Was sich dadurch ändert</h2>
+
+    <p>Eine Drohne ersetzt keinen Hubschrauber, und sie ersetzt kein Tanklöschfahrzeug. Wer
+      einem von beiden bei der Arbeit zugesehen hat, weiß das ohnehin.</p>
+
+    <p>Sie deckt ein Fenster ab, das heute nichts abdeckt. Die ersten Minuten, an einem Ort,
+      den in den ersten Minuten niemand erreicht, weil es keine Zufahrt gibt oder weil niemand
+      hin darf. Wer dieses Fenster trifft, dem bleibt das meiste von dem erspart, was sonst
+      folgt. Wer es verfehlt, betreibt danach Schadensbegrenzung, gemacht von denselben Leuten
+      wie immer.</p>
+
+    <figure>
+      <img src="/blog/img/crew-on-the-ground.jpg" width="1400" height="933"
+           alt="Ein Feuerwehrmann in Helm und Schutzkleidung schlägt Flammen auf einem
+                brennenden Feld aus."
+           loading="lazy" decoding="async"/>
+      <figcaption>Dieselben Leute, dieselbe Arbeit.</figcaption>
+    </figure>
+
+    <div class="cta">
+      <h3>Prüfen Sie Ihr eigenes Gebiet</h3>
+      <p>Averium Dynamics stellt ein kostenloses Werkzeug zur Lagebeurteilung bereit. Markieren
+        Sie eine Stelle auf der Karte, und es zeigt die Hangneigung, die wahrscheinliche
+        Laufrichtung des Feuers, den Wind und die nächstgelegenen Feuerwachen. Kein Login,
+        keine Anmeldung.</p>
+      <p><a href="/sizeup-de">averiumdynamics.com/sizeup-de</a></p>
+      <p>Fragen zu einem bestimmten Landkreis oder Waldgebiet:
+        <a href="mailto:info@averiumdynamics.com">info@averiumdynamics.com</a>.</p>
+    </div>
+
+    <div class="sources">
+      <h3>Quellen</h3>
+      <ul>
+        <li>Nordkurier, 15. Juli 2026: der Abstand von tausend Metern und 118 brennende Hektar.
+          <a href="https://www.nordkurier.de/regional/mecklenburg-vorpommern/grossbrand-im-nationalpark-weitet-sich-aus-duestere-prognose-fuer-die-anwohner-und-feuerwehr-4719357">nordkurier.de</a></li>
+        <li>Nordkurier, 4. August 2026: gut 20 Hektar zu Beginn und knapp 400 am Ende, und das
+          Drohnenteam des Landkreises, das vom Turm bei Speck flog.
+          <a href="https://www.nordkurier.de/regional/mueritz/drohnenpilot-bei-grossbrand-im-dauereinsatz-bundeswehr-entschuldigt-sich-fuer-verhalten-eines-soldaten-4753714">nordkurier.de</a></li>
+        <li>Bundeswehr, Operatives Führungskommando: zwei Hubschrauber CH-53, 16. bis 18. Juli
+          2026, 316 Flüge, rund 1.580.000 Liter.
+          <a href="https://www.bundeswehr.de/de/organisation/operatives-fuehrungskommando-der-bundeswehr/bundewehr-mueritz-waldbrand-unterstuetzung-6123090">bundeswehr.de</a></li>
+        <li>Müritz-Nationalpark: rund 400 Hektar der 32.200 Hektar des Parks, die Brandfläche
+          wegen Munition weiterhin gesperrt, Glutnester mit bis zu 160 Grad und frühestens etwa
+          zwei Wochen, bis Kräfte zurück konnten.
+          <a href="https://www.mueritz-nationalpark.de/presse/detail/waldbrand-im-mueritz-nationalpark-unter-kontrolle-nachsorge-und-sicherung-geht-weiter">mueritz-nationalpark.de</a></li>
+      </ul>
+      <p style="margin-top:1rem">Beide Zitate sind sinngemäß aus Interviews wiedergegeben, also
+        nicht wörtlich.</p>
+      <p>Offenlegung: Averium Dynamics entwickelt Löschdrohnen. Die im Drohnenabschnitt
+        genannten Grenzen sind genau die Grenzen, die diese Arbeit bestimmen.</p>
+      <p>Fotos von Pixabay, verwendet unter der
+        <a href="https://pixabay.com/service/license-summary/">Pixabay Inhaltslizenz</a>:
+        ojkumena, sippakorn, LindaJM, NetHawk, magocarlosyo, viya0414, ELG21 und fish96. Keines
+        davon zeigt den Brand im Müritz-Nationalpark.</p>
+      <p><a href="/blog/helicopter-air-tanker-fire-engine-drone">This article in English</a></p>
+    </div>
+
+    <div class="supporters">
+      <p>Gefördert von</p>
+      <div class="logos">
+        <img class="sibb" src="/sibb-logo.png" width="500" height="346"
+             alt="SIBB, der Verband der digitalen Wirtschaft Berlin-Brandenburg"
+             loading="lazy"/>
+        <img class="eu" src="/eu-cofinanced.png" width="600" height="126"
+             alt="Kofinanziert von der Europäischen Union" loading="lazy"/>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;color:#fff">Averium Dynamics</span>
+      <span><a href="/imprint">Impressum</a> · <a href="/privacy">Datenschutz</a></span>
+      <span>© 2026 Averium Dynamics UG</span>
+    </div>
+    <div class="legal">
+      Averium Dynamics UG (haftungsbeschränkt) · HRB 285037 B Amtsgericht Charlottenburg · Berlin, Deutschland
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -659,6 +659,11 @@
     {lat:52.3588236,lon:13.5912062,name:'Freiwillige Feuerwehr Schulzendorf'},
     // Mecklenburgische Seenplatte — the Müritz-Nationalpark and its surroundings, which is
     // where the German page now opens and the fire the German article describes.
+    // Qualzow and Blankenförde are first because they are the two nearest the default pin.
+    // Without them a fallback read named Kratzeburg at 8.6 km while both of these sit at
+    // 4.6 km, which is the same failure the Overpass cap caused, one layer down.
+    {lat:53.3308770,lon:12.8613973,name:'Freiwillige Feuerwehr Qualzow'},
+    {lat:53.3545180,lon:12.9205689,name:'Freiwillige Feuerwehr Blankenförde'},
     {lat:53.4290774,lon:12.9450888,name:'Freiwillige Feuerwehr Kratzeburg'},
     {lat:53.5136832,lon:12.8358024,name:'Freiwillige Feuerwehr Groß Dratow'},
     {lat:53.4151765,lon:12.5913594,name:'Freiwillige Feuerwehr Gotthun'},

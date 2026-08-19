@@ -375,6 +375,7 @@
       fbFail:"That didn't send — check your connection and try again.",
       errCoord:'Type the position as "latitude, longitude" — for example 37.92, -2.94',
       errFetch:'Could not load the data — check your connection and try moving the pin.',
+      errService:'The terrain and weather service is not answering. That is on us, not your connection. Please try again shortly.',
       errNoGeo:'This device cannot share its location. Tap the map instead.',
       errGeoDenied:'Location access was blocked. Allow it in your browser settings, or just tap the map.',
       errGeoUnavail:'No fix here — the phone cannot see enough satellites. Tap the map instead.',
@@ -382,7 +383,7 @@
       errGeoRough:m=>`Rough fix only (about ${m} m out). Drag the pin to where the fire actually is.`,
       whoBuilt:'Built by', whoDesc:', a wildfire-prevention company in Berlin.',
       whoImprint:'Company details', whoPrivacy:'Privacy',
-      sources:'Ground height measured from satellites; weather and wind from Open-Meteo; fire stations from OpenStreetMap.',
+      sources:'Ground height from the Copernicus DEM (GLO-90) via Open-Meteo; weather and wind from Open-Meteo; fire stations from OpenStreetMap.',
       confirmB:'Always confirm what you see on the ground',
       confirmRest:' — this is a guide to what\'s ahead of you, not a substitute for your own eyes.'
     },
@@ -442,6 +443,7 @@
       fbFail:'Das konnte nicht gesendet werden – bitte Verbindung prüfen und erneut versuchen.',
       errCoord:'Position als „Breite, Länge“ eingeben – zum Beispiel 53.37, 12.86',
       errFetch:'Daten konnten nicht geladen werden – bitte Verbindung prüfen und die Markierung verschieben.',
+      errService:'Der Dienst für Gelände- und Wetterdaten antwortet nicht. Das liegt an uns, nicht an Ihrer Verbindung. Bitte kurz später erneut versuchen.',
       errNoGeo:'Dieses Gerät kann seinen Standort nicht teilen. Bitte auf die Karte tippen.',
       errGeoDenied:'Standortzugriff ist blockiert. Bitte im Browser erlauben oder einfach auf die Karte tippen.',
       errGeoUnavail:'Kein Empfang hier – das Gerät sieht zu wenige Satelliten. Bitte auf die Karte tippen.',
@@ -449,7 +451,7 @@
       errGeoRough:m=>`Nur grobe Ortung (etwa ${m} m Abweichung). Ziehen Sie die Markierung dorthin, wo das Feuer wirklich ist.`,
       whoBuilt:'Entwickelt von', whoDesc:', einem Unternehmen für Waldbrandprävention in Berlin.',
       whoImprint:'Impressum', whoPrivacy:'Datenschutz',
-      sources:'Geländehöhen per Satellit gemessen; Wetter und Wind von Open-Meteo; Feuerwachen aus OpenStreetMap.',
+      sources:'Geländehöhen aus dem Copernicus DEM (GLO-90) über Open-Meteo; Wetter und Wind von Open-Meteo; Feuerwachen aus OpenStreetMap.',
       confirmB:'Prüfen Sie die Lage immer vor Ort',
       confirmRest:' – dies ist ein Anhaltspunkt für das, was vor Ihnen liegt, und ersetzt nicht den eigenen Blick.'
     }
@@ -763,12 +765,21 @@
     const g=grid(lat,lng,DEM_STEP_M);
     const lats=g.pts.map(p=>p[0].toFixed(6)).join(',');
     const lons=g.pts.map(p=>p[1].toFixed(6)).join(',');
-    const elevUrl=`https://api.open-meteo.com/v1/elevation?latitude=${lats}&longitude=${lons}`;
-    const wxUrl=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m&wind_speed_unit=kmh`;
+    // Both reads go through /api/sizeup-data. Open-Meteo's free tier is
+    // non-commercial, and the commercial key cannot sit in a page anyone can
+    // view source on, so the browser never talks to Open-Meteo directly.
+    const elevUrl=`/api/sizeup-data?kind=elevation&latitude=${lats}&longitude=${lons}`;
+    const wxUrl=`/api/sizeup-data?kind=forecast&latitude=${lat}&longitude=${lng}`;
 
+    let serviceDown=false;
     try{
       const [eR,wR]=await Promise.all([fetch(elevUrl),fetch(wxUrl)]);
       if(my!==seq) return;
+      // A 5xx is our end: the service is down, or the key is missing or
+      // rejected. Telling a crew to check their connection would be blaming
+      // them for our problem.
+      serviceDown = eR.status>=500 || wR.status>=500;
+      if(!eR.ok || !wR.ok) throw new Error('sizeup-data '+eR.status+'/'+wR.status);
       const eJ=await eR.json(), wJ=await wR.json();
       if(my!==seq) return;
       if(!eJ.elevation || eJ.elevation.length<9) throw new Error('no elevation');
@@ -794,7 +805,7 @@
       lastRead=null; readState='fail';
       $('read').className='read loading';
       $('read').textContent=t('readFail');
-      showErr('errFetch');
+      showErr(serviceDown?'errService':'errFetch');
       return;
     }
 

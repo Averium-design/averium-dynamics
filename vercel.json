@@ -6,6 +6,10 @@
       "source": "/blog/helicopter-air-tanker-fire-engine-drone",
       "destination": "/blog/helicopter-air-tanker-fire-engine-drone.html"
     },
+    {
+      "source": "/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne",
+      "destination": "/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne.html"
+    },
     { "source": "/(.*)", "destination": "/" }
   ]
 }

@@ -28,8 +28,119 @@ Read this file at the START of every session. Append at the END.
 - Open-Meteo fail-closed is DEPLOYED (tip of fix/ors-base-from-env,
   6edfe57). It was on the open-blocker list until 2026-08-18 and should
   not be re-raised.
+- The website reaches Open-Meteo ONLY through api/sizeup-data.js, which holds
+  OPEN_METEO_API_KEY (Vercel project env, Production and Preview) and calls
+  customer-api.open-meteo.com. The free API is non-commercial and this site
+  may not use it. The function fails closed on a missing or rejected key: no
+  key means no reading, never a fallback to the free endpoint.
+- The two Size-Up pages are GENERATED. Edit scripts/sizeup.src.html and run
+  `node scripts/build-sizeup.js`. Never edit public/sizeup.html or
+  public/sizeup-de.html by hand.
+- Anything this site tells a crew about distance or nearest help is a number
+  they may act on. Check it against the source before shipping it.
 
 ## Sessions
+
+### 2026-08-19
+
+**A German version of the field note was published, and then the thing it points
+at turned out to be broken.** The article carries a call to action for
+/sizeup-de. Nobody had opened /sizeup-de in German before sending readers to it.
+It opened on the Sierra de Cazorla and told its reader, in German, to tap
+somewhere in Spain, and its link-preview image was a screenshot of Cazorla at 24
+degrees and 1105 m. The article went live at about 15:45 and the audit that
+found this ran afterwards, because the instruction to hold publication until the
+audit arrived after the merge had already been pushed. **The lesson is the
+ordering, not the defect: a page that sends traffic somewhere is not finished
+until someone has used the destination the way its reader will.**
+
+**The Size-Up named help further away than the help that exists. Twice.**
+1. The Overpass query said `out center 20`, which returns an arbitrary twenty
+   stations inside the 40 km radius, not the nearest twenty. The distance sort
+   that followed was honest; its input was not. At the Müritz coordinate,
+   production reported the nearest brigade at 18 km while Qualzow and
+   Blankenförde sat at 4.6 km. Raised to 200. Cost 0.2 s on a timed live
+   comparison, 1.7 s against 1.5 s. It affected every location, not only German
+   ones: the English page at Cazorla now surfaces a CEDEFO at 0.9 km that it
+   never used to show.
+2. When Overpass fails, and it failed on the first live load after deploy, the
+   list falls back to baked data. That list did not contain the two brigades at
+   4.6 km either. Eleven Mecklenburgische Seenplatte stations were added across
+   the day, and there are 30 baked entries now. Verified by ranking the baked
+   list from three different pins rather than by eye.
+
+**Open-Meteo was being used outside its licence, from the browser.** Their free
+API is non-commercial, and their terms name "integrating our service into
+commercial products or promotional activities" as commercial use. The page
+called api.open-meteo.com directly, with no key, on every pin drop. A key alone
+could not fix it, because a key in public HTML is a key anyone can read, so
+api/sizeup-data.js now sits in between. It builds the upstream query itself
+rather than forwarding one, holds the key server-side, and fails closed on a
+missing or rejected key with no path back to the free endpoint. Verified after
+deploy by recording every request the browser makes on the live German page: two
+calls to /api/sizeup-data, zero to open-meteo.com, and the key absent from the
+rendered HTML. Vercel returned X-Vercel-Cache HIT on a repeat weather request,
+so the caching is working rather than merely configured.
+
+**Attribution that the licences ask for by name was missing.** The sources line
+said only "measured from satellites"; it now names the Copernicus DEM (GLO-90)
+via Open-Meteo, in both languages. Still missing: OpenTopoMap's required string
+includes an OpenStreetMap credit that we drop.
+
+**The elevation data was never the problem.** Checked at the provider rather
+than assumed: Open-Meteo's elevation API is Copernicus DEM 2021 GLO-90 at 90 m,
+documented as available worldwide. A real call for a point in the
+Müritz-Nationalpark returned nine plausible elevations. Germany is covered, and
+this was a defaults-and-licensing problem throughout, not a data problem.
+
+**Three photographs were replaced.** The fire engine was a US pumper beside a US
+ambulance on a road with yellow centre-line markings; it is now a German MAN and
+a smaller unit stopped on a sandy track behind Feuerwehr-Sperrzone tape. The
+helicopter was a PZL W-3 running a rescue hoist over an alpine meadow, which is
+not firefighting at all; it is now a machine carrying a bucket on a long line,
+and that machine is marked BUNDESHEER, so Austrian rather than German, which no
+caption claims otherwise. The crew shot was colour-graded Mediterranean scrub;
+it is now Feuerwehr Partenstein working a hose line over a smouldering forest
+floor. Frames were kept whole and the width and height attributes updated,
+rather than the photographs cropped to fit. Credits: LindaJM, NetHawk and ELG21
+out, royber99 and benerott in, fish96 now covering two images.
+
+**Decisions, and one reversal.** The German byline was published as 19 August,
+the day it went out, then changed to 18 August to match the English page,
+because it is one piece in two languages rather than two articles, and
+article:published_time was changed with it. That reverses a decision taken the
+same morning, and it was made knowing it edits a date already published.
+Reading time is six minutes, counted from 1365 English and 1283 German words at
+220 to 240 words a minute, not the five that was suggested; the same figure
+serves both languages because German runs slower per word than its lower count
+implies. The language link moved from the sources block to the byline, because
+telling readers at the bottom which languages exist tells them after they have
+given up. Two details now read more precisely in both languages than the first
+draft did, both verified at the Nordkurier: the Käflingsbergturm, and the
+Katasteramt des Landkreises.
+
+**Closed from yesterday's open list.** The photograph licence question, which
+was in fact already closed by a commit that landed after yesterday's entry was
+written.
+
+**Open:**
+- The Open-Meteo key was pasted into a chat message. Treat it as exposed:
+  rotate it in the Open-Meteo dashboard, update the Vercel variable, redeploy.
+- The night fire photograph is still tropical hills across a reservoir, and it
+  is the source of the 1200x630 OG card, so replacing it means recutting that
+  card for both languages.
+- The drone photograph is still an agricultural sprayer over rice paddies. It
+  is the section carrying the argument, and it should be our own airframe.
+- Esri World Imagery tiles are called with no API key. Esri basemaps normally
+  require an account. Their terms page could not be retrieved, so this is
+  unverified rather than settled either way.
+- The aspect card prints a direction and a dryness note at a 1 degree slope,
+  where aspect is DEM noise. It should be suppressed below about 5 degrees.
+- The English Size-Up call to action still says "any location in Spain for this
+  test", which is untrue for the English page as well.
+- OpenTopoMap attribution is incomplete, as above.
+- pyrognosis tenant/algeria is 9 commits ahead of origin and exists on one
+  laptop only. Unrelated to today, unchanged since 31 July.
 
 ### 2026-08-18
 

@@ -52,7 +52,7 @@ const PAGES = {
       'Das Gelände kennen, bevor Sie eintreffen: Steilheit, Laufrichtung des Feuers, Wind ' +
       'und die nächstgelegenen Feuerwachen. Von Averium Dynamics.',
     imgAlt:
-      'Die Lagebeurteilung zeigt einen Hang bei Cazorla mit Steilheit, Wind und Laufrichtung des Feuers.',
+      'Die Lagebeurteilung zeigt Wald im Müritz-Nationalpark mit Steilheit, Wind und Laufrichtung des Feuers.',
   },
 };
 

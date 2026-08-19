@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://www.averiumdynamics.com/sizeup-preview-de.jpg"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
-<meta property="og:image:alt" content="Die Lagebeurteilung zeigt einen Hang bei Cazorla mit Steilheit, Wind und Laufrichtung des Feuers."/>
+<meta property="og:image:alt" content="Die Lagebeurteilung zeigt Wald im Müritz-Nationalpark mit Steilheit, Wind und Laufrichtung des Feuers."/>
 <meta property="og:locale" content="de_DE"/>
 <meta property="og:locale:alternate" content="en_GB"/>
 <meta name="twitter:card" content="summary_large_image"/>
@@ -170,7 +170,7 @@
     <span class="tag" data-i18n="tag">auf die Karte tippen, um das Feuer zu setzen</span>
     <div class="coords">
       <button id="locBtn" class="loc" type="button"><span class="pin">◎</span><span id="locTxt" data-i18n="myLocation">Mein Standort</span></button>
-      <input id="coordInput" data-i18n-ph="coordPh" placeholder="oder Koordinaten einfügen, z. B. 37.92, -2.94" inputmode="decimal" />
+      <input id="coordInput" data-i18n-ph="coordPh" placeholder="oder Koordinaten einfügen, z. B. 53.37, 12.86" inputmode="decimal" />
       <button id="goBtn" data-i18n="go">Los</button>
     </div>
   </header>
@@ -182,7 +182,7 @@
            move the pin, so it never nags anyone who has already worked it out. -->
       <div class="cta" id="cta">
         <span class="cta-hand">🚒</span>
-        <span class="cta-text" data-i18n="ctaText"><b>Sie werden gerade zu einem Waldbrand alarmiert.</b><br>Tippen Sie auf der Karte auf die Einsatzstelle — für diesen Test eine beliebige Stelle in Spanien.<br>Was darunter erscheint, erwartet Sie beim Eintreffen.<br>Sagen Sie uns anschließend unten, ob Ihnen das geholfen hätte.</span>
+        <span class="cta-text" data-i18n="ctaText"><b>Sie werden gerade zu einem Waldbrand alarmiert.</b><br>Tippen Sie auf der Karte auf die Einsatzstelle — für diesen Test eine beliebige Stelle in Deutschland.<br>Was darunter erscheint, erwartet Sie beim Eintreffen.<br>Sagen Sie uns anschließend unten, ob Ihnen das geholfen hätte.</span>
       </div>
       <h2 data-i18n="panelTitle">Was Sie erwartet</h2>
       <div id="err" class="err" style="display:none"></div>
@@ -265,7 +265,12 @@
 <script>
 (function(){
   "use strict";
-  const START=[37.92,-2.94]; // Sierra de Cazorla, Spain (validated region)
+  // The opening pin, per language. Both builds share this file, so one constant meant a
+  // German reader landed on a Spanish mountain and was then told to tap somewhere in Spain.
+  // Chosen after the German page shipped with the Spanish default; the coordinate below is
+  // inside the Müritz-Nationalpark, the fire the German article is about.
+  const START_EN=[37.92,-2.94];    // Sierra de Cazorla, Spain (the validated region)
+  const START_DE=[53.3720,12.8570]; // Müritz-Nationalpark, near Zartwitz
 
   // Spacing of the 3x3 terrain probe, in metres. Copernicus GLO-90 has ~92.6 m latitude
   // spacing, so a 90 m step makes neighbouring rows resolve to the SAME DEM cell — the
@@ -386,10 +391,10 @@
     de:{
       brandSuffix:'Lagebeurteilung',
       tag:'auf die Karte tippen, um das Feuer zu setzen',
-      coordPh:'oder Koordinaten einfügen, z. B. 37.92, -2.94',
+      coordPh:'oder Koordinaten einfügen, z. B. 53.37, 12.86',
       myLocation:'Mein Standort', locating:'Suche Standort…', go:'Los',
       ctaText:'<b>Sie werden gerade zu einem Waldbrand alarmiert.</b>'
-        +'<br>Tippen Sie auf der Karte auf die Einsatzstelle — für diesen Test eine beliebige Stelle in Spanien.'
+        +'<br>Tippen Sie auf der Karte auf die Einsatzstelle — für diesen Test eine beliebige Stelle in Deutschland.'
         +'<br>Was darunter erscheint, erwartet Sie beim Eintreffen.'
         +'<br>Sagen Sie uns anschließend unten, ob Ihnen das geholfen hätte.',
       panelTitle:'Was Sie erwartet',
@@ -437,7 +442,7 @@
       fbThanks:'Vielen Dank – das ist beim Team angekommen und fließt direkt in die Entwicklung ein.',
       fbEmpty:'Bitte zuerst eine Antwort wählen, etwas ankreuzen oder eine Zeile schreiben.',
       fbFail:'Das konnte nicht gesendet werden – bitte Verbindung prüfen und erneut versuchen.',
-      errCoord:'Position als „Breite, Länge“ eingeben – zum Beispiel 37.92, -2.94',
+      errCoord:'Position als „Breite, Länge“ eingeben – zum Beispiel 53.37, 12.86',
       errFetch:'Daten konnten nicht geladen werden – bitte Verbindung prüfen und die Markierung verschieben.',
       errNoGeo:'Dieses Gerät kann seinen Standort nicht teilen. Bitte auf die Karte tippen.',
       errGeoDenied:'Standortzugriff ist blockiert. Bitte im Browser erlauben oder einfach auf die Karte tippen.',
@@ -458,6 +463,8 @@
   let LANG = 'de'; // BUILD:LANG
 
   const t=k=>{ const v=STR[LANG][k]; return v!==undefined?v:STR.en[k]; };
+
+  const START = LANG==='de' ? START_DE : START_EN;
 
   const map=L.map('map',{zoomControl:true}).setView(START,13);
   const topo=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
@@ -649,7 +656,15 @@
     {lat:52.5265525,lon:13.3891997,name:'Freiwillige Feuerwehr Mitte'},
     {lat:52.6111032,lon:13.4830902,name:'Freiwillige Feuerwehr Karow'},
     {lat:52.0555718,lon:13.2301378,name:'Freiwillige Feuerwehr Jänickendorf'},
-    {lat:52.3588236,lon:13.5912062,name:'Freiwillige Feuerwehr Schulzendorf'}
+    {lat:52.3588236,lon:13.5912062,name:'Freiwillige Feuerwehr Schulzendorf'},
+    // Mecklenburgische Seenplatte — the Müritz-Nationalpark and its surroundings, which is
+    // where the German page now opens and the fire the German article describes.
+    {lat:53.4290774,lon:12.9450888,name:'Freiwillige Feuerwehr Kratzeburg'},
+    {lat:53.5136832,lon:12.8358024,name:'Freiwillige Feuerwehr Groß Dratow'},
+    {lat:53.4151765,lon:12.5913594,name:'Freiwillige Feuerwehr Gotthun'},
+    {lat:53.3527197,lon:12.5782164,name:'Freiwillige Feuerwehr Bollewick'},
+    {lat:53.5264786,lon:12.9964092,name:'Freiwillige Feuerwehr Marihn'},
+    {lat:53.2084350,lon:12.9983992,name:'Freiwillige Feuerwehr Strasen'}
   ];
 
   let lastStations=null, lastStationNote='', lastStationFailed=false;
@@ -697,7 +712,7 @@
     const q='[out:json][timeout:15];('+
       'node["amenity"="fire_station"](around:'+STATION_RADIUS_M+','+lat+','+lon+');'+
       'way["amenity"="fire_station"](around:'+STATION_RADIUS_M+','+lat+','+lon+');'+
-      ');out center 20;';
+      ');out center 200;';
     try{
       const ctl=new AbortController();
       const kill=setTimeout(()=>ctl.abort(),9000);

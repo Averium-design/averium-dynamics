@@ -69,7 +69,9 @@
   article{padding:5rem 0 4rem}
   h1{font-size:2.25rem;font-weight:700;letter-spacing:-.02em;margin-bottom:1.25rem}
   @media(min-width:768px){h1{font-size:3rem}}
-  .byline{font-size:.875rem;color:var(--muted);padding-bottom:2rem;border-bottom:1px solid var(--border)}
+  .byline{font-size:.875rem;color:var(--muted);padding-bottom:2rem;border-bottom:1px solid var(--border);
+    display:flex;flex-wrap:wrap;gap:.35rem 1.25rem;align-items:baseline;justify-content:space-between}
+  .byline .lang{font-weight:600;white-space:nowrap}
 
   h2{font-size:1.5rem;font-weight:700;margin:3rem 0 1rem}
   @media(min-width:768px){h2{font-size:1.75rem}}
@@ -151,7 +153,9 @@
   <div class="wrap">
 
     <h1>Helicopter, air tanker, fire engine, drone: what each one is for</h1>
-    <p class="byline">18 August 2026 · Averium Dynamics UG, Berlin</p>
+    <p class="byline"><span>18 August 2026 · 6 min read · Averium Dynamics UG, Berlin</span>
+      <a class="lang" href="/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne"
+         hreflang="de">Auf Deutsch lesen</a></p>
 
     <figure>
       <img src="/blog/img/smouldering-ground.jpg" width="1300" height="824"
@@ -384,7 +388,6 @@
         word for word.</p>
       <p>Disclosure: Averium Dynamics develops firefighting drones. The limits set out in the
         drone section are the ones that constrain that work.</p>
-      <p><a href="/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne" hreflang="de">Auf Deutsch lesen</a></p>
       <p>Photographs from Pixabay, used under the
         <a href="https://pixabay.com/service/license-summary/">Pixabay Content Licence</a>:
         ojkumena, sippakorn, royber99, fish96, magocarlosyo, viya0414 and benerott. None of them

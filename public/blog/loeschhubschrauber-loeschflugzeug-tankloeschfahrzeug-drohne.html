@@ -71,7 +71,9 @@
   article{padding:5rem 0 4rem}
   h1{font-size:2.25rem;font-weight:700;letter-spacing:-.02em;margin-bottom:1.25rem}
   @media(min-width:768px){h1{font-size:3rem}}
-  .byline{font-size:.875rem;color:var(--muted);padding-bottom:2rem;border-bottom:1px solid var(--border)}
+  .byline{font-size:.875rem;color:var(--muted);padding-bottom:2rem;border-bottom:1px solid var(--border);
+    display:flex;flex-wrap:wrap;gap:.35rem 1.25rem;align-items:baseline;justify-content:space-between}
+  .byline .lang{font-weight:600;white-space:nowrap}
 
   h2{font-size:1.5rem;font-weight:700;margin:3rem 0 1rem}
   @media(min-width:768px){h2{font-size:1.75rem}}
@@ -153,7 +155,9 @@
   <div class="wrap">
 
     <h1>Löschhubschrauber, Löschflugzeug, Tanklöschfahrzeug, Drohne: wofür jedes Mittel da ist</h1>
-    <p class="byline">18. August 2026 · Averium Dynamics UG, Berlin</p>
+    <p class="byline"><span>18. August 2026 · 6 Min. Lesezeit · Averium Dynamics UG, Berlin</span>
+      <a class="lang" href="/blog/helicopter-air-tanker-fire-engine-drone"
+         hreflang="en">Read this in English</a></p>
 
     <figure>
       <img src="/blog/img/smouldering-ground.jpg" width="1300" height="824"
@@ -397,7 +401,6 @@
         <a href="https://pixabay.com/service/license-summary/">Pixabay Inhaltslizenz</a>:
         ojkumena, sippakorn, royber99, fish96, magocarlosyo, viya0414 und benerott. Keines davon
         zeigt den Brand im Müritz-Nationalpark.</p>
-      <p><a href="/blog/helicopter-air-tanker-fire-engine-drone">This article in English</a></p>
     </div>
 
     <div class="supporters">

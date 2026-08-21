@@ -46,14 +46,21 @@ Read this file at the START of every session. Append at the END.
   route. Any new React route must set its own document.title, or it silently
   inherits the homepage's. Load the page and read the tab before calling it
   done.
-- The two blog articles are set in Source Serif 4 while the rest of the site is
-  on Inter, and their text column is capped at 37rem while their figures run the
-  full width. Both are deliberate (2026-08-21) and there is a comment in each
-  file saying so. Do not "fix" either back without deciding the same thing for
-  src/index.css.
-- A font swap changes the measure. Serve public/ locally and count characters
-  per line before pushing one; 99 was shipped-adjacent this session and only a
-  local check caught it.
+- The two blog articles use Lora for headlines and DM Sans for body while the
+  rest of the site is on Inter. Deliberate (2026-08-21); there is a comment in
+  each file saying so. Do not "fix" it back without deciding the same thing for
+  src/index.css. The prose has NO max-width and must not get one: the
+  photographs set the width of that layout, and a narrower text column reads as
+  broken next to them.
+- A font swap changes the measure and the line count. Serve public/ locally and
+  check it at 1080px AND 375px before pushing; both a 99-character measure and a
+  five-line mobile headline were caught that way this session and neither was
+  visible in a diff.
+- When a type choice is being judged by eye, build a specimen sheet and let the
+  person pick from pictures. Three rounds were spent picking from font names and
+  none of them stuck; one specimen sheet settled it.
+- The English and German Size-Up both open on the Müritz. Cazorla is where the
+  read was validated, not where the tool should open.
 
 ## Sessions
 
@@ -106,42 +113,81 @@ because the page was actually loaded. Blog.js now sets `document.title` and the
 meta description in an effect and restores both on unmount; verified by
 navigating to /blog and back.
 
-**The articles left Inter, twice.** Inter is the default body face of most
-generated sites and was the last typography tell. It is set site-wide in
-`tailwind.config.js` and `src/index.css`, so the choice was between restyling
-the whole marketing site and letting the blog diverge. Blog-only was chosen
-deliberately, against the recommendation in the room, on the grounds that the
-articles are the pages that get read closely and the site-wide question is a
-separate decision for a later session.
+**The type on the articles changed four times, and the last change was the
+right one.** Inter is the default body face of most generated sites and was the
+last typography tell. It is set site-wide in `tailwind.config.js` and
+`src/index.css`, so the choice was between restyling the whole marketing site
+and letting the blog diverge. Blog-only was chosen deliberately, against the
+recommendation in the room, on the grounds that the articles are the pages that
+get read closely and the site-wide question is a separate decision.
 
-The first attempt was DM Sans, picked because its metrics are closest to Inter
-and nothing in the layout would have to move. **That was the wrong instinct and
-it was reversed the same afternoon.** It fixed the tell and was invisible on the
-page, which was the entire point of making the change; the reader could not see
-that anything had happened. Source Serif 4 instead. A serif body is something a
-generated site essentially never has, and these are pages people sit with and
-print.
+The route there was wrong twice, both times by me, and both times only visible
+on the page rather than in the diff:
 
-**The serif did not fit the layout, and checking it locally before pushing is
-the only reason that was caught.** Source Serif 4 across the full 56rem wrap
-measured 99 characters a line, roughly thirty past comfortable and worse with a
-serif than with the sans it replaced. Text is now capped at 37rem, which
-measures 69. Figures keep the full 848px, so wide photographs sit against a
-narrow column instead of every block on the page sharing one width — which was a
-separate checklist item, fixed as a side effect. The byline and figcaptions are
-sans in Space Grotesk, the ordinary editorial split, at no extra font request.
+1. **DM Sans.** Correct and invisible. It fixed the tell and changed nothing a
+   reader could see, which was the entire point of making the change.
+2. **Source Serif 4 as the BODY, with the text column capped at 37rem.**
+   Reverted the same afternoon. It read as a printed document rather than a
+   field note, and the cap — added because the serif measured 99 characters a
+   line at the full width — made the text visibly narrower than the
+   photographs. The measure argument was right in the abstract and wrong for a
+   layout whose photographs set the width. **Do not reintroduce a max-width on
+   the prose.**
+3. **Instrument Serif as the HEADLINE.** Rejected as too display-y and
+   fashionable for the subject.
+4. **Lora at 600 for headlines, DM Sans for body, full width.** Shipped.
 
-Headings stay Space Grotesk everywhere, unchanged. It was never one of the
-tells, and changing it would break the one thing still tying the articles to the
-homepage.
+The lesson under all of it: the character belongs in the headline, not spread
+over the whole page, and a type change nobody can see is not a type change.
+The fourth attempt was chosen off a specimen sheet of seven faces rendered on
+the real headline at real sizes, with per-face optical correction — comparing
+faces at the same pixel size compares x-heights, not character. Picking from
+pictures took one round trip and settled what three rounds of picking from font
+names had not.
 
-Verified on both live articles: Source Serif 4 loaded, 69 characters a line at
-desktop and 36 at 360px, byline and captions sans, h1 Space Grotesk, no
-horizontal scroll at either width, umlauts intact. And on the live homepage:
-computed body font Inter, unchanged.
+Sizes are optically corrected for Lora: h1 3.375rem desktop and 2.0625rem
+mobile, h2 1.9rem and 1.5rem. The mobile step came out of checking it — at
+2.375rem the English headline ran to five lines before the reader saw anything
+else. The German is still five lines, but its title is 85 characters against
+the English 62, so that is the title and not the face.
 
-Eight commits, four publish merges: `32bf932`/`dba8084`, `50bfbad`/`e2bc0f4`,
-`d24dee9`/`2352fc1`, `4f73aa7`/`622e415`.
+Headings and the wordmark: the wordmark in the header and footer, and the CTA
+h3, stay Space Grotesk. That is what still ties these pages to the homepage.
+
+Verified on both live articles at 1080px and 375px: Lora rendering at 600 with
+no faked bold, body DM Sans, text width equal to image width, no horizontal
+scroll, no overflow from the long German compounds.
+
+**The English Size-Up opened on a Spanish mountain, and had since it shipped.**
+Reported from the live site. /sizeup opened on the Sierra de Cazorla by design,
+because that is where the read was validated — but an English-speaking district
+officer landed at 1105 m in Andalusia with three Spanish brigades listed as
+their nearest help, on a tool linked from an English article about a German
+fire, built by a Berlin company. Validation is a reason to trust the numbers,
+not a reason to open there. START_EN is now the same Müritz coordinate as
+START_DE, kept as two constants so they can diverge again deliberately rather
+than by accident. Everything Spain-flavoured that hung off the default went with
+it: the coordinate examples in the placeholder and the error message, the
+feedback role placeholder, the two HTML placeholders that flash before the
+script runs, and the og:image:alt. The baked Spanish stations stay — they are
+real fallback entries and the tool works anywhere; only the comment calling them
+"the default pin" was wrong. Edited scripts/sizeup.src.html and ran the build,
+per the standing rule. Verified live: /sizeup opens at 53.37200, 12.85700, 79 m,
+and lists Qualzow and Blankenförde at 4.6 km.
+
+**The Size-Up was measured against the same checklist and scored higher than the
+articles**, at roughly 93. It loads no webfont at all — a system stack, which is
+the right call for a tool used on bad signal and which makes the checklist's main
+typography tell inapplicable. No gradients, no box-shadows, 44px minimum touch
+targets and a 16px input to stop iOS zooming, and stat labels in plain English
+("How steep", "Fire will run") rather than Slope and Aspect. Its one real failure
+is emoji as icons: the 🔥 and 🚒 map markers are defensible because they are
+functional and legible at a glance, but the sidebar 🚒 and the ◎ on the location
+button are decorative and were not changed this session.
+
+Seven changes, each a work commit and a publish merge: `32bf932`/`dba8084`,
+`50bfbad`/`e2bc0f4`, `d24dee9`/`2352fc1`, `4f73aa7`/`622e415`,
+`0507d9a`/`9971973`, `6368e2a`/`eb85e47`, `548d184`/`1978ad6`.
 
 **Still open.** `og-card.jpg` is still a 1200x630 crop of `fire-front-night.jpg`,
 a photograph already inside the article; fixing it needs an image we do not

@@ -46,10 +46,14 @@ Read this file at the START of every session. Append at the END.
   route. Any new React route must set its own document.title, or it silently
   inherits the homepage's. Load the page and read the tab before calling it
   done.
-- The two blog articles are on DM Sans while the rest of the site is on Inter.
-  That divergence is deliberate (2026-08-21) and there is a comment in both
-  files saying so. Do not "fix" it back without deciding the same thing for
+- The two blog articles are set in Source Serif 4 while the rest of the site is
+  on Inter, and their text column is capped at 37rem while their figures run the
+  full width. Both are deliberate (2026-08-21) and there is a comment in each
+  file saying so. Do not "fix" either back without deciding the same thing for
   src/index.css.
+- A font swap changes the measure. Serve public/ locally and count characters
+  per line before pushing one; 99 was shipped-adjacent this session and only a
+  local check caught it.
 
 ## Sessions
 
@@ -102,20 +106,42 @@ because the page was actually loaded. Blog.js now sets `document.title` and the
 meta description in an effect and restores both on unmount; verified by
 navigating to /blog and back.
 
-**The articles moved to DM Sans. The site stays on Inter.** Inter is the default
-body face of most generated sites and was the last typography tell. It is set
-site-wide in `tailwind.config.js` and `src/index.css`, so this was a choice
-between changing the whole marketing site and letting the blog diverge.
-Blog-only was chosen deliberately, against the recommendation in the room, on
-the grounds that the articles are the pages that get read closely and the
-site-wide question is a separate decision for a later session. Headings stay
-Space Grotesk in both places, which is what keeps the two reading as the same
-company. Verified on the live article: computed body font "DM Sans", h2 still
-Space Grotesk, no Inter requested; and on the live homepage: computed body font
-Inter, unchanged.
+**The articles left Inter, twice.** Inter is the default body face of most
+generated sites and was the last typography tell. It is set site-wide in
+`tailwind.config.js` and `src/index.css`, so the choice was between restyling
+the whole marketing site and letting the blog diverge. Blog-only was chosen
+deliberately, against the recommendation in the room, on the grounds that the
+articles are the pages that get read closely and the site-wide question is a
+separate decision for a later session.
 
-Six commits, three publish merges: `32bf932`/`dba8084`, `50bfbad`/`e2bc0f4`,
-`d24dee9`/`2352fc1`.
+The first attempt was DM Sans, picked because its metrics are closest to Inter
+and nothing in the layout would have to move. **That was the wrong instinct and
+it was reversed the same afternoon.** It fixed the tell and was invisible on the
+page, which was the entire point of making the change; the reader could not see
+that anything had happened. Source Serif 4 instead. A serif body is something a
+generated site essentially never has, and these are pages people sit with and
+print.
+
+**The serif did not fit the layout, and checking it locally before pushing is
+the only reason that was caught.** Source Serif 4 across the full 56rem wrap
+measured 99 characters a line, roughly thirty past comfortable and worse with a
+serif than with the sans it replaced. Text is now capped at 37rem, which
+measures 69. Figures keep the full 848px, so wide photographs sit against a
+narrow column instead of every block on the page sharing one width — which was a
+separate checklist item, fixed as a side effect. The byline and figcaptions are
+sans in Space Grotesk, the ordinary editorial split, at no extra font request.
+
+Headings stay Space Grotesk everywhere, unchanged. It was never one of the
+tells, and changing it would break the one thing still tying the articles to the
+homepage.
+
+Verified on both live articles: Source Serif 4 loaded, 69 characters a line at
+desktop and 36 at 360px, byline and captions sans, h1 Space Grotesk, no
+horizontal scroll at either width, umlauts intact. And on the live homepage:
+computed body font Inter, unchanged.
+
+Eight commits, four publish merges: `32bf932`/`dba8084`, `50bfbad`/`e2bc0f4`,
+`d24dee9`/`2352fc1`, `4f73aa7`/`622e415`.
 
 **Still open.** `og-card.jpg` is still a 1200x630 crop of `fire-front-night.jpg`,
 a photograph already inside the article; fixing it needs an image we do not

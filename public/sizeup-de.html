@@ -269,7 +269,13 @@
   // German reader landed on a Spanish mountain and was then told to tap somewhere in Spain.
   // Chosen after the German page shipped with the Spanish default; the coordinate below is
   // inside the Müritz-Nationalpark, the fire the German article is about.
-  const START_EN=[37.92,-2.94];    // Sierra de Cazorla, Spain (the validated region)
+  // Both are the Müritz now. Cazorla was the English pin because it is where the
+  // read was validated, but the English article that sends people here is about a
+  // German fire, this is a Berlin company, and an English-speaking district officer
+  // opening the tool landed on a Spanish mountain with Spanish brigades listed as
+  // their nearest help. Validation is a reason to trust the numbers, not a reason to
+  // open there. Kept as two constants so they can diverge again deliberately.
+  const START_EN=[53.3720,12.8570]; // Müritz-Nationalpark, near Zartwitz
   const START_DE=[53.3720,12.8570]; // Müritz-Nationalpark, near Zartwitz
 
   // Spacing of the 3x3 terrain probe, in metres. Copernicus GLO-90 has ~92.6 m latitude
@@ -321,7 +327,7 @@
     en:{
       brandSuffix:'Fire Size-Up',
       tag:'tap the map to place the fire',
-      coordPh:'or paste coordinates  e.g. 37.92, -2.94',
+      coordPh:'or paste coordinates  e.g. 53.37, 12.86',
       myLocation:'My location', locating:'Locating…', go:'Go',
       // Framed as a situation rather than an instruction: we are asking a professional to
       // judge whether this would have helped them, and that only works if they are picturing
@@ -370,12 +376,12 @@
       fbMissingL:"What's the one thing you'd want here that isn't?",
       fbMissingPh:"Anything at all — what you looked for and couldn't find.",
       fbRoleL:'Your role or brigade', fbOptional:'(optional)',
-      fbRolePh:'e.g. crew boss, Bomberos Cazorla',
+      fbRolePh:'e.g. crew boss, district fire service',
       fbSend:'Send feedback', fbSending:'Sending…', fbSentBtn:'Sent',
       fbThanks:"Thank you — that's with the team. It genuinely shapes what we build next.",
       fbEmpty:'Pick an answer, tick something, or write a line first.',
       fbFail:"That didn't send — check your connection and try again.",
-      errCoord:'Type the position as "latitude, longitude" — for example 37.92, -2.94',
+      errCoord:'Type the position as "latitude, longitude" — for example 53.37, 12.86',
       errFetch:'Could not load the data — check your connection and try moving the pin.',
       errService:'The terrain and weather service is not answering. That is on us, not your connection. Please try again shortly.',
       errNoGeo:'This device cannot share its location. Tap the map instead.',
@@ -636,7 +642,8 @@
   // so the two tenant regions are baked in as a fallback. A live query still runs first, which
   // is what makes the tool work for a pin dropped anywhere else.
   const BAKED_STATIONS=[
-    // Spain — Sierra de Cazorla, the validated region and the default pin.
+    // Spain — Sierra de Cazorla, where the read was validated. No longer the default
+    // pin, but kept: the tool works anywhere and these are real fallback entries.
     {lat:37.9169026,lon:-3.1095985,name:'Bomberos Consorcio Sierra de Cazorla'},
     {lat:37.9214646,lon:-2.9297490,name:'CEDEFO Vadillo Castril'},
     {lat:38.0160645,lon:-3.3765450,name:'Parque de Bomberos de Úbeda'},

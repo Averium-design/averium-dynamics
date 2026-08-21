@@ -35,7 +35,7 @@ const PAGES = {
       'See the ground before you arrive: how steep it is, which way the fire will run, ' +
       'the wind, and your nearest fire stations. From Averium Dynamics.',
     imgAlt:
-      'The Fire Size-Up tool showing a hillside near Cazorla with slope, wind and fire direction.',
+      'The Fire Size-Up tool showing ground in the Müritz-Nationalpark with slope, wind and fire direction.',
   },
   de: {
     out: 'sizeup-de.html',

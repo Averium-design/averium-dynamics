@@ -38,11 +38,18 @@
 <link rel="icon" type="image/png" href="/favicon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-  /* Tokens taken from tailwind.config.js, so this matches the rest of the
-     site. Tailwind only scans ./src and never reaches public/. */
+  /* Colours are taken from tailwind.config.js, so they match the rest of the
+     site. Tailwind only scans ./src and never reaches public/.
+
+     The BODY FONT deliberately does not match. The site is on Inter; these two
+     articles are on DM Sans. Inter is the default body face of most generated
+     sites, and these are the pages a reader actually sits with. Headings stay
+     Space Grotesk, which is shared with the site, so the two still read as the
+     same company. Decided 2026-08-21. Do not put this back to Inter without
+     deciding the same thing for src/index.css. */
   :root{
     --primary:#1B4D3E; --accent:#FF4D00;
     --fg:#1A1A1A; --muted:#6B7280;
@@ -52,11 +59,11 @@
   html{-webkit-text-size-adjust:100%}
   body{
     background:var(--bg); color:var(--fg);
-    font-family:'Inter',system-ui,sans-serif;
+    font-family:'DM Sans',system-ui,sans-serif;
     -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     line-height:1.75;
   }
-  h1,h2,h3{font-family:'Space Grotesk','Inter',sans-serif;line-height:1.15}
+  h1,h2,h3{font-family:'Space Grotesk','DM Sans',sans-serif;line-height:1.15}
 
   .wrap{max-width:56rem;margin:0 auto;padding:0 1.5rem}
 

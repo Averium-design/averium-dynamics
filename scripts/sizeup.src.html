@@ -58,7 +58,11 @@
   .coords button{background:var(--fire);border:none;color:#fff;border-radius:8px;padding:8px 12px;font-weight:700;cursor:pointer}
   .coords button.loc{background:#1b2530;border:1px solid var(--line);color:var(--ink);display:flex;align-items:center;gap:7px}
   .coords button.loc:hover{border-color:var(--accent)}
-  .coords button.loc .pin{color:var(--accent);font-size:15px;line-height:1}
+  /* Lucide locate-fixed. Was the glyph U+25CE, which is a decorative emoji-class
+     mark on a control that has a real job. The map markers stay emoji on purpose:
+     a fire and an engine read at a glance on a map, which beats a checklist row. */
+  .coords button.loc .pin{color:var(--accent);width:16px;height:16px;flex:none;
+    fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .coords button.loc.busy{opacity:.7}
   .coords button.loc.busy .pin{animation:ping 1s linear infinite}
   @keyframes ping{50%{opacity:.25}}
@@ -72,7 +76,10 @@
   .cta{display:flex;gap:11px;align-items:flex-start;background:rgba(63,169,255,.10);
     border:1px solid rgba(63,169,255,.45);border-radius:10px;padding:12px 14px;margin-bottom:14px;
     font-size:14.5px;line-height:1.5;color:#dbeaf7}
-  .cta-hand{font-size:20px;line-height:1.35;flex:none}
+  /* Lucide pointer. The prompt's job is "tap the map", so the icon says tap.
+     A fire engine here said nothing the sentence did not already say. */
+  .cta-hand{width:20px;height:20px;flex:none;margin-top:2px;color:#7cc4ff;
+    fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .cta-text b{color:#fff}
   .cta-text br{content:"";display:block;margin-top:5px}
   .cta.gone{display:none}
@@ -167,7 +174,7 @@
     </div>
     <span class="tag" data-i18n="tag">tap the map to place the fire</span>
     <div class="coords">
-      <button id="locBtn" class="loc" type="button"><span class="pin">◎</span><span id="locTxt" data-i18n="myLocation">My location</span></button>
+      <button id="locBtn" class="loc" type="button"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="2" x2="5" y1="12" y2="12"/><line x1="19" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="5"/><line x1="12" x2="12" y1="19" y2="22"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/></svg><span id="locTxt" data-i18n="myLocation">My location</span></button>
       <input id="coordInput" data-i18n-ph="coordPh" placeholder="or paste coordinates  e.g. 53.37, 12.86" inputmode="decimal" />
       <button id="goBtn" data-i18n="go">Go</button>
     </div>
@@ -179,7 +186,7 @@
            reads as a display rather than something to touch. Disappears the moment they
            move the pin, so it never nags anyone who has already worked it out. -->
       <div class="cta" id="cta">
-        <span class="cta-hand">🚒</span>
+        <svg class="cta-hand" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 14a8 8 0 0 1-8 8"/><path d="M18 11v-1a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1"/><path d="M10 9.5V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v10"/><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
         <span class="cta-text" data-i18n="ctaText"><b>You have just been called to a wildfire.</b><br>Tap the spot on the map where it is — anywhere in the world for this test.<br>What appears below is what is waiting for you when you arrive.<br>Then tell us at the bottom whether that would have helped.</span>
       </div>
       <h2 data-i18n="panelTitle">What you're driving into</h2>

@@ -10,7 +10,6 @@ import {
 import { Routes, Route, Link } from 'react-router-dom';
 import Imprint from './Imprint';
 import Privacy from './Privacy';
-import Blog from './Blog';
 
 /** -----------------------------
  *  Animation presets (Framer)
@@ -173,21 +172,6 @@ function HomePage() {
                 {item.label}
               </motion.button>
             ))}
-
-            <motion.div
-              initial={{ opacity: 0, y: -6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.32, duration: 0.5, ease: easeOut }}
-              whileHover={{ y: -1 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Link
-                to="/blog"
-                className="text-foreground-muted hover:text-primary transition-colors text-sm font-medium"
-              >
-                Field Notes
-              </Link>
-            </motion.div>
 
             <motion.button
               onClick={() => scrollToSection('contact')}
@@ -875,14 +859,6 @@ function HomePage() {
 
               <div className="flex items-center gap-4 text-sm">
                 <motion.div whileHover={{ y: -1 }} transition={{ duration: 0.2 }}>
-                  <Link to="/blog" className="hover:text-white transition-colors">
-                    Field Notes
-                  </Link>
-                </motion.div>
-
-                <span className="text-gray-600">•</span>
-
-                <motion.div whileHover={{ y: -1 }} transition={{ duration: 0.2 }}>
                   <Link to="/imprint" className="hover:text-white transition-colors">
                     Imprint
                   </Link>
@@ -914,7 +890,6 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/blog" element={<Blog />} />
       <Route path="/imprint" element={<Imprint />} />
       <Route path="/privacy" element={<Privacy />} />
     </Routes>

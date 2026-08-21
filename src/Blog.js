@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 /* The articles themselves are static HTML in public/blog/, served through the
@@ -21,6 +21,26 @@ const posts = [
 ];
 
 export default function Blog() {
+  /* This is a CRA single-page app: index.html carries one <title> for every
+     route, so /blog inherited the homepage's. Verified on the live page after
+     the first deploy. No react-helmet in the project, so set it directly. */
+  useEffect(() => {
+    const previousTitle = document.title;
+    document.title = 'Field Notes — Averium Dynamics';
+    const tag = document.querySelector('meta[name="description"]');
+    const previousDesc = tag ? tag.getAttribute('content') : null;
+    if (tag) {
+      tag.setAttribute(
+        'content',
+        'Write-ups of real wildfires and the equipment sent to them, from Averium Dynamics in Berlin.'
+      );
+    }
+    return () => {
+      document.title = previousTitle;
+      if (tag && previousDesc !== null) tag.setAttribute('content', previousDesc);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-white py-20">
       <div className="container mx-auto px-6 max-w-4xl">

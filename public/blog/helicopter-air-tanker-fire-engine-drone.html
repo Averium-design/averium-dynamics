@@ -38,18 +38,33 @@
 <link rel="icon" type="image/png" href="/favicon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Lora:wght@500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
   /* Colours are taken from tailwind.config.js, so they match the rest of the
      site. Tailwind only scans ./src and never reaches public/.
 
-     The BODY FONT deliberately does not match. The site is on Inter; these two
-     articles are on DM Sans. Inter is the default body face of most generated
-     sites, and these are the pages a reader actually sits with. Headings stay
-     Space Grotesk, which is shared with the site, so the two still read as the
-     same company. Decided 2026-08-21. Do not put this back to Inter without
-     deciding the same thing for src/index.css. */
+     The TYPE deliberately does not match the site, in two ways, both decided
+     2026-08-21.
+
+     Body: the site is on Inter, these two articles are on DM Sans. Inter is the
+     default body face of most generated sites. Do not put this back to Inter
+     without deciding the same thing for src/index.css.
+
+     Headlines: Lora at 600, against the sans body. The character belongs in the
+     headline, not spread over the whole page — a serif BODY was tried first and
+     reverted the same day because it read as a printed document, and because
+     capping the measure to suit it made the text narrower than the photographs.
+     Do not reintroduce a max-width on the prose: the figures set the width of
+     this layout.
+
+     Instrument Serif was tried for the headline before Lora and rejected as too
+     display-y; Lora was chosen off a specimen sheet of seven faces for reading
+     official and elegant rather than fashionable. Sizes here are already
+     optically corrected for it — Lora sets larger than a display face at the
+     same pixel size, so h1 and h2 are stepped down accordingly. The wordmark in
+     the header and the footer stays Space Grotesk, which is what still ties
+     these pages to the homepage. */
   :root{
     --primary:#1B4D3E; --accent:#FF4D00;
     --fg:#1A1A1A; --muted:#6B7280;
@@ -63,7 +78,8 @@
     -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     line-height:1.75;
   }
-  h1,h2,h3{font-family:'Space Grotesk','DM Sans',sans-serif;line-height:1.15}
+  h1,h2{font-family:'Lora',Georgia,'Times New Roman',serif;font-weight:600;line-height:1.14}
+  h3{font-family:'Space Grotesk','DM Sans',sans-serif;line-height:1.15}
 
   .wrap{max-width:56rem;margin:0 auto;padding:0 1.5rem}
 
@@ -74,14 +90,14 @@
   .site-head a{text-decoration:none;color:var(--fg);display:flex;align-items:center;gap:.6rem}
 
   article{padding:5rem 0 4rem}
-  h1{font-size:2.25rem;font-weight:700;letter-spacing:-.02em;margin-bottom:1.25rem}
-  @media(min-width:768px){h1{font-size:3rem}}
+  h1{font-size:2.0625rem;letter-spacing:-.012em;margin-bottom:1.25rem}
+  @media(min-width:768px){h1{font-size:3.375rem}}
   .byline{font-size:.875rem;color:var(--muted);padding-bottom:2rem;border-bottom:1px solid var(--border);
     display:flex;flex-wrap:wrap;gap:.35rem 1.25rem;align-items:baseline;justify-content:space-between}
   .byline .lang{font-weight:600;white-space:nowrap}
 
-  h2{font-size:1.5rem;font-weight:700;letter-spacing:-.01em;margin:3rem 0 1rem}
-  @media(min-width:768px){h2{font-size:1.75rem}}
+  h2{font-size:1.5rem;letter-spacing:-.005em;margin:3rem 0 1rem}
+  @media(min-width:768px){h2{font-size:1.9rem}}
   p{margin-bottom:1.25rem}
   strong{font-weight:600}
   a{color:var(--primary)}

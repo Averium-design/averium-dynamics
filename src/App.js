@@ -333,7 +333,7 @@ function HomePage() {
       <section className="py-20 md:py-32 bg-slate-950 text-white relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-10 bg-cover bg-center"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1744907529553-dc603ead4d4e?crop=entropy&cs=srgb&fm=jpg&q=85')` }}
+          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1744907529553-dc603ead4d4e?crop=entropy&cs=srgb&auto=format&q=85&w=2850')` }}
         />
 
         <div className="container mx-auto px-6 relative z-10">
@@ -383,6 +383,14 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Unsplash serves these. The w= values are tied to the rendered box:
+          cards are 329x192 CSS px, the Challenge backdrop is 1425x624, so w=658
+          and w=2850 cover a 2x display exactly. Sending the untrimmed originals
+          was not "higher quality" — 18 MB of 7680x4320 for a backdrop at 10%
+          opacity, and the browser's real-time downscale of a 4000px contour
+          photo aliased into moire that the resized file does not have.
+          auto=format serves AVIF/WebP where accepted and JPEG where not.
+          If a card's box changes size, change w= with it. */}
       {/* SOLUTION — BioSphereX three-layer system */}
       <section id="solution" className="py-20 md:py-32 bg-slate-50">
         <div className="container mx-auto px-6">
@@ -416,21 +424,21 @@ function HomePage() {
                 icon: Signal,
                 title: 'PYROGNOSIS',
                 desc: 'AI prediction platform fusing satellite, weather, and environmental data into a real-time ignition risk surface. Refreshes every five minutes at sub-hectare resolution. Tested on Spain and ready for pilot deployment.',
-                image: 'https://images.unsplash.com/photo-1770699197239-81b5da579f2b?crop=entropy&cs=srgb&fm=jpg&q=85',
+                image: 'https://images.unsplash.com/photo-1770699197239-81b5da579f2b?crop=entropy&cs=srgb&auto=format&q=85&w=658',
               },
               {
                 eyebrow: 'LAYER 2 — SUPPRESS',
                 icon: ShieldCheck,
                 title: 'Green Dome',
                 desc: 'Two-drone autonomous architecture: a detection drone with multi-sensor AI confirms ignition; a suppression drone deploys retardant before fire spreads. The two-drone system as a whole is patent pending at the German Patent and Trade Mark Office (DPMA), with an established priority date.',
-                image: 'https://images.unsplash.com/photo-1488149048941-581936ced6d6?crop=entropy&cs=srgb&fm=jpg&q=85',
+                image: 'https://images.unsplash.com/photo-1488149048941-581936ced6d6?crop=entropy&cs=srgb&auto=format&q=85&w=658',
               },
               {
                 eyebrow: 'LAYER 3 — CONTAIN',
                 icon: Flame,
                 title: 'HELIOS',
                 desc: 'Autonomous backfire drone swarm for megafire response. Satellite-guided controlled-burn system designed to halt fires that have already escaped initial suppression. In development.',
-                image: 'https://images.unsplash.com/photo-1768280511074-3b3effe7a139?crop=entropy&cs=srgb&fm=jpg&q=85',
+                image: 'https://images.unsplash.com/photo-1768280511074-3b3effe7a139?crop=entropy&cs=srgb&auto=format&q=85&w=658',
               },
             ].map((item, index) => (
               <motion.div

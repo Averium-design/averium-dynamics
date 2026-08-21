@@ -61,6 +61,13 @@ Read this file at the START of every session. Append at the END.
   none of them stuck; one specimen sheet settled it.
 - The English and German Size-Up both open on the Müritz. Cazorla is where the
   read was validated, not where the tool should open.
+- The Size-Up link previews are screenshots and go stale silently. If the
+  default pin, the panel copy or the icons change, public/sizeup-preview.jpg and
+  sizeup-preview-de.jpg have to be reshot AGAINST PRODUCTION — the reading comes
+  from api/sizeup-data and a local server has no such function, so a local
+  screenshot shows an error card.
+- Emoji on this site are not one decision. Map markers are functional and stay;
+  emoji standing in for interface icons are decoration and go.
 
 ## Sessions
 
@@ -181,13 +188,34 @@ the right call for a tool used on bad signal and which makes the checklist's mai
 typography tell inapplicable. No gradients, no box-shadows, 44px minimum touch
 targets and a 16px input to stop iOS zooming, and stat labels in plain English
 ("How steep", "Fire will run") rather than Slope and Aspect. Its one real failure
-is emoji as icons: the 🔥 and 🚒 map markers are defensible because they are
-functional and legible at a glance, but the sidebar 🚒 and the ◎ on the location
-button are decorative and were not changed this session.
+was emoji as icons, and the four were not the same thing. The 🔥 and 🚒 used as MAP
+MARKERS were kept: they are functional, they read at a glance on a phone at a
+roadside, and an SVG pin would cost legibility to satisfy a checklist row. The
+other two were decoration on controls with a real job and were replaced with
+inline Lucide SVG — locate-fixed for the location button, and pointer for the
+"you have just been called to a wildfire" card, whose job is "tap the map", so
+the icon now says tap rather than showing an engine the sentence already
+described. Both inherit currentColor and are aria-hidden; the busy-state pulse
+still works because it animates opacity, and is still off under
+prefers-reduced-motion.
 
-Seven changes, each a work commit and a publish merge: `32bf932`/`dba8084`,
+**The English link preview had shown a Spanish mountain since 28 July, and the
+default change made it contradict its own page.** public/sizeup-preview.jpg was
+a Cazorla screenshot, so anyone forwarding /sizeup by mail or WhatsApp pasted a
+card showing 1105 m in Andalusia for a tool that now opens in Mecklenburg. The
+German preview had been regenerated on the 19th; only English was stale.
+Regenerated against PRODUCTION, not a local build — the reading card comes from
+api/sizeup-data, which does not exist on a static local server, so a local shot
+would have read "could not read this spot". Taken after the icon deploy so the
+new SVG is in it. Framed to match the German one rather than inventing a second
+treatment: full 1200x630, reading populated, tap-prompt dismissed. 208 KB
+against the German 209 KB. The URL is unchanged, so anything holding the old
+card will serve Spain until it re-scrapes.
+
+Nine changes, each a work commit and a publish merge: `32bf932`/`dba8084`,
 `50bfbad`/`e2bc0f4`, `d24dee9`/`2352fc1`, `4f73aa7`/`622e415`,
-`0507d9a`/`9971973`, `6368e2a`/`eb85e47`, `548d184`/`1978ad6`.
+`0507d9a`/`9971973`, `6368e2a`/`eb85e47`, `548d184`/`1978ad6`,
+`d8d479f`/`8e80326`, `5184e40`/`128bd8f`.
 
 **Still open.** `og-card.jpg` is still a 1200x630 crop of `fire-front-night.jpg`,
 a photograph already inside the article; fixing it needs an image we do not

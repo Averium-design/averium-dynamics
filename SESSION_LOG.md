@@ -38,8 +38,93 @@ Read this file at the START of every session. Append at the END.
   public/sizeup-de.html by hand.
 - Anything this site tells a crew about distance or nearest help is a number
   they may act on. Check it against the source before shipping it.
+- vercel.json ends with `/(.*)` -> `/`, so NOTHING on this site can return a
+  404. A deleted image, a mistyped article URL or a dead link all return the
+  homepage with HTTP 200. Do not use a status code to check that something
+  shipped or that something is gone; check the content.
+- This is a create-react-app SPA with one `<title>` in index.html for every
+  route. Any new React route must set its own document.title, or it silently
+  inherits the homepage's. Load the page and read the tab before calling it
+  done.
+- The two blog articles are on DM Sans while the rest of the site is on Inter.
+  That divergence is deliberate (2026-08-21) and there is a comment in both
+  files saying so. Do not "fix" it back without deciding the same thing for
+  src/index.css.
 
 ## Sessions
+
+### 2026-08-21
+
+**The two field notes were measured against a 30-point checklist for
+AI-generated sites, and three of the six categories did not hold up.** Colour,
+layout and interaction passed as they stood: no gradients, no card grid, no
+scroll-reveals, one base colour and one accent. Images, prose rhythm and one
+typography item did not.
+
+**The drone photograph was the wrong picture, and its own caption said so.** It
+was an agricultural sprayer over a flooded field, sitting in the one section
+that describes what we build, captioned "Same idea, different job." Removed from
+both languages and `public/blog/img/drone-in-flight.jpg` deleted from the repo,
+rather than swapped for another stock photograph that is also not a firefighting
+drone. The drone section now runs without a figure and is the only section that
+does, which also breaks the heading-then-figure rhythm every other section had.
+Seven figures and six captions on each article, counted on the live page after
+deploy.
+
+**The prose leaned on one construction six times in 2,000 words.** Negation then
+correction: "The limit is not the vehicle. It is the last few kilometres."
+"Start with what a drone cannot do." "The drone was not the better tool." That
+shape is the most recognisable machine-writing signature there is, and at six
+uses it had stopped being a device. Cut to two: the paraphrased quote, where it
+belongs to the person speaking, and "a drone does not replace a helicopter",
+where the disclaimer is the point. Three figcaptions went from aphorism to plain
+description and a fourth was dropped, so the set no longer reads as one voice.
+The German was edited to match, not translated afresh.
+
+**The EN and DE image sets were deliberately left identical.** The checklist
+flags image reuse across pages, but these are one article in two languages,
+declared as translations by hreflang. A reader never sees both. Desynchronising
+them would have meant making one language poorer to satisfy a rule aimed at a
+different problem.
+
+**Nothing on the site linked to the blog.** `grep -rln blog src/` returned
+nothing: both articles had been reachable only by direct URL since publication.
+Added `src/Blog.js` as a Field Notes index, a `/blog` route, and links in the
+nav and the footer. The articles stay static HTML behind the vercel.json
+rewrites and are linked with plain anchors, not `<Link>`.
+
+**That index shipped with the homepage's title, and only opening it in a browser
+showed it.** This is a create-react-app SPA: one `index.html` with one `<title>`
+for every route, so `/blog` inherited "Averium Dynamics - Wildfire Prevention".
+The build passed, the page rendered, the links resolved, and it was still wrong.
+Same failure mode as /sizeup-de on 2026-08-19, caught earlier this time only
+because the page was actually loaded. Blog.js now sets `document.title` and the
+meta description in an effect and restores both on unmount; verified by
+navigating to /blog and back.
+
+**The articles moved to DM Sans. The site stays on Inter.** Inter is the default
+body face of most generated sites and was the last typography tell. It is set
+site-wide in `tailwind.config.js` and `src/index.css`, so this was a choice
+between changing the whole marketing site and letting the blog diverge.
+Blog-only was chosen deliberately, against the recommendation in the room, on
+the grounds that the articles are the pages that get read closely and the
+site-wide question is a separate decision for a later session. Headings stay
+Space Grotesk in both places, which is what keeps the two reading as the same
+company. Verified on the live article: computed body font "DM Sans", h2 still
+Space Grotesk, no Inter requested; and on the live homepage: computed body font
+Inter, unchanged.
+
+Six commits, three publish merges: `32bf932`/`dba8084`, `50bfbad`/`e2bc0f4`,
+`d24dee9`/`2352fc1`.
+
+**Still open.** `og-card.jpg` is still a 1200x630 crop of `fire-front-night.jpg`,
+a photograph already inside the article; fixing it needs an image we do not
+have. The Pixabay credit line names seven photographers and one of them may be
+the one whose picture was removed, but there is no name-to-file mapping to check
+it against, so the line was left alone rather than guessed at. The site-wide
+Inter question is deferred, not settled. The nav is `hidden md:flex` with no
+hamburger, so the Field Notes link is desktop-only and mobile readers reach the
+blog through the footer.
 
 ### 2026-08-19
 

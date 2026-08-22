@@ -6,11 +6,12 @@
 # robots.txt got 842 bytes of HTML with HTTP 200. Files in public/ are served
 # before the rewrites, which is why putting a real file here is the whole fix.
 #
-# Nothing here is disallowed, and that is deliberate in one specific case:
-# /sizeup and /sizeup-de carry "noindex" in a meta tag on the page itself. A
-# crawler has to be allowed to fetch a page in order to read that tag. Blocking
-# them here would leave them indexable-by-rumour - reachable through links,
-# never re-checked, and impossible to remove. Do not add a Disallow for them.
+# Nothing here is disallowed, and nothing on the site is noindex any more:
+# /sizeup and /sizeup-de became indexable on 2026-08-22. The rule that put this
+# paragraph here still stands for whatever comes next - never Disallow a page
+# that carries "noindex", because a crawler has to be allowed to fetch the page
+# in order to read that tag. Blocking it leaves it indexable-by-rumour:
+# reachable through links, never re-checked, and impossible to remove.
 
 User-agent: *
 Allow: /

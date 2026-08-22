@@ -3,11 +3,12 @@
   Written 2026-08-22. Before this file existed, /sitemap.xml returned the React
   app with HTTP 200, the same way /robots.txt did.
 
+  /sizeup and /sizeup-de were listed here on 2026-08-22, when they stopped
+  being noindex. If either ever goes back to noindex, remove it from this file
+  in the same commit: a URL cannot be asked to be indexed here and told not to
+  be indexed there.
+
   What is deliberately NOT listed:
-    /sizeup, /sizeup-de   - both carry "noindex" on the page. A URL cannot be
-                            asked to be indexed here and told not to be indexed
-                            there; declaring them would be a contradiction that
-                            costs trust in the whole file.
     /imprint, /privacy    - React routes. The app has one <title> for every
                             route, so both currently serve the homepage's title
                             and description. Listing near-duplicates is a
@@ -66,6 +67,28 @@
                 href="https://www.averiumdynamics.com/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne"/>
     <xhtml:link rel="alternate" hreflang="x-default"
                 href="https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone"/>
+  </url>
+
+  <!-- The free Size-Up tool, indexable since 2026-08-22. Static HTML, so unlike
+       /blog it ships its full text to a crawler. -->
+  <url>
+    <loc>https://www.averiumdynamics.com/sizeup</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.averiumdynamics.com/sizeup"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.averiumdynamics.com/sizeup-de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.averiumdynamics.com/sizeup"/>
+  </url>
+
+  <url>
+    <loc>https://www.averiumdynamics.com/sizeup-de</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.averiumdynamics.com/sizeup"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.averiumdynamics.com/sizeup-de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.averiumdynamics.com/sizeup"/>
   </url>
 
 </urlset>

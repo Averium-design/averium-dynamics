@@ -5,8 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <meta name="theme-color" content="#0a0d12"/>
 <meta name="mobile-web-app-capable" content="yes"/>
-<!-- Reachable by direct link only: sent to crews we have briefed, not a public page. -->
-<meta name="robots" content="noindex, nofollow, noarchive"/>
+<!-- Indexable since 2026-08-22. It was noindex, nofollow, noarchive for as long as it
+     was only sent to crews we had briefed. It is a public page now, and the best entry
+     point on the site: a free tool that works anywhere, needs no login, and answers a
+     question people actually search for. That is what earns links and gets quoted.
+     If it ever goes back to noindex, remove both URLs from public/sitemap.xml in the
+     same commit - a page cannot ask to be indexed there and refuse it here. -->
+<meta name="robots" content="index, follow"/>
 <title>Pyrognosis — Fire Size-Up</title>
 
 <!-- Link preview. Without these the URL pastes into email, WhatsApp and LinkedIn as a
@@ -32,6 +37,40 @@
 <link rel="canonical" href="https://www.averiumdynamics.com/sizeup"/>
 <link rel="alternate" hreflang="en" href="https://www.averiumdynamics.com/sizeup"/>
 <link rel="alternate" hreflang="de" href="https://www.averiumdynamics.com/sizeup-de"/>
+<link rel="alternate" hreflang="x-default" href="https://www.averiumdynamics.com/sizeup"/>
+<!-- Structured data. Rewritten per language by build-sizeup.js - edit it THERE, not here.
+     It describes a free web tool, which is what this page is, and it is the reason an
+     answer engine asked for "free wildfire slope and wind tool" can name this one. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "@id": "https://www.averiumdynamics.com/sizeup#app",
+  "name": "Fire Size-Up",
+  "url": "https://www.averiumdynamics.com/sizeup",
+  "description": "See the ground before you arrive: how steep it is, which way the fire will run, the wind, and your nearest fire stations. From Averium Dynamics.",
+  "inLanguage": "en-GB",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any modern web browser",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR"
+  },
+  "featureList": [
+    "Slope of the ground at any point",
+    "The direction a fire is likely to run",
+    "Current wind speed and direction",
+    "Nearest fire stations and their distance"
+  ],
+  "image": "https://www.averiumdynamics.com/sizeup-preview.jpg",
+  "publisher": {
+    "@id": "https://www.averiumdynamics.com/#organization"
+  }
+}
+</script>
 <link rel="icon" type="image/png" href="/favicon.png"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>

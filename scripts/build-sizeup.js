@@ -36,6 +36,14 @@ const PAGES = {
       'the wind, and your nearest fire stations. From Averium Dynamics.',
     imgAlt:
       'The Fire Size-Up tool showing ground in the Müritz-Nationalpark with slope, wind and fire direction.',
+    schemaName: 'Fire Size-Up',
+    schemaLang: 'en-GB',
+    features: [
+      'Slope of the ground at any point',
+      'The direction a fire is likely to run',
+      'Current wind speed and direction',
+      'Nearest fire stations and their distance',
+    ],
   },
   de: {
     out: 'sizeup-de.html',
@@ -53,6 +61,14 @@ const PAGES = {
       'und die nächstgelegenen Feuerwachen. Von Averium Dynamics.',
     imgAlt:
       'Die Lagebeurteilung zeigt Wald im Müritz-Nationalpark mit Steilheit, Wind und Laufrichtung des Feuers.',
+    schemaName: 'Lagebeurteilung',
+    schemaLang: 'de-DE',
+    features: [
+      'Hangneigung an jedem Punkt',
+      'Wahrscheinliche Laufrichtung des Feuers',
+      'Aktuelle Windgeschwindigkeit und -richtung',
+      'Nächstgelegene Feuerwachen und ihre Entfernung',
+    ],
   },
 };
 
@@ -142,8 +158,34 @@ function build(lang) {
     /<link rel="canonical" href="[^"]*"\/>/,
     `<link rel="canonical" href="${p.url}"/>\n` +
     `<link rel="alternate" hreflang="en" href="${PAGES.en.url}"/>\n` +
-    `<link rel="alternate" hreflang="de" href="${PAGES.de.url}"/>`
+    `<link rel="alternate" hreflang="de" href="${PAGES.de.url}"/>
+` +
+    `<link rel="alternate" hreflang="x-default" href="${PAGES.en.url}"/>`
   );
+
+  // 5b. Structured data, one object per language. Built here rather than kept in the
+  // source because every value in it differs by language, and a second hand-kept copy
+  // is exactly how the two pages drifted before.
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    '@id': `${p.url}#app`,
+    name: p.schemaName,
+    url: p.url,
+    description: p.desc,
+    inLanguage: p.schemaLang,
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any modern web browser',
+    browserRequirements: 'Requires JavaScript',
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+    featureList: p.features,
+    image: p.image,
+    publisher: { '@id': `${SITE}/#organization` },
+  };
+  const ldRe = /(<script type="application\/ld\+json">\n)[\s\S]*?(\n<\/script>)/;
+  if (!ldRe.test(html)) throw new Error('build-sizeup: JSON-LD block not found in the source');
+  html = html.replace(ldRe, `$1${JSON.stringify(ld, null, 2)}$2`);
 
   // 6. Mark the active side of the EN/DE control.
   html = html

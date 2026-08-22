@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#1B4D3E"/>
 
 <title>Löschhubschrauber, Löschflugzeug, Tanklöschfahrzeug, Drohne: wofür jedes Mittel da ist</title>
-<meta name="description" content="Ein Feuer im Müritz-Nationalpark brannte wochenlang auf Boden, den niemand betreten durfte. Was jedes Einsatzmittel kann, was es nicht kann, und welche Lücke keines von ihnen gedeckt hat."/>
+<meta name="description" content="Ein Feuer im Müritz-Nationalpark brannte wochenlang auf Boden, den niemand betreten durfte. Was jedes Einsatzmittel kann, was nicht, und welche Lücke blieb."/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://www.averiumdynamics.com/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne"/>
 <link rel="alternate" hreflang="de" href="https://www.averiumdynamics.com/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne"/>
@@ -88,7 +88,7 @@
       "@id": "https://www.averiumdynamics.com/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne#webpage",
       "url": "https://www.averiumdynamics.com/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne",
       "name": "Löschhubschrauber, Löschflugzeug, Tanklöschfahrzeug, Drohne: wofür jedes Mittel da ist",
-      "description": "Ein Feuer im Müritz-Nationalpark brannte wochenlang auf Boden, den niemand betreten durfte. Was jedes Einsatzmittel kann, was es nicht kann, und welche Lücke keines von ihnen gedeckt hat.",
+      "description": "Ein Feuer im Müritz-Nationalpark brannte wochenlang auf Boden, den niemand betreten durfte. Was jedes Einsatzmittel kann, was nicht, und welche Lücke blieb.",
       "isPartOf": {
         "@id": "https://www.averiumdynamics.com/#website"
       },
@@ -109,7 +109,7 @@
         "@id": "https://www.averiumdynamics.com/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne#webpage"
       },
       "headline": "Löschhubschrauber, Löschflugzeug, Tanklöschfahrzeug, Drohne: wofür jedes Mittel da ist",
-      "description": "Ein Feuer im Müritz-Nationalpark brannte wochenlang auf Boden, den niemand betreten durfte. Was jedes Einsatzmittel kann, was es nicht kann, und welche Lücke keines von ihnen gedeckt hat.",
+      "description": "Ein Feuer im Müritz-Nationalpark brannte wochenlang auf Boden, den niemand betreten durfte. Was jedes Einsatzmittel kann, was nicht, und welche Lücke blieb.",
       "inLanguage": "de-DE",
       "datePublished": "2026-08-18",
       "dateModified": "2026-08-22",
@@ -147,6 +147,12 @@
         {
           "@type": "ListItem",
           "position": 2,
+          "name": "Field Notes",
+          "item": "https://www.averiumdynamics.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
           "name": "Löschhubschrauber, Löschflugzeug, Tanklöschfahrzeug, Drohne"
         }
       ]
@@ -212,6 +218,19 @@
   article{padding:5rem 0 4rem}
   h1{font-size:2.0625rem;letter-spacing:-.012em;margin-bottom:1.25rem}
   @media(min-width:768px){h1{font-size:3.375rem}}
+  /* Section label above the headline. It is also the only link on this page that
+     goes UP: the index links down to the articles and nothing pointed back until
+     2026-08-22. It is rendered because the BreadcrumbList in the JSON-LD names it,
+     and schema may only describe what is visible. */
+  .crumb{font-size:.8125rem;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:.9rem}
+  /* Underline via text-decoration rather than border-bottom, so the padding that
+     widens the tap target does not push the rule away from the word. Padding and
+     negative margin cancel out: the hit area grows from 17px to about 33px and
+     nothing moves on screen. */
+  .crumb a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--border);
+    text-underline-offset:3px;display:inline-block;padding:.5rem 0;margin:-.5rem 0}
+  .crumb a:hover{color:var(--primary);text-decoration-color:var(--primary)}
   .byline{font-size:.875rem;color:var(--muted);padding-bottom:2rem;border-bottom:1px solid var(--border);
     display:flex;flex-wrap:wrap;gap:.35rem 1.25rem;align-items:baseline;justify-content:space-between}
   .byline .lang{font-weight:600;white-space:nowrap}
@@ -318,6 +337,7 @@
 <article>
   <div class="wrap">
 
+    <p class="crumb"><a href="/blog">Field Notes</a></p>
     <h1>Löschhubschrauber, Löschflugzeug, Tanklöschfahrzeug, Drohne: wofür jedes Mittel da ist</h1>
     <p class="byline"><span>18. August 2026 · 6 Min. Lesezeit · Averium Dynamics UG, Berlin</span>
       <a class="lang" href="/blog/helicopter-air-tanker-fire-engine-drone"

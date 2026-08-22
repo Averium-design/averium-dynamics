@@ -232,6 +232,9 @@
   li{margin-bottom:.4rem}
 
   figure{margin:2.25rem 0}
+  /* <picture> is inline by default; without this the figure keeps a text
+     baseline gap under the photograph. */
+  figure picture{display:block}
   figure img{width:100%;height:auto;display:block;border:1px solid var(--border)}
   figcaption{font-size:.8125rem;color:var(--muted);margin-top:.6rem;line-height:1.55}
 
@@ -321,10 +324,19 @@
          hreflang="en">Read this in English</a></p>
 
     <figure>
-      <img src="/blog/img/smouldering-ground.jpg" width="1300" height="824"
-           alt="Rauch steigt von verbranntem Boden in einem gerodeten Waldstück auf, davor
+      <picture>
+        <source type="image/avif" srcset="/blog/img/smouldering-ground-424w.avif 424w, /blog/img/smouldering-ground-848w.avif 848w, /blog/img/smouldering-ground-1272w.avif 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/smouldering-ground-424w.webp 424w, /blog/img/smouldering-ground-848w.webp 848w, /blog/img/smouldering-ground-1272w.webp 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/smouldering-ground-848w.jpg"
+             srcset="/blog/img/smouldering-ground-424w.jpg 424w, /blog/img/smouldering-ground-848w.jpg 848w, /blog/img/smouldering-ground-1272w.jpg 1272w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1300" height="824"
+             alt="Rauch steigt von verbranntem Boden in einem gerodeten Waldstück auf, davor
                 Baumstümpfe."
-           decoding="async"/>
+             fetchpriority="high" decoding="async"/>
+      </picture>
       <figcaption>Boden, der schon gebrannt hat.</figcaption>
     </figure>
 
@@ -348,10 +360,19 @@
     <p>Einen einzigen Liter Wasser konnten sie nicht darauf bringen.</p>
 
     <figure>
-      <img src="/blog/img/fire-front-night.jpg" width="1600" height="1067"
-           alt="Ein Feuer brennt in der Dämmerung entlang eines bewaldeten Höhenzugs, sein Licht
+      <picture>
+        <source type="image/avif" srcset="/blog/img/fire-front-night-424w.avif 424w, /blog/img/fire-front-night-848w.avif 848w, /blog/img/fire-front-night-1272w.avif 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/fire-front-night-424w.webp 424w, /blog/img/fire-front-night-848w.webp 848w, /blog/img/fire-front-night-1272w.webp 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/fire-front-night-848w.jpg"
+             srcset="/blog/img/fire-front-night-424w.jpg 424w, /blog/img/fire-front-night-848w.jpg 848w, /blog/img/fire-front-night-1272w.jpg 1272w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1600" height="1067"
+             alt="Ein Feuer brennt in der Dämmerung entlang eines bewaldeten Höhenzugs, sein Licht
                 spiegelt sich im Wasser davor."
-           loading="lazy" decoding="async"/>
+             loading="lazy" decoding="async"/>
+      </picture>
     </figure>
 
     <p>Am Ende waren knapp 400 Hektar verbrannt, etwa ein Prozent des Nationalparks. Hunderte
@@ -432,10 +453,19 @@
     <h2>Das Tanklöschfahrzeug</h2>
 
     <figure>
-      <img src="/blog/img/fire-engine.jpg" width="1400" height="933"
-           alt="Ein Löschfahrzeug und ein kleineres Fahrzeug stehen auf einem sandigen Waldweg,
+      <picture>
+        <source type="image/avif" srcset="/blog/img/fire-engine-424w.avif 424w, /blog/img/fire-engine-848w.avif 848w, /blog/img/fire-engine-1272w.avif 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/fire-engine-424w.webp 424w, /blog/img/fire-engine-848w.webp 848w, /blog/img/fire-engine-1272w.webp 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/fire-engine-848w.jpg"
+             srcset="/blog/img/fire-engine-424w.jpg 424w, /blog/img/fire-engine-848w.jpg 848w, /blog/img/fire-engine-1272w.jpg 1272w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1400" height="933"
+             alt="Ein Löschfahrzeug und ein kleineres Fahrzeug stehen auf einem sandigen Waldweg,
                 davor ein Absperrband mit der Aufschrift Feuerwehr Sperrzone."
-           loading="lazy" decoding="async"/>
+             loading="lazy" decoding="async"/>
+      </picture>
       <figcaption>Kaum zu schlagen, bis zu der Stelle, an der der Weg endet.</figcaption>
     </figure>
 
@@ -463,10 +493,19 @@
     <h2>Der Löschhubschrauber</h2>
 
     <figure>
-      <img src="/blog/img/helicopter.jpg" width="1250" height="833"
-           alt="Ein Militärhubschrauber trägt einen Löschwasserbehälter an langer Leine über Rauch
+      <picture>
+        <source type="image/avif" srcset="/blog/img/helicopter-424w.avif 424w, /blog/img/helicopter-848w.avif 848w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/helicopter-424w.webp 424w, /blog/img/helicopter-848w.webp 848w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/helicopter-848w.jpg"
+             srcset="/blog/img/helicopter-424w.jpg 424w, /blog/img/helicopter-848w.jpg 848w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1250" height="833"
+             alt="Ein Militärhubschrauber trägt einen Löschwasserbehälter an langer Leine über Rauch
                 und einem bewaldeten Hang."
-           loading="lazy" decoding="async"/>
+             loading="lazy" decoding="async"/>
+      </picture>
       <figcaption>Ein Löschwasserbehälter an langer Leine. Die übliche Ausstattung für diese
         Arbeit.</figcaption>
     </figure>
@@ -494,9 +533,18 @@
     <h2>Das Löschflugzeug</h2>
 
     <figure>
-      <img src="/blog/img/air-tanker.jpg" width="1400" height="788"
-           alt="Ein gelb-rotes Löschflugzeug von unten, das eine große Wasserlast abwirft."
-           loading="lazy" decoding="async"/>
+      <picture>
+        <source type="image/avif" srcset="/blog/img/air-tanker-424w.avif 424w, /blog/img/air-tanker-848w.avif 848w, /blog/img/air-tanker-1272w.avif 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/air-tanker-424w.webp 424w, /blog/img/air-tanker-848w.webp 848w, /blog/img/air-tanker-1272w.webp 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/air-tanker-848w.jpg"
+             srcset="/blog/img/air-tanker-424w.jpg 424w, /blog/img/air-tanker-848w.jpg 848w, /blog/img/air-tanker-1272w.jpg 1272w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1400" height="788"
+             alt="Ein gelb-rotes Löschflugzeug von unten, das eine große Wasserlast abwirft."
+             loading="lazy" decoding="async"/>
+      </picture>
       <figcaption>Ein Löschflugzeug mitten im Abwurf.</figcaption>
     </figure>
 
@@ -531,10 +579,19 @@
       war.</p>
 
     <figure>
-      <img src="/blog/img/crew-at-the-edge.jpg" width="1400" height="770"
-           alt="Zwei Feuerwehrleute in Schutzkleidung arbeiten mit einem Schlauch über
+      <picture>
+        <source type="image/avif" srcset="/blog/img/crew-at-the-edge-424w.avif 424w, /blog/img/crew-at-the-edge-848w.avif 848w, /blog/img/crew-at-the-edge-1272w.avif 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/crew-at-the-edge-424w.webp 424w, /blog/img/crew-at-the-edge-848w.webp 848w, /blog/img/crew-at-the-edge-1272w.webp 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/crew-at-the-edge-848w.jpg"
+             srcset="/blog/img/crew-at-the-edge-424w.jpg 424w, /blog/img/crew-at-the-edge-848w.jpg 848w, /blog/img/crew-at-the-edge-1272w.jpg 1272w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1400" height="770"
+             alt="Zwei Feuerwehrleute in Schutzkleidung arbeiten mit einem Schlauch über
                 schwelendem Waldboden."
-           loading="lazy" decoding="async"/>
+             loading="lazy" decoding="async"/>
+      </picture>
       <figcaption>Normalerweise passiert die Arbeit auf diese Entfernung. An der Müritz kam
         niemand näher als einen Kilometer heran.</figcaption>
     </figure>
@@ -566,10 +623,19 @@
       wie immer.</p>
 
     <figure>
-      <img src="/blog/img/crew-on-the-ground.jpg" width="1400" height="933"
-           alt="Ein Feuerwehrmann in Helm und Schutzkleidung schlägt Flammen auf einem
+      <picture>
+        <source type="image/avif" srcset="/blog/img/crew-on-the-ground-424w.avif 424w, /blog/img/crew-on-the-ground-848w.avif 848w, /blog/img/crew-on-the-ground-1272w.avif 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/crew-on-the-ground-424w.webp 424w, /blog/img/crew-on-the-ground-848w.webp 848w, /blog/img/crew-on-the-ground-1272w.webp 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/crew-on-the-ground-848w.jpg"
+             srcset="/blog/img/crew-on-the-ground-424w.jpg 424w, /blog/img/crew-on-the-ground-848w.jpg 848w, /blog/img/crew-on-the-ground-1272w.jpg 1272w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1400" height="933"
+             alt="Ein Feuerwehrmann in Helm und Schutzkleidung schlägt Flammen auf einem
                 brennenden Feld aus."
-           loading="lazy" decoding="async"/>
+             loading="lazy" decoding="async"/>
+      </picture>
       <figcaption>Dieselben Leute, dieselbe Arbeit.</figcaption>
     </figure>
 

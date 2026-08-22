@@ -31,6 +31,17 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- The Field Notes index. A React route, so unlike the two articles below it
+       ships no server-rendered text - its worth here is that it links to both
+       of them from a page the nav links to, which a sitemap entry alone cannot
+       do. Restored 2026-08-22 after being removed on the 21st. -->
+  <url>
+    <loc>https://www.averiumdynamics.com/blog</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <url>
     <loc>https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone</loc>
     <lastmod>2026-08-22</lastmod>

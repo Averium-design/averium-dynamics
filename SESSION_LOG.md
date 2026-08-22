@@ -82,6 +82,17 @@ Read this file at the START of every session. Append at the END.
   visible byline says the organisation. Change one and you change both.
 - A `<caption>` inside a horizontally scrolling container gets clipped. Captions
   belong outside the scroll box.
+- DNS for averiumdynamics.com stays at Namecheap BasicDNS
+  (`dns1/dns2.registrar-servers.com`). Do NOT move nameservers to Vercel: the
+  domain carries live Zoho mail (3 MX, SPF, a Zoho verification TXT, `_dmarc`)
+  and `A pyrognosis 46.225.110.213`, the production platform server. Changing
+  nameservers drops every record not recreated by hand.
+- The apex is `A @ 216.198.79.1` (Vercel) and is added to the Vercel project
+  with a 308 to www. Both `averiumdynamics.com` and `www.averiumdynamics.com`
+  are separate entries there and both must stay.
+- Windows `nslookup` cannot query CAA and returns the A record instead, which
+  reads as "no CAA record" whether or not one exists. Query CAA over
+  DNS-over-HTTPS.
 
 ## Sessions
 
@@ -168,11 +179,8 @@ Three commits and a publish merge: `20aa044`, `fcb3744`, `7635923` /
 **Still open, and two of them are the ones that matter most.**
 - ~~Nothing on this site links to either article.~~ **Closed the same day** -
   see the addendum below.
-- **`https://averiumdynamics.com` times out.** The apex has no TLS listener:
-  `http://` returns 302 to www correctly, `https://` never completes a
-  handshake. Anyone typing the bare domain in a browser, which tries HTTPS
-  first, sees a dead site, and any backlink written to the apex passes nothing.
-  DNS, not this repo.
+- ~~`https://averiumdynamics.com` times out.~~ **Fixed the same day** - see
+  the addendum below.
 - Whether `/sizeup` should stay `noindex, nofollow`. A free tool that works
   anywhere is the kind of page that earns links; the flag was deliberate and is
   worth revisiting on purpose rather than by drift.
@@ -216,6 +224,43 @@ hamburger is a design decision, not a fix, and was not made here.
 Verified live: `/blog` returns its own title and description, and both article
 links from it resolve to the right pages with the comparison table present.
 `74b1902` / `e2fc0ec`.
+
+**The apex now works over HTTPS, and it was never a certificate problem.** The
+bare domain pointed at `162.255.119.98`, which identified itself as
+`X-Served-By: Namecheap URL Forward` / `Server: namecheap-nginx`. That service
+listens on port 80 only - port 443 timed out, no listener - so no certificate
+could exist for it however long anyone waited. The live certificate covered
+`CN=www.averiumdynamics.com` alone, which was the tell that the apex had never
+been added to the Vercel project at all.
+
+Fixed in two places, neither of them this repo. In Vercel, `averiumdynamics.com`
+was added to the project as a second domain with a 308 redirect to
+`www.averiumdynamics.com`. At Namecheap, the URL Redirect Record on `@` was
+deleted and replaced with `A @ 216.198.79.1`, the value from the project's own
+domain card. Vercel then issued the certificate itself.
+
+**The shortcut that was deliberately not taken: moving nameservers to Vercel.**
+It is the obvious fix and it would have broken company email. The domain carries
+live Zoho mail - three MX records, an SPF record and a Zoho verification TXT -
+plus `_dmarc`, and an `A pyrognosis 46.225.110.213` record pointing at the
+production platform server. Moving nameservers drops everything not manually
+recreated. DNS stays at Namecheap BasicDNS; one record changed.
+
+Checked before the change and clear: no CAA records exist on the domain, which
+is the usual silent blocker for Let's Encrypt issuance. Windows `nslookup`
+cannot query CAA and answers with the A record instead, which reads as "no CAA"
+whether or not one exists - it was checked over DNS-over-HTTPS instead.
+
+Verified after: `A 216.198.79.1` on two independent resolvers; a Let's Encrypt
+certificate whose subject is `CN=averiumdynamics.com`, valid 22 Aug to 20 Nov
+2026; `https://averiumdynamics.com` returning 308 to
+`https://www.averiumdynamics.com/` and a 200; a real browser loading the bare
+domain with no certificate warning; and MX, SPF, the Zoho TXT and the
+`pyrognosis` A record all still present afterwards.
+
+One thing improved that was not the goal. The old Namecheap forward sent
+visitors to `http://www...`, so even the path that worked was an insecure hop.
+The redirect is now HTTPS end to end.
 
 **Recorded late, from the commits.** Two commit pairs from 21 August never
 reached this file, because the entry above them was written at 12:45 and both

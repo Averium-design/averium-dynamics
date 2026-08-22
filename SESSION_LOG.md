@@ -344,7 +344,7 @@ intact, zero replacement characters on the German page, and the map still loads
 (15 tiles EN, 12 DE). `grep -i "for this test|diesen Test"` returns nothing
 across the source and both live pages.
 
-`b0e1f4a`-range work commit / `aa0eb23` publish.
+`26aaa9e` / `aa0eb23`.
 
 **Recorded late, from the commits.** Two commit pairs from 21 August never
 reached this file, because the entry above them was written at 12:45 and both

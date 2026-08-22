@@ -35,6 +35,124 @@
 <meta name="twitter:description" content="A fire in Muritz burned for weeks on ground nobody was allowed to walk on. What each tool is good at, and the gap none of them covered."/>
 <meta name="twitter:image" content="https://www.averiumdynamics.com/blog/img/og-card.jpg"/>
 
+
+<!-- Structured data. It does not make the page rank: Google confirmed schema is
+     not a ranking factor. It is here because it is what an AI answer engine reads
+     to work out who wrote this, when, and what it is about, and because Google
+     requires that schema describe only what is actually visible on the page.
+     If the byline, the date or the sources change, change them here too. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.averiumdynamics.com/#organization",
+      "name": "Averium Dynamics",
+      "legalName": "Averium Dynamics UG (haftungsbeschraenkt)",
+      "url": "https://www.averiumdynamics.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://www.averiumdynamics.com/#logo",
+        "url": "https://www.averiumdynamics.com/logo.png",
+        "contentUrl": "https://www.averiumdynamics.com/logo.png"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Berlin",
+        "addressCountry": "DE"
+      },
+      "email": "info@averiumdynamics.com",
+      "identifier": "HRB 285037 B, Amtsgericht Charlottenburg",
+      "knowsAbout": [
+        "Wildfire detection",
+        "Wildfire prediction",
+        "Autonomous firefighting drones",
+        "Fire behaviour modelling"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.averiumdynamics.com/#website",
+      "url": "https://www.averiumdynamics.com/",
+      "name": "Averium Dynamics",
+      "publisher": {
+        "@id": "https://www.averiumdynamics.com/#organization"
+      },
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone#webpage",
+      "url": "https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone",
+      "name": "Helicopter, air tanker, fire engine, drone: what each one is for",
+      "description": "A fire in Mueritz National Park burned for weeks on ground nobody was allowed to walk on. What each firefighting tool is good at, what it cannot do, and the gap none of them covered.",
+      "isPartOf": {
+        "@id": "https://www.averiumdynamics.com/#website"
+      },
+      "inLanguage": "en-GB",
+      "breadcrumb": {
+        "@id": "https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone#breadcrumb"
+      },
+      "datePublished": "2026-08-18",
+      "dateModified": "2026-08-22"
+    },
+    {
+      "@type": "Article",
+      "@id": "https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone#article",
+      "isPartOf": {
+        "@id": "https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone#webpage"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone#webpage"
+      },
+      "headline": "Helicopter, air tanker, fire engine, drone: what each one is for",
+      "description": "A fire in Mueritz National Park burned for weeks on ground nobody was allowed to walk on. What each firefighting tool is good at, what it cannot do, and the gap none of them covered.",
+      "inLanguage": "en-GB",
+      "datePublished": "2026-08-18",
+      "dateModified": "2026-08-22",
+      "author": {
+        "@id": "https://www.averiumdynamics.com/#organization"
+      },
+      "publisher": {
+        "@id": "https://www.averiumdynamics.com/#organization"
+      },
+      "image": [
+        "https://www.averiumdynamics.com/blog/img/og-card.jpg",
+        "https://www.averiumdynamics.com/blog/img/smouldering-ground.jpg",
+        "https://www.averiumdynamics.com/blog/img/fire-front-night.jpg",
+        "https://www.averiumdynamics.com/blog/img/helicopter.jpg"
+      ],
+      "wordCount": 1365,
+      "isAccessibleForFree": true,
+      "articleSection": "Wildfire response",
+      "citation": [
+        "https://www.nordkurier.de/regional/mecklenburg-vorpommern/grossbrand-im-nationalpark-weitet-sich-aus-duestere-prognose-fuer-die-anwohner-und-feuerwehr-4719357",
+        "https://www.bundeswehr.de/de/organisation/operatives-fuehrungskommando-der-bundeswehr/bundewehr-mueritz-waldbrand-unterstuetzung-6123090",
+        "https://www.mueritz-nationalpark.de/presse/detail/waldbrand-im-mueritz-nationalpark-unter-kontrolle-nachsorge-und-sicherung-geht-weiter"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Averium Dynamics",
+          "item": "https://www.averiumdynamics.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Helicopter, air tanker, fire engine, drone"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
 <link rel="icon" type="image/png" href="/favicon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -159,6 +277,26 @@
     figure{break-inside:avoid}
     a{color:#000;text-decoration:underline}
   }
+
+  /* Comparison table, added 2026-08-22. It restates the four sections below on
+     the five criteria named above it, and adds no claim the prose does not make.
+     It is here for two readers: someone deciding what to send a crew, who wants
+     the shape of the answer before 1,300 words of it, and an answer engine,
+     which extracts a table far more reliably than the same facts spread over
+     six sections. It must stay a real <table> for both of those to work.
+     Wide content scrolls inside its own box; the page never scrolls sideways. */
+  .tablefig{margin:2.25rem 0}
+  .tablefig figcaption{margin:0 0 .85rem;font-size:.875rem;line-height:1.6;color:var(--muted)}
+  .tablefig .hint{display:none}
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;width:100%;min-width:44rem;font-size:.9375rem;line-height:1.55}
+  th,td{border-top:1px solid var(--border);padding:.8rem .85rem;vertical-align:top;text-align:left}
+  thead th{border-top:none;border-bottom:2px solid var(--primary);color:var(--primary);
+    font-weight:600;white-space:nowrap}
+  tbody th{font-weight:600;width:10rem;color:var(--fg)}
+  td{color:var(--fg)}
+  tbody tr:last-child th,tbody tr:last-child td{border-bottom:1px solid var(--border)}
+  @media(max-width:700px){.tablefig .hint{display:inline}}
 </style>
 </head>
 <body>
@@ -231,6 +369,61 @@
       firefighting aircraft are hard to find, so this piece gives none rather than estimating.
       None of the four tools wins on all five points, which is why the comparison is worth
       making at all.</p>
+
+    <figure class="tablefig">
+<figcaption>The five criteria, applied. Read down a column for one tool, across a row to compare all four. Nothing in it is claimed that the sections below do not. <span class="hint">The table scrolls sideways on a narrow screen.</span></figcaption>
+<div class="tablewrap">
+<table>
+  <thead>
+    <tr><td></td><th scope="col">Fire engine</th><th scope="col">Helicopter</th><th scope="col">Air tanker</th><th scope="col">Drone</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Time until something lands on the fire</th>
+      <td>Quick to the last paved road. After that it is navigation, in forest, usually at night.</td>
+      <td>Minutes over ground a vehicle would need hours to cross.</td>
+      <td>Requested, moved, loaded and flown, from a base rarely close. A tool for the second day.</td>
+      <td>Reaches ground with no road to it quickly, and nobody has to find the way in first.</td>
+    </tr>
+    <tr>
+      <th scope="row">What one call-out costs</th>
+      <td>No figure given, for the reason above.</td>
+      <td>Enough that one is only called in an emergency.</td>
+      <td>No figure given, for the reason above.</td>
+      <td>A fraction of a flight with a pilot on board.</td>
+    </tr>
+    <tr>
+      <th scope="row">Where it can go, and where it is allowed to go</th>
+      <td>Where a road goes.</td>
+      <td>Over anything, including ground crews are not allowed to walk on.</td>
+      <td>Over anything, but from a base that is rarely near.</td>
+      <td>Ground with no road, and ground nobody is allowed to walk on.</td>
+    </tr>
+    <tr>
+      <th scope="row">People in the danger area</th>
+      <td>The crew, on foot, seeing what is in front of them.</td>
+      <td>The aircrew, overhead.</td>
+      <td>The aircrew, overhead.</td>
+      <td>Nobody.</td>
+    </tr>
+    <tr>
+      <th scope="row">How much it carries</th>
+      <td>Real volume, refillable, and it cools the ground rather than knocking the flame down.</td>
+      <td>More than anything on wheels could bring in the time. Water from height spreads, and some is gone before it lands.</td>
+      <td>More per run than anything else here.</td>
+      <td>A small tank. Against a developed fire it is useless, and dry powder does not cool the fuel underneath.</td>
+    </tr>
+    <tr>
+      <th scope="row">The job it actually covers</th>
+      <td>The fire you can drive to, and the hot spots and the wetting down afterwards.</td>
+      <td>A fire that has already got away.</td>
+      <td>The backbone of the air response around the Mediterranean. In a German district, the second day.</td>
+      <td>A small fire, in the first minutes, somewhere nothing else reaches in that time.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</figure>
 
     <h2>The fire engine</h2>
 

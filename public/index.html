@@ -4,12 +4,77 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#1B4D3E" />
-    <meta name="description" content="Averium Dynamics - Wildfire Prevention Through Autonomous Infrastructure" />
+    <meta name="description" content="Averium Dynamics builds BioSphereX, a closed-loop system that predicts, suppresses and contains wildfires. Berlin, Germany. Pyrognosis, the prediction layer, is ready for pilot deployment." />
+    <link rel="canonical" href="https://www.averiumdynamics.com/" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon.png" />
     <title>Averium Dynamics - Wildfire Prevention</title>
+
+    <!-- Added 2026-08-22. This head is the only part of the homepage that is not
+         built by JavaScript, so it is the only part every crawler and every link
+         preview is guaranteed to see. The body is a client-rendered React app:
+         the HTML shipped for "/" contains an empty <div id="root"> and nothing
+         else, which is why the description and the Organization block below have
+         to carry the meaning rather than point at it. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Averium Dynamics" />
+    <meta property="og:title" content="Averium Dynamics - Wildfire Prevention" />
+    <meta property="og:description" content="A closed-loop system that predicts, suppresses and contains wildfires, built in Berlin for fire services and environmental authorities." />
+    <meta property="og:url" content="https://www.averiumdynamics.com/" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:image" content="https://www.averiumdynamics.com/logo.png" />
+    <meta property="og:image:alt" content="Averium Dynamics" />
+    <meta name="twitter:card" content="summary" />
+
+    <!-- The Organization node the two articles point at by @id. Their schema
+         says author and publisher are "https://www.averiumdynamics.com/#organization";
+         this is where that identifier is defined. Delete this and those
+         references dangle. Keep the @id string byte-identical across all three
+         files. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.averiumdynamics.com/#organization",
+          "name": "Averium Dynamics",
+          "legalName": "Averium Dynamics UG (haftungsbeschraenkt)",
+          "url": "https://www.averiumdynamics.com/",
+          "email": "info@averiumdynamics.com",
+          "identifier": "HRB 285037 B, Amtsgericht Charlottenburg",
+          "description": "Averium Dynamics builds BioSphereX, a closed-loop wildfire system with three layers - predict, suppress, contain - for fire agencies and environmental authorities. Pyrognosis, the prediction layer, has been tested on Spain and is ready for pilot deployment.",
+          "logo": {
+            "@type": "ImageObject",
+            "@id": "https://www.averiumdynamics.com/#logo",
+            "url": "https://www.averiumdynamics.com/logo.png",
+            "contentUrl": "https://www.averiumdynamics.com/logo.png"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Berlin",
+            "addressCountry": "DE"
+          },
+          "knowsAbout": [
+            "Wildfire detection",
+            "Wildfire prediction",
+            "Autonomous firefighting drones",
+            "Fire behaviour modelling"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.averiumdynamics.com/#website",
+          "url": "https://www.averiumdynamics.com/",
+          "name": "Averium Dynamics",
+          "inLanguage": "en-GB",
+          "publisher": { "@id": "https://www.averiumdynamics.com/#organization" }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

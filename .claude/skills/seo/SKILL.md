@@ -45,9 +45,10 @@ quoted accurately**, not for ranking a brand term nobody types.
   the page to read the tag. Blocking it leaves the page indexable-by-rumour:
   reachable by link, never re-checked, impossible to remove.
 - **Never list a `noindex` URL in the sitemap.** Asking for indexing in one
-  place and refusing it in another discredits the whole file. `/sizeup` and
-  `/sizeup-de` are currently `noindex, nofollow, noarchive` — which also means
-  they cannot pass a link to anything.
+  place and refusing it in another discredits the whole file. If a page's robots
+  tag changes, the sitemap changes in the SAME commit. `/sizeup` and `/sizeup-de`
+  were `noindex, nofollow, noarchive` until 2026-08-22 and are now `index, follow`
+  and listed.
 - **`lastmod` must be a real date.** A sitemap that claims today on every crawl
   is treated as noise.
 - **Every hreflang set must list every language including itself.** A set where
@@ -60,7 +61,10 @@ quoted accurately**, not for ranking a brand term nobody types.
   referenced by `@id` from the articles. Keep
   `https://www.averiumdynamics.com/#organization` byte-identical everywhere.
 - **The two Size-Up pages are generated.** Edit `scripts/sizeup.src.html` and
-  run `node scripts/build-sizeup.js`.
+  run `node scripts/build-sizeup.js`. Anything that differs BY LANGUAGE belongs in
+  `PAGES` in the build script, not in the source — including the JSON-LD, which
+  is rewritten per language. A second hand-kept copy is how these two pages
+  drifted before.
 - **Run `npm run check` before committing.** It catches invisible characters
   that make a word un-greppable and never show in a diff.
 

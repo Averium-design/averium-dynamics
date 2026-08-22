@@ -413,6 +413,40 @@ measure again, not a result.
 
 `0fe94d8` publish.
 
+**Both nits from the audit are closed.** The meta descriptions were 181
+characters in English and 187 in German against a usable limit near 160, so
+Google was going to cut both mid-sentence. Now 157 and 156, carrying the same
+claim - the fire, the ground nobody could walk on, the gap. The description in
+the JSON-LD follows the meta tag rather than drifting from it.
+
+**Nothing linked back up.** The index links down to the articles; nothing
+pointed the other way, so a reader arriving from a search result had no way to
+find out anything else existed. A "Field Notes" label now sits above the
+headline - the standard editorial place for a section name, which happens to be
+the link. It is rendered rather than implied because the BreadcrumbList names
+it and schema may only describe what is on the page. That breadcrumb is three
+levels now, where it used to skip from the homepage straight to the article.
+
+**The tap target needed a second pass, and the first version was too small.** As
+first written the link was 17px high, which is the line box and nothing more.
+Switching from `border-bottom` to `text-decoration` with an underline offset
+means vertical padding no longer drags the rule away from the word, so padding
+plus a cancelling negative margin buys 39px of hit area and moves nothing on
+screen. The 44px rule this borrows from is a Size-Up rule written for a phone at
+a roadside; an article eyebrow is a gentler case, but 17px was too small on any
+reading.
+
+Known and deliberate: `/blog` is English only, so the German article links to an
+English index. A German index is a bigger decision than that commit.
+
+Verified live in both languages: 157 and 156 characters, the crumb resolves to
+`/blog` (200), three breadcrumb levels each. One measurement wobbled - reading
+the German page through a shell pipe reported 158 characters because of how the
+pipe decoded the umlauts; read as UTF-8 from the file it is 156. When a count
+involves non-ASCII, read the bytes properly before believing the number.
+
+`15953b6` publish.
+
 **Recorded late, from the commits.** Two commit pairs from 21 August never
 reached this file, because the entry above them was written at 12:45 and both
 landed afterwards:

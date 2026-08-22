@@ -318,6 +318,34 @@ ceiling on that.
 
 `8a1e9d5` / `765ae69`, and `82158d8` for the skill correction.
 
+**"For this test" is gone from the Size-Up, and the German was worse than the
+English.** Honest wording while the only visitors were briefed crews being asked
+for an opinion; to a stranger arriving from a search result it reads as a
+prototype nobody should rely on, which is the opposite of what the page is for.
+It had to go once the page was indexed, which happened earlier the same day.
+
+The two languages did not say the same thing. English offered "anywhere in the
+world"; German offered "für diesen Test eine beliebige Stelle in Deutschland" -
+anywhere in Germany, for a test. **The tool was never limited to Germany**:
+elevation is Copernicus DEM GLO-90, documented worldwide, and the stations come
+from OSM through Overpass, also worldwide. A German reader was being told the
+tool could do less than it can, and that had been true since the German page
+shipped. Both now read "anywhere in the world".
+
+Three copies of the same sentence, all changed: the EN and DE entries in the STR
+table, and the hardcoded English fallback inside the element - the one that
+flashes before the script runs and that a crawler reads if it does not execute
+JavaScript. Missing that third copy is how English text has shipped inside the
+German page twice before.
+
+Verified on production in a browser rather than by grep alone, because the check
+involves non-ASCII: both CTAs read correctly, the em dash and the umlauts are
+intact, zero replacement characters on the German page, and the map still loads
+(15 tiles EN, 12 DE). `grep -i "for this test|diesen Test"` returns nothing
+across the source and both live pages.
+
+`b0e1f4a`-range work commit / `aa0eb23` publish.
+
 **Recorded late, from the commits.** Two commit pairs from 21 August never
 reached this file, because the entry above them was written at 12:45 and both
 landed afterwards:

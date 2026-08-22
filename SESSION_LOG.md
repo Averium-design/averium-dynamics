@@ -105,6 +105,11 @@ Read this file at the START of every session. Append at the END.
 - The article figure is 848 CSS px at most (`.wrap` is 56rem minus 1.5rem
   padding). Any new image belongs in a `<picture>` with
   `sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"`.
+- Two skills live in `.claude/skills/`: `seo` (indexing, robots, sitemap,
+  schema, what has been ruled out) and `field-notes` (voice, factual discipline,
+  bilingual rules, typography, and a pre-publish checklist). Read the relevant
+  one BEFORE writing or editing a page, and update it in the same commit when a
+  fact it states stops being true - that has already been missed once.
 
 ## Sessions
 
@@ -446,6 +451,39 @@ pipe decoded the umlauts; read as UTF-8 from the file it is 156. When a count
 involves non-ASCII, read the bytes properly before believing the number.
 
 `15953b6` publish.
+
+**Everything needed to write article two is now a skill, not a log to re-read.**
+`.claude/skills/field-notes/` with `references/checklist.md` beside it. All of it
+was already true; it existed only as a narrative of incidents spread across four
+days of this file, which is not a form anyone can follow while writing.
+
+It carries the things that are not visible in the code: the machine-writing
+tells that got the first draft rejected and are structural rather than
+vocabulary, with the "not X. It is Y." construction capped at two per article
+and an instruction to count them; the factual discipline, including that a claim
+which fails checking is dropped rather than softened and that the piece gives no
+euro figures because none could be sourced; the bilingual rules that look like
+mistakes if you do not know why (identical image sets, one reading time for two
+word counts, one byline date); the four photographs that were removed and what
+was wrong with each; and the wiring a new article needs and is easy to half-do -
+both `vercel.json` rewrites, both sitemap entries, `posts` in `src/Blog.js`, and
+the hardcoded `TARGETS` list in `check-invisible.js` that silently ignores any
+file nobody adds to it.
+
+The typography numbers in it were **verified against the CSS rather than copied
+from this log** - h1 3.375rem/2.0625rem, h2 1.9rem/1.5rem - and one claim was
+wrong on the first pass: "seven figures" is seven photographs plus the
+comparison table, eight `<figure>` elements. Corrected before commit.
+
+Open items are listed explicitly so article two inherits them knowingly rather
+than rediscovering them: the OG card is still a crop of a photograph inside the
+article, the byline is the organisation rather than a named author, and the
+Pixabay credit line has no file mapping.
+
+Complements the `seo` skill, which owns the indexing side. They overlap at the
+checklist deliberately.
+
+`1f4ead3` publish.
 
 **Recorded late, from the commits.** Two commit pairs from 21 August never
 reached this file, because the entry above them was written at 12:45 and both

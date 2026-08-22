@@ -166,12 +166,8 @@ Three commits and a publish merge: `20aa044`, `fcb3744`, `7635923` /
 `9b7ee97`.
 
 **Still open, and two of them are the ones that matter most.**
-- **Nothing on this site links to either article.** `grep -rln blog src/`
-  returns nothing and has since the Field Notes index was removed on 21 August.
-  The sitemap now declares them, which is a weaker signal than a link, and the
-  Size-Up pages cannot carry that link because they are `nofollow`. Re-adding an
-  index would reverse a decision taken the day before, so it is a decision, not
-  a fix.
+- ~~Nothing on this site links to either article.~~ **Closed the same day** -
+  see the addendum below.
 - **`https://averiumdynamics.com` times out.** The apex has no TLS listener:
   `http://` returns 302 to www correctly, `https://` never completes a
   handshake. Anyone typing the bare domain in a browser, which tries HTTPS
@@ -183,6 +179,43 @@ Three commits and a publish merge: `20aa044`, `fcb3744`, `7635923` /
 - `og-card.jpg` is still a crop of a photograph inside the article, unchanged.
 - The homepage still ships an empty `<div id="root">` to crawlers. Metadata now
   carries the meaning; the rendering strategy is untouched.
+
+**Field Notes is back, and that reverses eb7258d from the day before.** Leo's
+decision, taken once the consequence was on the table: both articles had been
+reachable only by direct URL since 21 August, and the sitemap added this morning
+declares them but cannot substitute for a link. The Size-Up pages could not
+carry that link either - they are `nofollow`.
+
+Restored rather than rewritten. `src/Blog.js` is the file as it stood at
+`eb7258d^`, and the `App.js` change is that commit's own diff applied in
+reverse: the import, the nav link, the footer link and the `/blog` route, 25
+lines, nothing else. The invisible-character check that shipped in the same
+commit is untouched. The original removal recorded no reason, which is why it
+was restored intact rather than reconstructed.
+
+**The title fix from the 21st survived, and was checked by loading the page
+rather than by trusting the build.** `/blog` reads "Field Notes - Averium
+Dynamics" on the live site, and returning to `/` restores both the homepage
+title and its description. This route inherited the homepage's title twice
+before, on 19 and 21 August, and the build passed both times.
+
+**`check-invisible.js` had a hardcoded TARGETS list, so three shipping files
+were unchecked**: `src/Blog.js`, and this morning's `public/robots.txt` and
+`public/sitemap.xml`. Added. 13 files to 16, all clean. Any new hand-written
+file is invisible to that check until someone edits the list - worth knowing
+before trusting a "clean" result.
+
+`/blog` is in the sitemap. It ships no server-rendered text, being a React
+route; its worth is that it links to both articles from a page the nav links to.
+
+**Unchanged, and it limits this.** The nav is `hidden md:flex` with no
+hamburger, so at 375px the nav link is not rendered at all and mobile readers
+reach the blog through the footer link only. Verified at both widths. A
+hamburger is a design decision, not a fix, and was not made here.
+
+Verified live: `/blog` returns its own title and description, and both article
+links from it resolve to the right pages with the comparison table present.
+`74b1902` / `e2fc0ec`.
 
 **Recorded late, from the commits.** Two commit pairs from 21 August never
 reached this file, because the entry above them was written at 12:45 and both

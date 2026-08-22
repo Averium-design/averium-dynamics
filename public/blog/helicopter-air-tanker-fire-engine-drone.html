@@ -230,6 +230,9 @@
   li{margin-bottom:.4rem}
 
   figure{margin:2.25rem 0}
+  /* <picture> is inline by default; without this the figure keeps a text
+     baseline gap under the photograph. */
+  figure picture{display:block}
   figure img{width:100%;height:auto;display:block;border:1px solid var(--border)}
   figcaption{font-size:.8125rem;color:var(--muted);margin-top:.6rem;line-height:1.55}
 
@@ -319,9 +322,18 @@
          hreflang="de">Auf Deutsch lesen</a></p>
 
     <figure>
-      <img src="/blog/img/smouldering-ground.jpg" width="1300" height="824"
-           alt="Smoke rising from burnt ground in a cleared forest, with tree stumps in front."
-           decoding="async"/>
+      <picture>
+        <source type="image/avif" srcset="/blog/img/smouldering-ground-424w.avif 424w, /blog/img/smouldering-ground-848w.avif 848w, /blog/img/smouldering-ground-1272w.avif 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/smouldering-ground-424w.webp 424w, /blog/img/smouldering-ground-848w.webp 848w, /blog/img/smouldering-ground-1272w.webp 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/smouldering-ground-848w.jpg"
+             srcset="/blog/img/smouldering-ground-424w.jpg 424w, /blog/img/smouldering-ground-848w.jpg 848w, /blog/img/smouldering-ground-1272w.jpg 1272w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1300" height="824"
+             alt="Smoke rising from burnt ground in a cleared forest, with tree stumps in front."
+             fetchpriority="high" decoding="async"/>
+      </picture>
       <figcaption>Ground that has already burned.</figcaption>
     </figure>
 
@@ -344,10 +356,19 @@
     <p>They could not put a single litre of water on it.</p>
 
     <figure>
-      <img src="/blog/img/fire-front-night.jpg" width="1600" height="1067"
-           alt="A fire burning along a forested ridge at dusk, its light reflected in the water
+      <picture>
+        <source type="image/avif" srcset="/blog/img/fire-front-night-424w.avif 424w, /blog/img/fire-front-night-848w.avif 848w, /blog/img/fire-front-night-1272w.avif 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/fire-front-night-424w.webp 424w, /blog/img/fire-front-night-848w.webp 848w, /blog/img/fire-front-night-1272w.webp 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/fire-front-night-848w.jpg"
+             srcset="/blog/img/fire-front-night-424w.jpg 424w, /blog/img/fire-front-night-848w.jpg 848w, /blog/img/fire-front-night-1272w.jpg 1272w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1600" height="1067"
+             alt="A fire burning along a forested ridge at dusk, its light reflected in the water
                 in front."
-           loading="lazy" decoding="async"/>
+             loading="lazy" decoding="async"/>
+      </picture>
     </figure>
 
     <p>By the end it had burned close to 400 hectares, about one per cent of the national park.
@@ -428,10 +449,19 @@
     <h2>The fire engine</h2>
 
     <figure>
-      <img src="/blog/img/fire-engine.jpg" width="1400" height="933"
-           alt="A German fire engine and a smaller unit stopped on a sandy forest track, behind
+      <picture>
+        <source type="image/avif" srcset="/blog/img/fire-engine-424w.avif 424w, /blog/img/fire-engine-848w.avif 848w, /blog/img/fire-engine-1272w.avif 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/fire-engine-424w.webp 424w, /blog/img/fire-engine-848w.webp 848w, /blog/img/fire-engine-1272w.webp 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/fire-engine-848w.jpg"
+             srcset="/blog/img/fire-engine-424w.jpg 424w, /blog/img/fire-engine-848w.jpg 848w, /blog/img/fire-engine-1272w.jpg 1272w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1400" height="933"
+             alt="A German fire engine and a smaller unit stopped on a sandy forest track, behind
                 tape reading Feuerwehr Sperrzone."
-           loading="lazy" decoding="async"/>
+             loading="lazy" decoding="async"/>
+      </picture>
       <figcaption>Hard to beat, right up to the point where the road ends.</figcaption>
     </figure>
 
@@ -458,10 +488,19 @@
     <h2>The helicopter</h2>
 
     <figure>
-      <img src="/blog/img/helicopter.jpg" width="1250" height="833"
-           alt="A military helicopter carrying a water bucket on a long line, above smoke and a
+      <picture>
+        <source type="image/avif" srcset="/blog/img/helicopter-424w.avif 424w, /blog/img/helicopter-848w.avif 848w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/helicopter-424w.webp 424w, /blog/img/helicopter-848w.webp 848w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/helicopter-848w.jpg"
+             srcset="/blog/img/helicopter-424w.jpg 424w, /blog/img/helicopter-848w.jpg 848w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1250" height="833"
+             alt="A military helicopter carrying a water bucket on a long line, above smoke and a
                 wooded ridge."
-           loading="lazy" decoding="async"/>
+             loading="lazy" decoding="async"/>
+      </picture>
       <figcaption>A bucket on a long line. The standard fit for this work.</figcaption>
     </figure>
 
@@ -488,10 +527,19 @@
     <h2>The air tanker</h2>
 
     <figure>
-      <img src="/blog/img/air-tanker.jpg" width="1400" height="788"
-           alt="A yellow and red water bomber aircraft seen from below, releasing a large load
+      <picture>
+        <source type="image/avif" srcset="/blog/img/air-tanker-424w.avif 424w, /blog/img/air-tanker-848w.avif 848w, /blog/img/air-tanker-1272w.avif 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/air-tanker-424w.webp 424w, /blog/img/air-tanker-848w.webp 848w, /blog/img/air-tanker-1272w.webp 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/air-tanker-848w.jpg"
+             srcset="/blog/img/air-tanker-424w.jpg 424w, /blog/img/air-tanker-848w.jpg 848w, /blog/img/air-tanker-1272w.jpg 1272w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1400" height="788"
+             alt="A yellow and red water bomber aircraft seen from below, releasing a large load
                 of water."
-           loading="lazy" decoding="async"/>
+             loading="lazy" decoding="async"/>
+      </picture>
       <figcaption>A water bomber part-way through a drop.</figcaption>
     </figure>
 
@@ -526,10 +574,19 @@
       part.</p>
 
     <figure>
-      <img src="/blog/img/crew-at-the-edge.jpg" width="1400" height="770"
-           alt="Two firefighters in German protective clothing working a hose line over a
+      <picture>
+        <source type="image/avif" srcset="/blog/img/crew-at-the-edge-424w.avif 424w, /blog/img/crew-at-the-edge-848w.avif 848w, /blog/img/crew-at-the-edge-1272w.avif 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/crew-at-the-edge-424w.webp 424w, /blog/img/crew-at-the-edge-848w.webp 848w, /blog/img/crew-at-the-edge-1272w.webp 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/crew-at-the-edge-848w.jpg"
+             srcset="/blog/img/crew-at-the-edge-424w.jpg 424w, /blog/img/crew-at-the-edge-848w.jpg 848w, /blog/img/crew-at-the-edge-1272w.jpg 1272w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1400" height="770"
+             alt="Two firefighters in German protective clothing working a hose line over a
                 smouldering forest floor."
-           loading="lazy" decoding="async"/>
+             loading="lazy" decoding="async"/>
+      </picture>
       <figcaption>Normally the work happens this close. At Müritz nobody could come within a
         kilometre.</figcaption>
     </figure>
@@ -559,10 +616,19 @@
       and the rest is damage limitation, done by the same people as always.</p>
 
     <figure>
-      <img src="/blog/img/crew-on-the-ground.jpg" width="1400" height="933"
-           alt="A firefighter in helmet and protective clothing beating out flames in a burning
+      <picture>
+        <source type="image/avif" srcset="/blog/img/crew-on-the-ground-424w.avif 424w, /blog/img/crew-on-the-ground-848w.avif 848w, /blog/img/crew-on-the-ground-1272w.avif 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/crew-on-the-ground-424w.webp 424w, /blog/img/crew-on-the-ground-848w.webp 848w, /blog/img/crew-on-the-ground-1272w.webp 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/crew-on-the-ground-848w.jpg"
+             srcset="/blog/img/crew-on-the-ground-424w.jpg 424w, /blog/img/crew-on-the-ground-848w.jpg 848w, /blog/img/crew-on-the-ground-1272w.jpg 1272w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1400" height="933"
+             alt="A firefighter in helmet and protective clothing beating out flames in a burning
                 field."
-           loading="lazy" decoding="async"/>
+             loading="lazy" decoding="async"/>
+      </picture>
       <figcaption>The same people, doing the same work.</figcaption>
     </figure>
 

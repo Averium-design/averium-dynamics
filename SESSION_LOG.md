@@ -93,6 +93,11 @@ Read this file at the START of every session. Append at the END.
 - Windows `nslookup` cannot query CAA and returns the A record instead, which
   reads as "no CAA record" whether or not one exists. Query CAA over
   DNS-over-HTTPS.
+- `/sizeup` and `/sizeup-de` are `index, follow` since 2026-08-22 and are in
+  the sitemap. If either goes back to `noindex`, remove it from the sitemap in
+  the SAME commit. Every load costs an Open-Meteo call against a paid key.
+- In `build-sizeup.js`, anything that differs by language lives in `PAGES`, not
+  in `sizeup.src.html`. That now includes the JSON-LD.
 
 ## Sessions
 
@@ -181,9 +186,8 @@ Three commits and a publish merge: `20aa044`, `fcb3744`, `7635923` /
   see the addendum below.
 - ~~`https://averiumdynamics.com` times out.~~ **Fixed the same day** - see
   the addendum below.
-- Whether `/sizeup` should stay `noindex, nofollow`. A free tool that works
-  anywhere is the kind of page that earns links; the flag was deliberate and is
-  worth revisiting on purpose rather than by drift.
+- ~~Whether `/sizeup` should stay `noindex, nofollow`.~~ **Decided and shipped
+  the same day** - see the addendum below.
 - `og-card.jpg` is still a crop of a photograph inside the article, unchanged.
 - The homepage still ships an empty `<div id="root">` to crawlers. Metadata now
   carries the meaning; the rendering strategy is untouched.
@@ -261,6 +265,58 @@ domain with no certificate warning; and MX, SPF, the Zoho TXT and the
 One thing improved that was not the goal. The old Namecheap forward sent
 visitors to `http://www...`, so even the path that worked was an insecure hop.
 The redirect is now HTTPS end to end.
+
+**The Size-Up is indexable, in both languages.** Leo's decision. It was
+`noindex, nofollow, noarchive` for as long as it was only sent to crews we had
+briefed; it is a public page now, linked from both articles, and it is the best
+entry point the site has - a free tool that needs no login, works anywhere and
+answers a question people actually search for.
+
+Both languages rather than one. A `noindex` page inside an hreflang set breaks
+the pairing, so indexing English and not German would have been worse than
+leaving both out.
+
+Changed at the source per the standing rule - `scripts/sizeup.src.html` and
+`scripts/build-sizeup.js`, then `node scripts/build-sizeup.js`. The two
+`public/sizeup*.html` files are generated and were not edited by hand.
+
+Added while there: `x-default` on the hreflang set, matching the articles, and
+`WebApplication` JSON-LD naming the tool, its language, that it is free, and
+the four things it reports. That object is generated per language from a new
+`PAGES` entry in the build script rather than kept in the source, because every
+value in it differs by language and a second hand-kept copy is how these two
+pages drifted before.
+
+**The four `featureList` entries were checked against the rendered page rather
+than assumed.** "How steep", "Fire will run", the wind readout and the
+nearest-station list are all visible text. Schema describing what a page does
+not show is spam under Google's rules, and a feature list is the easiest place
+on this site to slip into it.
+
+`robots.txt` and `sitemap.xml` both stated in writing that these pages were
+noindex. Corrected in the same commit rather than left contradicting the pages
+they describe. The sitemap is 6 URLs now. The rule that produced that paragraph
+is kept and restated: never `Disallow` a page carrying `noindex`.
+
+**The tool itself was checked, not just its metadata.** The source file was
+edited, so the live page was loaded after deploy: 15 map tiles rendered, the
+station markers are there, the reading card populates, and no error card. Title
+and `lang` correct on both.
+
+**One follow-up the skill file caused.** The SEO skill still said these pages
+were noindex. That edit failed on an em dash and the failure was not caught
+before the push, so for one commit a file whose entire job is to stop the next
+session rediscovering things asserted the opposite of what had just shipped.
+Corrected in `82158d8`. The lesson is narrow and worth keeping: when a fact
+changes, the files that *describe* the fact are part of the change, and a
+scripted edit that fails silently is worse than no edit.
+
+**Worth knowing before traffic arrives.** Every load of this page calls
+`api/sizeup-data`, which holds a paid Open-Meteo key. Indexing attaches a cost
+to visits that direct links never generated at this volume. Nobody has put a
+ceiling on that.
+
+`8a1e9d5` / `765ae69`, and `82158d8` for the skill correction.
 
 **Recorded late, from the commits.** Two commit pairs from 21 August never
 reached this file, because the entry above them was written at 12:45 and both

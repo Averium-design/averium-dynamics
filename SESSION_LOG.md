@@ -68,8 +68,136 @@ Read this file at the START of every session. Append at the END.
   screenshot shows an error card.
 - Emoji on this site are not one decision. Map markers are functional and stay;
   emoji standing in for interface icons are decoration and go.
+- `public/robots.txt` and `public/sitemap.xml` are real files, and they have to
+  stay that way. Files in public/ are served ahead of the vercel.json rewrites;
+  delete one and that URL silently starts answering with the React app at HTTP
+  200 again. Never `Disallow` a page that carries `noindex` — a crawler has to
+  fetch the page to read the tag.
+- The Organization node is defined once, in `public/index.html`, and both blog
+  articles reference it by `@id`. The string
+  `https://www.averiumdynamics.com/#organization` must be byte-identical in all
+  three files or the references dangle.
+- Schema may only describe what is visible on the page — that is Google's rule,
+  not a preference. The articles' `author` is the organisation because the
+  visible byline says the organisation. Change one and you change both.
+- A `<caption>` inside a horizontally scrolling container gets clipped. Captions
+  belong outside the scroll box.
 
 ## Sessions
+
+### 2026-08-22
+
+**The two files every SEO check assumes exist did not exist, and both returned
+HTTP 200.** `/robots.txt` and `/sitemap.xml` were each answered with 842 bytes
+of the React app at `content-type: text/html`, because `vercel.json` ends with
+`/(.*)` -> `/` and there was no file to match first. This is the failure the
+standing note about status codes describes, found in the wild: every automated
+check that asks "does the site have a robots.txt" gets 200 and passes. Files in
+`public/` are served ahead of the rewrites, so a real file is the whole fix.
+Verified live after deploy by content type and content, not by status:
+`text/plain`, 1,553 bytes for robots.txt and `application/xml`, 2,943 bytes with
+three `<loc>` entries for the sitemap.
+
+**robots.txt disallows nothing, and one case is deliberate.** `/sizeup` and
+`/sizeup-de` carry `noindex` in a meta tag on the page. A crawler must be
+allowed to fetch a page to read that tag, so a `Disallow` here would leave them
+indexable-by-rumour: reachable by link, never re-checked, impossible to remove.
+There is a comment in the file saying so. The AI crawlers are named
+individually rather than left to the wildcard; the effect is identical and the
+point is that the decision is on the record with a date.
+
+**The sitemap omits four URLs on purpose.** `/sizeup` and `/sizeup-de` are
+noindex, and asking for indexing in one place while refusing it in another is a
+contradiction that costs trust in the whole file. `/imprint` and `/privacy` are
+React routes that still serve the homepage's title and description, so listing
+them would declare near-duplicates.
+
+**No llms.txt, on the evidence.** Server logs across 137,000 domains show 97%
+of llms.txt files are never fetched by an AI crawler, and Google stated in June
+2026 that the file has no effect on Search or AI Overviews either way. It was
+considered and rejected rather than overlooked; it should not be re-raised
+without new evidence.
+
+**Structured data is not a ranking factor, and was added anyway.** Google has
+said so directly. It is here because an answer engine reads it to work out who
+published a page and when, and because these two articles are the pages most
+likely to be quoted by one. Both articles now carry Article, WebPage,
+BreadcrumbList and a shared Organization node, with `datePublished`,
+`dateModified`, `inLanguage`, the images and the four sources the pieces
+already cite. The homepage got the Organization node they point at by `@id`,
+plus the canonical and the Open Graph set it never had. The `@id` string
+`https://www.averiumdynamics.com/#organization` has to stay byte-identical
+across all three files or the references dangle; there is a comment in each.
+
+**Author is the organisation, not a person, and that is a held decision rather
+than an oversight.** Google requires that schema describe only what is visible
+on the page, and the visible byline reads "Averium Dynamics UG, Berlin". A
+named human author is the stronger authority signal and we have real
+credentials to put behind it, but who gets the byline on a published article is
+not a decision to make silently. Both would have to change together.
+
+**The comparison table is the one change a reader will see.** The article
+already says "Any comparison worth reading states its criteria" and names five,
+then answers them across four prose sections without ever putting them side by
+side. The table does that and adds nothing: every cell restates a sentence from
+the sections below it, and the two cost cells read "no figure given, for the
+reason above" because the piece deliberately gives no euro figures. It is a
+real `<table>` for two readers — someone who wants the shape of the answer
+before 1,300 words of it, and a retrieval system, which extracts a table far
+more reliably than the same facts spread over six sections.
+
+**It was wrong at 375px, and only looking at it showed that.** The page did not
+scroll sideways and the table scrolled inside its own box, both correct — but
+the `<caption>` was inside that scrolling box too, so it was cut off at the
+right edge and unreadable on a phone. Moved to a `<figcaption>` outside the
+scroll container, which also matches the figure/figcaption idiom the article
+already uses for photographs, with a line that appears under 700px telling the
+reader the table scrolls. At 1080px the table is 848px, the same width as the
+photographs, which is what this layout is measured against. The German table is
+written from the German article's own wording, not translated from the English
+one.
+
+**Verified after deploy on the live pages**, not locally: both JSON-LD blocks
+parse, the graph resolves to the five expected node types, `dateModified` is
+today, six table rows are present in both languages, and the homepage carries
+its canonical and Organization node.
+
+Three commits and a publish merge: `20aa044`, `fcb3744`, `7635923` /
+`9b7ee97`.
+
+**Still open, and two of them are the ones that matter most.**
+- **Nothing on this site links to either article.** `grep -rln blog src/`
+  returns nothing and has since the Field Notes index was removed on 21 August.
+  The sitemap now declares them, which is a weaker signal than a link, and the
+  Size-Up pages cannot carry that link because they are `nofollow`. Re-adding an
+  index would reverse a decision taken the day before, so it is a decision, not
+  a fix.
+- **`https://averiumdynamics.com` times out.** The apex has no TLS listener:
+  `http://` returns 302 to www correctly, `https://` never completes a
+  handshake. Anyone typing the bare domain in a browser, which tries HTTPS
+  first, sees a dead site, and any backlink written to the apex passes nothing.
+  DNS, not this repo.
+- Whether `/sizeup` should stay `noindex, nofollow`. A free tool that works
+  anywhere is the kind of page that earns links; the flag was deliberate and is
+  worth revisiting on purpose rather than by drift.
+- `og-card.jpg` is still a crop of a photograph inside the article, unchanged.
+- The homepage still ships an empty `<div id="root">` to crawlers. Metadata now
+  carries the meaning; the rendering strategy is untouched.
+
+**Recorded late, from the commits.** Two commit pairs from 21 August never
+reached this file, because the entry above them was written at 12:45 and both
+landed afterwards:
+- `eb7258d` / `82759b7`, 14:30 — added `scripts/check-invisible.js`, wired to
+  `npm run check`, which fails on zero-width spaces, no-break and narrow
+  no-break spaces, soft hyphens, bidi controls and U+FFFD in the hand-written
+  sources. **It also deleted the Field Notes index**: `src/Blog.js`, the `/blog`
+  route, the nav link and the footer link. That reverses what the 2026-08-21
+  entry records as shipped, including the `document.title` fix written up there
+  in detail, and no reason was recorded. The articles themselves were untouched.
+- `c019338` / `6dcf7af`, 15:04 — homepage Unsplash images sized to the boxes
+  they render in. 27.24 MB to 3.19 MB. Recorded here because it was also a
+  quality fix, not only a weight one: the HELIOS card had been aliasing into
+  moire from browser-side downscaling of a 4,000px contour photograph.
 
 ### 2026-08-21
 

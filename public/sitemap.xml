@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Written 2026-08-22. Before this file existed, /sitemap.xml returned the React
+  app with HTTP 200, the same way /robots.txt did.
+
+  What is deliberately NOT listed:
+    /sizeup, /sizeup-de   - both carry "noindex" on the page. A URL cannot be
+                            asked to be indexed here and told not to be indexed
+                            there; declaring them would be a contradiction that
+                            costs trust in the whole file.
+    /imprint, /privacy    - React routes. The app has one <title> for every
+                            route, so both currently serve the homepage's title
+                            and description. Listing near-duplicates is a
+                            quality signal against us, not for us.
+
+  hreflang lives in two places by design: in the pages themselves and in the
+  xhtml:link entries below. Google accepts either; two agreeing sources are
+  what makes a bilingual pair unambiguous. Each URL must list BOTH languages,
+  including itself - a set where one side omits the other is discarded whole.
+
+  lastmod must be a real date. A file that claims today on every crawl is
+  ignored as noise. Change it when the page changes, not when the sitemap does.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://www.averiumdynamics.com/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en"
+                href="https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone"/>
+    <xhtml:link rel="alternate" hreflang="de"
+                href="https://www.averiumdynamics.com/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne"/>
+    <xhtml:link rel="alternate" hreflang="x-default"
+                href="https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone"/>
+  </url>
+
+  <url>
+    <loc>https://www.averiumdynamics.com/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en"
+                href="https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone"/>
+    <xhtml:link rel="alternate" hreflang="de"
+                href="https://www.averiumdynamics.com/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne"/>
+    <xhtml:link rel="alternate" hreflang="x-default"
+                href="https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone"/>
+  </url>
+
+</urlset>

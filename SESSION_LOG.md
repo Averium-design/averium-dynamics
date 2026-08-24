@@ -113,6 +113,41 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-08-24
+
+**Google can now see the site.** The domain was verified in Search Console and
+`https://www.averiumdynamics.com/sitemap.xml` submitted. Status **Success**,
+**6 discovered pages**, last read 24 August. This closes the item raised on the
+22nd as the highest-leverage thing outstanding, and it was the one piece of that
+day's work that could not be done from a terminal.
+
+Verification is a **Domain property**, done by DNS TXT at Namecheap, so it
+covers the apex, `www` and every subdomain. Two details worth keeping:
+
+- A Domain property does **not** pre-fill the site address in the Sitemaps box.
+  The full URL has to be entered, `https://www.averiumdynamics.com/sitemap.xml`,
+  not the bare filename. The instruction given first was the URL-prefix form and
+  was wrong for this property type.
+- The sitemap showed **"Couldn't fetch"** first and flipped to Success on its
+  own. That is the queue, not an error. Do not resubmit on seeing it.
+
+**The email records survived, and that was the risk.** The domain now carries
+three TXT records on `@` - the new `google-site-verification`, the existing
+`zoho-verification`, and the SPF record - plus the three Zoho MX records. All
+verified present on Google's and Cloudflare's resolvers after the change. The
+failure mode being avoided was editing an existing TXT record rather than adding
+a fourth row, which would have taken `info@averiumdynamics.com` offline.
+
+**Nothing to do now but wait.** Crawling and indexing take days to weeks. The
+place to look is Coverage -> Pages in Search Console, including what is excluded
+and why.
+
+**Still open on the site, unchanged:** `og-card.jpg` is a crop of a photograph
+inside the article; the byline is the organisation rather than a named author;
+the Pixabay credit line has no file mapping; there is still only one article, in
+two languages, and a second is what makes topical authority possible at all. The
+`field-notes` skill added on the 22nd carries everything needed to write it.
+
 ### 2026-08-22
 
 **The two files every SEO check assumes exist did not exist, and both returned

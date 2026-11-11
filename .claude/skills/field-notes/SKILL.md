@@ -5,7 +5,8 @@ description: How to write, build and publish a Field Notes article for Averium D
 
 # Writing a Field Note
 
-Two articles exist so far — one piece in two languages, published 2026-08-18.
+Two pieces exist so far, each in two languages: the Müritz piece (2026-08-18)
+and the munitions-contaminated land piece (2026-11-12).
 Everything below was learned by getting it wrong first. `SESSION_LOG.md` on
 `docs/session-log` has the incidents; this is the distilled rule.
 
@@ -15,7 +16,12 @@ writing and the article's own build. They overlap deliberately at the checklist.
 ## What a Field Note is
 
 A write-up of a **real fire that actually happened**, and of the equipment sent
-to it. Named place, named dates, named sources. The reader is a district fire
+to it — **or of the rules that govern how such a fire may be fought**, read from
+the rule texts themselves rather than from how they are usually quoted. A fire
+piece names the place, the dates and the sources; a rules piece names the rule,
+its edition or date, and who issued it. Either way, nothing unnamed. Widened on
+2026-11-12 for the munitions piece, rather than opening a second category. The
+reader is a district fire
 officer, a forestry manager or someone in an environmental authority — a
 professional who will know immediately if you are bluffing.
 
@@ -162,8 +168,9 @@ Do not change these without deciding the same thing for `src/index.css`:
 - **A caption that has to excuse the photograph means the wrong photograph.**
 - Keep frames whole. Update `width`/`height`; do not crop to fit.
 - Alt text describes what is in the frame, in the article's language.
-- Credits: every photographer named, licence linked. There is **no name-to-file
-  mapping** for the current Pixabay credit line — build one for new images.
+- Credits: every photographer named, licence linked. The name-to-file mapping
+  lives in `references/photo-credits.md` — add a row in the same commit as a
+  new image, and write "unknown" rather than guess.
 - Run `node scripts/build-images.js` (see the `seo` skill; `sharp` is not a
   project dependency) and use the `<picture>` markup with
   `sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"`. Never upscale.
@@ -208,6 +215,9 @@ earlier one, say so and say why.
 - **The byline is the organisation, not a person.** A named author with real
   credentials is the stronger authority signal and we have them — it is an
   unmade decision, not an oversight. Schema must change with the visible byline.
-- The Pixabay credit line names seven photographers with no mapping to files.
-- The site had **one** article until now. Two pieces is where topical authority
-  starts becoming possible at all.
+- The mapping in `references/photo-credits.md` is reconstructed for article
+  one, and two of its rows (`fire-engine.jpg`, `helicopter.jpg`) can only say
+  "royber99 or benerott". Article one's credit line also still names viya0414,
+  whose picture was deleted.
+- Two pieces now exist. Two is where topical authority starts becoming possible
+  at all.

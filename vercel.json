@@ -10,6 +10,14 @@
       "source": "/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne",
       "destination": "/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne.html"
     },
+    {
+      "source": "/blog/munitions-contaminated-land-what-the-rules-say",
+      "destination": "/blog/munitions-contaminated-land-what-the-rules-say.html"
+    },
+    {
+      "source": "/blog/munitionsbelastete-flaechen-was-gilt",
+      "destination": "/blog/munitionsbelastete-flaechen-was-gilt.html"
+    },
     { "source": "/(.*)", "destination": "/" }
   ]
 }

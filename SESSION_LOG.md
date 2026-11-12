@@ -113,6 +113,39 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-12 (evening)
+
+**Prüfpunkte self-check built, NOT merged, NOT pushed.** Branch
+`feature/pruefpunkte-check`, commit 3d52621 off main b5565b9. `/pruefpunkte`
+(DE) and `/checklist` (EN): five questions, score out of 5 (or 3 when question
+1 is "nur Flug und Erkundung", which drops Löschmittel and Fehlwurf). On
+screen only the score and the names of the open points. Article promise
+block, language link moved to the header, link after the five points, PDF
+footers naming the check URL, privacy section 4a, sitemap, check-invisible,
+skills. Verified locally only: `npm run check` clean, build compiles, both
+rewrites resolve by `<title>` through a local server that applies
+vercel.json, no sideways scroll at 375 and 1080, no-JS shows all five
+questions with their Grundlagen.
+
+**Decided, and why:**
+- **Mail ships as the mailto fallback, not a real sender.** The contact form
+  goes to Formspree (delivers only to us). `api/feedback.js` uses Resend, and
+  `resend._domainkey.averiumdynamics.com` does not exist (DoH, NXDOMAIN) and
+  SPF includes only Zoho, so Resend cannot send to a reader. The reader's own
+  mail client sends answers + a `Code:` line to info@; the reply text is
+  printed by `node scripts/pruefpunkte-reply.js "<code>"`. No test result
+  mail could be sent or spam-checked, because there is no sender.
+- **Question 2's open text says "unter Aufsicht" plus the 25 kg limit**, not
+  "im Auftrag" as briefed. Same correction the article got earlier today.
+- **No XCMG row** in the comparison table: the article cites no XCMG source.
+- A1/A2/A3 numbers from VO (EU) 2019/947 consolidated 01.05.2025 (EUR-Lex,
+  read through a browser; curl gets an empty 202). C1/C2 mass limits live in
+  2019/945 and were left out.
+
+**Still open:** live verification after deploy; Leo to review the "next
+step" lines in the reply script (our advice, not quoted from a source); a
+Resend domain (DKIM TXT at Namecheap) if the real sender is wanted.
+
 ### 2026-11-12
 
 **Field Note 2 published, German and English.** Merged `--no-ff` as 2bdbf69

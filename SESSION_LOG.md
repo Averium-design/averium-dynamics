@@ -113,6 +113,15 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-12 (night, promise box position)
+
+The self-check box moved a third time, at Leo's request. It now sits directly
+after "Die vollständige Liste mit den Grundlagen gibt es in der
+Selbstprüfung." (and the EN twin), before the five-point table. Before that it
+was under the byline (one deploy), then after the sources. Its text is
+unchanged. Branch `content/remove-direct-contact`, together with the contact
+change, not merged yet.
+
 ### 2026-11-12 (night, contact line)
 
 At Leo's request, "oder direkt bei Leo Safia unter leo@averiumdynamics.com"

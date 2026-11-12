@@ -113,6 +113,29 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-12 (night, last)
+
+**Headline work published and checked live.**
+- 402815c (`--no-ff`) merged the new h1, the promise block moved to the end,
+  and the old article name replaced in the check pages' sources and both PDF
+  footers. Both PDFs were regenerated, still one page each, and live they are
+  byte-identical to the repo.
+- 65d6bad (`--no-ff`) shortened the DE `<title>` and WebPage name to 60
+  characters: "Munitionsbelastete Flächen: Brand, den niemand betreten darf".
+  This supersedes the 64-character title in the entry below.
+
+Checked on production by content:
+- DE `<title>` is 60 characters and the h1 reads "Ein Brand, den keine
+  Feuerwehr betreten darf".
+- EN `<title>` is "Munitions-contaminated land: a fire nobody may enter" and the h1
+  reads "A fire no fire service may enter".
+- The sources link text on /pruefpunkte and /checklist is the new h1.
+- Zero U+FFFD on all four pages.
+
+**Open:** Leo proposed "löschen" in place of "betreten" in both languages. It is
+not applied yet; it was raised with him because the article's own sources say
+the fire is fought, at barriers and from the air.
+
 ### 2026-11-12 (night, later)
 
 **Field Note 2 got a new headline, and the promise block moved. Committed on

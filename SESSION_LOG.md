@@ -128,10 +128,12 @@ Read this file at the START of every session. Append at the END.
 - This also proves Vercel bundled `public/pruefpunkte-text.js` into the
   function.
 
-**Still open before merging:**
-- Inbox or spam at Gmail.
-- Whether the copy reached info@.
-- Whether the links in the mail resolve.
+**Confirmed by Leo, closing what was open:**
+- The test mail landed in the Gmail inbox, not in spam.
+- The links in it resolve.
+- The copy arrived at info@ (Zoho).
+
+Branch `feature/pruefpunkte-mail` is ready to merge, and is not merged yet.
 
 The preview URL was found through the GitHub deployments API, because a
 shortened name containing the branch would exceed 63 characters.

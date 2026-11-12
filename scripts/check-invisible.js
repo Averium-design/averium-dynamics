@@ -55,6 +55,7 @@ const TARGETS = [
   'public/robots.txt',
   'public/sitemap.xml',
   'api/sizeup-data.js',
+  'api/pruefpunkte.js',
   'vercel.json',
   'tailwind.config.js',
 ];

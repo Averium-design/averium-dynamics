@@ -81,6 +81,7 @@
       ],
       disclosure: 'Averium Dynamics entwickelt Löschdrohnen. Die fünf Punkte gelten für uns wie für jeden anderen Anbieter.',
       sign: 'Mit freundlichen Grüßen\nAverium Dynamics UG (haftungsbeschränkt), Berlin',
+      requested: 'Sie erhalten diese E-Mail, weil Sie Ihr Ergebnis der Selbstprüfung auf averiumdynamics.com angefordert haben. Ohne Ihre Einwilligung schreiben wir Ihnen nicht erneut.',
     },
     en: {
       subject: function (x, y) { return `Your checklist: ${x} of ${y} settled`; },
@@ -138,6 +139,7 @@
       ],
       disclosure: 'Averium Dynamics develops firefighting drones. The five points apply to us as they do to any other supplier.',
       sign: 'Kind regards\nAverium Dynamics UG (haftungsbeschränkt), Berlin',
+      requested: 'You are receiving this email because you requested your self-check result on averiumdynamics.com. Without your consent we will not write to you again.',
     },
   };
 
@@ -176,7 +178,7 @@
     });
     out.push('', t.explainerHead, '');
     t.explainer.forEach(function (s) { out.push(s, ''); });
-    out = out.concat(t.links, ['', t.disclosure, '', t.sign]);
+    out = out.concat(t.links, ['', t.disclosure, '', t.sign, '', '--', t.requested]);
     return { subject: t.subject(r.x, r.y), body: out.join('\n') };
   }
 

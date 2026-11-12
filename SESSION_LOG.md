@@ -132,9 +132,11 @@ Checked on production by content:
 - The sources link text on /pruefpunkte and /checklist is the new h1.
 - Zero U+FFFD on all four pages.
 
-**Open:** Leo proposed "löschen" in place of "betreten" in both languages. It is
-not applied yet; it was raised with him because the article's own sources say
-the fire is fought, at barriers and from the air.
+**Decided: "betreten" stays.** Leo proposed "löschen" instead, in both
+languages. It was not applied: the article's own sources say the fire is
+fought, at barriers, from the air, and offensively on suspected ground, so
+"nobody may extinguish it" would be false in the headline. Leo chose to keep
+"betreten". Do not reopen this without a source that says otherwise.
 
 ### 2026-11-12 (night, later)
 

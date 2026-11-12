@@ -56,6 +56,24 @@ export default function Privacy() {
           </div>
 
           <div>
+            <h3 className="text-lg font-semibold text-foreground mb-2">4a. Self-check (/pruefpunkte, /checklist)</h3>
+            <p>
+              The self-check counts your answers in your browser. Nothing is transmitted to us while you
+              answer. If you choose to send us your result, the page opens your own email program with a
+              message to info@averiumdynamics.com; nothing is sent until you send it. We then receive your
+              email address, your answers, the area you describe if you fill in that field, and whether you
+              ticked the consent box.
+            </p>
+            <p className="mt-3">
+              Purpose: we use your email address to send you the full list you asked for, on the basis of
+              Art. 6(1)(b) GDPR. We write to you again only if you ticked the box allowing later contact;
+              that consent is the basis for any further message (Art. 6(1)(a) GDPR) and you can withdraw it
+              at any time by writing to info@averiumdynamics.com. Without that consent we do not use your
+              address for anything else. Retention follows section 7.
+            </p>
+          </div>
+
+          <div>
             <h3 className="text-lg font-semibold text-foreground mb-2">5. Hosting</h3>
             <p>
               This website is hosted on infrastructure provided by Vercel Inc. (USA). Server logs

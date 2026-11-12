@@ -113,6 +113,31 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-12 (night, mail live)
+
+**Real email is live.** e8518eb (`--no-ff` over 53d0617 and 658465e), pushed at
+Leo's request, served about 45 s later. This supersedes "mailto fallback
+shipped" from earlier today: the mailto now appears only when sending fails.
+
+Checked on production by content:
+- /pruefpunkte and /checklist carry the email field and the send button.
+- The API answers 400 for a bad address and for a bad code, and 405 for GET.
+- A real send from www.averiumdynamics.com/pruefpunkte to leosafia4@gmail.com
+  at 375 px: the API returned 200 `{"ok":true,"delivered":true}`, the page said
+  "Gesendet an …", the fallback stayed hidden, and the list showed the four
+  open points.
+- Arrival of this live mail, and of its copy at info@, still has to be
+  confirmed by Leo. The preview send earlier was confirmed: inbox, links,
+  copy.
+
+**Standing facts for the register:**
+- Resend domain averiumdynamics.com, eu-west-1.
+- DNS records: DKIM TXT `resend._domainkey`, CNAME `rsend`, CNAME `send`.
+- Vercel env: RESEND_API_KEY and PRUEFPUNKTE_FROM, for Production and
+  Preview.
+- Previews are behind Vercel Authentication. Find their URL through the
+  GitHub deployments API.
+
 ### 2026-11-12 (night, first real send)
 
 **The real sender works on the preview.**

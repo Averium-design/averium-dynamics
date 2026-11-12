@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="theme-color" content="#1B4D3E"/>
+
+<title>Drohneneinsatz auf munitionsbelasteten Flächen: Prüfpunkte</title>
+<meta name="description" content="Fünf Punkte, die vor jedem Drohneneinsatz über munitionsbelasteten Flächen zu klären sind. Selbstprüfung in zwei Minuten, mit Grundlagen."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.averiumdynamics.com/pruefpunkte"/>
+<link rel="alternate" hreflang="de" href="https://www.averiumdynamics.com/pruefpunkte"/>
+<link rel="alternate" hreflang="en" href="https://www.averiumdynamics.com/checklist"/>
+<link rel="alternate" hreflang="x-default" href="https://www.averiumdynamics.com/checklist"/>
+
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Averium Dynamics"/>
+<meta property="og:title" content="Drohneneinsatz auf munitionsbelasteten Flächen: Prüfpunkte"/>
+<meta property="og:description" content="Fünf Punkte, die vor jedem Drohneneinsatz über munitionsbelasteten Flächen zu klären sind. Selbstprüfung in zwei Minuten, mit Grundlagen."/>
+<meta property="og:url" content="https://www.averiumdynamics.com/pruefpunkte"/>
+<meta property="og:locale" content="de_DE"/>
+<meta property="og:locale:alternate" content="en_GB"/>
+<meta property="og:image" content="https://www.averiumdynamics.com/blog/img/og-munitions.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+
+<!-- Beschreibt nur, was auf der Seite sichtbar ist. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://www.averiumdynamics.com/pruefpunkte#webpage",
+  "url": "https://www.averiumdynamics.com/pruefpunkte",
+  "name": "Drohneneinsatz auf munitionsbelasteten Flächen: Prüfpunkte",
+  "description": "Fünf Punkte, die vor jedem Drohneneinsatz über munitionsbelasteten Flächen zu klären sind. Selbstprüfung in zwei Minuten, mit Grundlagen.",
+  "inLanguage": "de-DE",
+  "datePublished": "2026-11-12",
+  "publisher": { "@id": "https://www.averiumdynamics.com/#organization" },
+  "isBasedOn": "https://www.averiumdynamics.com/blog/munitionsbelastete-flaechen-was-gilt"
+}
+</script>
+
+<link rel="icon" type="image/png" href="/favicon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Lora:wght@500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* Same type as the Field Notes: Lora 600 headlines, DM Sans body, Space
+     Grotesk wordmark. Colours from tailwind.config.js. EN twin: checklist.html.
+     The questions and their Grundlagen are plain HTML so they survive without
+     JavaScript; the script only counts and builds the mail. What a reader gets
+     per open point (explanation, next step) is deliberately NOT on this page;
+     it goes out by reply mail, see scripts/pruefpunkte-reply.js. */
+  :root{--primary:#1B4D3E;--accent:#FF4D00;--fg:#1A1A1A;--muted:#6B7280;--border:#E5E7EB;--bg:#FFFFFF;--soft:#F6F7F6}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--bg);color:var(--fg);font-family:'DM Sans',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.7}
+  h1,h2{font-family:'Lora',Georgia,'Times New Roman',serif;font-weight:600;line-height:1.14}
+  h3{font-family:'Space Grotesk','DM Sans',sans-serif;line-height:1.15}
+  .wrap{max-width:56rem;margin:0 auto;padding:0 1.5rem}
+  a{color:var(--primary)}
+
+  .site-head{border-bottom:1px solid var(--border);background:#fff}
+  .site-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:4.5rem}
+  .site-head .home{text-decoration:none;color:var(--fg);display:flex;align-items:center;gap:.6rem}
+  .site-head img{width:2.75rem;height:2.75rem;object-fit:contain;display:block}
+  .site-head span{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem}
+  .site-head .lang{font-size:.875rem;font-weight:600;white-space:nowrap;padding:.75rem 0}
+
+  main{padding:3.5rem 0 3rem}
+  .crumb{font-size:.8125rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:.9rem}
+  .crumb a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--border);
+    text-underline-offset:3px;display:inline-block;padding:.5rem 0;margin:-.5rem 0}
+  h1{font-size:2.0625rem;letter-spacing:-.012em;margin-bottom:1rem}
+  @media(min-width:768px){h1{font-size:3rem}}
+  h2{font-size:1.5rem;margin:3rem 0 1rem}
+  @media(min-width:768px){h2{font-size:1.9rem}}
+  p{margin-bottom:1.1rem}
+  .lede{font-size:1.0625rem}
+
+  fieldset{border:none;border-top:1px solid var(--border);padding:1.5rem 0 1.25rem}
+  legend{float:left;width:100%;font-weight:600;font-size:1.0625rem;line-height:1.5;margin-bottom:.35rem}
+  legend .n{color:var(--primary);margin-right:.35rem}
+  .basis{clear:both;font-size:.8125rem;color:var(--muted);margin-bottom:.75rem}
+  .opts{display:flex;flex-wrap:wrap;gap:.5rem}
+  .opts label{display:flex;align-items:center;gap:.5rem;min-height:3rem;padding:.55rem .95rem;
+    border:1px solid var(--border);border-radius:.375rem;cursor:pointer;background:#fff;line-height:1.3}
+  .opts input{accent-color:var(--primary);width:1.1rem;height:1.1rem;flex:none}
+  .opts label:has(input:checked){border-color:var(--primary);background:var(--soft)}
+  fieldset.skipped{display:none}
+  .skipnote{display:none;font-size:.9375rem;color:var(--muted);border-top:1px solid var(--border);padding:1rem 0}
+  .skipnote.on{display:block}
+
+  .btn{display:inline-block;font:inherit;font-weight:600;font-size:1rem;color:#fff;background:var(--primary);
+    border:none;border-radius:.375rem;padding:.9rem 1.4rem;min-height:3rem;cursor:pointer;text-decoration:none}
+  .btn:hover{background:#163f33}
+  .btn.ghost{background:#fff;color:var(--primary);border:1px solid var(--primary)}
+  .warn{color:#9A3412;font-size:.9375rem;margin-top:.75rem}
+
+  .result{border:1px solid var(--border);border-top:3px solid var(--primary);padding:1.5rem;margin:2rem 0}
+  .result .score{font-family:'Lora',Georgia,serif;font-weight:600;font-size:1.6rem;line-height:1.25;margin-bottom:.5rem}
+  .result p:last-child{margin-bottom:0}
+  [hidden]{display:none !important}
+
+  .mail{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+  .mail h3{font-size:1.125rem;font-weight:600;margin-bottom:.75rem}
+  .mail label.field{display:block;font-weight:600;margin:1rem 0 .35rem}
+  .mail textarea{width:100%;font:inherit;font-size:1rem;padding:.6rem .75rem;border:1px solid #D1D5DB;border-radius:.375rem;min-height:4.5rem}
+  .mail .consent{display:flex;gap:.6rem;align-items:flex-start;margin:1rem 0 .5rem;cursor:pointer}
+  .mail .consent input{margin-top:.3rem;width:1.1rem;height:1.1rem;flex:none;accent-color:var(--primary)}
+  .small{font-size:.875rem;color:var(--muted)}
+  .after{margin-top:1rem}
+
+  .pdf{font-size:.9375rem;color:var(--muted);margin-top:1.5rem}
+  .pdf a{display:inline-block;padding:.75rem 0}
+
+  .explainer{background:var(--soft);padding:1.5rem;margin:1rem 0}
+  .explainer ul{margin:0 0 1.1rem 1.25rem}
+  .explainer li{margin-bottom:.5rem}
+  .explainer p:last-child{margin-bottom:0}
+
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;width:100%;min-width:40rem;font-size:.9375rem;line-height:1.55}
+  th,td{border-top:1px solid var(--border);padding:.8rem .85rem;vertical-align:top;text-align:left}
+  thead th{border-top:none;border-bottom:2px solid var(--primary);color:var(--primary);font-weight:600}
+  tbody th{font-weight:600}
+  .tcap{font-size:.875rem;color:var(--muted);margin-bottom:.85rem}
+  .tcap .hint{display:none}
+  @media(max-width:700px){.tcap .hint{display:inline}}
+  figure{margin:2rem 0}
+  figure picture{display:block}
+  figure img{width:100%;height:auto;display:block;border:1px solid var(--border)}
+  figcaption{font-size:.8125rem;color:var(--muted);margin-top:.6rem;line-height:1.55}
+
+  .sources{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:.875rem;color:var(--muted)}
+  .sources ul{margin-left:1.25rem}
+  .sources li{margin-bottom:.5rem;word-break:break-word}
+
+  footer{background:#000;color:#9CA3AF;padding:2.5rem 0;margin-top:3rem;font-size:.875rem}
+  footer a{color:#9CA3AF;text-decoration:none}
+  footer .row{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
+  footer .legal{margin-top:1.25rem;padding-top:1rem;border-top:1px solid #1F2937;font-size:.75rem;color:#6B7280}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="home" href="/"><img src="/logo.png" alt=""/><span>Averium Dynamics</span></a>
+    <a class="lang" href="/checklist" hreflang="en">English</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <p class="crumb"><a href="/blog/munitionsbelastete-flaechen-was-gilt">Field Note: Munitionsbelastete Flächen</a></p>
+    <h1>Fünf Punkte vor einem Drohneneinsatz über munitionsbelasteten Flächen</h1>
+    <p class="lede">Fünf Fragen, je drei Antworten. Am Ende sehen Sie, wie viele Punkte für Ihren
+      Einsatz geklärt sind und welche noch offen sind. Das dauert etwa zwei Minuten.</p>
+
+    <form id="check" novalidate>
+
+      <fieldset data-q="1">
+        <legend><span class="n">1</span>Soll das Fluggerät über der Fläche etwas abgeben, also Löschmittel oder eine andere Last? Oder soll es nur fliegen und erkunden?</legend>
+        <p class="basis">Betriebskategorie · Grundlage: VO (EU) 2019/947</p>
+        <div class="opts">
+          <label><input type="radio" name="q1" value="clear"/>nur Flug und Erkundung</label>
+          <label><input type="radio" name="q1" value="drop"/>es ist ein Abwurf vorgesehen</label>
+          <label><input type="radio" name="q1" value="unknown"/>weiß ich nicht</label>
+        </div>
+      </fieldset>
+
+      <fieldset data-q="2">
+        <legend><span class="n">2</span>Steht fest, wer fliegt? Die Feuerwehr selbst, oder ein Unternehmen in ihrem Auftrag?</legend>
+        <p class="basis">Wer fliegt · Grundlage: § 21k LuftVO, EGRED 2, STS-BOS</p>
+        <div class="opts">
+          <label><input type="radio" name="q2" value="clear"/>ja</label>
+          <label><input type="radio" name="q2" value="no"/>nein</label>
+          <label><input type="radio" name="q2" value="unknown"/>weiß ich nicht</label>
+        </div>
+      </fieldset>
+
+      <fieldset data-q="3">
+        <legend><span class="n">3</span>Ist geregelt, wie sich die Drohne mit Hubschraubern und Löschflugzeugen über der Einsatzstelle abstimmt?</legend>
+        <p class="basis">Luftraum · Grundlage: DFV und AGBF, Fachempfehlung Drohnen und UAV, August 2025</p>
+        <div class="opts">
+          <label><input type="radio" name="q3" value="clear"/>ja</label>
+          <label><input type="radio" name="q3" value="no"/>nein</label>
+          <label><input type="radio" name="q3" value="unknown"/>weiß ich nicht</label>
+        </div>
+      </fieldset>
+
+      <p class="skipnote" id="skipnote">Fragen 4 und 5 entfallen: Wenn nur geflogen und erkundet wird,
+        wird nichts abgeworfen.</p>
+
+      <fieldset data-q="4">
+        <legend><span class="n">4</span>Ist geklärt, ob das Löschmittel in Deutschland in Verkehr gebracht werden darf und ob eine Erlaubnis nach § 7 SprengG nötig ist?</legend>
+        <p class="basis">Löschmittel · Grundlage: ProdSG, § 7 SprengG, 1. SprengV</p>
+        <div class="opts">
+          <label><input type="radio" name="q4" value="clear"/>ja</label>
+          <label><input type="radio" name="q4" value="no"/>nein</label>
+          <label><input type="radio" name="q4" value="unknown"/>weiß ich nicht</label>
+        </div>
+      </fieldset>
+
+      <fieldset data-q="5">
+        <legend><span class="n">5</span>Gibt es eine Antwort darauf, was mit einem Körper geschieht, der nicht auslöst, auf einer Fläche, die niemand betreten darf?</legend>
+        <p class="basis">Fehlwurf · Grundlage: Einsatzplanung</p>
+        <div class="opts">
+          <label><input type="radio" name="q5" value="clear"/>ja</label>
+          <label><input type="radio" name="q5" value="no"/>nein</label>
+          <label><input type="radio" name="q5" value="unknown"/>weiß ich nicht</label>
+        </div>
+      </fieldset>
+
+      <noscript><p class="small">Ohne JavaScript wird hier nichts ausgezählt. Die fünf Punkte gibt es
+        auch <a href="/blog/pruefpunkte-munitionsbelastete-flaechen.pdf">als PDF</a>, und Ihre Antworten
+        können Sie an <a href="mailto:info@averiumdynamics.com">info@averiumdynamics.com</a> schicken.</p></noscript>
+
+      <button class="btn" type="submit" id="show">Ergebnis anzeigen</button>
+      <p class="warn" id="warn" role="alert" hidden></p>
+    </form>
+
+    <section class="result" id="result" aria-live="polite" hidden>
+      <p class="score" id="score"></p>
+      <p id="open"></p>
+      <p class="small" id="skipline" hidden>Löschmittel und Fehlwurf entfallen, weil nichts abgeworfen wird.</p>
+
+      <div class="mail">
+        <h3>Die vollständige Liste per E-Mail</h3>
+        <p>Zu jedem offenen Punkt schicken wir Ihnen, worum es geht, die Grundlage und was als Nächstes
+          zu tun ist, dazu die Übersicht zu A1, A2 und A3. Der Knopf öffnet Ihr Mailprogramm mit Ihren
+          Antworten an uns; wir antworten mit der Liste.</p>
+
+        <label class="field" for="area">Um welche Fläche geht es? (optional)</label>
+        <textarea id="area" maxlength="500"></textarea>
+
+        <label class="consent"><input type="checkbox" id="consent"/>
+          <span>Averium Dynamics darf mich später zu diesem Thema erneut anschreiben.</span></label>
+        <p class="small">Ihre Adresse sehen wir als Absender Ihrer Mail. Wir nutzen sie, um Ihnen die Liste
+          zu schicken. Ohne Haken schreiben wir danach nicht wieder.
+          <a href="/privacy">Datenschutz</a></p>
+
+        <p><a class="btn" id="mailbtn" href="mailto:info@averiumdynamics.com">E-Mail vorbereiten</a></p>
+        <div class="after" id="after" hidden>
+          <p class="small">Hat sich kein Mailprogramm geöffnet? Kopieren Sie den Text und schicken Sie ihn an
+            info@averiumdynamics.com.</p>
+          <button class="btn ghost" type="button" id="copybtn">Text kopieren</button>
+          <span class="small" id="copied" hidden>Kopiert.</span>
+        </div>
+      </div>
+    </section>
+
+    <p class="pdf">Lieber auf Papier: <a href="/blog/pruefpunkte-munitionsbelastete-flaechen.pdf"
+      type="application/pdf">die fünf Prüfpunkte als PDF</a></p>
+
+    <h2>A1, A2, A3 und das Abwurfverbot</h2>
+    <div class="explainer">
+      <p>A1, A2 und A3 sind Unterkategorien der offenen Kategorie. Sie richten sich nach dem Abstand zu
+        Menschen und nach der Klasse des Fluggeräts. Für die ganze offene Kategorie gilt: höchstzulässige
+        Startmasse unter 25 kg, Flug in Sichtweite (VLOS), höchstens 120 m über dem nächstgelegenen Punkt
+        der Erdoberfläche, außer beim Überfliegen eines Hindernisses.</p>
+      <ul>
+        <li><strong>A1:</strong> Menschenansammlungen werden nie überflogen. Mit Klasse C0 oder einem
+          selbst gebauten Gerät unter 250 g dürfen unbeteiligte Personen überflogen werden, mit Klasse C1
+          muss der Fernpilot davon ausgehen können, dass das nicht geschieht.</li>
+        <li><strong>A2:</strong> Klasse C2. Keine unbeteiligten Personen überfliegen, horizontal mindestens
+          30 m Abstand zu ihnen, im Langsamflugmodus mindestens 5 m. Der Fernpilot braucht ein
+          Fernpiloten-Zeugnis.</li>
+        <li><strong>A3:</strong> Klassen C2, C3, C4 oder selbst gebaut unter 25 kg. Keine unbeteiligte
+          Person darf gefährdet werden, und zu Wohn-, Gewerbe-, Industrie- und Erholungsgebieten gelten
+          mindestens 150 m Abstand.</li>
+      </ul>
+      <p>Das Abwurfverbot steht in Artikel 4 der Verordnung, zusammen mit dem Verbot, gefährliche Güter
+        mitzuführen. Es gilt für die ganze offene Kategorie. Welche Unterkategorie geflogen wird, ändert
+        daran nichts.</p>
+      <p>Wer eine Bedingung der offenen Kategorie nicht erfüllt, ist in der speziellen Kategorie und
+        braucht nach Artikel 5 und 12 eine Betriebsgenehmigung. Dort setzt § 21k LuftVO an: Er nimmt den
+        Betrieb von Drohnen unter 25 kg durch oder unter Aufsicht von BOS von dieser Genehmigungspflicht
+        aus.</p>
+    </div>
+
+    <h2>Andere Systeme</h2>
+    <p class="tcap">Was die Systeme tun, wie sie zum Brand kommen und wie weit sie sind, nach den
+      genannten Quellen. <span class="hint">Die Tabelle lässt sich seitlich scrollen.</span></p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th scope="col">System</th><th scope="col">Was es tut</th><th scope="col">Wie es zum Brand kommt</th><th scope="col">Stand</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Korean Air mit Anduril Industries</th>
+            <td>Software führt Sensordaten zu einem Lagebild zusammen und meldet einen Brandausbruch.</td>
+            <td>Unbemannte Fluggeräte erkunden; bekämpft wird mit schnell verfügbaren unbemannten
+              Fluggeräten oder mit bemannten Löschflugzeugen.</td>
+            <td>Die Unternehmen prüfen seit Oktober 2025 eine gemeinsame Entwicklung
+              (<a href="https://uasweekly.com/2025/10/02/korean-air-anduril-expand-uas-partnership-for-ai-wildfire-response-platform/">UAS Weekly, 02.10.2025</a>).</td>
+          </tr>
+          <tr>
+            <th scope="row">Averium Dynamics</th>
+            <td>Automatische Branderkennung an Bord, Abwurf eines Löschkörpers.</td>
+            <td>Unbemanntes Fluggerät.</td>
+            <td>Eigener kontrollierter Versuch, Prototyp.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <figure>
+      <picture>
+        <source type="image/avif" srcset="/blog/img/onboard-detection-424w.avif 424w, /blog/img/onboard-detection-848w.avif 848w, /blog/img/onboard-detection-1272w.avif 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <source type="image/webp" srcset="/blog/img/onboard-detection-424w.webp 424w, /blog/img/onboard-detection-848w.webp 848w, /blog/img/onboard-detection-1272w.webp 1272w"
+                sizes="(min-width: 896px) 848px, calc(100vw - 3rem)">
+        <img src="/blog/img/onboard-detection-848w.jpg"
+             srcset="/blog/img/onboard-detection-424w.jpg 424w, /blog/img/onboard-detection-848w.jpg 848w, /blog/img/onboard-detection-1272w.jpg 1272w"
+             sizes="(min-width: 896px) 848px, calc(100vw - 3rem)"
+             width="1920" height="1044"
+             alt="Senkrechte Bordansicht auf grauen Boden. Ein gelber Erkennungsrahmen mit der Beschriftung „FIRE 69%“ umschließt ein kleines Feuer in einem dreieckigen Metallgestell. Oben rechts hängt ein rot-gelber kugelförmiger Löschkörper ins Bild."
+             loading="lazy" decoding="async"/>
+      </picture>
+      <figcaption>Bordansicht aus einem eigenen kontrollierten Versuch. Die automatische Branderkennung
+        markiert den Brandherd, hier mit einer Konfidenz von 69 Prozent. Prototyp.</figcaption>
+    </figure>
+
+    <div class="sources">
+      <p><strong>Quellen.</strong> Die fünf Punkte und ihre Grundlagen stammen aus der Field Note
+        <a href="/blog/munitionsbelastete-flaechen-was-gilt">Munitionsbelastete Flächen: die Zahl, die alle nennen</a>,
+        dort mit allen Quellen. Zu A1, A2 und A3:</p>
+      <ul>
+        <li>Durchführungsverordnung (EU) 2019/947, Artikel 4, 5 und 12 und Anhang Teil A
+          (UAS.OPEN.010 bis .040), konsolidierte Fassung vom 01.05.2025.
+          <a href="https://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:02019R0947-20250501">eur-lex.europa.eu</a></li>
+        <li>Luftfahrt-Bundesamt, Einordnung des UAS-Betriebes nach aktuellem Recht.
+          <a href="https://www.lba.de/DE/Drohnen/Allgemeine_Informationen/Risikobewertung/Risikobewertung_node.html">lba.de</a></li>
+        <li>§ 21k LuftVO. <a href="https://www.gesetze-im-internet.de/luftvo_2015/__21k.html">gesetze-im-internet.de</a></li>
+      </ul>
+      <p>Offenlegung: Averium Dynamics entwickelt Löschdrohnen. Die fünf Punkte gelten für uns wie für
+        jeden anderen Anbieter.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;color:#fff">Averium Dynamics</span>
+      <span><a href="/imprint">Impressum</a> · <a href="/privacy">Datenschutz</a></span>
+      <span>© 2026 Averium Dynamics UG</span>
+    </div>
+    <div class="legal">
+      Averium Dynamics UG (haftungsbeschränkt) · HRB 285037 B Amtsgericht Charlottenburg · Berlin, Deutschland
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Counts the answers and builds a mailto. Nothing is sent anywhere by this
+   page: the reader's own mail client sends it, to info@. The last line of the
+   mail ("Code") is what scripts/pruefpunkte-reply.js reads to print the reply.
+   Identical in checklist.html apart from T. */
+(function(){
+  var T = {
+    lang: 'de',
+    names: {1:'Betriebskategorie',2:'Wer fliegt',3:'Luftraum',4:'Löschmittel',5:'Fehlwurf'},
+    answers: {clear:'ja',no:'nein',unknown:'weiß ich nicht',drop:'es ist ein Abwurf vorgesehen',flightonly:'nur Flug und Erkundung',skipped:'entfällt'},
+    score: function(x,y){ return x + ' von ' + y + ' Punkten geklärt'; },
+    open: function(list){ return list.length ? 'Offen: ' + list.join(', ') + '.' : 'Offen: keiner.'; },
+    missing: 'Bitte beantworten Sie noch Frage ',
+    subject: function(x,y){ return 'Prüfpunkte, ' + x + ' von ' + y + ' geklärt'; },
+    head: 'Prüfpunkte-Check, Ergebnis',
+    area: 'Fläche',
+    consent: 'Weitere Kontaktaufnahme erlaubt',
+    yes: 'ja', no: 'nein', to: 'An'
+  };
+
+  var form = document.getElementById('check');
+  var q = function(n){ var c = form.querySelector('input[name="q'+n+'"]:checked'); return c ? c.value : null; };
+  var flightOnly = function(){ return q(1) === 'clear'; };
+  var last = null;
+
+  function syncSkip(){
+    var skip = flightOnly();
+    [4,5].forEach(function(n){ form.querySelector('fieldset[data-q="'+n+'"]').classList.toggle('skipped', skip); });
+    document.getElementById('skipnote').classList.toggle('on', skip);
+  }
+  form.addEventListener('change', function(e){ if (e.target.name === 'q1') syncSkip(); });
+  syncSkip();
+
+  function evaluate(){
+    var skip = flightOnly(), ns = skip ? [1,2,3] : [1,2,3,4,5];
+    for (var i = 0; i < ns.length; i++) if (!q(ns[i])) return { missing: ns[i] };
+    var open = ns.filter(function(n){ return q(n) !== 'clear'; });
+    return { skip: skip, y: ns.length, x: ns.length - open.length, open: open };
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var r = evaluate(), warn = document.getElementById('warn');
+    if (r.missing){
+      warn.textContent = T.missing + r.missing + '.';
+      warn.hidden = false;
+      form.querySelector('fieldset[data-q="'+r.missing+'"] input').focus();
+      return;
+    }
+    warn.hidden = true;
+    last = r;
+    document.getElementById('score').textContent = T.score(r.x, r.y);
+    document.getElementById('open').textContent = T.open(r.open.map(function(n){ return T.names[n]; }));
+    document.getElementById('skipline').hidden = !r.skip;
+    var res = document.getElementById('result');
+    res.hidden = false;
+    updateMail();
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  function answerText(n){
+    var v = q(n);
+    if (n === 1) return v === 'clear' ? T.answers.flightonly : T.answers[v];
+    if (last.skip && (n === 4 || n === 5)) return T.answers.skipped;
+    return T.answers[v];
+  }
+  function code(){
+    var map = { clear:'y', no:'n', unknown:'u', drop:'d' }, s = '';
+    for (var n = 1; n <= 5; n++) s += n + ((last.skip && n > 3) ? '-' : map[q(n)]);
+    return T.lang + ':' + s;
+  }
+  function body(){
+    var lines = [T.head, T.score(last.x, last.y), ''];
+    for (var n = 1; n <= 5; n++) lines.push(n + '. ' + T.names[n] + ': ' + answerText(n));
+    var area = document.getElementById('area').value.trim();
+    if (area) lines.push('', T.area + ': ' + area);
+    lines.push('', T.consent + ': ' + (document.getElementById('consent').checked ? T.yes : T.no));
+    lines.push('Code: ' + code());
+    return lines.join('\n');
+  }
+  function updateMail(){
+    if (!last) return;
+    document.getElementById('mailbtn').href = 'mailto:info@averiumdynamics.com'
+      + '?subject=' + encodeURIComponent(T.subject(last.x, last.y))
+      + '&body=' + encodeURIComponent(body());
+  }
+  document.getElementById('area').addEventListener('input', updateMail);
+  document.getElementById('consent').addEventListener('change', updateMail);
+  document.getElementById('mailbtn').addEventListener('click', function(){
+    updateMail();
+    document.getElementById('after').hidden = false;
+  });
+  document.getElementById('copybtn').addEventListener('click', function(){
+    var text = T.to + ': info@averiumdynamics.com\n' + T.subject(last.x, last.y) + '\n\n' + body();
+    var done = function(){ document.getElementById('copied').hidden = false; };
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, function(){});
+  });
+})();
+</script>
+</body>
+</html>

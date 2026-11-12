@@ -143,8 +143,12 @@ One piece in two languages, not two articles.
   these are one article in two languages, declared by hreflang, and a reader
   never sees both. Do not make one language poorer to satisfy a rule aimed at a
   different problem.
-- **The language link belongs in the byline**, not the sources block — telling
-  readers at the bottom which languages exist tells them after they have given up.
+- **The language link belongs at the top of the page, in the site header**, not
+  the sources block — telling readers at the bottom which languages exist tells
+  them after they have given up. It was in the byline until 2026-11-12, when Leo
+  moved it into the header on the munitions piece. On a phone it shortens to
+  "English" / "Deutsch" so the wordmark stays on one line. Article one still has
+  it in the byline.
 - **hreflang must list every language including itself, plus x-default**, in the
   page AND in the sitemap. A set where one side omits the other is discarded whole.
 - `/blog` is currently **English only**, so the German article's up-link goes to

@@ -220,6 +220,18 @@
   .site-head img{width:2.75rem;height:2.75rem;object-fit:contain;display:block}
   .site-head span{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem}
   .site-head a{text-decoration:none;color:var(--fg);display:flex;align-items:center;gap:.6rem}
+  /* Language link at the top of the page, in the header, since 2026-11-12. It
+     was in the byline; moved so a reader sees it before anything else. */
+  .site-head .wrap{justify-content:space-between}
+  .site-head a.lang{color:var(--primary);font-size:.875rem;font-weight:600;white-space:nowrap;padding:.75rem 0}
+  .site-head span{white-space:nowrap}
+  .site-head a.lang span{font:inherit}
+  @media(max-width:480px){.site-head a.lang .long{display:none}}
+  /* The promise block under the byline, pointing to the self-check. */
+  .promise{border:1px solid var(--border);border-left:3px solid var(--primary);padding:1.25rem 1.5rem;margin:2rem 0 0}
+  .promise p{margin-bottom:.9rem}
+  .promise a.go{display:inline-block;background:var(--primary);color:#fff;font-weight:600;text-decoration:none;
+    padding:.8rem 1.25rem;border-radius:.375rem;min-height:3rem}
 
   article{padding:5rem 0 4rem}
   h1{font-size:2.0625rem;letter-spacing:-.012em;margin-bottom:1.25rem}
@@ -339,6 +351,8 @@
       <img src="/logo.png" alt=""/>
       <span>Averium Dynamics</span>
     </a>
+    <a class="lang" href="/blog/munitionsbelastete-flaechen-was-gilt"
+       hreflang="de"><span class="long">Auf </span>Deutsch<span class="long"> lesen</span></a>
   </div>
 </header>
 
@@ -347,9 +361,13 @@
 
     <p class="crumb"><a href="/blog">Field Notes</a></p>
     <h1>Munitions-contaminated land: the number everyone quotes</h1>
-    <p class="byline"><span>12 November 2026 · 6 min read · Averium Dynamics UG, Berlin</span>
-      <a class="lang" href="/blog/munitionsbelastete-flaechen-was-gilt"
-         hreflang="de">Auf Deutsch lesen</a></p>
+    <p class="byline"><span>12 November 2026 · 6 min read · Averium Dynamics UG, Berlin</span></p>
+
+    <div class="promise">
+      <p>Five points to settle before any drone flies over this ground. A two minute
+        self-check.</p>
+      <a class="go" href="/checklist">Start the self-check</a>
+    </div>
 
     <figure>
       <picture>
@@ -562,6 +580,9 @@
 
     <p><strong>The failed drop.</strong> What happens to a payload that does not go off, on ground
       nobody is allowed to enter. There should be an answer to that before anything flies.</p>
+
+    <p>The full list, with the legal basis for each point, is in the
+      <a href="/checklist">self-check</a>.</p>
 
     <figure class="tablefig">
 <figcaption>What to settle before a deployment, and on what basis. <span class="hint">The table scrolls sideways on a narrow screen.</span></figcaption>

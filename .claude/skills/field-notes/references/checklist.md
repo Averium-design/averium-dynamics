@@ -26,7 +26,7 @@ site. Work through it before the publish merge, not after.
 - [ ] Same byline date on both, and `article:published_time` agrees.
 - [ ] Same reading-time figure on both.
 - [ ] Image sets identical across the two.
-- [ ] Language link is in the byline, not the sources block.
+- [ ] Language link is at the top of the page (site header), not the sources block.
 
 ## Head
 

@@ -113,6 +113,25 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-12 (night, Resend domain)
+
+**averiumdynamics.com is verified at Resend**, region eu-west-1 (Ireland),
+verified 20:03 per the Resend dashboard. Leo added three records at Namecheap:
+- TXT `resend._domainkey` (DKIM)
+- CNAME `rsend` -> `rsend-euw1.forge.rmta.net`
+- CNAME `send` -> `send.forge.rmta.net`
+
+Resend's current setup uses CNAMEs for the return path, not the MX + SPF TXT
+described in the earlier entry. Checked over DNS-over-HTTPS (dns.google): all
+three resolve, and the Zoho MX records (mx, mx2, mx3.zoho.eu) are unchanged.
+"Enable receiving" in Resend is deliberately left off, so inbound mail stays
+with Zoho. Cloudflare's resolver briefly answered NXDOMAIN for `rsend`: a
+negative cache from a lookup made before the record existed.
+
+**Still open:** the Vercel env vars (RESEND_API_KEY from this Resend account,
+and PRUEFPUNKTE_FROM), then a preview deploy and the test mail to
+leosafia4@gmail.com.
+
 ### 2026-11-12 (night, mail)
 
 **Real email for the self-check built. Branch `feature/pruefpunkte-mail`,

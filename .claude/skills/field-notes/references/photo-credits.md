@@ -14,6 +14,8 @@ not fill a gap by guessing from the subject of the picture.
 |---|---|---|---|
 | `sandy-heathland.jpg` | winklerchristopher | 5178754, "Sandy heathland landscape in Brandenburg" | Supplied and verified by Leo, 2026-11-12, including that it is not AI-generated. CDN URL: `cdn.pixabay.com/photo/2020/05/16/19/00/germany-5178754_1280.jpg` |
 | `fire-trucks-forest.jpg` | rico_loeb | 1345264, "Row of fire trucks near forest" | Supplied and verified by Leo, 2026-11-12. CDN URL: `cdn.pixabay.com/photo/2016/04/22/07/21/fire-1345264_1280.jpg` |
+| `disused-tank.jpg` | distelapparath | 3907368, "Abandoned military tank by pond" | Supplied and verified by Leo, 2026-11-12, including that it is not AI-generated. CDN URL: `cdn.pixabay.com/photo/2019/01/01/19/19/lost-places-3907368_1280.jpg`. Caption names no site or location, on purpose. |
+| `sandy-track-pines.jpg` | winklerchristopher | 5134829, "Sandy heathland trail through pine forest" | Supplied and verified by Leo, 2026-11-12, including that it is not AI-generated. CDN URL: `cdn.pixabay.com/photo/2020/05/05/19/59/germany-5134829_1280.jpg`. The frame shows a two-rut sand track through dry grassland with pines behind, so it is captioned as that and not as a vegetation-free holding line. |
 | `og-munitions.jpg` | rico_loeb | crop of 1345264 | 1200x630 centre crop of `fire-trucks-forest.jpg` |
 
 `sandy-heathland.jpg` replaced `charred-clearing.jpg`, which was the same

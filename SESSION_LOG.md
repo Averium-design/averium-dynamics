@@ -228,6 +228,8 @@ document with a different number turns up, it wins.
 
 **Caption shortened** (merge df75ad1). At Leo's request, "kein Einsatz an einem realen Vegetationsbrand" was removed from the onboard-frame caption, along with the matching English phrase. It now ends "Prototyp." / "A prototype.", and still says it is a controlled test. This reverses the earlier caption wording.
 
+**Reversal: the caption clause is restored** (merge acfe5f3, reversing df75ad1). The onboard-frame caption again ends "Prototyp, kein Einsatz an einem realen Vegetationsbrand." / "A prototype, not a deployment at a real vegetation fire." in both languages. Why: the article body never states that the test was not a real fire, so the caption is the only place on the page that says it, and "Prototyp" alone does not. Do not shorten this caption again unless the body takes over that statement.
+
 **Still open:**
 - The eleven-row table survives in git history (4523578, pushed). Deliberately
   not rewritten.

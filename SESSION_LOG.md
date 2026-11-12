@@ -226,6 +226,8 @@ document with a different number turns up, it wins.
 
 **Later still: our own onboard frame** (merge 9326225). `onboard-detection.jpg` (1920x1044, Averium Dynamics own material) went into "Unbemannte Systeme über diesen Flächen". The captions say what it is: a controlled test and a prototype, not a deployment at a real fire. It is the corrected render ("FIRE 69%", "SCANNING"); the frame with the unfilled "FIRE DETECTED ??? DROP BALL" placeholder was never added to the repo. The file had no EXIF, XMP or IPTC metadata. It is not in the Pixabay credit line, and the credit map records it as own material. **Caught after deploy:** the first request for the full-size `onboard-detection.jpg` returned the homepage HTML. It reached the previous deployment, where the file did not exist yet, so the catch-all rewrite answered. Seconds later it served `image/jpeg`, byte-identical to the repo file. That is why a fresh file should be checked again after a few seconds before calling it missing, and checked by content type, never by status code.
 
+**Caption shortened** (merge df75ad1). At Leo's request, "kein Einsatz an einem realen Vegetationsbrand" was removed from the onboard-frame caption, along with the matching English phrase. It now ends "Prototyp." / "A prototype.", and still says it is a controlled test. This reverses the earlier caption wording.
+
 **Still open:**
 - The eleven-row table survives in git history (4523578, pushed). Deliberately
   not rewritten.

@@ -113,6 +113,29 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-12 (night, first real send)
+
+**The real sender works on the preview.**
+- Vercel env now has RESEND_API_KEY (replaced, from the account holding the
+  verified domain) and PRUEFPUNKTE_FROM, both for Production and Preview.
+- The branch was pushed for a preview build, and 658465e is an empty commit to
+  rebuild with the new variable.
+- The preview is behind Vercel Authentication, so it cannot be reached
+  without a login. Leo ran the flow in his own browser on
+  `averium-dynamics-6fpnfmrp0-...vercel.app/pruefpunkte` and the page said
+  "Gesendet an leosafia4@gmail.com". The API answered `delivered: true`, which
+  it only does after Resend accepted the reader mail.
+- This also proves Vercel bundled `public/pruefpunkte-text.js` into the
+  function.
+
+**Still open before merging:**
+- Inbox or spam at Gmail.
+- Whether the copy reached info@.
+- Whether the links in the mail resolve.
+
+The preview URL was found through the GitHub deployments API, because a
+shortened name containing the branch would exceed 63 characters.
+
 ### 2026-11-12 (night, Resend domain)
 
 **averiumdynamics.com is verified at Resend**, region eu-west-1 (Ireland),

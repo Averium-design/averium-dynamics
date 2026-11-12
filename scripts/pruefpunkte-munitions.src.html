@@ -1,0 +1,66 @@
+<!doctype html>
+<!--
+  Source of public/blog/pruefpunkte-munitionsbelastete-flaechen.pdf, the
+  printable table promised in the Field Note
+  /blog/munitionsbelastete-flaechen-was-gilt. Every sentence here is taken from
+  that article; if the table there changes, change it here and regenerate:
+
+    msedge --headless --disable-gpu --no-pdf-header-footer
+      --print-to-pdf=public/blog/pruefpunkte-munitionsbelastete-flaechen.pdf
+      file:///<repo>/scripts/pruefpunkte-munitions.src.html
+
+  System fonts on purpose: a headless print must not depend on a web font
+  arriving in time.
+-->
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Prüfpunkte: was vor einem Einsatz auf munitionsbelasteten Flächen zu klären ist</title>
+<style>
+  @page{size:A4 landscape;margin:11mm 13mm 11mm}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;font-size:8.6pt;line-height:1.35;color:#1A1A1A}
+  .label{font-size:8pt;letter-spacing:.08em;text-transform:uppercase;color:#6B7280;margin-bottom:2mm}
+  h1{font-family:Georgia,'Times New Roman',serif;font-weight:600;font-size:15pt;line-height:1.2;margin-bottom:3mm;color:#1B4D3E}
+  p{margin-bottom:2.5mm}
+  table{border-collapse:collapse;width:100%;margin:3mm 0 4mm}
+  th,td{border-top:1px solid #D1D5DB;padding:1.5mm 2.5mm;vertical-align:top;text-align:left}
+  thead th{border-top:none;border-bottom:2px solid #1B4D3E;color:#1B4D3E;font-weight:600}
+  tbody th{font-weight:600}
+  td:last-child{width:90mm;color:#374151}
+  tr{break-inside:avoid}
+  tbody tr:last-child th,tbody tr:last-child td{border-bottom:1px solid #D1D5DB}
+  .foot{margin-top:4mm;padding-top:2.5mm;border-top:1px solid #D1D5DB;font-size:8pt;color:#6B7280}
+  .foot p{margin-bottom:1.2mm}
+</style>
+</head>
+<body>
+
+<p class="label">Averium Dynamics · Field Notes · 12. November 2026</p>
+<h1>Was vor einem Einsatz zu klären ist</h1>
+
+<p>Fünf Punkte sind unabhängig vom Anbieter zu klären.</p>
+
+<table>
+  <thead>
+    <tr><th scope="col">Was zu klären ist</th><th scope="col">Grundlage</th></tr>
+  </thead>
+  <tbody>
+    <tr><th scope="row">Betriebskategorie: Abwurf und Gefahrgut sind in der offenen Kategorie nicht zulässig</th><td>VO (EU) 2019/947</td></tr>
+    <tr><th scope="row">Ausnahme für die BOS: Drohnen unter 25 kg, auch durch Dritte unter Aufsicht einer BOS</th><td>§ 21k LuftVO, EGRED 2 (BBK, Stand Juni 2024), <span style="white-space:nowrap">STS-BOS</span> (LBA, 16.07.2025)</td></tr>
+    <tr><th scope="row">Abstimmung mit der bemannten Luftfahrt, Erkennbarkeit über ADS-B oder FLARM</th><td>DFV und AGBF, Fachempfehlung Drohnen und UAV, August 2025</td></tr>
+    <tr><th scope="row">Löschmittel: Inverkehrbringen, Marktüberwachung, Erlaubnis, Lagerung, Transport</th><td>ProdSG, § 7 SprengG, 1. SprengV</td></tr>
+    <tr><th scope="row">Fehlwurf: Verbleib eines nicht ausgelösten Körpers auf nicht betretbarer Fläche</th><td>Einsatzplanung</td></tr>
+  </tbody>
+</table>
+
+<div class="foot">
+  <p>Offenlegung: Averium Dynamics entwickelt Löschdrohnen. Die fünf Punkte oben gelten für uns wie
+    für jeden anderen Anbieter.</p>
+  <p>Aus dem Artikel „Munitionsbelastete Flächen: die Zahl, die alle nennen“, mit Quellen:
+    averiumdynamics.com/blog/munitionsbelastete-flaechen-was-gilt</p>
+  <p>Averium Dynamics UG (haftungsbeschränkt), Berlin · info@averiumdynamics.com</p>
+</div>
+
+</body>
+</html>

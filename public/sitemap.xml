@@ -38,7 +38,7 @@
        do. Restored 2026-08-22 after being removed on the 21st. -->
   <url>
     <loc>https://www.averiumdynamics.com/blog</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -67,6 +67,32 @@
                 href="https://www.averiumdynamics.com/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne"/>
     <xhtml:link rel="alternate" hreflang="x-default"
                 href="https://www.averiumdynamics.com/blog/helicopter-air-tanker-fire-engine-drone"/>
+  </url>
+
+  <url>
+    <loc>https://www.averiumdynamics.com/blog/munitions-contaminated-land-what-the-rules-say</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en"
+                href="https://www.averiumdynamics.com/blog/munitions-contaminated-land-what-the-rules-say"/>
+    <xhtml:link rel="alternate" hreflang="de"
+                href="https://www.averiumdynamics.com/blog/munitionsbelastete-flaechen-was-gilt"/>
+    <xhtml:link rel="alternate" hreflang="x-default"
+                href="https://www.averiumdynamics.com/blog/munitions-contaminated-land-what-the-rules-say"/>
+  </url>
+
+  <url>
+    <loc>https://www.averiumdynamics.com/blog/munitionsbelastete-flaechen-was-gilt</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en"
+                href="https://www.averiumdynamics.com/blog/munitions-contaminated-land-what-the-rules-say"/>
+    <xhtml:link rel="alternate" hreflang="de"
+                href="https://www.averiumdynamics.com/blog/munitionsbelastete-flaechen-was-gilt"/>
+    <xhtml:link rel="alternate" hreflang="x-default"
+                href="https://www.averiumdynamics.com/blog/munitions-contaminated-land-what-the-rules-say"/>
   </url>
 
   <!-- The free Size-Up tool, indexable since 2026-08-22. Static HTML, so unlike

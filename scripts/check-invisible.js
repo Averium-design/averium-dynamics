@@ -35,6 +35,10 @@ const ROOT = path.resolve(__dirname, '..');
 const TARGETS = [
   'public/blog/helicopter-air-tanker-fire-engine-drone.html',
   'public/blog/loeschhubschrauber-loeschflugzeug-tankloeschfahrzeug-drohne.html',
+  'public/blog/munitions-contaminated-land-what-the-rules-say.html',
+  'public/blog/munitionsbelastete-flaechen-was-gilt.html',
+  'scripts/checklist-munitions.src.html',
+  'scripts/pruefpunkte-munitions.src.html',
   'scripts/sizeup.src.html',
   'scripts/build-sizeup.js',
   'src/App.js',

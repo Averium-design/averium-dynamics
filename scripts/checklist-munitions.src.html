@@ -1,0 +1,67 @@
+<!doctype html>
+<!--
+  Source of public/blog/checklist-munitions-contaminated-land.pdf, the
+  printable table promised in the Field Note
+  /blog/munitions-contaminated-land-what-the-rules-say. Every sentence here is
+  taken from that article; if the table there changes, change it here and
+  regenerate:
+
+    msedge --headless --disable-gpu --no-pdf-header-footer
+      --print-to-pdf=public/blog/checklist-munitions-contaminated-land.pdf
+      file:///<repo>/scripts/checklist-munitions.src.html
+
+  System fonts on purpose: a headless print must not depend on a web font
+  arriving in time.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Checklist: what to settle before a deployment on munitions-contaminated land</title>
+<style>
+  @page{size:A4 landscape;margin:11mm 13mm 11mm}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;font-size:8.6pt;line-height:1.35;color:#1A1A1A}
+  .label{font-size:8pt;letter-spacing:.08em;text-transform:uppercase;color:#6B7280;margin-bottom:2mm}
+  h1{font-family:Georgia,'Times New Roman',serif;font-weight:600;font-size:15pt;line-height:1.2;margin-bottom:3mm;color:#1B4D3E}
+  p{margin-bottom:2.5mm}
+  table{border-collapse:collapse;width:100%;margin:3mm 0 4mm}
+  th,td{border-top:1px solid #D1D5DB;padding:1.5mm 2.5mm;vertical-align:top;text-align:left}
+  thead th{border-top:none;border-bottom:2px solid #1B4D3E;color:#1B4D3E;font-weight:600}
+  tbody th{font-weight:600}
+  td:last-child{width:90mm;color:#374151}
+  tr{break-inside:avoid}
+  tbody tr:last-child th,tbody tr:last-child td{border-bottom:1px solid #D1D5DB}
+  .foot{margin-top:4mm;padding-top:2.5mm;border-top:1px solid #D1D5DB;font-size:8pt;color:#6B7280}
+  .foot p{margin-bottom:1.2mm}
+</style>
+</head>
+<body>
+
+<p class="label">Averium Dynamics · Field Notes · 12 November 2026</p>
+<h1>What to settle before a deployment</h1>
+
+<p>Five points need to be settled, whichever supplier is involved.</p>
+
+<table>
+  <thead>
+    <tr><th scope="col">What to settle</th><th scope="col">Basis</th></tr>
+  </thead>
+  <tbody>
+    <tr><th scope="row">Operating category: dropping objects and dangerous goods are not permitted in the open category</th><td>Regulation (EU) 2019/947</td></tr>
+    <tr><th scope="row">Exemption for the BOS: drones under 25 kg, including third parties flying under the supervision of a BOS</th><td>§ 21k LuftVO, EGRED 2 (BBK, as of June 2024), <span style="white-space:nowrap">STS-BOS</span> (LBA, 16 July 2025)</td></tr>
+    <tr><th scope="row">Coordination with crewed aviation, visibility via ADS-B or FLARM</th><td>DFV and AGBF, Fachempfehlung Drohnen und UAV, August 2025</td></tr>
+    <tr><th scope="row">Extinguishing agent: placing on the market, market surveillance, permit, storage, transport</th><td>ProdSG, § 7 SprengG, 1. SprengV</td></tr>
+    <tr><th scope="row">Failed drop: what happens to a payload that has not gone off, on ground nobody may enter</th><td>Deployment planning</td></tr>
+  </tbody>
+</table>
+
+<div class="foot">
+  <p>Disclosure: Averium Dynamics develops firefighting drones. The five points above apply to us
+    as they do to any other supplier.</p>
+  <p>From the article "Munitions-contaminated land: the number everyone quotes", with sources:
+    averiumdynamics.com/blog/munitions-contaminated-land-what-the-rules-say</p>
+  <p>Averium Dynamics UG (haftungsbeschränkt), Berlin · info@averiumdynamics.com</p>
+</div>
+
+</body>
+</html>

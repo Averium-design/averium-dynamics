@@ -7,6 +7,19 @@ import { Link } from 'react-router-dom';
    from the site at all: before it, both were reachable only by direct URL. */
 const posts = [
   {
+    date: '12 November 2026',
+    dateISO: '2026-11-12',
+    read: '6 min read',
+    title: 'Munitions-contaminated land: the number everyone quotes',
+    blurb:
+      'On munitions-contaminated ground, crews keep their distance instead of fighting the ' +
+      'fire. The distance is quoted as 300, 500 or 1,000 metres, almost always attributed to ' +
+      'FwDV 500. What the rules actually say, and five points to settle before an unmanned ' +
+      'system flies there.',
+    href: '/blog/munitions-contaminated-land-what-the-rules-say',
+    de: '/blog/munitionsbelastete-flaechen-was-gilt',
+  },
+  {
     date: '18 August 2026',
     dateISO: '2026-08-18',
     read: '6 min read',
@@ -53,8 +66,9 @@ export default function Blog() {
           What we learn from real fires
         </h1>
         <p className="text-foreground-muted leading-relaxed max-w-2xl mb-12">
-          Write-ups of fires we have followed closely, and of the equipment that was
-          sent to them. Sourced, and dull where the facts are dull.
+          Write-ups of fires we have followed closely, of the equipment that was
+          sent to them, and of the rules that govern them. Sourced, and dull where
+          the facts are dull.
         </p>
 
         {posts.map((post) => (

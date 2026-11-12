@@ -35,7 +35,8 @@ const sharp = require('sharp');
 
 const DIR = path.resolve(__dirname, '..', 'public', 'blog', 'img');
 const WIDTHS = [424, 848, 1272];
-const SKIP = new Set(['og-card.jpg']); // fixed-size social card, not part of the layout
+// Fixed-size social cards, one per article pair, not part of the layout.
+const SKIP = new Set(['og-card.jpg', 'og-munitions.jpg']);
 
 // Quality chosen per format, not shared: AVIF holds up far lower than JPEG does.
 const OPTS = {

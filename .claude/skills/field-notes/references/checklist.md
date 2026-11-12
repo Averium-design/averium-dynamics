@@ -78,7 +78,8 @@ site. Work through it before the publish merge, not after.
 - [ ] Served locally and **looked at, at 1080px AND 375px**: no sideways scroll,
       the table scrolls inside its own box, its caption is outside that box, the
       headline is not five lines on mobile, text width equals image width.
-- [ ] Tap targets on any standalone link are not just the line box.
+- [ ] Tap targets on any standalone link are not just the line box: at least
+      24×24 CSS px (WCAG 2.2 AA), aim for 48×48. See the `seo` skill's thresholds.
 
 ## Verify after deploying
 

@@ -113,6 +113,19 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-12 (night, duplicate link)
+
+**Reversal:** "Die vollständige Liste mit den Grundlagen gibt es in der
+Selbstprüfung." (and the EN twin) has been removed from both articles. Earlier
+today the brief said to keep that sentence after the five points. Leo reversed
+it because, with the box right below, the two read as a duplicate. The box is
+now the only link to the check in the article body.
+
+Published as 7b4fac6. Checked live at 375 px:
+- Each article has exactly one link to the check and one box.
+- The box follows "Der Fehlwurf" / "The failed drop" and precedes the table.
+- No U+FFFD and no sideways scroll.
+
 ### 2026-11-12 (night, address)
 
 **Published 56f61b7** (`--no-ff` over c0e2fa6, 0f12f31, 6caebcd):

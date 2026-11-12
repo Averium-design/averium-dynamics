@@ -21,8 +21,8 @@ export default function Imprint() {
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-2">Address</h3>
             <p className="text-foreground-muted leading-relaxed">
-              Kastanienallee 51<br />
-              12627 Berlin<br />
+              Potsdamer Straße 61<br />
+              10785 Berlin<br />
               Germany
             </p>
           </div>

@@ -113,6 +113,30 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-12 (night, address)
+
+**Published 56f61b7** (`--no-ff` over c0e2fa6, 0f12f31, 6caebcd):
+- **The company address** is now Potsdamer Straße 61, 10785 Berlin, in the
+  Imprint and the privacy policy. These were the only two places
+  "Kastanienallee 51, 12627" appeared. Leo typed "Postdamer"; it was written
+  as Potsdamer Straße, which is the street that 10785 belongs to.
+- **leo@ is removed** from the articles' contact line.
+- **The self-check box** sits directly after the five points.
+
+The first live check, made while Vercel was still building, showed the old
+content everywhere. That was a deploy in progress, not a failure.
+
+Rechecked on production in a browser at 375 px:
+- /imprint and /privacy render the new address, and neither contains
+  Kastanienallee or 12627.
+- Both articles: no leo@, exactly one box, placed after the "vollständige
+  Liste" sentence and before the table. No U+FFFD and no sideways scroll.
+
+**Not changed, outside the website:** the address registered with the
+Handelsregister (HRB 285037 B). An Impressum address should match the
+ladungsfähige Anschrift; whether the register entry has been updated is
+Leo's to confirm.
+
 ### 2026-11-12 (night, promise box position)
 
 The self-check box moved a third time, at Leo's request. It now sits directly

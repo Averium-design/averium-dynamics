@@ -230,6 +230,8 @@ document with a different number turns up, it wins.
 
 **Reversal: the caption clause is restored** (merge acfe5f3, reversing df75ad1). The onboard-frame caption again ends "Prototyp, kein Einsatz an einem realen Vegetationsbrand." / "A prototype, not a deployment at a real vegetation fire." in both languages. Why: the article body never states that the test was not a real fire, so the caption is the only place on the page that says it, and "Prototyp" alone does not. Do not shorten this caption again unless the body takes over that statement.
 
+**Reversed again: the clause is removed** (merge b5565b9, reversing acfe5f3). At Leo's direct request the onboard caption ends "Prototyp." / "A prototype." again. This supersedes the note above saying not to shorten it. The reason recorded there still applies: nothing else on the page says the test was not a real fire. If that matters later, put the statement in the body rather than toggling the caption a fourth time.
+
 **Still open:**
 - The eleven-row table survives in git history (4523578, pushed). Deliberately
   not rewritten.

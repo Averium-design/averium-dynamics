@@ -50,9 +50,10 @@
   /* Same type as the Field Notes: Lora 600 headlines, DM Sans body, Space
      Grotesk wordmark. Colours from tailwind.config.js. EN twin: checklist.html.
      The questions and their Grundlagen are plain HTML so they survive without
-     JavaScript; the script only counts and builds the mail. What a reader gets
-     per open point (explanation, next step) is deliberately NOT on this page;
-     it goes out by reply mail, see scripts/pruefpunkte-reply.js. */
+     JavaScript; the script counts and builds the mail. What a reader gets
+     per open point (explanation, next step) is rendered only when they press
+     the mail button, from /pruefpunkte-text.js, the same module the reply
+     script (scripts/pruefpunkte-reply.js) uses. Soft gate, on purpose. */
   :root{--primary:#1B4D3E;--accent:#FF4D00;--fg:#1A1A1A;--muted:#6B7280;--border:#E5E7EB;--bg:#FFFFFF;--soft:#F6F7F6}
   *{margin:0;padding:0;box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
@@ -113,6 +114,10 @@
   .mail .consent input{margin-top:.3rem;width:1.1rem;height:1.1rem;flex:none;accent-color:var(--primary)}
   .small{font-size:.875rem;color:var(--muted)}
   .after{margin-top:1rem}
+  .fulllist{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border)}
+  .fulllist h4{font-family:'DM Sans',system-ui,sans-serif;font-size:1rem;font-weight:600;margin:1.1rem 0 .3rem}
+  .fulllist p{margin-bottom:.45rem}
+  .fulllist .lbl{font-weight:600}
 
   .pdf{font-size:.9375rem;color:var(--muted);margin-top:1.5rem}
   .pdf a{display:inline-block;padding:.75rem 0}
@@ -233,8 +238,8 @@
       <div class="mail">
         <h3>Die vollständige Liste per E-Mail</h3>
         <p>Zu jedem offenen Punkt schicken wir Ihnen, worum es geht, die Grundlage und was als Nächstes
-          zu tun ist, dazu die Übersicht zu A1, A2 und A3. Der Knopf öffnet Ihr Mailprogramm mit Ihren
-          Antworten an uns; wir antworten mit der Liste.</p>
+          zu tun ist. Der Knopf öffnet Ihr Mailprogramm mit Ihren Antworten an uns und zeigt die Liste
+          gleich hier; wir antworten mit derselben Liste.</p>
 
         <label class="field" for="area">Um welche Fläche geht es? (optional)</label>
         <textarea id="area" maxlength="500"></textarea>
@@ -252,6 +257,7 @@
           <button class="btn ghost" type="button" id="copybtn">Text kopieren</button>
           <span class="small" id="copied" hidden>Kopiert.</span>
         </div>
+        <div class="fulllist" id="fulllist" hidden></div>
       </div>
     </section>
 
@@ -302,6 +308,17 @@
               (<a href="https://uasweekly.com/2025/10/02/korean-air-anduril-expand-uas-partnership-for-ai-wildfire-response-platform/">UAS Weekly, 02.10.2025</a>).</td>
           </tr>
           <tr>
+            <th scope="row">XCMG mit dem Shanghaier Büro des Ministeriums für Notfallmanagement</th>
+            <td>Fahrzeuggestütztes System mit zwei Löschdrohnen und einer Aufklärungsdrohne, für Brände im
+              Frühstadium in Hochhäusern, Wald und Grasland.</td>
+            <td>Die Aufklärungsdrohne fliegt voraus und legt eine Route fest, die Löschdrohnen folgen. Sie
+              tragen Pulverlöschkörper oder Drucktanks.</td>
+            <td>Im Oktober 2023 auf einer Messe in Peking gezeigt, als fünfte Produktgeneration. Nach
+              Angaben von Mitarbeitern im Waldbrandschutz eingesetzt, bei Wiederentzündungsstellen und in
+              unzugänglichem Gelände
+              (<a href="https://www.scmp.com/news/china/science/article/3238211/chinese-ai-drone-system-aims-hit-fires-hard-reach-places-they-turn-big-blazes">SCMP, 19.10.2023</a>).</td>
+          </tr>
+          <tr>
             <th scope="row">Averium Dynamics</th>
             <td>Automatische Branderkennung an Bord, Abwurf eines Löschkörpers.</td>
             <td>Unbemanntes Fluggerät.</td>
@@ -340,6 +357,14 @@
           <a href="https://www.lba.de/DE/Drohnen/Allgemeine_Informationen/Risikobewertung/Risikobewertung_node.html">lba.de</a></li>
         <li>§ 21k LuftVO. <a href="https://www.gesetze-im-internet.de/luftvo_2015/__21k.html">gesetze-im-internet.de</a></li>
       </ul>
+      <p>Zur Tabelle der anderen Systeme:</p>
+      <ul>
+        <li>Korean Air und Anduril Industries, gemeinsame Mitteilung vom 02.10.2025, nach UAS Weekly.
+          <a href="https://uasweekly.com/2025/10/02/korean-air-anduril-expand-uas-partnership-for-ai-wildfire-response-platform/">uasweekly.com</a></li>
+        <li>South China Morning Post, Zhang Tong, 19.10.2023. Das XCMG-System: Aufbau, Einsatzweise,
+          Partner und Stand, nach Angaben von XCMG auf der Messe.
+          <a href="https://www.scmp.com/news/china/science/article/3238211/chinese-ai-drone-system-aims-hit-fires-hard-reach-places-they-turn-big-blazes">scmp.com</a></li>
+      </ul>
       <p>Offenlegung: Averium Dynamics entwickelt Löschdrohnen. Die fünf Punkte gelten für uns wie für
         jeden anderen Anbieter.</p>
     </div>
@@ -360,6 +385,7 @@
   </div>
 </footer>
 
+<script src="/pruefpunkte-text.js"></script>
 <script>
 /* Counts the answers and builds a mailto. Nothing is sent anywhere by this
    page: the reader's own mail client sends it, to info@. The last line of the
@@ -377,7 +403,8 @@
     head: 'Prüfpunkte-Check, Ergebnis',
     area: 'Fläche',
     consent: 'Weitere Kontaktaufnahme erlaubt',
-    yes: 'ja', no: 'nein', to: 'An'
+    yes: 'ja', no: 'nein', to: 'An',
+    listHead: 'Ihre offenen Punkte', noneOpen: 'Kein Punkt ist offen.'
   };
 
   var form = document.getElementById('check');
@@ -446,11 +473,34 @@
       + '?subject=' + encodeURIComponent(T.subject(last.x, last.y))
       + '&body=' + encodeURIComponent(body());
   }
+  /* The full list, rendered from /pruefpunkte-text.js, the same module the
+     reply script uses. Shown when the reader presses the mail button: the gate
+     is soft on purpose (decided 2026-11-12). If the module did not load, the
+     mailto still works and the list simply does not appear. */
+  function renderList(){
+    var P = window.PruefpunkteText, box = document.getElementById('fulllist');
+    if (!P || !last) return;
+    var r = P.build(code());
+    box.textContent = '';
+    var el = function(tag, text, cls){ var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; box.appendChild(e); return e; };
+    el('h3', T.listHead);
+    if (!r.open.length) el('p', T.noneOpen);
+    r.open.forEach(function(p){
+      el('h4', p.n + '. ' + p.name);
+      el('p', p.open);
+      var b = el('p', null, 'small'); b.appendChild(document.createElement('span')).className = 'lbl';
+      b.firstChild.textContent = r.labels.basis + ': '; b.appendChild(document.createTextNode(p.basis));
+      var n = el('p'); n.appendChild(document.createElement('span')).className = 'lbl';
+      n.firstChild.textContent = r.labels.next + ': '; n.appendChild(document.createTextNode(p.next));
+    });
+    box.hidden = false;
+  }
   document.getElementById('area').addEventListener('input', updateMail);
   document.getElementById('consent').addEventListener('change', updateMail);
   document.getElementById('mailbtn').addEventListener('click', function(){
     updateMail();
     document.getElementById('after').hidden = false;
+    renderList();
   });
   document.getElementById('copybtn').addEventListener('click', function(){
     var text = T.to + ': info@averiumdynamics.com\n' + T.subject(last.x, last.y) + '\n\n' + body();

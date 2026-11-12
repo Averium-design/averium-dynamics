@@ -10,11 +10,12 @@ const posts = [
     date: '12 November 2026',
     dateISO: '2026-11-12',
     read: '6 min read',
-    title: 'Munitions-contaminated land: the number everyone quotes is not what the directive says',
+    title: 'Munitions-contaminated land: the number everyone quotes',
     blurb:
-      'The distance quoted for wildfires on munitions-contaminated ground is almost always ' +
-      'attributed to FwDV 500, and two qualifiers regularly get lost on the way. What the ' +
-      'rules say, and what to check before an unmanned system is used there.',
+      'On munitions-contaminated ground, crews keep their distance instead of fighting the ' +
+      'fire. The distance is quoted as 300, 500 or 1,000 metres, almost always attributed to ' +
+      'FwDV 500. What the rules actually say, and five points to settle before an unmanned ' +
+      'system flies there.',
     href: '/blog/munitions-contaminated-land-what-the-rules-say',
     de: '/blog/munitionsbelastete-flaechen-was-gilt',
   },

@@ -12,14 +12,14 @@ not fill a gap by guessing from the subject of the picture.
 
 | File | Photographer | Pixabay ID / title | How established |
 |---|---|---|---|
-| `charred-clearing.jpg` | ojkumena | 2370996, "The Forest Fell" (listed as "Charred forest clearing with smoke") | Supplied and verified by Leo, 2026-11-12. CDN URL: `cdn.pixabay.com/photo/2017/06/04/12/55/the-forest-fell-2370996_1280.jpg` |
+| `sandy-heathland.jpg` | winklerchristopher | 5178754, "Sandy heathland landscape in Brandenburg" | Supplied and verified by Leo, 2026-11-12, including that it is not AI-generated. CDN URL: `cdn.pixabay.com/photo/2020/05/16/19/00/germany-5178754_1280.jpg` |
 | `fire-trucks-forest.jpg` | rico_loeb | 1345264, "Row of fire trucks near forest" | Supplied and verified by Leo, 2026-11-12. CDN URL: `cdn.pixabay.com/photo/2016/04/22/07/21/fire-1345264_1280.jpg` |
 | `og-munitions.jpg` | rico_loeb | crop of 1345264 | 1200x630 centre crop of `fire-trucks-forest.jpg` |
 
-`charred-clearing.jpg` is the **same Pixabay photograph** as
-`smouldering-ground.jpg` in Field Note 1, downloaded again at 1280px. Kept as a
-separate file so either article can change its picture without moving the
-other's.
+`sandy-heathland.jpg` replaced `charred-clearing.jpg`, which was the same
+Pixabay photograph (ojkumena, 2370996) as `smouldering-ground.jpg` in Field
+Note 1 and so duplicated that article's opener. `charred-clearing*` was deleted;
+`smouldering-ground*` was not touched.
 
 ## Field Note 1 — helicopter, air tanker, fire engine, drone (2026-08-18)
 

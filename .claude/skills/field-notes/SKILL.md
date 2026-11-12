@@ -55,6 +55,10 @@ words:
 - **Inter as the body face.** It is the default of most generated sites. These
   articles are Lora 600 headlines + DM Sans body, deliberately diverging from
   the rest of the site. See "Typography" below before touching it.
+- **Exhaustiveness.** Listing every rule, criterion or option that applies reads
+  as machine-generated even when every line of it is true. Keep only the points
+  a professional reader might not already know. The munitions piece went from
+  eleven checklist rows to five on that test (2026-11-12).
 
 Read the draft asking "which sentence would a person not have bothered to
 write?" — and delete it.
@@ -94,6 +98,10 @@ In priority order, from what actually changed these pages:
    Article one names five criteria and then answers them across four sections;
    the table puts them side by side and **adds no claim the prose does not make**.
    Use `<th scope>`, wrap it per the checklist, caption it outside the scroll box.
+   The converse holds too: **a row the prose does not discuss makes the piece a
+   checklist, not a Field Note.** Write the prose or cut the row. The munitions
+   piece's first draft had an eleven-row table making eleven claims that appeared
+   nowhere in the text (2026-11-12).
 2. **Claims that survive being lifted out of context.** One sentence, one fact,
    no back-reference. A passage that needs the paragraph above it will be quoted
    wrongly or not at all.
@@ -113,6 +121,12 @@ extracted.
 
 Open with the specific event, not with context. Article one opens on a date, a
 place and a number of hectares.
+
+The munitions piece broke this rule anyway, so it now has a test: **the first two
+sentences must name a place and a date.** If they do not, the opening is
+context, not an event, and it is wrong. The first draft opened on "anyone who
+looks into this soon comes across a number" and read as machine-written for
+that reason. It now opens on Jüterbog, 31 May 2023 (2026-11-12).
 
 ## Bilingual rules
 

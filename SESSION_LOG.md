@@ -113,6 +113,32 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-12 (night)
+
+**Published and checked live.** The second merge was 637d3ba (`--no-ff` over
+41c2ade), pushed at Leo's request, and served about 30 s after the push. This
+closes the "live check NOT done" item in the entry below.
+
+Checked on production by content, never by status:
+- /pruefpunkte and /checklist carry their own titles, with zero U+FFFD.
+- `/pruefpunkte-text.js` serves as `application/javascript`.
+- Both PDFs serve as `application/pdf` (66046 and 62952 bytes); the DE PDF is
+  byte-identical to the repo.
+- The sitemap serves as XML and lists both new URLs.
+- In a browser at 375 px, both languages:
+  - The article promise button leads to the right check.
+  - Score and open names are correct; the full list stays hidden until the mail
+    button, then shows the four expected points.
+  - The mailto subject is correct, the three-row table is there, and nothing
+    scrolls sideways.
+  - The header language link goes to the other language.
+  - No console errors.
+
+**Still open:**
+- No real mail sender. Mail is still the mailto fallback until a Resend domain
+  is verified.
+- Leo has not reviewed the "next step" lines in `public/pruefpunkte-text.js`.
+
 ### 2026-11-12 (late evening)
 
 **The self-check was merged and pushed to main at Leo's request:** 172162e,

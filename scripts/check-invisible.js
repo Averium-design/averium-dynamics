@@ -39,6 +39,7 @@ const TARGETS = [
   'public/blog/munitionsbelastete-flaechen-was-gilt.html',
   'public/pruefpunkte.html',
   'public/checklist.html',
+  'public/pruefpunkte-text.js',
   'scripts/pruefpunkte-reply.js',
   'scripts/checklist-munitions.src.html',
   'scripts/pruefpunkte-munitions.src.html',

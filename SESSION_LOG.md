@@ -113,6 +113,126 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-12
+
+**Field Note 2 published, German and English.** Merged `--no-ff` as 2bdbf69
+(branch `content/munitions-field-note`: 4523578, 6a86fe9, f0dcc3d) and live:
+`/blog/munitionsbelastete-flaechen-was-gilt` and
+`/blog/munitions-contaminated-land-what-the-rules-say`. It opens on the Jüterbog
+fire of 31 May 2023, sets out what FwDV 500, the AFKzV notes, the Hessian
+guidance and the May 2026 UAG version actually say about distances on
+munitions-contaminated ground, and ends on five points to settle before an
+unmanned system is used. Thirteen linked, dated sources per page, each saying
+which fact it supports.
+
+Checked live by content after deploy, not by status: both tab titles right,
+the language link works both ways, zero replacement characters on the German
+page, `sitemap.xml` serves as `application/xml` with both URLs, both PDFs serve
+as `application/pdf` at the regenerated sizes, the new images serve as images,
+and `/blog` lists the new title.
+
+**Decided, and why:**
+- **The German text was replaced wholesale** (`artikel_de_v2.md`, a working file,
+  never committed). The first draft opened on context ("anyone who looks into
+  this soon comes across a number") and carried an eleven-row checklist whose
+  claims appeared nowhere in the prose. It now opens on a place and a date, and
+  the table is five rows, each argued above it. The "Qualifikation und
+  Besatzung" row was cut deliberately.
+- **The UAG/Hessen contradiction on air operations stays, with both sources
+  named.** Hessen calls air attack on munitions ground "oft die einzige
+  offensive Möglichkeit"; the UAG version calls direct use of aircraft there "in
+  der Regel nicht zweckmäßig". The sources disagreeing is the point of the
+  article, not a flaw in it.
+- **688 ha, cited to dpa in the Nordkurier (2 November 2023), quoting the
+  Agrar- und Forstministerium.** See the discrepancy below.
+- **The opening number is "innerhalb weniger Stunden von vier auf etwa
+  13 Hektar"**, as dpa reported it on 1 June 2023 (t-online). The earlier "nach
+  vier Stunden ... 13 Hektar" was a later newsblog misreading of "von vier
+  [Hektar]" and is gone for good.
+- **Korean Air / Anduril: "prüfen gemeinsam die Entwicklung"**, matching the
+  source's "exploring". "Für Südkorea" was removed; the source names Korean and
+  Asia-Pacific markets.
+
+**Reversal: the Sichuan claim was cut.** The draft said Chinese state media
+reported firefighting drones used in the Sichuan fire of March 2024 "nicht nur
+zur Aufklärung". Its only source, german.china.org.cn (22.03.2024), describes a
+Wing Loong-2 flying 18 hours of fire monitoring and telecoms relay over Yajiang,
+which is reconnaissance. The source contradicted the claim, so the sentence and
+the source line were removed rather than softened. For the record, the page did
+load first time from here; the http/https loop reported earlier was not
+reproduced.
+
+**§ 21k LuftVO: the wording was wrong, and there is a 25 kg limit.** The draft
+said the exemption covers third parties flying "im Auftrag" of a BOS. The
+statute (gesetze-im-internet.de, read 2026-11-12) says "durch oder unter
+Aufsicht", and paragraph 1 applies **only to drones with less than 25 kg
+take-off mass**. EGRED 2 section 3.1.1.1 says the same. The text, the table and
+both PDFs now say a third party flying unter Aufsicht einer BOS is covered,
+with the 25 kg limit. **This is the legal core of the business model.** A
+system that carries extinguishing agent and comes in over 25 kg is not covered
+by § 21k(1) at all. EGRED 2 also notes that an amendment to § 21k is planned.
+EGRED 2 is now cited as the document itself (`drohnen-empfehlungen.pdf`,
+"Version 2, Stand Juni 2024"), not the December 2023 press release, which never
+mentions § 21k.
+
+**Discrepancy, recorded so it is not rediscovered: 688 ha against 700 ha.** The
+Jüterbog area appears as "688 Hektar ... laut Ministerium" only in dpa's report
+(Nordkurier, 2 November 2023). No ministry publication carrying 688 was found.
+Landesforst Brandenburg's own WS-Info 01/2024 says the fire spread "auf 700
+Hektar". At the time, the landowner and the Einsatzleitung reported "über 700"
+(Stiftung Naturlandschaften Brandenburg, 15 June 2023; t-online newsblog,
+14 June). Other figures in circulation: 718 ha (Berliner Zeitung/dpa, 10 June).
+The article uses 688 because it is the ministry's figure. If a ministry
+document with a different number turns up, it wins.
+
+**Broke or was caught in review:**
+- "Was auf der Fläche möglich ist, entscheidet der Kampfmittelbeseitigungsdienst"
+  was **contradicted** by the Hessian guidance: the Einsatzleitung decides, on
+  the KMRD advisers' assessment. Corrected.
+- "Kontrolliertes Ausbrennen ... die vorschriftsgemäße Entscheidung" was in
+  neither source. Now "brennt das Innere zwischen den Barrieren aus", backed by
+  Hessen (no entry, hold at barriers) and the UAG.
+- Unsourced tactics removed: Werfer, beräumte Korridore, "anforderungspflichtig
+  und wetterabhängig", drones "seit Jahren". Unbemannte Monitore turned out to
+  be in the Hessian guidance (p. 4) and stayed. "Löschraupen" became the UAG's
+  "ferngeführte Systeme".
+- `charred-clearing.jpg`, the first opener, was the same Pixabay photograph
+  (2370996) as article one's `smouldering-ground.jpg`. Replaced with
+  `sandy-heathland.jpg` (winklerchristopher, 5178754) and deleted. Derivatives
+  were built with an unmodified copy of `build-images.js` against that one file,
+  so article one's variants were not re-encoded.
+- `og-munitions.jpg` was in the JSON-LD `image` list but is not shown on the
+  page. Removed from the schema; it stays as `og:image`.
+- The five-row table's full-sentence row headers were squeezed by a fixed
+  `10rem` column. Changed to 62% on these two pages only.
+- The standalone PDF download link was a 21 px tap target. Padded to about
+  48 px. The language link is 25 px, which passes WCAG 2.2 AA's 24 px minimum
+  and was left alone.
+- Headline shortened to "die Zahl, die alle nennen" / "the number everyone
+  quotes": 3 lines DE and 4 EN at 375 px, down from 5 and 6.
+
+**Skills updated** (in the merge):
+- `field-notes` gains three rules: the first two sentences must name a place
+  and a date; a table row the prose does not argue makes the piece a checklist;
+  exhaustiveness is a tell.
+- `seo` gains thresholds (Core Web Vitals, Googlebot 2 MB, tap targets 24/48,
+  URLs over 100 characters), credited to github.com/AgriciDaniel/claude-seo.
+- `seo` also gains a rendering section. The articles and the Size-Up are static
+  HTML. `/`, `/blog`, `/imprint` and `/privacy` are client-rendered, so `/blog`
+  unfurls as the homepage, and its article links do not exist for a client that
+  does not run JavaScript.
+
+**Still open:**
+- The eleven-row table survives in git history (4523578, pushed). Deliberately
+  not rewritten.
+- `sharp` is in this machine's `node_modules`, installed with `--no-save`.
+  `package.json` and `package-lock.json` are unchanged.
+- Article one has the same schema issue: `og-card.jpg` is listed in its JSON-LD
+  `image` but not shown on the page. Its credit line also still names viya0414,
+  whose picture was deleted. Out of scope today.
+- `/blog` still unfurls with the homepage's title and description, because it
+  is a React route. Recorded in the seo skill's rendering section; not fixed.
+
 ### 2026-08-24
 
 **Google can now see the site.** The domain was verified in Search Console and

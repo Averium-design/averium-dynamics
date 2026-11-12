@@ -113,6 +113,39 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-12 (night, mail)
+
+**Real email for the self-check built. Branch `feature/pruefpunkte-mail`,
+53d0617, NOT merged, NOT pushed.** `api/pruefpunkte.js` sends through Resend:
+- To the reader: score and full list, from `public/pruefpunkte-text.js`.
+- To us: a copy (PRUEFPUNKTE_COPY_TO, default info@).
+- It fails closed: with no RESEND_API_KEY or PRUEFPUNKTE_FROM it answers 503,
+  and the page shows the mailto instead.
+
+Decided, and why: the reader's mail carries only our fixed text and their
+score. Their area note goes only into our copy, so the endpoint cannot be used
+to send arbitrary text from our domain to any address.
+
+Tested:
+- With a stubbed Resend: all paths, i.e. not configured, bad address, newline
+  in the address, bad code, honeypot, success, reader send failing, copy
+  failing, copy-to override.
+- In a browser at 375 and 1080: both the success path and the fallback path.
+
+Privacy section 4a now names Resend, linking its privacy policy and DPA.
+
+**Blocked on Leo, nothing done on the account side:** this machine has no
+Resend key, no Vercel login and no Namecheap access. Needed before it can
+work:
+- Resend: domain added, and its DKIM / MX / SPF records on
+  `resend._domainkey` and `send` at Namecheap, leaving the Zoho records alone.
+- Vercel env: RESEND_API_KEY and PRUEFPUNKTE_FROM.
+- The test mail goes to leosafia4@gmail.com (Leo's instruction).
+
+**Not yet verified:** that Vercel bundles `public/pruefpunkte-text.js` into
+the function. The require path is static, but this is only proven on a
+preview deploy.
+
 ### 2026-11-12 (night, last)
 
 **Headline work published and checked live.**

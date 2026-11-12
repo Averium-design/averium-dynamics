@@ -15,7 +15,7 @@ export default function Privacy() {
             <h3 className="text-lg font-semibold text-foreground mb-2">1. Controller</h3>
             <p>
               Averium Dynamics UG (haftungsbeschränkt)<br />
-              Kastanienallee 51, 12627 Berlin, Germany<br />
+              Potsdamer Straße 61, 10785 Berlin, Germany<br />
               HRB 285037 B, Amtsgericht Charlottenburg<br />
               Email:{' '}
               <a className="text-primary hover:underline" href="mailto:info@averiumdynamics.com">

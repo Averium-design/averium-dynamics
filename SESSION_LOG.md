@@ -113,6 +113,29 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-12 (night, later)
+
+**Field Note 2 got a new headline, and the promise block moved. Committed on
+`feature/pruefpunkte-check`, NOT merged; main is still 637d3ba.**
+- The h1, og:title, twitter:title and the JSON-LD headline carry the hook:
+  "Ein Brand, den keine Feuerwehr betreten darf" / "A fire no fire service
+  may enter".
+- `<title>` and the WebPage name keep the search term: "Munitionsbelastete
+  Flächen: ein Brand, den niemand betreten darf" (64 characters, over the
+  ~60 guideline) / "Munitions-contaminated land: a fire nobody may enter" (52).
+- They differ on purpose (Leo's decision). This replaces the "die Zahl, die
+  alle nennen" headline recorded in the first entry for this date.
+- Slugs are unchanged.
+- The promise block now sits after the sources and disclosure, before the
+  funding logos; the opening photograph and then Jüterbog follow the byline
+  again. The EN button reads "Take the self-check".
+- h1 at 375 px: 3 lines DE, 2 EN.
+
+**Left stale on purpose (not in the brief):**
+- The old title is still the link text in the sources of /pruefpunkte and
+  /checklist.
+- Both PDF footers still quote the old title as "Aus dem Artikel ...".
+
 ### 2026-11-12 (night)
 
 **Published and checked live.** The second merge was 637d3ba (`--no-ff` over

@@ -222,6 +222,8 @@ document with a different number turns up, it wins.
   unfurls as the homepage, and its article links do not exist for a client that
   does not run JavaScript.
 
+**Later the same day: two more photographs** (merge 81e340b). `disused-tank.jpg` (distelapparath, Pixabay 3907368) went into "Belastet oder verdächtig", and `sandy-track-pines.jpg` (winklerchristopher, 5134829) went into "Was heute getan wird". Credit line, credit map and JSON-LD `image` list are updated. Checked live: all four figures load on both pages, with no replacement characters and the language links working both ways. The track photograph was briefed as the vegetation-free ground a fire is held at. The frame shows a two-rut sand track through dry grassland, which is fuel, so it is captioned as what it shows. A fire officer would see the difference.
+
 **Still open:**
 - The eleven-row table survives in git history (4523578, pushed). Deliberately
   not rewritten.

@@ -113,6 +113,14 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-12 (night, contact line)
+
+At Leo's request, "oder direkt bei Leo Safia unter leo@averiumdynamics.com"
+(and "or directly to Leo Safia at ...") was removed from the CTA of both
+munitions articles. Contact there is info@ only. These were the only two
+places leo@ appeared in public/, src/ and scripts/. Branch
+`content/remove-direct-contact`, not merged yet.
+
 ### 2026-11-12 (night, mail live)
 
 **Real email is live.** e8518eb (`--no-ff` over 53d0617 and 658465e), pushed at

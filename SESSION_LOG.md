@@ -113,6 +113,39 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-12 (late evening)
+
+**The self-check was merged and pushed to main at Leo's request:** 172162e,
+`--no-ff` over 3d52621. This reverses "not merged" in the entry below. The
+live check after deploy was NOT done: Leo interrupted with new changes before
+it ran. Until someone loads /pruefpunkte and /checklist on production and reads
+the titles, they are unverified live.
+
+**Then three changes on `feature/pruefpunkte-check`, commit 41c2ade, NOT
+merged.** main is still 172162e.
+- **The full list now shows on the page** when the mail button is pressed. The
+  text moved into `public/pruefpunkte-text.js`. Both pages load it and
+  `scripts/pruefpunkte-reply.js` requires it, so there is one source. Reply
+  output was byte-identical before and after for four test codes. The gate is
+  soft on purpose (Leo's decision). The mailto still opens.
+- **XCMG row added** from SCMP (Zhang Tong, 19.10.2023). Two corrections to
+  the brief, kept to the source: the partner is the *Shanghai office* of the
+  Ministry of Emergency Management, and the forest claim is XCMG staff saying
+  it worked on "re-ignition points and inaccessible terrain". The source does
+  not say "Glutnester" or "terrain vehicles cannot reach". SCMP returns 403
+  to WebFetch; the text was read from the article's JSON-LD `articleBody` in a
+  browser.
+- **"dazu die Übersicht zu A1, A2 und A3" dropped** from the mail promise (EN
+  likewise).
+
+Checked locally at 375 and 1080: no sideways scroll, list hidden until the
+click, correct items for the drop-planned and flight-only paths, no-JS still
+shows the five questions and Grundlagen, check clean, build compiles.
+
+**Note for timing checks:** Playwright clicks took 1 to 2 s each because the
+browser window was occluded and throttled to about 1 animation frame per
+second. The page loads in about 80 ms. That number is not the page.
+
 ### 2026-11-12 (evening)
 
 **Prüfpunkte self-check built, NOT merged, NOT pushed.** Branch

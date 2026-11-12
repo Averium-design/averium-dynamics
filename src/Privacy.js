@@ -59,10 +59,21 @@ export default function Privacy() {
             <h3 className="text-lg font-semibold text-foreground mb-2">4a. Self-check (/pruefpunkte, /checklist)</h3>
             <p>
               The self-check counts your answers in your browser. Nothing is transmitted to us while you
-              answer. If you choose to send us your result, the page opens your own email program with a
-              message to info@averiumdynamics.com; nothing is sent until you send it. We then receive your
-              email address, your answers, the area you describe if you fill in that field, and whether you
-              ticked the consent box.
+              answer. If you ask for the full list by email, your email address, your answers, the area you
+              describe if you fill in that field, and whether you ticked the consent box are sent to our
+              server. We email you the list and receive a copy of your result ourselves. If that sending is
+              unavailable, the page instead offers to open your own email program with a message to
+              info@averiumdynamics.com, and nothing is sent until you send it.
+            </p>
+            <p className="mt-3">
+              The emails are sent through Resend (Resend, Inc., USA), which processes your email address
+              and the content of the message on our behalf. See Resend&apos;s{' '}
+              <a className="text-primary hover:underline" href="https://resend.com/legal/privacy-policy" target="_blank" rel="noreferrer">
+                privacy policy
+              </a>{' '}and{' '}
+              <a className="text-primary hover:underline" href="https://resend.com/legal/dpa" target="_blank" rel="noreferrer">
+                data processing addendum
+              </a>.
             </p>
             <p className="mt-3">
               Purpose: we use your email address to send you the full list you asked for, on the basis of

@@ -109,6 +109,9 @@
   .mail{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
   .mail h3{font-size:1.125rem;font-weight:600;margin-bottom:.75rem}
   .mail label.field{display:block;font-weight:600;margin:1rem 0 .35rem}
+  .mail input[type=email]{width:100%;font:inherit;font-size:1rem;padding:.7rem .75rem;border:1px solid #D1D5DB;border-radius:.375rem;min-height:3rem}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  #sendstatus{margin-top:.25rem}
   .mail textarea{width:100%;font:inherit;font-size:1rem;padding:.6rem .75rem;border:1px solid #D1D5DB;border-radius:.375rem;min-height:4.5rem}
   .mail .consent{display:flex;gap:.6rem;align-items:flex-start;margin:1rem 0 .5rem;cursor:pointer}
   .mail .consent input{margin-top:.3rem;width:1.1rem;height:1.1rem;flex:none;accent-color:var(--primary)}
@@ -239,19 +242,26 @@
       <div class="mail">
         <h3>The full list by email</h3>
         <p>For each open point we send you what it is about, its legal basis and what to do next. The
-          button opens your mail program with your answers addressed to us and shows the list right here;
-          we reply with the same list.</p>
+          list also appears right here.</p>
+
+        <label class="field" for="email">Your email address</label>
+        <input type="email" id="email" autocomplete="email" maxlength="254"/>
+        <div class="hp" aria-hidden="true"><label>Website <input type="text" id="website" tabindex="-1" autocomplete="off"/></label></div>
 
         <label class="field" for="area">Which area is this about? (optional)</label>
         <textarea id="area" maxlength="500"></textarea>
 
         <label class="consent"><input type="checkbox" id="consent"/>
           <span>Averium Dynamics may contact me again about this subject later.</span></label>
-        <p class="small">We see your address as the sender of your email. We use it to send you the list.
+        <p class="small">We use your address to send you the list; a copy of your result comes to us.
           Without the tick we will not write again after that.
           <a href="/privacy">Privacy</a></p>
 
-        <p><a class="btn" id="mailbtn" href="mailto:info@averiumdynamics.com">Prepare email</a></p>
+        <p><button class="btn" type="button" id="sendbtn">Email me the list</button></p>
+        <p class="small" id="sendstatus" role="status" hidden></p>
+        <div id="fallback" hidden>
+          <p><a class="btn ghost" id="mailbtn" href="mailto:info@averiumdynamics.com">Send from my mail program</a></p>
+        </div>
         <div class="after" id="after" hidden>
           <p class="small">No mail program opened? Copy the text and send it to info@averiumdynamics.com.</p>
           <button class="btn ghost" type="button" id="copybtn">Copy text</button>
@@ -386,8 +396,8 @@
 
 <script src="/pruefpunkte-text.js"></script>
 <script>
-/* Counts the answers and builds a mailto. Nothing is sent anywhere by this
-   page: the reader's own mail client sends it, to info@. The last line of the
+/* Counts the answers, sends the result through /api/pruefpunkte, and builds
+   a mailto to info@ as the fallback when that send is unavailable. The last line of the
    mail ("Code") is what scripts/pruefpunkte-reply.js reads to print the reply.
    Identical in pruefpunkte.html apart from T. */
 (function(){
@@ -403,7 +413,11 @@
     area: 'Area',
     consent: 'Further contact allowed',
     yes: 'yes', no: 'no', to: 'To',
-    listHead: 'Your open points', noneOpen: 'No point is open.'
+    listHead: 'Your open points', noneOpen: 'No point is open.',
+    badEmail: 'Please enter a valid email address.',
+    sending: 'Sending …',
+    sent: function(a){ return 'Sent to ' + a + '. If nothing arrives, please check your spam folder.'; },
+    failed: 'Sending did not work just now. Send your answers to us from your own mail program instead, and we reply with the list:'
   };
 
   var form = document.getElementById('check');
@@ -494,6 +508,30 @@
     });
     box.hidden = false;
   }
+  /* Real send through /api/pruefpunkte (Resend). If that is not configured or
+     fails, the mailto to info@ appears instead: the reader can always reach us. */
+  var EMAIL = /^[^\s@<>"(),;:]{1,64}@[A-Za-z0-9.-]{1,190}\.[A-Za-z]{2,24}$/;
+  document.getElementById('sendbtn').addEventListener('click', function(){
+    if (!last) return;
+    var btn = this, st = document.getElementById('sendstatus');
+    var email = document.getElementById('email').value.trim();
+    if (!EMAIL.test(email)){ st.textContent = T.badEmail; st.hidden = false; document.getElementById('email').focus(); return; }
+    btn.disabled = true; st.textContent = T.sending; st.hidden = false;
+    renderList();
+    var showFallback = function(){
+      st.textContent = T.failed;
+      updateMail();
+      document.getElementById('fallback').hidden = false;
+      btn.disabled = false;
+    };
+    fetch('/api/pruefpunkte', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: code(), email: email, area: document.getElementById('area').value.trim(),
+        consent: document.getElementById('consent').checked, website: document.getElementById('website').value })
+    }).then(function(r){ return r.json().catch(function(){ return {}; }); })
+      .then(function(j){ if (j && j.delivered) { st.textContent = T.sent(email); } else showFallback(); })
+      .catch(showFallback);
+  });
   document.getElementById('area').addEventListener('input', updateMail);
   document.getElementById('consent').addEventListener('change', updateMail);
   document.getElementById('mailbtn').addEventListener('click', function(){

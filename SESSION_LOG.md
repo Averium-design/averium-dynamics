@@ -113,6 +113,23 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-13 (mail box)
+
+**On branch `content/mail-offer-box`, NOT merged, NOT pushed.** Main is
+b811515.
+- **The test offer is now a box.** In the HTML mail it has a green tint, a
+  dark-green left bar, a bold "Gemeinsam testen" heading and a "Test anfragen"
+  button (mailto info@). In plain text it is framed by rules, with the heading
+  in capitals.
+- **The A1/A2/A3 explainer is removed from the mail** at Leo's request ("not
+  to make the email too complicated"). It stays on /pruefpunkte and
+  /checklist. The all-clear intro no longer says "Unten trotzdem die
+  Übersicht".
+
+Checked: the DE and EN mails were rendered through the real handler with
+Resend stubbed, both returned 200, and the DE HTML was screenshotted.
+`npm run check` is clean.
+
 ### 2026-11-13 (published)
 
 **Published as b811515** (`--no-ff` over 3a9b084) at Leo's request. Served

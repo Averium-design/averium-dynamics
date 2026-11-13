@@ -113,6 +113,18 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-13 (mail box live)
+
+**Published as 4de64e3** (`--no-ff` over 68fa423) at Leo's request. It was
+served about 40 s after the push: the live `/pruefpunkte-text.js` carries
+`offerButton` and no A1/A2/A3 explainer. A real send through
+`/api/pruefpunkte` (de:1d2y3u4n5u, to leosafia4@gmail.com, copy to info@
+marked "Testversand 2026-11-13 (Claude), Box-Version") answered
+`delivered: true`.
+
+**Still open:** Leo to confirm that the box and button render in Gmail. Inline
+styles only; nothing was tested in Outlook.
+
 ### 2026-11-13 (mail box)
 
 **On branch `content/mail-offer-box`, NOT merged, NOT pushed.** Main is

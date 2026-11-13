@@ -113,6 +113,38 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-13
+
+**On branch `content/test-offer-and-keywords`, 3a9b084, NOT merged, NOT
+pushed.** Main is still 7b4fac6. Two changes, both at Leo's request:
+
+- **The self-check mail now carries the lead.** A "Gemeinsam testen" / "Test
+  it together" block sits after the result and before the A1/A2/A3 explainer:
+  our firefighting drone is a prototype, we would like to test it together with
+  the reader, reply to this mail. It goes in `public/pruefpunkte-text.js`, so
+  the API and `scripts/pruefpunkte-reply.js` both carry it. Rendered for
+  de:1d2y3u4n5u and en:1y2y3y4-5-. The page itself is unchanged.
+- **"Feuerlöschdrohne" / "firefighting drone" for SEO.** These are used only
+  where a passage is about drones that suppress fire:
+  - the drone-section h2 in all four pages;
+  - the munitions piece's descriptions (meta, og, twitter, JSON-LD; 153/155
+    characters) and its section opener;
+  - the German disclosures, and the disclosure in the mail.
+  Reconnaissance drones (the Müritz survey team, "Drohnen klären ... auf")
+  stay "Drohnen", because calling them firefighting drones would be false.
+  dateModified and sitemap lastmod are now 2026-11-13 for the four pages.
+
+**Decided:** this is a bounded exception to the seo skill's "no
+keyword-editing" rule. The exception is recorded in the skill, in the same
+commit.
+
+Checked locally: `npm run check` is clean. At 375 px, "Feuerlöschdrohnen über
+diesen Flächen" runs to two lines with no sideways scroll. The other three new
+h2s were only checked in a popup that was not at 375 px.
+
+**Still open:** the merge and push (waiting for Leo's go), then a live check
+by content and a real test send.
+
 ### 2026-11-12 (night, duplicate link)
 
 **Reversal:** "Die vollständige Liste mit den Grundlagen gibt es in der

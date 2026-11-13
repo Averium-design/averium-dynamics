@@ -113,6 +113,24 @@ Read this file at the START of every session. Append at the END.
 
 ## Sessions
 
+### 2026-11-13 (published)
+
+**Published as b811515** (`--no-ff` over 3a9b084) at Leo's request. Served
+about 30 s after the push. This closes the merge item in the entry below.
+
+Checked on production by content:
+- All four articles carry the new h2s ("Feuerlöschdrohnen über diesen
+  Flächen", "Firefighting drones over this ground", "Die Feuerlöschdrohne",
+  "The firefighting drone"). Titles are unchanged and there is zero U+FFFD.
+- `/pruefpunkte-text.js` serves the "Gemeinsam testen" block.
+- The sitemap shows 2026-11-13 four times.
+- A real send through `/api/pruefpunkte` (de:1d2y3u4n5u, to
+  leosafia4@gmail.com) answered `{"ok":true,"delivered":true}`. The copy to
+  info@ is marked "Testversand 2026-11-13 (Claude)".
+
+**Still open:** Leo to confirm that the mail arrived and that the new block
+reads right in Gmail.
+
 ### 2026-11-13
 
 **On branch `content/test-offer-and-keywords`, 3a9b084, NOT merged, NOT

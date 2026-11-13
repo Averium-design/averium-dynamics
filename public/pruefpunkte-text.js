@@ -65,6 +65,8 @@
           next: 'Vom Anbieter schriftlich verlangen, was ein nicht ausgelöster Körper enthält und ob er liegen bleiben darf, und das mit den Fachberatern des Kampfmittelräumdienstes besprechen.',
         },
       },
+      offerHead: 'Gemeinsam testen',
+      offer: 'Unsere Feuerlöschdrohne ist ein Prototyp, und wir erproben sie gern gemeinsam mit Ihnen. Wenn Sie die Technik selbst testen möchten, antworten Sie einfach auf diese E-Mail.',
       explainerHead: 'A1, A2, A3 und das Abwurfverbot',
       explainer: [
         'A1, A2 und A3 sind Unterkategorien der offenen Kategorie. Sie richten sich nach dem Abstand zu Menschen und nach der Klasse des Fluggeräts. Für die ganze offene Kategorie gilt: höchstzulässige Startmasse unter 25 kg, Flug in Sichtweite (VLOS), höchstens 120 m über dem nächstgelegenen Punkt der Erdoberfläche, außer beim Überfliegen eines Hindernisses.',
@@ -79,7 +81,7 @@
         'Der Artikel mit allen Quellen: https://www.averiumdynamics.com/blog/munitionsbelastete-flaechen-was-gilt',
         'Die Selbstprüfung: https://www.averiumdynamics.com/pruefpunkte',
       ],
-      disclosure: 'Averium Dynamics entwickelt Löschdrohnen. Die fünf Punkte gelten für uns wie für jeden anderen Anbieter.',
+      disclosure: 'Averium Dynamics entwickelt Feuerlöschdrohnen. Die fünf Punkte gelten für uns wie für jeden anderen Anbieter.',
       sign: 'Mit freundlichen Grüßen\nAverium Dynamics UG (haftungsbeschränkt), Berlin',
       requested: 'Sie erhalten diese E-Mail, weil Sie Ihr Ergebnis der Selbstprüfung auf averiumdynamics.com angefordert haben. Ohne Ihre Einwilligung schreiben wir Ihnen nicht erneut.',
     },
@@ -123,6 +125,8 @@
           next: 'Ask the supplier in writing what a payload that has not gone off contains and whether it may stay where it lands, and discuss it with the explosive ordnance disposal advisers.',
         },
       },
+      offerHead: 'Test it together',
+      offer: 'Our firefighting drone is a prototype, and we would like to try it out together with you. If you want to test the technology yourselves, simply reply to this email.',
       explainerHead: 'A1, A2, A3 and the ban on dropping',
       explainer: [
         'A1, A2 and A3 are subcategories of the open category. They turn on distance to people and on the class of the aircraft. Across the whole open category: maximum take-off mass under 25 kg, flight within visual line of sight (VLOS), and no more than 120 m above the closest point of the Earth\'s surface, except when flying over an obstacle.',
@@ -176,6 +180,7 @@
     r.open.forEach(function (p) {
       out.push('', p.n + '. ' + p.name, p.open, t.basis + ': ' + p.basis, t.next + ': ' + p.next);
     });
+    out.push('', t.offerHead, t.offer);
     out.push('', t.explainerHead, '');
     t.explainer.forEach(function (s) { out.push(s, ''); });
     out = out.concat(t.links, ['', t.disclosure, '', t.sign, '', '--', t.requested]);

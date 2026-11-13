@@ -154,7 +154,12 @@ Ranked by what changed the pages here, not by what a guide claims:
   A real question-and-answer section in the HTML is worth more than the markup.
 - **Keyword-editing the prose.** These articles were deliberately rewritten to
   remove machine-writing tells. Keyword density would undo that for nothing;
-  it is not how retrieval works.
+  it is not how retrieval works. **Bounded exception (Leo, 2026-11-13):** the
+  product term *Feuerlöschdrohne(n)* / *firefighting drone(s)* is used where a
+  passage is genuinely about drones that suppress fire: the h2 of the drone
+  section in both articles, the munitions piece's meta description, and the
+  disclosure. Never where a drone only does reconnaissance (the Müritz
+  survey drones, "Drohnen klären ... auf"). That keeps it true, not dense.
 - **Migrating off create-react-app.** Real problem, wrong size for an SEO task.
   What it costs is recorded under "Rendering" above.
 

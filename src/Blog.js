@@ -10,7 +10,7 @@ const posts = [
     date: '12 November 2026',
     dateISO: '2026-11-12',
     read: '6 min read',
-    title: 'A fire no fire service may enter',
+    title: 'A fire no firefighter may enter',
     blurb:
       'On munitions-contaminated ground, crews keep their distance instead of fighting the ' +
       'fire. The distance is quoted as 300, 500 or 1,000 metres, almost always attributed to ' +

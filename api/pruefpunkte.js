@@ -30,6 +30,17 @@ const toHtml = text =>
   '<div style="font:15px/1.6 -apple-system,Segoe UI,Arial,sans-serif;color:#1A1A1A;white-space:pre-wrap">' +
   esc(text).replace(/https:\/\/[^\s<]+/g, u => `<a href="${u}" style="color:#1B4D3E">${u}</a>`) +
   '</div>';
+// The test offer is the lead of the mail, so in HTML it is a highlighted box
+// with a button that opens a reply to info@. Fixed text only, no reader input.
+const offerHtml = p =>
+  '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;border-collapse:collapse">' +
+  '<tr><td style="background:#EAF2EE;border-left:6px solid #1B4D3E;padding:20px 22px;font:15px/1.6 -apple-system,Segoe UI,Arial,sans-serif;color:#1A1A1A">' +
+  `<div style="font-size:20px;font-weight:700;color:#1B4D3E;margin:0 0 8px">${esc(p.offerHead)}</div>` +
+  `<div style="margin:0 0 16px">${esc(p.offer)}</div>` +
+  `<a href="mailto:info@averiumdynamics.com?subject=${encodeURIComponent(p.offerHead)}" ` +
+  'style="display:inline-block;background:#1B4D3E;color:#FFFFFF;text-decoration:none;font-weight:700;padding:12px 22px;border-radius:4px">' +
+  `${esc(p.button)}</a>` +
+  '</td></tr></table>';
 
 const EMAIL = /^[^\s@<>"(),;:]{1,64}@[A-Za-z0-9.-]{1,190}\.[A-Za-z]{2,24}$/;
 
@@ -91,7 +102,8 @@ module.exports = async (req, res) => {
   try {
     await send(key, {
       from, to: [email], reply_to: 'info@averiumdynamics.com',
-      subject: mail.subject, text: mail.body, html: toHtml(mail.body),
+      subject: mail.subject, text: mail.body,
+      html: toHtml(mail.parts.pre) + offerHtml(mail.parts) + toHtml(mail.parts.post),
     });
   } catch (err) {
     console.error('[pruefpunkte] reader mail failed', err.message);
